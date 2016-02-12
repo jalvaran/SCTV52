@@ -73,10 +73,10 @@ include_once("procesaRemision.php");
 	<br>
 	<?php	
 	
-	if(!empty($_REQUEST["TxtIdRemision"])){
-		$RutaPrintCot="../tcpdf/examples/imprimiremision.php?ImgPrintRemi=".$_REQUEST["TxtIdRemision"];			
+	if(!empty($_REQUEST["TxtidRemision"])){
+		$RutaPrintCot="../tcpdf/examples/imprimiremision.php?ImgPrintRemi=".$_REQUEST["TxtidRemision"];			
 		$css->CrearTabla();
-		$css->CrearFilaNotificacion("Remision almacenada Correctamente <a href='$RutaPrintCot' target='_blank'>Imprimir Remision No. $_REQUEST[TxtIdRemision]</a>",16);
+		$css->CrearFilaNotificacion("Remision almacenada Correctamente <a href='$RutaPrintCot' target='_blank'>Imprimir Remision No. $_REQUEST[TxtidRemision]</a>",16);
 		$css->CerrarTabla();
 	}
 	
@@ -143,10 +143,15 @@ include_once("procesaRemision.php");
 	if(!empty($idCotizacion)){
 		$DatosCotizacion=$obVenta->DevuelveValores("cotizacionesv5","ID",$idCotizacion);
 		$DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$DatosCotizacion["Clientes_idClientes"]);
-		$css->CrearFormularioEvento("FrmBuscarCotizacion",$myPage,"post","_self","onKeyPress='return disableEnterKey(event)'");
+		$css->CrearFormularioEvento("FrmCrearRemision",$myPage,"post","_self","onKeypress='DeshabilitaEnter()'");
+                print("REMISION<br><br>");
+                        $css->CrearInputText("TxtidCliente","hidden","",$DatosCotizacion["Clientes_idClientes"],"","black","","",150,30,0,0);
 			$css->CrearTabla();
 			$css->FilaTabla(18);
-			$css->ColTabla("REMISION:",3);
+                        print("<td colspan=3>");
+			print("FECHA: ");
+                        $css->CrearInputText("TxtFechaRemision","text","",date("Y-m-d"),"","black","","",150,30,0,1); 
+                        print("</td>"); 
 			$css->ColTabla("COTIZACION:",1);
 			$css->ColTablaInputText("TxtIdCotizacion","text",$DatosCotizacion["ID"],"","","black","","",150,30,1,1);
 			$css->CierraFilaTabla();
@@ -281,7 +286,7 @@ include_once("procesaRemision.php");
 			print("<td>");
 			$css->CrearInputNumber("TxtSaldo","number","",$Total,"Saldo","black","","",200,30,1,1,0,"","any");
 			print("<br>");
-			$css->CrearBoton("BtnGuardarRemision","Guardar");
+			$css->CrearBotonConfirmado("BtnGuardarRemision","Guardar");
 			print("</td>");
 			$css->CierraFilaTabla();
 			
