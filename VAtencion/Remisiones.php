@@ -278,6 +278,28 @@ include_once("procesaRemision.php");
 			$css->ColTabla('ANTICIPO:',3);
 			print("<td>");
 			$css->CrearInputNumber("TxtAnticipo","number","",0,"Anticipo","black","onkeyup","calculetotaldias()",200,30,0,1,0,"","any");
+                        print("<br>Seleccione una Cuenta destino para el anticipo:<br>");
+                        $css->CrearSelect("CmbCuentaDestino", "");
+                            $Consulta=$obVenta->ConsultarTabla("cuentasfrecuentes","WHERE ClaseCuenta='ACTIVOS'");
+                            while($DatosCuentasFrecuentes=mysql_fetch_array($Consulta)){
+                                if($DatosCuentasFrecuentes["CuentaPUC"]=='110510')
+                                    $Sel=1;
+                                else
+                                    $Sel=0;
+                                $css->CrearOptionSelect($DatosCuentasFrecuentes["CuentaPUC"], $DatosCuentasFrecuentes["Nombre"], $Sel);
+                                
+                            }
+                        $css->CerrarSelect(); 
+                        print("<br>Seleccione un Centro de Costos:<br>");
+                        $css->CrearSelect("CmbCentroCostos", "");
+                            $Consulta=$obVenta->ConsultarTabla("centrocosto","");
+                            while($DatosCentroCostos=mysql_fetch_array($Consulta)){
+                               
+                                $css->CrearOptionSelect($DatosCentroCostos["ID"], $DatosCentroCostos["Nombre"], 0);
+                                
+                            }
+                        $css->CerrarSelect(); 
+                            
 			print("</td>");
 			$css->CierraFilaTabla();
 			
@@ -285,6 +307,7 @@ include_once("procesaRemision.php");
 			$css->ColTabla('SALDO:',3);
 			print("<td>");
 			$css->CrearInputNumber("TxtSaldo","number","",$Total,"Saldo","black","","",200,30,1,1,0,"","any");
+                                               
 			print("<br>");
 			$css->CrearBotonConfirmado("BtnGuardarRemision","Guardar");
 			print("</td>");

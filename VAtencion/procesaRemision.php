@@ -13,34 +13,34 @@
 		
 	if(!empty($_REQUEST['TxtSaldo'])){
 		
-		$fecha=date("Y-m-d");
-		
 		$obVenta=new ProcesoVenta($idUser);
 				
 		//$DatosCotizacion=$obVenta->DevuelveValores("cotizacionesv5","ID",$_REQUEST['TxtIdCotizacion']);
 		
 		$tab="remisiones";
-		$NumRegistros=13;  
+		$NumRegistros=14;  
 							
 		
-		$Columnas[0]="Fecha";						$Valores[0]=$Cantidad;
-		$Columnas[1]="Clientes_idClientes";						$Valores[1]=$DatosProducto["Referencia"];
-		$Columnas[2]="ObservacionesRemision";					$Valores[2]=$DatosProducto["PrecioVenta"];
-		$Columnas[3]="Cotizaciones_idCotizaciones";						$Valores[3]=$Subtotal;
-		$Columnas[4]="Obra";						$Valores[4]=$DatosProducto["Nombre"];
-		$Columnas[5]="Direccion";								$Valores[5]=$IVA;
-		$Columnas[6]="Ciudad";						$Valores[6]=$DatosProducto["CostoUnitario"];
-		$Columnas[7]="Telefono";					$Valores[7]=$DatosProducto["CostoUnitario"];
-		$Columnas[8]="Retira";							$Valores[8]=$Total;
-		$Columnas[9]="FechaDespacho";						$Valores[9]=$DatosDepartamento["TipoItem"];
-		$Columnas[10]="HoraDespacho";						$Valores[10]=$idUser;
-		$Columnas[11]="Anticipo";						$Valores[11]=$DatosProducto["CuentaPUC"];
-		$Columnas[12]="Estado";			    			$Valores[12]=$TablaItem;
+		$Columnas[0]="Fecha";						$Valores[0]=$_REQUEST['TxtFechaRemision'];
+		$Columnas[1]="Clientes_idClientes";				$Valores[1]=$_REQUEST['TxtidCliente'];
+		$Columnas[2]="ObservacionesRemision";				$Valores[2]=$_REQUEST['TxtObservacionesRemision'];
+		$Columnas[3]="Cotizaciones_idCotizaciones";			$Valores[3]=$_REQUEST['TxtIdCotizacion'];
+		$Columnas[4]="Obra";						$Valores[4]=$_REQUEST['TxtObra'];
+		$Columnas[5]="Direccion";					$Valores[5]=$_REQUEST['TxtDireccionObra'];
+		$Columnas[6]="Ciudad";						$Valores[6]=$_REQUEST['TxtCiudadObra'];
+		$Columnas[7]="Telefono";					$Valores[7]=$_REQUEST['TxtTelefonoObra'];
+		$Columnas[8]="Retira";						$Valores[8]=$_REQUEST['TxtRetira'];
+		$Columnas[9]="FechaDespacho";					$Valores[9]=$_REQUEST['TxtFecha'];
+		$Columnas[10]="HoraDespacho";					$Valores[10]=$_REQUEST['TxtHora'];
+		$Columnas[11]="Anticipo";					$Valores[11]=$_REQUEST['TxtAnticipo'];
+		$Columnas[12]="Dias";			    			$Valores[12]=$_REQUEST['TxtDias'];
+                $Columnas[13]="Estado";			    			$Valores[13]="A";
 		
 		$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
-		
-		header("location:Cotizaciones.php?TxtAsociarCliente=$idClientes");
-			
+		$idRemision=$obVenta->ObtenerMAX("remisiones", "ID", 1, "");
+                if($_REQUEST['TxtAnticipo']>0)
+                    $obVenta->RegistreAnticipo($_REQUEST['TxtidCliente'],$_REQUEST['TxtAnticipo'],$_REQUEST['CmbCuentaDestino'],$_REQUEST['CmbCentroCostos'],"Anticipo por remision $idRemision");
+		header("location:Remisiones.php?TxtidRemision=$idRemision");	
 	}
 	
 	

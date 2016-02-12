@@ -137,16 +137,16 @@ function calculetotaldias() {
 
 }
 
-function DeshabilitaEnter(e){
-var key;
-if(window.event){
-key = window.event.keyCode; //IE
-}else{
-key = e.which; //firefox
+// esta funcion no permite enviar un formulario con el enter
+function DeshabilitaEnter(){
+    if(event.keyCode == 13) event.returnValue = false;
 }
-if(key==13){
-return false;
-}else{
-return true;
-}
+
+// esta funcion permite confirmar el envio de un formulario
+function Confirmar(){
+	
+	if (confirm('¿Estas seguro que deseas realizar esta accion?')){ 
+      this.form.submit();
+      
+    } 
 }

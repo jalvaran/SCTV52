@@ -16,6 +16,7 @@
 	$RegCREE="SI";
 	$COMPrinter=3;
 	$PrintCuenta="SI";
+        $CuentaAnticipos=2705;
 	
 class Consultar_Producto{
 	private $consulta;
@@ -691,6 +692,90 @@ public function ConsultarTabla($tabla,$Condicion)
 	}	
 	
 
+////////////////////////////////////////////////////////////////////
+//////////////////////Funcion Registra Anticipo
+///////////////////////////////////////////////////////////////////
+
+	public function RegistreAnticipo($idCliente,$Anticipo, $CuentaDestino,$CentroCosto,$Concepto){
+            $fecha=date("Y-m-d");
+            $DatosCentro=$this->DevuelveValores("centrocosto","ID",$CentroCosto);
+            $DatosCliente=$this->DevuelveValores("clientes","idClientes",$idCliente);
+            $DatosCuentasFrecuentes=$this->DevuelveValores("cuentasfrecuentes","CuentaPUC",$CuentaDestino);
+            $NIT=$DatosCliente["Num_Identificacion"];
+            $RazonSocialC=$DatosCliente["RazonSocial"];
+            
+            //////Creo el comprobante de Ingreso
+            
+            $tab="comprobantes_ingreso";
+            $NumRegistros=4;
+
+            $Columnas[0]="Fecha";		$Valores[0]=$fecha;
+            $Columnas[1]="Clientes_idClientes";	$Valores[1]=$idCliente;
+            $Columnas[2]="Valor";               $Valores[2]=$Anticipo;
+            $Columnas[3]="Tipo";		$Valores[3]="EFECTIVO";
+            
+            $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+            
+            $idIngreso=$this->ObtenerMAX($tab,"ID", 1,"");
+            
+            ////Registro el anticipo en el libro diario
+            
+            $tab="librodiario";
+            $NumRegistros=26;
+            $CuentaPUC=$CuentaDestino;
+            $NombreCuenta=$DatosCuentasFrecuentes["Nombre"];
+            $CuentaPUCContraPartida="2705".$NIT;
+            $NombreCuentaContraPartida="Anticipos recibidos Cliente: $RazonSocialC NIT $NIT";
+            
+
+
+            $Columnas[0]="Fecha";			$Valores[0]=$fecha;
+            $Columnas[1]="Tipo_Documento_Intero";	$Valores[1]="ComprobanteIngreso";
+            $Columnas[2]="Num_Documento_Interno";	$Valores[2]=$idIngreso;
+            $Columnas[3]="Tercero_Tipo_Documento";	$Valores[3]=$DatosCliente['Tipo_Documento'];
+            $Columnas[4]="Tercero_Identificacion";	$Valores[4]=$NIT;
+            $Columnas[5]="Tercero_DV";			$Valores[5]=$DatosCliente['DV'];
+            $Columnas[6]="Tercero_Primer_Apellido";	$Valores[6]=$DatosCliente['Primer_Apellido'];
+            $Columnas[7]="Tercero_Segundo_Apellido";    $Valores[7]=$DatosCliente['Segundo_Apellido'];
+            $Columnas[8]="Tercero_Primer_Nombre";	$Valores[8]=$DatosCliente['Primer_Nombre'];
+            $Columnas[9]="Tercero_Otros_Nombres";	$Valores[9]=$DatosCliente['Otros_Nombres'];
+            $Columnas[10]="Tercero_Razon_Social";	$Valores[10]=$RazonSocialC;
+            $Columnas[11]="Tercero_Direccion";		$Valores[11]=$DatosCliente['Direccion'];
+            $Columnas[12]="Tercero_Cod_Dpto";		$Valores[12]=$DatosCliente['Cod_Dpto'];
+            $Columnas[13]="Tercero_Cod_Mcipio";		$Valores[13]=$DatosCliente['Cod_Mcipio'];
+            $Columnas[14]="Tercero_Pais_Domicilio";     $Valores[14]=$DatosCliente['Pais_Domicilio'];
+            $Columnas[15]="CuentaPUC";			$Valores[15]=$CuentaPUC;
+            $Columnas[16]="NombreCuenta";		$Valores[16]=$NombreCuenta;
+            $Columnas[17]="Detalle";			$Valores[17]="Anticipos";
+            $Columnas[18]="Debito";			$Valores[18]=$Anticipo;
+            $Columnas[19]="Credito";			$Valores[19]="0";
+            $Columnas[20]="Neto";			$Valores[20]=$Valores[18];
+            $Columnas[21]="Mayor";			$Valores[21]="NO";
+            $Columnas[22]="Esp";			$Valores[22]="NO";
+            $Columnas[23]="Concepto";			$Valores[23]=$Concepto;
+            $Columnas[24]="idCentroCosto";		$Valores[24]=$CentroCosto;
+            $Columnas[25]="idEmpresa";			$Valores[25]=$DatosCentro["EmpresaPro"];
+
+            $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+
+
+            ///////////////////////Registramos contra partida del anticipo
+
+            $CuentaPUC=$CuentaPUCContraPartida; 
+            $NombreCuenta=$NombreCuentaContraPartida;
+
+            $Valores[15]=$CuentaPUC;
+            $Valores[16]=$NombreCuenta;
+            $Valores[18]="0";
+            $Valores[19]=$Anticipo; 			//Credito se escribe el total de la venta menos los impuestos
+            $Valores[20]=$Valores[19]*(-1);  											//Credito se escribe el total de la venta menos los impuestos
+
+            $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+		
+	}
+        
+        
+        
 //////////////////////////////Fin	
 }
 
