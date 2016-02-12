@@ -74,10 +74,16 @@ include_once("procesaRemision.php");
 	<?php	
 	
 	if(!empty($_REQUEST["TxtidRemision"])){
-		$RutaPrintCot="../tcpdf/examples/imprimiremision.php?ImgPrintRemi=".$_REQUEST["TxtidRemision"];			
-		$css->CrearTabla();
-		$css->CrearFilaNotificacion("Remision almacenada Correctamente <a href='$RutaPrintCot' target='_blank'>Imprimir Remision No. $_REQUEST[TxtidRemision]</a>",16);
-		$css->CerrarTabla();
+            $RutaPrintCot="../tcpdf/examples/imprimiremision.php?ImgPrintRemi=".$_REQUEST["TxtidRemision"];			
+            $css->CrearTabla();
+            $css->CrearFilaNotificacion("Remision almacenada Correctamente <a href='$RutaPrintCot' target='_blank'>Imprimir Remision No. $_REQUEST[TxtidRemision]</a>",16);
+            $css->CerrarTabla();
+            if(!empty($_REQUEST["TxtidIngreso"])){
+                $RutaPrintIngreso="../tcpdf/examples/imprimiringreso.php?ImgPrintIngreso=".$_REQUEST["TxtidIngreso"];			
+                $css->CrearTabla();
+                $css->CrearFilaNotificacion("Comprobante de Ingreso Creado Correctamente <a href='$RutaPrintIngreso' target='_blank'>Imprimir Comprobante de Ingreso No. $_REQUEST[TxtidIngreso]</a>",16);
+                $css->CerrarTabla();
+            }
 	}
 	
 	

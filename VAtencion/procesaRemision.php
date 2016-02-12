@@ -38,9 +38,14 @@
 		
 		$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		$idRemision=$obVenta->ObtenerMAX("remisiones", "ID", 1, "");
-                if($_REQUEST['TxtAnticipo']>0)
-                    $obVenta->RegistreAnticipo($_REQUEST['TxtidCliente'],$_REQUEST['TxtAnticipo'],$_REQUEST['CmbCuentaDestino'],$_REQUEST['CmbCentroCostos'],"Anticipo por remision $idRemision");
-		header("location:Remisiones.php?TxtidRemision=$idRemision");	
+                $VariblesImpresion="TxtidRemision=$idRemision";
+                if($_REQUEST['TxtAnticipo']>0){
+                    
+                    $idIngreso=$obVenta->RegistreAnticipo($_REQUEST['TxtidCliente'],$_REQUEST['TxtAnticipo'],$_REQUEST['CmbCuentaDestino'],$_REQUEST['CmbCentroCostos'],"Anticipo por remision $idRemision");
+                    $VariblesImpresion=$VariblesImpresion."&TxtidIngreso=$idIngreso";
+                    
+                }
+                    header("location:Remisiones.php?$VariblesImpresion");	
 	}
 	
 	

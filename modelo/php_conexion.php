@@ -707,12 +707,13 @@ public function ConsultarTabla($tabla,$Condicion)
             //////Creo el comprobante de Ingreso
             
             $tab="comprobantes_ingreso";
-            $NumRegistros=4;
+            $NumRegistros=5;
 
             $Columnas[0]="Fecha";		$Valores[0]=$fecha;
             $Columnas[1]="Clientes_idClientes";	$Valores[1]=$idCliente;
             $Columnas[2]="Valor";               $Valores[2]=$Anticipo;
             $Columnas[3]="Tipo";		$Valores[3]="EFECTIVO";
+            $Columnas[4]="Concepto";		$Valores[4]=$Concepto;
             
             $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
             
@@ -772,6 +773,7 @@ public function ConsultarTabla($tabla,$Condicion)
 
             $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		
+            return($idIngreso);
 	}
         
         
