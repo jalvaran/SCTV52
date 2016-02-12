@@ -162,14 +162,14 @@ class CssIni{
 	/////////////////////Crea un Formulario
 	
 	function CrearForm($nombre,$action,$method,$target){
-		print('<li><form name= "'.$nombre.'" action="'.$action.'" id="'.$nombre.'" method="'.$method.'" target="'.$target.'">');
+		print('<li><form name= "'.$nombre.'" action="'.$action.'" id="'.$nombre.'" method="'.$method.'" target="'.$target.'"></li>');
 		
 	}
 	
 	/////////////////////Crea un Formulario
 	
 	function CrearFormularioEvento($nombre,$action,$method,$target,$evento){
-		print('<li><form name= "'.$nombre.'" action="'.$action.'" id="'.$nombre.'" method="'.$method.'" target="'.$target.'">');
+		print('<form name= "'.$nombre.'" action="'.$action.'" id="'.$nombre.'" method="'.$method.'" target="'.$target.'" '.$evento.'>');
 		
 	}
 	
@@ -446,7 +446,12 @@ class CssIni{
 		
 	}
 	
+	/////////////////////Crea un Boton Submit con evento
 	
+	function CrearBotonConfirmado($nombre,$value){
+		print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" onclick="Confirmar()" class="btn btn-danger">');
+		
+	}
 	//////////////////////////////////FIN
 }
 	
