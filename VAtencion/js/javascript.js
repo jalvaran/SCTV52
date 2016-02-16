@@ -1,4 +1,4 @@
-?//	Hacer tienda online de informatica usando: HTML, CSS, JS
+//	Hacer tienda online de informatica usando: HTML, CSS, JS
 //	En el codigo javascript hay que hacer la base de datos de los productos con un vector por ejemplo...
 
 
@@ -23,11 +23,11 @@
 		//Se cargan los productos dentro del HTML de forna dinamica haciendo uso de los datos de la base de datos, como si de un PHP se tratase:
 		var DIVS = document.getElementsByName("DIVS");
 		for (i in productos){
-			DIVS[i].innerHTML = '<a id="imgG'+i+'" href="' +imgGrandes[i]+ '"><img id="imgP'+i+'" class="imagen" src="' +imgPeque[i]+ '"></a><div class="etiquetas"><b><span id="pro'+i+'">' +productos[i]+ '</span>: <span id="pre'+i+'">' +precios[i]+ '€</span></b></div><div class="stock">Hay en stock <span id="uni'+i+'">' +stock[i]+ '</span> unidades,<br/>¿Cuantas quiere?: <input class="uniBien" type="number" id="uniUser'+i+'" name="uniUser" value="0" size="4" /></div>';
+			DIVS[i].innerHTML = '<a id="imgG'+i+'" href="' +imgGrandes[i]+ '"><img id="imgP'+i+'" class="imagen" src="' +imgPeque[i]+ '"></a><div class="etiquetas"><b><span id="pro'+i+'">' +productos[i]+ '</span>:ï¿½<span id="pre'+i+'">' +precios[i]+ 'ï¿½</span></b></div><div class="stock">Hay en stock <span id="uni'+i+'">' +stock[i]+ '</span> unidades,<br/>ï¿½Cuantas quiere?: <input class="uniBien" type="number" id="uniUser'+i+'" name="uniUser" value="0" size="4" /></div>';
 		}
 	
 	
-		//Rellena el campo dia y año, de la fecha de nacimiento y tarjeta de credito:
+		//Rellena el campo dia y aï¿½o, de la fecha de nacimiento y tarjeta de credito:
 		//Mas info en: http://www.tallerwebmaster.com/tutorial/mostrar-fecha-actual-con-javascrip/58/
 		//Fecha de nacimiento
 		var fecha = new Date();
@@ -116,7 +116,7 @@
 	function calculaElTotal(elEvento) {
 
 	
-		//Añade el encabezado de la tabla
+		//Aï¿½ade el encabezado de la tabla
 		document.getElementById("tablaTotal").innerHTML = '<tr><td class="pro"><b>Producto</b></td><td class="uni"><b>Unidades</b></td><td class="preUni"><b>Precio Unidad</b></td><td class="preTotal"><b>Precio Total</b></td></tr>';
 	
 	
@@ -195,9 +195,9 @@
 		totalAPagar=Math.floor(totalAPagar);
 		totalAPagar=totalAPagar/100;		
 		
-		//Se añade a la tabla el TOTAL que suma el carrito:
+		//Se aï¿½ade a la tabla el TOTAL que suma el carrito:
 		tablaTotal = document.getElementById("tablaTotal").innerHTML;
-		document.getElementById("tablaTotal").innerHTML = tablaTotal + '<tr><td> </td> <td></td><td class="preUni"><b>Transporte: </b></td><td class="preTotal"><b>' +totalTransporte+ '</b></td></tr>' + '<tr><td> </td> <td></td><td class="preUni"><b>IVA ('+(IVA*100)+'%): </b></td><td class="preTotal"><b>' +totalIVA+ '</b></td></tr>' + '<tr><td> </td> <td></td><td class="preUni"><b>Total: </b></td><td class="preTotal" id="totalAPagar"><b>' +totalAPagar+ ' €</b></td></tr>';
+		document.getElementById("tablaTotal").innerHTML = tablaTotal + '<tr><td>ï¿½</td>ï¿½<td></td><td class="preUni"><b>Transporte: </b></td><td class="preTotal"><b>' +totalTransporte+ '</b></td></tr>' + '<tr><td>ï¿½</td>ï¿½<td></td><td class="preUni"><b>IVA ('+(IVA*100)+'%): </b></td><td class="preTotal"><b>' +totalIVA+ '</b></td></tr>' + '<tr><td>ï¿½</td>ï¿½<td></td><td class="preUni"><b>Total: </b></td><td class="preTotal" id="totalAPagar"><b>' +totalAPagar+ ' ï¿½</b></td></tr>';
 	}	
 	
 	
@@ -271,7 +271,7 @@
 			else{
 				document.getElementById("fechaNacimientoMes").className = "textBien";
 			}	
-		//Fecha de nacimiento AÑO:
+		//Fecha de nacimiento Aï¿½O:
 			var vFechaNacimientoAnio = document.getElementById("fechaNacimientoAnio").selectedIndex;
 			if( vFechaNacimientoAnio == null || vFechaNacimientoAnio == 0 ) {
 				todoBien=false;
@@ -465,7 +465,7 @@
 		else{
 			document.getElementById("mesTarjeta").className = "textBien";
 		}	
-		//Fecha de tarjeta AÑO:
+		//Fecha de tarjeta Aï¿½O:
 		var vAnioTarjeta = document.getElementById("anioTarjeta").selectedIndex;
 		if( vAnioTarjeta == null || vAnioTarjeta == 0 ) {
 			todoBien=false;

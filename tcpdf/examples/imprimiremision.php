@@ -277,8 +277,10 @@ $tbl = <<<EOD
 </em></strong></span></div>
 
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
-<span style="color:#00008B;font-family:'Bookman Old Style';font-size:10px;"><strong><em>Ésta cotización tiene vigencia de 30 días y está sujeta a disponibilidad de equipos y cambios sin previo aviso
-</em></strong></span></div><br><br>
+<span style="color:#00008B;font-family:'Bookman Old Style';font-size:10px;">Certifico que los equipos remisionados los he recibido en buen estado y funcionamiento por lo cual me hago responsable de los
+        daños, faltantes especiales y perdidas que a su devolucion se presenten, así mismo exonero de toda responsabilidad a Oscar Jimenez G. por cualquier hecho o percance que se llegare a presentar 
+        el uso de los equipos. El transporte corre por cuenta del cliente, los equipos deben entregarse desarmados en la puerta de la obra.
+</span></div><br><br>
 
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
 <span style="color:#000000;font-family:'Bookman Old Style';font-size:8px;">Cotización Generada por SOFTCONTECH V2.0, Software Diseñado por TECHNO SOLUCIONES, 317 774 0609, info@technosoluciones.com</div></span>
