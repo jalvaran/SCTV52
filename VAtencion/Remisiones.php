@@ -72,7 +72,7 @@ include_once("procesaRemision.php");
     <div class="container">
 	<br>
 	<?php	
-	
+	$css->CrearImageLink("../VMenu/MenuVentas.php", "../images/remision.png", "_self");
 	if(!empty($_REQUEST["TxtidRemision"])){
             $RutaPrintCot="../tcpdf/examples/imprimiremision.php?ImgPrintRemi=".$_REQUEST["TxtidRemision"];			
             $css->CrearTabla();
