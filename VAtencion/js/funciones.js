@@ -139,6 +139,7 @@ function calculetotaldias() {
 
 // esta funcion no permite enviar un formulario con el enter
 function DeshabilitaEnter(){
+    
     if(event.keyCode == 13) event.returnValue = false;
 }
 

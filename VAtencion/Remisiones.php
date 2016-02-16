@@ -147,6 +147,7 @@ include_once("procesaRemision.php");
 					//////////////////////////Se dibujan los campos para crear la remision
 					
 	if(!empty($idCotizacion)){
+                //print("<script>alert('entra')</script>");
 		$DatosCotizacion=$obVenta->DevuelveValores("cotizacionesv5","ID",$idCotizacion);
 		$DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$DatosCotizacion["Clientes_idClientes"]);
 		$css->CrearFormularioEvento("FrmCrearRemision",$myPage,"post","_self","onKeypress='DeshabilitaEnter()'");
@@ -235,8 +236,8 @@ include_once("procesaRemision.php");
 				
 				
 				$Subtotal=$Subtotal+$DatosItems["Subtotal"];
-				$IVA=$IVA+$DatosItems["IVA"];
-				$Total=$Total+$DatosItems["Total"];
+				$IVA=round($IVA+$DatosItems["IVA"]);
+				$Total=round($Total+$DatosItems["Total"]);
 				
 				$css->FilaTabla(14);
 				$css->ColTabla($DatosItems["Referencia"],1);

@@ -1,5 +1,4 @@
 <?php
-
 require_once('tcpdf_include.php');
 include("../../modelo/php_conexion.php");
 ////////////////////////////////////////////
@@ -8,13 +7,10 @@ include("../../modelo/php_conexion.php");
 session_start();
 if(!isset($_SESSION["username"]))
    header("Location: ../../index.php");
-
 ////////////////////////////////////////////
 /////////////Obtengo el ID de la cotizacion a que se imprimirá 
 ////////////////////////////////////////////
-
 $idRemision = $_REQUEST["ImgPrintRemi"];
-
 ////////////////////////////////////////////
 /////////////Obtengo valores de la Remision
 ////////////////////////////////////////////
@@ -25,31 +21,23 @@ $fecha=$DatosRemision["Fecha"];
 $observaciones=$DatosRemision["ObservacionesRemision"];
 $Clientes_idClientes=$DatosRemision["Clientes_idClientes"];
 $Usuarios_idUsuarios=$DatosRemision["Usuarios_idUsuarios"];
-
 ////////////////////////////////////////////
 /////////////Obtengo valores del centro de costos
 ////////////////////////////////////////////
 		
 $DatosCentroCostos=$obVenta->DevuelveValores("centrocosto","ID",$DatosRemision["CentroCosto"]);
-
 ////////////////////////////////////////////
 /////////////Obtengo datos del cliente
 ////////////////////////////////////////////
-
 		  		  
 $DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$Clientes_idClientes);
-
 ////////////////////////////////////////////
 /////////////Obtengo datos del Usuario creador y de la empresa propietaria
 ////////////////////////////////////////////
-
-
-$registros2=$obVenta->DevuelveValores("usuarios","idUsuarios",$Usuarios_idUsuarios);
-$nombreUsuario=$registros2["Nombre"];
-$ApellidoUsuario=$registros2["Apellido"];
-
+$DatosUsuario=$obVenta->DevuelveValores("usuarios","idUsuarios",$Usuarios_idUsuarios);
+$nombreUsuario=$DatosUsuario["Nombre"];
+$ApellidoUsuario=$DatosUsuario["Apellido"];
 $registros2=$obVenta->DevuelveValores("empresapro","idEmpresaPro",$DatosCentroCostos["EmpresaPro"]);
-
 $RazonSocialEP=$registros2["RazonSocial"];
 $DireccionEP=$registros2["Direccion"];
 $TelefonoEP=$registros2["Celular"];
@@ -77,84 +65,57 @@ class MYPDF extends TCPDF {
 		$this->setPageMark();
 	}
 }
-
 // create new PDF document
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Julian Andres Alvaran Valencia');
 $pdf->SetTitle('Remisiones TS');
 $pdf->SetSubject('Remisiones');
 $pdf->SetKeywords('Techno Soluciones, PDF, Remisiones, CCTV, Alarmas, Computadores, Software');
-
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
 // set margins
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $pdf->SetHeaderMargin(0);
 $pdf->SetFooterMargin(0);
-
 // remove default footer
 $pdf->setPrintFooter(false);
-
 // set auto page breaks
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
 // set some language-dependent strings (optional)
 if (@file_exists(dirname(__FILE__).'/lang/spa.php')) {
 	require_once(dirname(__FILE__).'/lang/spa.php');
 	$pdf->setLanguageArray($l);
 }
-
 // ---------------------------------------------------------
-
 // set font
 //$pdf->SetFont('helvetica', 'B', 6);
-
 // add a page
 $pdf->AddPage();
 $pdf->SetFont('helvetica', '', 9);
-
 ///////////////////////////////////////////////////////
 //////////////encabezado//////////////////
 ////////////////////////////////////////////////////////
-
-
 $tbl = <<<EOD
-
 <hr id="Line1" style="margin:0;padding:0;position:absolute;left:0px;top:44px;width:625px;height:2px;z-index:1;">
-
 <div id="wb_Text5" style="position:absolute;left:334px;top:127px;width:335px;height:18px;z-index:7;text-align:left;">
 <span style="color:#000000;font-family:'Bookman Old Style';font-size:13px;">Buga $fecha</span></div>
 <div id="wb_Text1" style="position:absolute;left:380px;top:72px;width:150px;height:16px;text-align:rigth;z-index:2;">
-<span style="color:#00008B;font-family:'Bookman Old Style';font-size:13px;"><strong><em>REMISION No. $idRemision
+<span style="font-family:'Bookman Old Style';font-size:13px;"><strong><em>REMISION No. $idRemision
 </em></strong></span></div>
-
-
 </div>
-
-
 EOD;
-
 $pdf->writeHTML($tbl, false, false, false, false, '');
-
 /////////////////Datos de la Remision
 //
 //
 //
-
 $tbl = <<<EOD
-
-
 <table border="1" cellpadding="2" cellspacing="2" align="left">
     <tr nobr="true">
         <th><strong>Cliente:</strong> $DatosCliente[RazonSocial]</th>
@@ -182,21 +143,11 @@ $tbl = <<<EOD
 <hr id="Line3" style="margin:0;padding:0;position:absolute;left:0px;top:219px;width:625px;height:2px;z-index:9;">
   
 EOD;
-
 $pdf->writeHTML($tbl, false, false, false, false, '');
-
 ////////////////////Datos de los items
-
-
-
-
-
 $tbl = <<<EOD
-
-
 <table border="1" cellpadding="2" cellspacing="2" align="center">
   
-
  <tr nobr="true">
   <th><h3>Ref</h3></th>
   <th colspan="3"><h3>Descripción</h3></th>
@@ -207,9 +158,7 @@ $tbl = <<<EOD
  </tr>
  </table>
 EOD;
-
 $pdf->writeHTML($tbl, false, false, false, false, '');
-
 ////////////////////////////////////////////////////////
  
 $Consulta=$obVenta->ConsultarTabla("cot_itemscotizaciones","WHERE NumCotizacion='$DatosRemision[Cotizaciones_idCotizaciones]'");
@@ -223,14 +172,12 @@ while($registros2=mysql_fetch_array($Consulta)){
 $Subtotal=$Subtotal+($registros2["Subtotal"]*$DatosRemision["Dias"]);
 $IVA=$IVA+($registros2["IVA"]*$DatosRemision["Dias"]);
 $Total=$Total+($registros2["Total"]*$DatosRemision["Dias"]);
-
 $registros2["Total"]=number_format($registros2["Total"]);
 $registros2["Subtotal"]=number_format(round($registros2["Subtotal"]*$DatosRemision["Dias"]));	
 $registros2["ValorUnitario"]=number_format(round($registros2["ValorUnitario"]));	
 			
 			
 $tbl = <<<EOD
-
 <table border="1" cellpadding="2" cellspacing="2" align="center">
  <tr nobr="true">
   <td>$registros2[Referencia]</td>
@@ -242,18 +189,14 @@ $tbl = <<<EOD
  </tr>
  </table>
 EOD;
-
 $pdf->writeHTML($tbl, false, false, false, false, '');
 			
 		  
 }
-
 $Subtotal=  number_format($Subtotal);
 $IVA=  number_format($IVA);
 $Total=  number_format($Total);
-
 $tbl = <<<EOD
-
 <table border="1" cellpadding="2" cellspacing="2" align="center">
  <tr nobr="true">
   <td colspan="5" align="center"><h3>Observaciones</h3></td></tr>
@@ -266,32 +209,25 @@ $tbl = <<<EOD
  </tr>
  </table>
 EOD;
-
 $pdf->writeHTML($tbl, false, false, false, false, '');		
 		
 $tbl = <<<EOD
 </br>
  
   <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:rigth;">
-<span style="color:#00008B;font-family:'Bookman Old Style';font-size:10px;"><strong><em>Realizado por: $nombreUsuario $ApellidoUsuario
+<span style="font-family:'Bookman Old Style';font-size:10px;"><strong><em>Realizado por: $DatosUsuario[Nombre] $DatosUsuario[Apellido]
 </em></strong></span></div>
-
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
-<span style="color:#00008B;font-family:'Bookman Old Style';font-size:10px;">Certifico que los equipos remisionados los he recibido en buen estado y funcionamiento por lo cual me hago responsable de los
-        daños, faltantes especiales y perdidas que a su devolucion se presenten, así mismo exonero de toda responsabilidad a Oscar Jimenez G. por cualquier hecho o percance que se llegare a presentar 
-        el uso de los equipos. El transporte corre por cuenta del cliente, los equipos deben entregarse desarmados en la puerta de la obra.
+<span style="font-family:'Bookman Old Style';font-size:10px;">Certifico que los equipos remisionados los he recibido en buen estado y funcionamiento por lo cual me hago responsable de los daños,
+        faltantes especiales y perdidas que a su devolucion se presenten, así mismo exonero de toda responsabilidad al Sr. Oscar Jimenez G. por cualquier hecho o percance que se llegare a presentar durante el uso de los equipos.
+        El transporte corre por cuenta del cliente, los equipos deben entregarse desarmados en la puerta de la obra.
 </span></div><br><br>
-
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
 <span style="color:#000000;font-family:'Bookman Old Style';font-size:8px;">Cotización Generada por SOFTCONTECH V2.0, Software Diseñado por TECHNO SOLUCIONES, 317 774 0609, info@technosoluciones.com</div></span>
-
 EOD;
-
 $pdf->writeHTML($tbl, false, false, false, false, '');		
-
 //Close and output PDF document
 $pdf->Output($nombre_file.'.pdf', 'I');
-
 //============================================================+
 // END OF FILE
 //============================================================+

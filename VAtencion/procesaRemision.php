@@ -13,9 +13,9 @@
 		
 	if(!empty($_REQUEST['TxtSaldo'])){
 		
-		$obVenta=new ProcesoVenta($_SESSION['idUser']);
+		$obVenta=new ProcesoVenta($idUser);
 				
-		///Ingreso a Remisiones
+		//$DatosCotizacion=$obVenta->DevuelveValores("cotizacionesv5","ID",$_REQUEST['TxtIdCotizacion']);
 		
 		$tab="remisiones";
 		$NumRegistros=16;  
@@ -35,11 +35,11 @@
 		$Columnas[11]="Anticipo";					$Valores[11]=$_REQUEST['TxtAnticipo'];
 		$Columnas[12]="Dias";			    			$Valores[12]=$_REQUEST['TxtDias'];
                 $Columnas[13]="Estado";			    			$Valores[13]="A";
-		$Columnas[14]="CentroCosto";			    		$Valores[14]=$_REQUEST['CmbCentroCostos'];
-                $Columnas[15]="Usuarios_idUsuarios";		    		$Valores[15]=$_SESSION['idUser'];
+		$Columnas[14]="Usuarios_idUsuarios";			    	$Valores[14]=$idUser;
+                $Columnas[15]="CentroCosto";			    		$Valores[15]=$_REQUEST["CmbCentroCostos"];
+                
 		$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		$idRemision=$obVenta->ObtenerMAX("remisiones", "ID", 1, "");
-                
                 $VariblesImpresion="TxtidRemision=$idRemision";
                 if($_REQUEST['TxtAnticipo']>0){
                     
