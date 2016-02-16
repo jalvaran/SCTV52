@@ -160,9 +160,8 @@ $tbl = <<<EOD
 EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');
 ////////////////////////////////////////////////////////
- 
+$PesoTotal=$obVenta->CalculePesoRemision($DatosRemision['Cotizaciones_idCotizaciones']); 
 $Consulta=$obVenta->ConsultarTabla("cot_itemscotizaciones","WHERE NumCotizacion='$DatosRemision[Cotizaciones_idCotizaciones]'");
-	
 $Subtotal=0;
 $IVA=0;
 $Total=0;
@@ -201,7 +200,8 @@ $tbl = <<<EOD
  <tr nobr="true">
   <td colspan="5" align="center"><h3>Observaciones</h3></td></tr>
   <tr nobr="true">
-  <td colspan="5" align="left">Cotizacion No.: $DatosRemision[Cotizaciones_idCotizaciones], $observaciones</td></tr>
+  <td colspan="5" align="left">Cotizacion No.: $DatosRemision[Cotizaciones_idCotizaciones], Peso Total de la
+      Remision: $PesoTotal Kgs, Observaciones adicionales: $observaciones</td></tr>
   <tr nobr="true">
   <td colspan="4" align="rigth"><h3>SubTotal</h3></td><td>$$Subtotal</td></tr>
   <tr nobr="true"><td colspan="4" align="rigth"><h3>IVA</h3></td><td>$$IVA</td></tr>
@@ -222,8 +222,14 @@ $tbl = <<<EOD
         faltantes especiales y perdidas que a su devolucion se presenten, así mismo exonero de toda responsabilidad al Sr. Oscar Jimenez G. por cualquier hecho o percance que se llegare a presentar durante el uso de los equipos.
         El transporte corre por cuenta del cliente, los equipos deben entregarse desarmados en la puerta de la obra.
 </span></div><br><br>
+
+<div id="Div_Firmas" style="text-align:left;">
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:left;">Recibe: ______________________________</span>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:right;"> Entrega: ______________________________</span></div>
+
+        
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
-<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px;">Cotización Generada por SOFTCONTECH V2.0, Software Diseñado por TECHNO SOLUCIONES, 317 774 0609, info@technosoluciones.com</div></span>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px;">Remision Generada por SOFTCONTECH V5.0, Software Diseñado por TECHNO SOLUCIONES SAS, 317 774 0609, info@technosoluciones.com</div></span>
 EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');		
 //Close and output PDF document
