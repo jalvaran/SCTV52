@@ -97,7 +97,7 @@ if (@file_exists(dirname(__FILE__).'/lang/spa.php')) {
 //$pdf->SetFont('helvetica', 'B', 6);
 // add a page
 $pdf->AddPage();
-$pdf->SetFont('helvetica', '', 9);
+$pdf->SetFont('helvetica', '', 8);
 ///////////////////////////////////////////////////////
 //////////////encabezado//////////////////
 ////////////////////////////////////////////////////////
@@ -201,7 +201,7 @@ $tbl = <<<EOD
  <tr nobr="true">
   <td colspan="5" align="center"><h3>Observaciones</h3></td></tr>
   <tr nobr="true">
-  <td colspan="5" align="left">$observaciones</td></tr>
+  <td colspan="5" align="left">Cotizacion No.: $DatosRemision[Cotizaciones_idCotizaciones], $observaciones</td></tr>
   <tr nobr="true">
   <td colspan="4" align="rigth"><h3>SubTotal</h3></td><td>$$Subtotal</td></tr>
   <tr nobr="true"><td colspan="4" align="rigth"><h3>IVA</h3></td><td>$$IVA</td></tr>

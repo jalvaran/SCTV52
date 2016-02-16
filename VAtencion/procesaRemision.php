@@ -39,7 +39,23 @@
                 $Columnas[15]="CentroCosto";			    		$Valores[15]=$_REQUEST["CmbCentroCostos"];
                 
 		$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+                 
+                
 		$idRemision=$obVenta->ObtenerMAX("remisiones", "ID", 1, "");
+                
+                ///////////////////////////////Se ingresa a rem_relaciones
+                
+                $ConsultaItems=$obVenta->ConsultarTabla("cot_itemscotizaciones","WHERE NumCotizacion='$_REQUEST[TxtIdCotizacion]'");
+                while($DatosItemsCotizacion=  mysql_fetch_array($ConsultaItems)){
+                    $tab="rem_relaciones";
+                    $NumRegistros=4; 
+                    $Columnas[0]="FechaEntrega";				$Valores[0]=$_REQUEST['TxtFechaRemision'];
+                    $Columnas[1]="CantidadEntregada";				$Valores[1]=$DatosItemsCotizacion["Cantidad"];
+                    $Columnas[2]="idItemCotizacion";				$Valores[2]=$DatosItemsCotizacion['ID'];
+                    $Columnas[3]="idRemision";                                  $Valores[3]=$idRemision;
+
+                    $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+                }
                 $VariblesImpresion="TxtidRemision=$idRemision";
                 if($_REQUEST['TxtAnticipo']>0){
                     
