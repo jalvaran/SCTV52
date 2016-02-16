@@ -696,7 +696,7 @@ public function ConsultarTabla($tabla,$Condicion)
 //////////////////////Funcion Registra Anticipo
 ///////////////////////////////////////////////////////////////////
 
-	public function RegistreAnticipo($idCliente,$Anticipo, $CuentaDestino,$CentroCosto,$Concepto){
+	public function RegistreAnticipo($idCliente,$Anticipo, $CuentaDestino,$CentroCosto,$Concepto,$idUser){
             $fecha=date("Y-m-d");
             $DatosCentro=$this->DevuelveValores("centrocosto","ID",$CentroCosto);
             $DatosCliente=$this->DevuelveValores("clientes","idClientes",$idCliente);
@@ -707,13 +707,14 @@ public function ConsultarTabla($tabla,$Condicion)
             //////Creo el comprobante de Ingreso
             
             $tab="comprobantes_ingreso";
-            $NumRegistros=5;
+            $NumRegistros=6;
 
             $Columnas[0]="Fecha";		$Valores[0]=$fecha;
             $Columnas[1]="Clientes_idClientes";	$Valores[1]=$idCliente;
             $Columnas[2]="Valor";               $Valores[2]=$Anticipo;
             $Columnas[3]="Tipo";		$Valores[3]="EFECTIVO";
             $Columnas[4]="Concepto";		$Valores[4]=$Concepto;
+            $Columnas[5]="Usuarios_idUsuarios";	$Valores[5]=$idUser;
             
             $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
             

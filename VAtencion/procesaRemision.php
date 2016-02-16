@@ -59,7 +59,7 @@
                 $VariblesImpresion="TxtidRemision=$idRemision";
                 if($_REQUEST['TxtAnticipo']>0){
                     
-                    $idIngreso=$obVenta->RegistreAnticipo($_REQUEST['TxtidCliente'],$_REQUEST['TxtAnticipo'],$_REQUEST['CmbCuentaDestino'],$_REQUEST['CmbCentroCostos'],"Anticipo por remision $idRemision");
+                    $idIngreso=$obVenta->RegistreAnticipo($_REQUEST['TxtidCliente'],$_REQUEST['TxtAnticipo'],$_REQUEST['CmbCuentaDestino'],$_REQUEST['CmbCentroCostos'],"Anticipo por remision $idRemision",$idUser);
                     $VariblesImpresion=$VariblesImpresion."&TxtidIngreso=$idIngreso";
                     
                 }
