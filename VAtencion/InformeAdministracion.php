@@ -41,7 +41,7 @@ $idUser=$_SESSION['idUser'];
 	<body>
    
 	 <?php 
-	 $myPage="InformeAdmin.php";
+	 $myPage="InformeAdministracion.php";
 	 $css->CabeceraIni("SoftConTech Informe de Administracion"); 
 	 $css->CabeceraFin(); 
 	 
@@ -62,17 +62,13 @@ $idUser=$_SESSION['idUser'];
 	  <div id="Usuarios" class="container" >
 	
 		<h2 align="center">
-					<?php 
-					
-						
-						/////////////////////////////////////Se dibuja los usuarios
-						
-					print("Informe de Administracion ");							
-					$imagerute="../images/informes.png";
-					$Ruta=$myPage;			
-					$css->CrearImageLink($Ruta,$imagerute,"_self");
-					
-					?></h2>
+                    <?php 
+
+                    $imagerute="../images/informes.png";
+                    $Ruta=$myPage;			
+                    $css->CrearImageLink($Ruta,$imagerute,"_self",150,150);
+
+                    ?></h2>
                		<table class="table table-bordered" >
                       <tr>
                         <td>

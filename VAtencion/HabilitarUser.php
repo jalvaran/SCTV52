@@ -89,7 +89,7 @@ if(!empty($_REQUEST['TxtHabilitarUser'])){
 					print("Cerrar Cajas");							
 					$imagerute="../images/CerrarCajas.png";
 					$Ruta=$myPage."?ImgCerrarCajas=1";			
-					$css->CrearImageLink($Ruta,$imagerute,"_self");
+					$css->CrearImageLink($Ruta,$imagerute,"_self",200,200);
 					
 					?></h2>
                		<table class="table table-bordered" >

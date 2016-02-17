@@ -16,26 +16,18 @@ if (!isset($_SESSION['username']))
 
 $NombreUser=$_SESSION['nombre'];
 $idUser=$_SESSION['idUser'];	
-$idCotizacion="";
+$idRemision="";
 
 
 
 //////Si recibo un cliente
-	if(!empty($_REQUEST['TxtAsociarCotizacion'])){
+	if(!empty($_REQUEST['TxtAsociarRemision'])){
 		
-		$idCotizacion=$_REQUEST['TxtAsociarCotizacion'];
+		$idRemision=$_REQUEST['TxtAsociarRemision'];
 	}
 
-	////////// Paginacion
-$page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 
-    	$limit = 8;
-    	$startpoint = ($page * $limit) - $limit;
-		
-/////////
-
-include_once ('funciones/function.php');
-include_once("procesaRemision.php");
+include_once("procesaDevolucion.php");
 	
 	
 ?>
@@ -45,20 +37,20 @@ include_once("procesaRemision.php");
   
 	<head>
 	
-	 <?php $css =  new CssIni("Remisiones"); ?>
+	 <?php $css =  new CssIni("Devoluciones"); ?>
 	</head>
  
 	<body>
    
 	 <?php 
 	 $obVenta=new ProcesoVenta($idUser);
-	 $myPage="Remisiones.php";
-	 $css->CabeceraIni("SoftConTech Remisiones"); 
+	 $myPage="Devoluciones.php";
+	 $css->CabeceraIni("SoftConTech Devoluciones"); 
 	 
 	 	
-	 $css->CrearForm("FrmBuscarCotizacion",$myPage,"post","_self");
-	 $css->CrearInputText("TxtBuscarCotizacion","text","Buscar Cotizacion: ","","Digite el numero de una cotizacion","white","","",300,30,0,0);
-	 $css->CrearBoton("BtnBuscarCotizacion", "Buscar");
+	 $css->CrearForm("FrmBuscarRemision",$myPage,"post","_self");
+	 $css->CrearInputText("TxtBuscarRemision","text","Buscar Remision: ","","Digite el numero de una Remision","white","","",300,30,0,0);
+	 $css->CrearBoton("BtnBuscarRemision", "Buscar");
 	 $css->CerrarForm();
 	 
 	 $css->CabeceraFin(); 
@@ -73,16 +65,16 @@ include_once("procesaRemision.php");
 	<br>
 	<?php	
 	
-        $css->CrearImageLink("../VMenu/MnuVentas.php", "../images/remision.png", "_self",200,200);
-	if(!empty($_REQUEST["TxtidRemision"])){
-            $RutaPrintCot="../tcpdf/examples/imprimiremision.php?ImgPrintRemi=".$_REQUEST["TxtidRemision"];			
+        $css->CrearImageLink("../VMenu/MnuVentas.php", "../images/devolucion2.png", "_self",200,200);
+	if(!empty($_REQUEST["TxtidDevolucion"])){
+            $RutaPrintCot="../tcpdf/examples/imprimirDevolucion.php?ImgPrintDevolucion=".$_REQUEST["TxtidDevolucion"];			
             $css->CrearTabla();
-            $css->CrearFilaNotificacion("Remision almacenada Correctamente <a href='$RutaPrintCot' target='_blank'>Imprimir Remision No. $_REQUEST[TxtidRemision]</a>",16);
+            $css->CrearFilaNotificacion("Devolucion almacenada Correctamente <a href='$RutaPrintCot' target='_blank'>Imprimir Devolucion No. $_REQUEST[TxtidDevolucion]</a>",16);
             $css->CerrarTabla();
-            if(!empty($_REQUEST["TxtidIngreso"])){
-                $RutaPrintIngreso="../tcpdf/examples/imprimiringreso.php?ImgPrintIngreso=".$_REQUEST["TxtidIngreso"];			
+            if(!empty($_REQUEST["TxtidFactura"])){
+                $RutaPrint="../tcpdf/examples/imprimirFacturaAlquiler.php?ImgPrintFactura=".$_REQUEST["TxtidFactura"];			
                 $css->CrearTabla();
-                $css->CrearFilaNotificacion("Comprobante de Ingreso Creado Correctamente <a href='$RutaPrintIngreso' target='_blank'>Imprimir Comprobante de Ingreso No. $_REQUEST[TxtidIngreso]</a>",16);
+                $css->CrearFilaNotificacion("Factura Creada Correctamente <a href='$RutaPrint' target='_blank'>Imprimir Factura No. $_REQUEST[TxtidIngreso]</a>",16);
                 $css->CerrarTabla();
             }
 	}
@@ -95,46 +87,47 @@ include_once("procesaRemision.php");
 	  <div id="Productos Agregados" class="container" >
 	
 		<h2 align="center">
-					<?php 
+                <?php 
 										
-					////////////////////////////////////Si se solicita buscar una cotizacion
+					////////////////////////////////////Si se solicita buscar una Remision
 	
-	if(!empty($_REQUEST["TxtBuscarCotizacion"])){
+	if(!empty($_REQUEST["TxtBuscarRemision"])){
 		
-		$Key=$_REQUEST["TxtBuscarCotizacion"];
-		$pa=mysql_query("SELECT * FROM cotizacionesv5 c INNER JOIN clientes cl ON c.Clientes_idClientes = cl.idClientes WHERE cl.RazonSocial LIKE '%$Key%' OR c.ID = '$Key' ORDER BY c.ID DESC LIMIT 20") or die(mysql_error());
+		$Key=$_REQUEST["TxtBuscarRemision"];
+		$pa=mysql_query("SELECT * FROM remisiones r INNER JOIN clientes cl ON r.Clientes_idClientes = cl.idClientes "
+                        . "WHERE r.Estado<>'C' AND(cl.RazonSocial LIKE '%$Key%' OR r.ID = '$Key' OR r.Obra LIKE '%$Key%' OR r.FechaDespacho LIKE '%$Key%') ORDER BY r.ID DESC LIMIT 20") or die(mysql_error());
 		if(mysql_num_rows($pa)){
 			print("<br>");
 			$css->CrearTabla();
 			$css->FilaTabla(18);
-			$css->ColTabla("Cotizaciones Encontradas para Asociar:",4);
+			$css->ColTabla("Remisiones Encontradas:",4);
 			$css->CierraFilaTabla();
 			
 			$css->FilaTabla(18);
 				$css->ColTabla("ID",1);
 				$css->ColTabla('Fecha',1);
-				$css->ColTabla('RazonSocial',1);
-				$css->ColTabla('Usuario',1);
-				$css->ColTabla('Observaciones',1);
-				$css->ColTabla('NumSolicitud',1);
-				$css->ColTabla('NumOrden',1);
-				$css->ColTabla('Visualizar',1);
+				$css->ColTabla('Razon Social',1);
+				$css->ColTabla('Obra',1);
+				$css->ColTabla('Fecha Despacho',1);
+				$css->ColTabla('Hora Despacho',1);
+				$css->ColTabla('Observaciones Remision',1);
+				$css->ColTabla('Anticipo',1);
 				$css->ColTabla('Asociar',1);
 			$css->CierraFilaTabla();
-			while($DatosCotizacion=mysql_fetch_array($pa)){
+			while($DatosRemision=mysql_fetch_array($pa)){
 				$css->FilaTabla(14);
-				$css->ColTabla($DatosCotizacion['ID'],1);
-				$css->ColTabla($DatosCotizacion['Fecha'],1);
-				$css->ColTabla($DatosCotizacion['RazonSocial'],1);
-				$css->ColTabla($DatosCotizacion['Usuarios_idUsuarios'],1);
-				$css->ColTabla($DatosCotizacion['Observaciones'],1);
-				$css->ColTabla($DatosCotizacion['NumSolicitud'],1);
-				$css->ColTabla($DatosCotizacion['NumOrden'],1);
+				$css->ColTabla($DatosRemision['ID'],1);
+				$css->ColTabla($DatosRemision['Fecha'],1);
+				$css->ColTabla($DatosRemision['RazonSocial'],1);
+				$css->ColTabla($DatosRemision['Obra'],1);
+				$css->ColTabla($DatosRemision['FechaDespacho'],1);
+				$css->ColTabla($DatosRemision['HoraDespacho'],1);
+				$css->ColTabla($DatosRemision['ObservacionesRemision'],1);
 				print("<td>");
-				$RutaPrintCot="../tcpdf/examples/imprimircoti.php?ImgPrintCoti=".$DatosCotizacion["ID"];
-				$css->CrearLink($RutaPrintCot,"_blank","Ver");
+				$RutaPrint="../tcpdf/examples/imprimiremision.php?ImgPrintRemi=".$DatosRemision["ID"];
+				$css->CrearLink($RutaPrint,"_blank","Ver");
 				print("</td>");
-				$css->ColTablaVar($myPage,"TxtAsociarCotizacion",$DatosCotizacion['ID'],"","Asociar Cotizacion");
+				$css->ColTablaVar($myPage,"TxtAsociarRemision",$DatosRemision['ID'],"","Asociar Remision");
 				$css->CierraFilaTabla();
 			}
 			
@@ -147,12 +140,12 @@ include_once("procesaRemision.php");
 					
 					//////////////////////////Se dibujan los campos para crear la remision
 					
-	if(!empty($idCotizacion)){
+	if(!empty($idRemision)){
                 //print("<script>alert('entra')</script>");
-		$DatosCotizacion=$obVenta->DevuelveValores("cotizacionesv5","ID",$idCotizacion);
+		$DatosRemision=$obVenta->DevuelveValores("remisiones","ID",$idRemision);
 		$DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$DatosCotizacion["Clientes_idClientes"]);
-		$css->CrearFormularioEvento("FrmCrearRemision",$myPage,"post","_self","onKeypress='DeshabilitaEnter()'");
-                print("REMISION<br><br>");
+		$css->CrearFormularioEvento("FrmCrearDevolucion",$myPage,"post","_self","onKeypress='DeshabilitaEnter()'");
+                print("DEVOLUCION<br><br>");
                         $css->CrearInputText("TxtidCliente","hidden","",$DatosCotizacion["Clientes_idClientes"],"","black","","",150,30,0,0);
 			$css->CrearTabla();
 			$css->FilaTabla(18);
@@ -325,7 +318,7 @@ include_once("procesaRemision.php");
 		$css->CerrarForm();	
 	}else{
 		$css->CrearTabla();
-		$css->CrearFilaNotificacion("Por favor busque y asocie una cotizacion",16);
+		$css->CrearFilaNotificacion("Por favor busque y asocie una remision",16);
 		$css->CerrarTabla();
 	}
 					

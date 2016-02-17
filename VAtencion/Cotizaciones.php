@@ -48,9 +48,10 @@ include_once("procesaCoti.php");
 	 <?php $css =  new CssIni("SoftConTech Cotizaciones"); ?>
 	</head>
  
-	<body>
+	<body align="center">
    
 	 <?php 
+         
 	 $obVenta=new ProcesoVenta($idUser);
 	 $myPage="Cotizaciones.php";
 	 $css->CabeceraIni("SoftConTech Cotizaciones"); 
@@ -103,7 +104,7 @@ include_once("procesaCoti.php");
     <div class="container">
 	<br>
 	<?php	
-	
+	$css->CrearImageLink("../VMenu/MnuVentas.php", "../images/cotizacion.png", "_self",200,200);
 	if(!empty($_REQUEST["TxtIdCotizacion"])){
 		$RutaPrintCot="../tcpdf/examples/imprimircoti.php?ImgPrintCoti=".$_REQUEST["TxtIdCotizacion"];			
 		$css->CrearTabla();
@@ -220,93 +221,93 @@ include_once("procesaCoti.php");
                         	
                             <?php 
 							
-								if($idClientes>0){
-														
-								$css->CrearTabla();
-								
-								$pa=mysql_query("SELECT * FROM  precotizacion WHERE idUsuario='$idUser' ORDER BY ID DESC") or die(mysql_error());
-								if(mysql_num_rows($pa)){	
-									
-									$css->FilaTabla(18);
-									$css->ColTabla('Referencia',1);
-									$css->ColTabla('Descripcion',1);
-									$css->ColTabla('Cantidad',1);
-									$css->ColTabla('ValorUnitario',1);
-									$css->ColTabla('Subtotal',1);
-									$css->ColTabla('Borrar',1);
-									$css->CierraFilaTabla();
-									
-								while($row=mysql_fetch_array($pa)){
-									$css->FilaTabla(16);
-									$css->ColTabla($row['Referencia'],1);
-									$css->ColTabla($row['Descripcion'],1);
-									print("<td colspan=2>");
-									$css->CrearForm("FrmEdit$row[ID]",$myPage,"post","_self");
-									$css->CrearInputText("TxtIdCliente","hidden","",$idClientes,"","","","",0,0,0,0);
-									$css->CrearInputText("TxtTabla","hidden","",$row["Tabla"],"","","","",0,0,0,0);
-									$css->CrearInputText("TxtPrecotizacion","hidden","",$row["ID"],"","","","",0,0,0,0);
-									$css->CrearInputNumber("TxtEditar","number","",$row["Cantidad"],"","black","","",100,30,0,1,0, "","any");
-									$css->CrearInputNumber("TxtValorUnitario","number","",$row["ValorUnitario"],"","black","","",150,30,0,1,$row["PrecioCosto"], $row["ValorUnitario"]*10,"any");
-									$css->CrearBoton("BtnEditar", "E");
-									$css->CerrarForm();
-									print("</td>");
-									$css->ColTabla(number_format($row['SubTotal']),1);
-									$css->ColTablaDel($myPage,"precotizacion","ID",$row['ID'],$idClientes);
-									$css->CierraFilaTabla();
-									
-								 
-								}
-								}
-								
-								$css->CerrarTabla();
-								
-								
-								
-								$Subtotal=$obVenta->SumeColumna("precotizacion","SubTotal", "idUsuario",$idUser);
-								$IVA=$obVenta->SumeColumna("precotizacion","IVA", "idUsuario",$idUser);
-															
-								$Total=$Subtotal+$IVA;
-								
-								$css->CrearForm("FrmGuarda",$myPage,"post","_self");
-								$css->CrearInputText("TxtIdCliente","hidden","",$idClientes,"","","","",150,30,0,0);
-								
-								$css->CrearTabla();
-								$css->FilaTabla(14);
-								$css->ColTabla("Esta Cotizacion:",4);
-								$css->CierraFilaTabla();
-								$css->FilaTabla(18);
-								$css->ColTabla("SUBTOTAL:",1);
-								$css->ColTabla(number_format($Subtotal),3);
-								$css->CierraFilaTabla();
-								$css->FilaTabla(18);
-								$css->ColTabla("IMPUESTOS:",1);
-								$css->ColTabla(number_format($IVA),3);
-								$css->CierraFilaTabla();
-								
-								$css->FilaTabla(18);
-								$css->ColTabla("TOTAL:",1);
-								$css->ColTabla(number_format($Total),3);
-								$css->FilaTabla(18);
-								print("<td colspan=4>");
-								$css->CrearInputText("TxtNumOrden","text","","","Numero de Orden","black","","",150,30,0,0);
-								
-								$css->CrearInputText("TxtNumSolicitud","text","","","Numero de Solicitud","black","","",150,30,0,0);
-								print("<br>");
-								$css->CrearTextArea("TxtObservaciones","","","Observaciones para esta Cotizaciones","black","","",300,100,0,0);
-								print("<br>");
-								$css->CrearBoton("BtnGuardar","Guardar");
-								print("</td>");
-								$css->CierraFilaTabla();
-															
-								$css->CerrarTabla(); 
-								$css->CerrarForm();
-								
-								}else{
-									print('<tr><div class="alert alert-success" align="center"><strong>Por favor Seleccione un Cliente</strong></div></tr>');
-								}
-							?>
-                              
-                                
+                            if($idClientes>0){
+
+                            $css->CrearTabla();
+
+                            $pa=mysql_query("SELECT * FROM  precotizacion WHERE idUsuario='$idUser' ORDER BY ID DESC") or die(mysql_error());
+                            if(mysql_num_rows($pa)){	
+
+                                    $css->FilaTabla(18);
+                                    $css->ColTabla('Referencia',1);
+                                    $css->ColTabla('Descripcion',1);
+                                    $css->ColTabla('Cantidad',1);
+                                    $css->ColTabla('ValorUnitario',1);
+                                    $css->ColTabla('Subtotal',1);
+                                    $css->ColTabla('Borrar',1);
+                                    $css->CierraFilaTabla();
+
+                            while($row=mysql_fetch_array($pa)){
+                                    $css->FilaTabla(16);
+                                    $css->ColTabla($row['Referencia'],1);
+                                    $css->ColTabla($row['Descripcion'],1);
+                                    print("<td colspan=2>");
+                                    $css->CrearForm("FrmEdit$row[ID]",$myPage,"post","_self");
+                                    $css->CrearInputText("TxtIdCliente","hidden","",$idClientes,"","","","",0,0,0,0);
+                                    $css->CrearInputText("TxtTabla","hidden","",$row["Tabla"],"","","","",0,0,0,0);
+                                    $css->CrearInputText("TxtPrecotizacion","hidden","",$row["ID"],"","","","",0,0,0,0);
+                                    $css->CrearInputNumber("TxtEditar","number","",$row["Cantidad"],"","black","","",100,30,0,1,0, "","any");
+                                    $css->CrearInputNumber("TxtValorUnitario","number","",$row["ValorUnitario"],"","black","","",150,30,0,1,$row["PrecioCosto"], $row["ValorUnitario"]*10,"any");
+                                    $css->CrearBoton("BtnEditar", "E");
+                                    $css->CerrarForm();
+                                    print("</td>");
+                                    $css->ColTabla(number_format($row['SubTotal']),1);
+                                    $css->ColTablaDel($myPage,"precotizacion","ID",$row['ID'],$idClientes);
+                                    $css->CierraFilaTabla();
+                                    
+
+                            }
+                            }
+
+                            $css->CerrarTabla();
+
+
+
+                            $Subtotal=$obVenta->SumeColumna("precotizacion","SubTotal", "idUsuario",$idUser);
+                            $IVA=$obVenta->SumeColumna("precotizacion","IVA", "idUsuario",$idUser);
+
+                            $Total=$Subtotal+$IVA;
+
+                            $css->CrearForm("FrmGuarda",$myPage,"post","_self");
+                            $css->CrearInputText("TxtIdCliente","hidden","",$idClientes,"","","","",150,30,0,0);
+
+                            $css->CrearTabla();
+                            $css->FilaTabla(14);
+                            $css->ColTabla("Esta Cotizacion:",4);
+                            $css->CierraFilaTabla();
+                            $css->FilaTabla(18);
+                            $css->ColTabla("SUBTOTAL:",1);
+                            $css->ColTabla(number_format($Subtotal),3);
+                            $css->CierraFilaTabla();
+                            $css->FilaTabla(18);
+                            $css->ColTabla("IMPUESTOS:",1);
+                            $css->ColTabla(number_format($IVA),3);
+                            $css->CierraFilaTabla();
+
+                            $css->FilaTabla(18);
+                            $css->ColTabla("TOTAL:",1);
+                            $css->ColTabla(number_format($Total),3);
+                            $css->FilaTabla(18);
+                            print("<td colspan=4>");
+                            $css->CrearInputText("TxtNumOrden","text","","","Numero de Orden","black","","",150,30,0,0);
+
+                            $css->CrearInputText("TxtNumSolicitud","text","","","Numero de Solicitud","black","","",150,30,0,0);
+                            print("<br>");
+                            $css->CrearTextArea("TxtObservaciones","","","Observaciones para esta Cotizaciones","black","","",300,100,0,0);
+                            print("<br>");
+                            $css->CrearBotonConfirmado("BtnGuardar","Guardar");
+                            print("</td>");
+                            $css->CierraFilaTabla();
+
+                            $css->CerrarTabla(); 
+                            $css->CerrarForm();
+
+                            }else{
+                                    print('<tr><div class="alert alert-success" align="center"><strong>Por favor Seleccione un Cliente</strong></div></tr>');
+                            }
+                    ?>
+
+
                               </tr>
                            
                             	

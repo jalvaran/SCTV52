@@ -350,9 +350,10 @@ class CssIni{
 	/////////////////////Crear una columna para una tabla
 	
 	function ColTablaDel($Page,$tabla,$IdTabla,$ValueDel,$idPre){
-		print('<td>
-                  	<a href="'.$Page.'?del='.$ValueDel.'&TxtTabla='.$tabla.'&TxtIdTabla='.$IdTabla.'&TxtIdPre='.$idPre.'" title="Eliminar de la Lista">
-               		<i class="icon-remove"></i>
+           
+		print('<td align="center">
+                  	<a href="'.$Page.'?del='.$ValueDel.'&TxtTabla='.$tabla.'&TxtIdTabla='.$IdTabla.'&TxtIdPre='.$idPre.'" title="Eliminar de la Lista" >
+               		<i class="icon-remove">X</i>
                                     </a>
                                 </td>');
 		
@@ -433,8 +434,8 @@ class CssIni{
 		print('</ul></li></ul></div>');
 	}
 	
-	function CrearImageLink($page,$imagerute,$target){
-		print('<a href="'.$page.'" target="'.$target.'"><img src="'.$imagerute.'"></a>');
+	function CrearImageLink($page,$imagerute,$target,$Alto,$Ancho){
+		print('<a href="'.$page.'" target="'.$target.'"><img src="'.$imagerute.'" style="height:'.$Alto.'px; width:'.$Ancho.'px"></a>');
 	}
 	function CrearLink($link,$target,$Titulo){
 		print('<a href="'.$link.'" target="'.$target.'">'.$Titulo.'</a>');
@@ -449,7 +450,7 @@ class CssIni{
 	/////////////////////Crea un Boton Submit con evento
 	
 	function CrearBotonConfirmado($nombre,$value){
-		print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" onclick="Confirmar()" class="btn btn-danger">');
+		print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" onclick="Confirmar(); return false" class="btn btn-danger">');
 		
 	}
 	//////////////////////////////////FIN
