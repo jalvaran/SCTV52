@@ -143,25 +143,25 @@ include_once("procesaDevolucion.php");
 	if(!empty($idRemision)){
                 //print("<script>alert('entra')</script>");
 		$DatosRemision=$obVenta->DevuelveValores("remisiones","ID",$idRemision);
-		$DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$DatosCotizacion["Clientes_idClientes"]);
-		$css->CrearFormularioEvento("FrmCrearDevolucion",$myPage,"post","_self","onKeypress='DeshabilitaEnter()'");
+		$DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$DatosRemision["Clientes_idClientes"]);
+		
                 print("DEVOLUCION<br><br>");
-                        $css->CrearInputText("TxtidCliente","hidden","",$DatosCotizacion["Clientes_idClientes"],"","black","","",150,30,0,0);
+                        
 			$css->CrearTabla();
 			$css->FilaTabla(18);
                         print("<td colspan=3>");
 			print("FECHA: ");
-                        $css->CrearInputText("TxtFechaRemision","text","",date("Y-m-d"),"","black","","",150,30,0,1); 
+                        $css->CrearInputText("TxtFechaDevolucion","text","",date("Y-m-d"),"","black","","",150,30,0,1); 
                         print("</td>"); 
-			$css->ColTabla("COTIZACION:",1);
-			$css->ColTablaInputText("TxtIdCotizacion","text",$DatosCotizacion["ID"],"","","black","","",150,30,1,1);
+			$css->ColTabla("REMISION:",1);
+			$css->ColTablaInputText("TxtIdRemision","text",$DatosRemision["ID"],"","","black","","",150,30,1,1);
 			$css->CierraFilaTabla();
 			$css->FilaTabla(16);
 			$css->ColTabla('CLIENTE:',1);
 			$css->ColTabla($DatosCliente["RazonSocial"],1);
 			$css->ColTabla(' ',1);
 			$css->ColTabla('OBRA:',1);
-			$css->ColTablaInputText("TxtObra","text","","","Nombre de la Obra","black","","",300,30,0,1);
+			$css->ColTabla($DatosRemision["Obra"],1);
 			$css->CierraFilaTabla();
 			
 			$css->FilaTabla(16);
@@ -169,7 +169,7 @@ include_once("procesaDevolucion.php");
 			$css->ColTabla($DatosCliente["Direccion"],1);
 			$css->ColTabla(' ',1);
 			$css->ColTabla('DIRECCION OBRA:',1);
-			$css->ColTablaInputText("TxtDireccionObra","text","","","Direccion de la Obra","black","","",300,30,0,1);
+			$css->ColTabla($DatosRemision["Direccion"],1);
 			$css->CierraFilaTabla();
 			
 			$css->FilaTabla(16);
@@ -177,26 +177,25 @@ include_once("procesaDevolucion.php");
 			$css->ColTabla($DatosCliente["Telefono"],1);
 			$css->ColTabla(' ',1);
 			$css->ColTabla('CIUDAD Y TELEFONO:',1);
-			print("<td>");
-			$css->CrearInputText("TxtCiudadObra","text","","","Ciudad","black","","",300,30,0,1);
-			print("<br>");
-			$css->CrearInputText("TxtTelefonoObra","text","","","Telefono","black","","",300,30,0,1);
-			print("</td>");
+			
+			$css->ColTabla($DatosRemision["Ciudad"].' '.$DatosRemision["Telefono"],1);
+			
+			
 			$css->CierraFilaTabla();
 			
 			$css->FilaTabla(16);
 			$css->ColTabla('CIUDAD:',1);
 			$css->ColTabla($DatosCliente["Ciudad"],1);
 			$css->ColTabla(' ',1);
-			$css->ColTabla('RETIRA:',1);
-			$css->ColTablaInputText("TxtRetira","text","","","Retira","black","","",300,30,0,1);
+			$css->ColTabla('RETIRÓ:',1);
+			$css->ColTabla($DatosRemision["Retira"],1);
 			$css->CierraFilaTabla();
 			
 			$css->FilaTabla(16);
 			$css->ColTabla('NIT:',1);
 			$css->ColTabla($DatosCliente["Num_Identificacion"],1);
 			$css->ColTabla(' ',1);
-			$css->ColTabla('FECHA Y HORA:',1);
+			$css->ColTabla('FECHA Y HORA DEVOLUCION:',1);
 			$Fecha=date("Y-m-d");
 			$Hora=date("H:i:s");
 			print("<td>");
@@ -207,42 +206,65 @@ include_once("procesaDevolucion.php");
 			
 			$css->FilaTabla(16);
 			print("<td colspan=5 style='text-align: center'>");
-			$css->CrearTextArea("TxtObservacionesRemision","","","Observaciones","black","","",500,150,0,0);
+			$css->CrearTextArea("TxtObservacionesDevolucion","","","Observaciones","black","","",500,150,0,0);
 			print("</td>");
 			$css->CierraFilaTabla();
 			
 			$css->CerrarTabla();
 			
 			$css->CrearTabla();
-			$Consulta=$obVenta->ConsultarTabla("cot_itemscotizaciones","WHERE NumCotizacion=$idCotizacion");
+			$Consulta=$obVenta->ConsultarTabla("rem_relaciones", "WHERE idRemision='$idRemision'");
 			
 			$css->FilaTabla(16);
 			$css->ColTabla('REFERENCIA',1);
 			$css->ColTabla('DESCRIPCION',1);
-			$css->ColTabla('CANTIDAD',1);
+                        $css->ColTabla('FECHA ENTREGA',1);
+			$css->ColTabla('CANTIDAD ENTREGADA',1);
 			$css->ColTabla('VALOR',1);
+                        $css->ColTabla('DIAS',1);
+                        $css->ColTabla('CANTIDAD DEVOLUCION',1);
+                        $css->ColTabla('PENDIENTE X DEVOLVER ',1);
+                        $css->ColTabla('SUBTOTAL',1);
 			$css->CierraFilaTabla();
 			
 			$Total=0;
 			$Subtotal=0;
 			$IVA=0;
-			while($DatosItems=mysql_fetch_array($Consulta)){
+			while($DatosItemRemision=mysql_fetch_array($Consulta)){
 				
-				
+				$DatosItems=$obVenta->DevuelveValores("cot_itemscotizaciones", "ID", $DatosItemRemision["idItemCotizacion"]);
 				$Subtotal=$Subtotal+$DatosItems["Subtotal"];
 				$IVA=round($IVA+$DatosItems["IVA"]);
 				$Total=round($Total+$DatosItems["Total"]);
-				
+				$TotalFila=$DatosItemRemision["CantidadDevolucion"]*$DatosRemision["Dias"]*$DatosItems["Subtotal"];
+                                $PendienteDevolver=$DatosItemRemision["CantidadEntregada"]-$DatosItemRemision["CantidadDevolucion"];
+                                ///////////////Creo Formulario para edicion
+                                
 				$css->FilaTabla(14);
 				$css->ColTabla($DatosItems["Referencia"],1);
 				$css->ColTabla($DatosItems["Descripcion"],1);
-				$css->ColTabla($DatosItems["Cantidad"],1);
-				$css->ColTabla(number_format($DatosItems["Subtotal"]),1);
+                                $css->ColTabla($DatosItemRemision["FechaEntrega"],1);
+				$css->ColTabla($DatosItemRemision["CantidadEntregada"],1);
+				 print("<td colspan=3 style='width:500px;'>");
+                                 $css->CrearFormularioEvento("FrmEditar$DatosItems[ID]",$myPage,"post","_self","");
+                                $css->CrearInputText("TxtIdItem","hidden","",$DatosItems["ID"],"","black","","",150,30,0,0);
+                                $css->CrearInputNumber("TxtSubtotalUnitario","number","",$DatosItems["Subtotal"],"Subtotal","black","onkeyup","calculetotalItems()",80,30,0,1,'','',"any");
+                               
+                                $css->CrearInputNumber("TxtDias","number","",$DatosRemision["Dias"],"Dias","black","onchange","calculetotalItems()",80,30,0,0,1,1000,"any");
+                                
+                                $css->CrearInputNumber("TxtCantidadDevolucion","number","",0,"Devuelve","black","","",80,30,0,1,0,$PendienteDevolver,"any");
+                                $css->CrearBotonVerde("BtnEditar","E");
+                                $css->CerrarForm();
+                                print("</td>");
+                                $css->ColTabla($PendienteDevolver,1);
+                                print("<td>");
+                                $css->CrearInputNumber("TxtSubtotalItem","number","",$TotalFila,"SubtotalDias","black","","",80,30,1,1,"","","any");
+                                print("</td>");
 				$css->CierraFilaTabla();
 				
 			}
 			
-			
+			$css->CrearFormularioEvento("FrmCrearDevolucion",$myPage,"post","_self","onKeypress='DeshabilitaEnter()'");
 			$css->FilaTabla(16);
 			
 			$css->ColTabla('DIAS',3);

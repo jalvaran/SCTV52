@@ -453,6 +453,13 @@ class CssIni{
 		print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" onclick="Confirmar(); return false" class="btn btn-danger">');
 		
 	}
+        
+        /////////////////////Crea un Boton Editar Green
+	
+	function CrearBotonVerde($nombre,$value){
+		print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" class="btn btn-success">');
+		
+	}
 	//////////////////////////////////FIN
 }
 	
