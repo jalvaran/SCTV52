@@ -137,9 +137,7 @@ include_once("procesaDevolucion.php");
 		$DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$DatosRemision["Clientes_idClientes"]);
 		
                         $css->CrearTabla();
-                        $css->FilaTabla(16);
-                        $css->ColTabla('<h3 align="center">ITEMS DISPONIBLES PARA DEVOLVER</h3>',6);
-                        $css->CierraFilaTabla();
+                        $css->CrearFilaNotificacion("Items Disponibles en esta remision",18);
                         $css->FilaTabla(16);
                         $css->ColTabla('REMISION:',1);
                         $css->ColTabla($idRemision,1);
@@ -153,14 +151,13 @@ include_once("procesaDevolucion.php");
 			$Consulta=$obVenta->ConsultarTabla("rem_relaciones", "WHERE idRemision='$idRemision' GROUP BY idItemCotizacion");
 			
 			$css->FilaTabla(16);
-			$css->ColTabla('REFERENCIA',1);
-			$css->ColTabla('DESCRIPCION',1);
-                        $css->ColTabla('FECHA ENTREGA',1);
-			$css->ColTabla('CANTIDAD ENTREGADA',1);
-			$css->ColTabla('VALOR',1);
+			$css->ColTabla('<strong>REFERENCIA</strong>',1);
+			$css->ColTabla('<strong>DESCRIPCION</strong>',1);
+                        $css->ColTabla('<strong>FECHA ENTREGA</strong>',1);
+			$css->ColTabla('<strong>CANTIDAD ENTREGADA</strong>',1);
+			$css->ColTabla('<strong>AJUSTE</strong>',1);
                         
-                        $css->ColTabla('CANTIDAD DEVOLUCION',1);
-                        $css->ColTabla('PENDIENTE X DEVOLVER ',1);
+                        $css->ColTabla('<strong>PENDIENTE X DEVOLVER</strong>',1);
                        
 			$css->CierraFilaTabla();
 			
@@ -180,15 +177,15 @@ include_once("procesaDevolucion.php");
                             $css->ColTabla($DatosItems["Descripcion"],1);
                             $css->ColTabla($DatosItemRemision["FechaEntrega"],1);
                             $css->ColTabla($Entregas,1);
-                            print("<td colspan=2 width='30%'>");
+                            print("<td width='40%'>");
                             $css->CrearFormularioEvento("FrmEditar$DatosItems[ID]",$myPage,"post","_self","");
                             $css->CrearInputText("TxtIdItem","hidden","",$DatosItems["ID"],"","black","","",150,30,0,0);
                             $css->CrearInputText("TxtAsociarRemision","hidden","",$idRemision,"","black","","",150,30,0,0);
                            
                            
-                            $css->CrearInputNumber("TxtSubtotalUnitario","number","",$DatosItems["Subtotal"],"Subtotal","black","","",80,30,0,1,'','',"any");
-                            
-                            $css->CrearInputNumber("TxtCantidadDevolucion","number","",$PendienteDevolver,"Devuelve","black","","",80,30,0,1,1,$PendienteDevolver,"any");
+                            $css->CrearInputNumber("TxtSubtotalUnitario","number","Valor: ",$DatosItems["ValorUnitario"],"Valor Unitario","black","","",80,30,0,1,'','',"any");
+                            $css->CrearInputNumber("TxtCantidadDevolucion","number"," Cantidad: ",$PendienteDevolver,"Devuelve","black","","",70,30,0,1,1,$PendienteDevolver,"any");
+                            $css->CrearInputNumber("TxtDias","number"," Dias: ",$DatosRemision["Dias"],"Dias","black","","",70,30,0,1,1,1000,"any");
                             $css->CrearBotonVerde("BtnEditar","+");
                             $css->CerrarForm();
                             print("</td>");
@@ -202,12 +199,52 @@ include_once("procesaDevolucion.php");
                            
                             $css->CierraFilaTabla();
 			}
+        $css->CerrarTabla();
 			
-			
-			
-			$css->CerrarTabla();
-                        
-		
+	///////////////////////////////////////////
+        /////////////Visualizamos la pre Devolucion
+        ///
+        ///
+        ///
+        $sql="SELECT pre.ID as ID, cot.Referencia as Referencia, cot.Descripcion as Descripcion, pre.Cantidad as Cantidad,"
+                . " pre.Subtotal as Subtotal, pre.Dias as Dias, pre.Total as Total FROM rem_pre_devoluciones pre";
+        $sql.=" INNER JOIN cot_itemscotizaciones cot ON cot.ID=pre.idItemCotizacion";
+        $sql.=" WHERE pre.idRemision='$idRemision'";
+        $consulta=$obVenta->Query($sql);              
+	
+        if(mysql_affected_rows()){
+            
+            
+            $css->CrearTabla();
+            $css->CrearFilaNotificacion("PRE-DEVOLUCION",18);
+            $css->FilaTabla(16);
+            $css->ColTabla("<strong>Referencia</strong>", 1);
+            $css->ColTabla("<strong>Descripcion</strong>", 1);
+            $css->ColTabla("<strong>Cantidad</strong>", 1);
+            $css->ColTabla("<strong>SubTotal</strong>", 1);
+            $css->ColTabla("<strong>Dias</strong>", 1);
+            $css->ColTabla("<strong>Total</strong>", 1);
+            $css->ColTabla("<strong>Borrar</strong>", 1);
+            $css->CierraFilaTabla();
+            
+            while($DatosPreDevolucion=mysql_fetch_array($consulta)){
+                $css->FilaTabla(16);
+                $css->ColTabla($DatosPreDevolucion["Referencia"], 1);
+                $css->ColTabla($DatosPreDevolucion["Descripcion"], 1);
+                $css->ColTabla($DatosPreDevolucion["Cantidad"], 1);
+                $css->ColTabla($DatosPreDevolucion["Subtotal"], 1);
+                $css->ColTabla($DatosPreDevolucion["Dias"], 1);
+                $css->ColTabla($DatosPreDevolucion["Total"], 1);
+                $css->ColTablaDel($myPage,"rem_pre_devoluciones","ID",$DatosPreDevolucion['ID'],$idRemision);
+                $css->CierraFilaTabla();
+            }
+            
+            $css->CerrarTabla();
+            $css->CrearFormularioEvento("FormGuardaDevolucion", $myPage, "post", "self","");
+            $css->CerrarForm();
+        }
+        
+        
 	}else{
 		$css->CrearTabla();
 		$css->CrearFilaNotificacion("Por favor busque y asocie una remision",16);
