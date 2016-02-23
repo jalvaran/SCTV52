@@ -166,6 +166,21 @@ class ProcesoVenta{
 	return($reg["suma"]);
 
 	}	
+        
+        /////Suma un valor en especifico de una tabla segun una condicion
+		
+	function Sume($Tabla,$NombreColumnaSuma, $Condicion)
+	{
+	
+		
+	$sql="SELECT SUM($NombreColumnaSuma) AS suma FROM $Tabla $Condicion";
+	
+	$reg=mysql_query($sql) or die('no se pudo obtener la suma de '.$sql.' '.$NombreColumnaSuma.' para la tabla '.$Tabla.' en SumeColumna: ' . mysql_error());
+	$reg=mysql_fetch_array($reg);
+	
+	return($reg["suma"]);
+
+	}	
 	
 	///Totaliza una venta
 	
@@ -527,6 +542,20 @@ public function ActualizaRegistro($tabla,$campo, $value, $filtro, $idItem)
   {		
 	
 	$sql="UPDATE `$tabla` SET `$campo` = '$value' WHERE `$filtro` = '$idItem'";
+	
+	mysql_query($sql) or die('no se pudo actualizar el registro en la $tabla: ' . mysql_error());	
+		
+	}
+        
+        ////////////////////////////////////////////////////////////////////
+//////////////////////Funcion Actualizar registro en tabla
+///////////////////////////////////////////////////////////////////
+
+
+public function update($tabla,$campo, $value, $condicion)
+  {		
+	
+	$sql="UPDATE `$tabla` SET `$campo` = '$value' $condicion";
 	
 	mysql_query($sql) or die('no se pudo actualizar el registro en la $tabla: ' . mysql_error());	
 		

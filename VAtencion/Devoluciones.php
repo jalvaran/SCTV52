@@ -213,7 +213,7 @@ include_once("procesaDevolucion.php");
 			$css->CerrarTabla();
 			
 			$css->CrearTabla();
-			$Consulta=$obVenta->ConsultarTabla("rem_relaciones", "WHERE idRemision='$idRemision'");
+			$Consulta=$obVenta->ConsultarTabla("rem_relaciones", "WHERE idRemision='$idRemision' GROUP BY idItemCotizacion");
 			
 			$css->FilaTabla(16);
 			$css->ColTabla('REFERENCIA',1);
@@ -232,112 +232,58 @@ include_once("procesaDevolucion.php");
 			$IVA=0;
 			while($DatosItemRemision=mysql_fetch_array($Consulta)){
 				
-				$DatosItems=$obVenta->DevuelveValores("cot_itemscotizaciones", "ID", $DatosItemRemision["idItemCotizacion"]);
-				$Subtotal=$Subtotal+$DatosItems["Subtotal"];
-				$IVA=round($IVA+$DatosItems["IVA"]);
-				$Total=round($Total+$DatosItems["Total"]);
-				$TotalFila=$DatosItemRemision["CantidadDevolucion"]*$DatosRemision["Dias"]*$DatosItems["Subtotal"];
-                                $PendienteDevolver=$DatosItemRemision["CantidadEntregada"]-$DatosItemRemision["CantidadDevolucion"];
-                                ///////////////Creo Formulario para edicion
-                                
-				$css->FilaTabla(14);
-				$css->ColTabla($DatosItems["Referencia"],1);
-				$css->ColTabla($DatosItems["Descripcion"],1);
-                                $css->ColTabla($DatosItemRemision["FechaEntrega"],1);
-				$css->ColTabla($DatosItemRemision["CantidadEntregada"],1);
-				 print("<td colspan=3 style='width:500px;'>");
-                                 $css->CrearFormularioEvento("FrmEditar$DatosItems[ID]",$myPage,"post","_self","");
-                                $css->CrearInputText("TxtIdItem","hidden","",$DatosItems["ID"],"","black","","",150,30,0,0);
-                                $css->CrearInputNumber("TxtSubtotalUnitario","number","",$DatosItems["Subtotal"],"Subtotal","black","onkeyup","calculetotalItems()",80,30,0,1,'','',"any");
-                               
-                                $css->CrearInputNumber("TxtDias","number","",$DatosRemision["Dias"],"Dias","black","onchange","calculetotalItems()",80,30,0,0,1,1000,"any");
-                                
-                                $css->CrearInputNumber("TxtCantidadDevolucion","number","",0,"Devuelve","black","","",80,30,0,1,0,$PendienteDevolver,"any");
-                                $css->CrearBotonVerde("BtnEditar","E");
-                                $css->CerrarForm();
-                                print("</td>");
-                                $css->ColTabla($PendienteDevolver,1);
-                                print("<td>");
-                                $css->CrearInputNumber("TxtSubtotalItem","number","",$TotalFila,"SubtotalDias","black","","",80,30,1,1,"","","any");
-                                print("</td>");
-				$css->CierraFilaTabla();
-				
+                            $DatosItems=$obVenta->DevuelveValores("cot_itemscotizaciones", "ID", $DatosItemRemision["idItemCotizacion"]);
+                            $Entregas=$obVenta->Sume('rem_relaciones', "CantidadEntregada", " WHERE idItemCotizacion=$DatosItemRemision[idItemCotizacion] AND idRemision=$idRemision");
+                            $Salidas=$obVenta->Sume("rem_relaciones", "CantidadDevolucion", " WHERE idItemCotizacion=$DatosItemRemision[idItemCotizacion] AND idRemision=$idRemision");
+                            $Subtotal=$Subtotal+$DatosItems["Subtotal"];
+                            $IVA=round($IVA+$DatosItems["IVA"]);
+                            $Total=round($Total+$DatosItems["Total"]);
+                            $TotalFila=$Salidas*$DatosRemision["Dias"]*$DatosItems["Subtotal"];
+                            $PendienteDevolver=$Entregas-$Salidas;
+                            ///////////////Creo Formulario para edicion
+
+                            $css->FilaTabla(14);
+                            $css->ColTabla($DatosItems["Referencia"],1);
+                            $css->ColTabla($DatosItems["Descripcion"],1);
+                            $css->ColTabla($DatosItemRemision["FechaEntrega"],1);
+                            $css->ColTabla($Entregas,1);
+                            print("<td colspan=3 width='30%'>");
+                            $css->CrearFormularioEvento("FrmEditar$DatosItems[ID]",$myPage,"post","_self","");
+                            $css->CrearInputText("TxtIdItem","hidden","",$DatosItems["ID"],"","black","","",150,30,0,0);
+                            $css->CrearInputText("TxtAsociarRemision","hidden","",$idRemision,"","black","","",150,30,0,0);
+
+                            $css->CrearInputText("TxtFechaDevolucion","text","Fecha Devolucion:",$Fecha,"Fecha y Hora","black","","",100,30,0,1);
+                            $css->CrearInputText("TxtHoraDevolucion","text","",$Hora,"Fecha y Hora","black","","",80,30,0,1);
+                            print("<br>");
+                            $css->CrearInputNumber("TxtSubtotalUnitario","number","",$DatosItems["Subtotal"],"Subtotal","black","","",80,30,0,1,'','',"any");
+
+                            $css->CrearInputNumber("TxtDias","number","",$DatosRemision["Dias"],"Dias","black","","",80,30,0,0,1,1000,"any");
+
+                            $css->CrearInputNumber("TxtCantidadDevolucion","number","",$PendienteDevolver,"Devuelve","black","","",80,30,0,1,0,$PendienteDevolver,"any");
+                            $css->CrearBotonVerde("BtnEditar","E");
+                            $css->CerrarForm();
+                            print("</td>");
+                            
+
+                            if($PendienteDevolver>0){
+                                $cstyle="color:RED;";
+                            }else{
+                                 $cstyle="color:Black;";
+                            }        
+                            print("<td style=$cstyle><h4>$PendienteDevolver</h4></td>");
+
+                            print("<td>");
+                            $css->CrearInputNumber("TxtSubtotalItem","number","",$TotalFila,"SubtotalDias","black","","",80,30,1,1,"","","any");
+                            print("</td>");
+                            $css->CierraFilaTabla();
+
 			}
 			
-			$css->CrearFormularioEvento("FrmCrearDevolucion",$myPage,"post","_self","onKeypress='DeshabilitaEnter()'");
-			$css->FilaTabla(16);
 			
-			$css->ColTabla('DIAS',3);
-			print("<td>");
-			$css->CrearInputText("TxtSubtotalH","hidden","",$Subtotal,"","","","",300,30,0,1);
-			$css->CrearInputText("TxtIVAH","hidden","",$IVA,"","","","",300,30,0,1);
-			$css->CrearInputText("TxtTotalH","hidden","",$Total,"","","","",300,30,0,1);
-			$css->CrearInputNumber("TxtDias","number","",1,"Dias","black","onchange","calculetotaldias()",80,30,0,1,1,1000,"any");
-			print("</td>");
-			
-			$css->CierraFilaTabla();
-			
-			
-			$css->FilaTabla(16);
-			$css->ColTabla('SUBTOTAL',3);
-			print("<td>");
-			$css->CrearInputNumber("TxtSubtotal","number","",$Subtotal,"Subtotal","black","","",200,30,1,1,0,"","any");
-			print("</td>");
-			$css->CierraFilaTabla();
-			$css->FilaTabla(16);
-			$css->ColTabla('IVA',3);
-			print("<td>");
-			$css->CrearInputNumber("TxtIVA","number","",$IVA,"IVA","black","","",200,30,1,1,0,"","any");
-			print("</td>");
-			$css->CierraFilaTabla();
-			$css->FilaTabla(16);
-			$css->ColTabla('TOTAL',3);
-			print("<td>");
-			$css->CrearInputNumber("TxtTotal","number","",$Total,"Subtotal","black","","",200,30,1,1,0,"","any");
-			print("</td>");
-			$css->CierraFilaTabla();
-			
-			$css->FilaTabla(16);
-			$css->ColTabla('ANTICIPO:',3);
-			print("<td>");
-			$css->CrearInputNumber("TxtAnticipo","number","",0,"Anticipo","black","onkeyup","calculetotaldias()",200,30,0,1,0,"","any");
-                        print("<br>Seleccione una Cuenta destino para el anticipo:<br>");
-                        $css->CrearSelect("CmbCuentaDestino", "");
-                            $Consulta=$obVenta->ConsultarTabla("cuentasfrecuentes","WHERE ClaseCuenta='ACTIVOS'");
-                            while($DatosCuentasFrecuentes=mysql_fetch_array($Consulta)){
-                                if($DatosCuentasFrecuentes["CuentaPUC"]=='110510')
-                                    $Sel=1;
-                                else
-                                    $Sel=0;
-                                $css->CrearOptionSelect($DatosCuentasFrecuentes["CuentaPUC"], $DatosCuentasFrecuentes["Nombre"], $Sel);
-                                
-                            }
-                        $css->CerrarSelect(); 
-                        print("<br>Seleccione un Centro de Costos:<br>");
-                        $css->CrearSelect("CmbCentroCostos", "");
-                            $Consulta=$obVenta->ConsultarTabla("centrocosto","");
-                            while($DatosCentroCostos=mysql_fetch_array($Consulta)){
-                               
-                                $css->CrearOptionSelect($DatosCentroCostos["ID"], $DatosCentroCostos["Nombre"], 0);
-                                
-                            }
-                        $css->CerrarSelect(); 
-                            
-			print("</td>");
-			$css->CierraFilaTabla();
-			
-			$css->FilaTabla(16);
-			$css->ColTabla('SALDO:',3);
-			print("<td>");
-			$css->CrearInputNumber("TxtSaldo","number","",$Total,"Saldo","black","","",200,30,1,1,0,"","any");
-                                               
-			print("<br>");
-			$css->CrearBotonConfirmado("BtnGuardarRemision","Guardar");
-			print("</td>");
-			$css->CierraFilaTabla();
 			
 			$css->CerrarTabla();
-		$css->CerrarForm();	
+                        
+		
 	}else{
 		$css->CrearTabla();
 		$css->CrearFilaNotificacion("Por favor busque y asocie una remision",16);
@@ -402,7 +348,4 @@ include_once("procesaDevolucion.php");
   
 </html>
 
-<script language="JavaScript"> 
-atajos();
-posiciona('TxtCodigoBarras');
-</script> 
+
