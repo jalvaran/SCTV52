@@ -9,14 +9,12 @@ if(isset($_REQUEST["BtnEditar"])){
     $CantidadDevolucion=$_REQUEST["TxtCantidadDevolucion"];
     $idRemision=$_REQUEST["TxtAsociarRemision"];
     
-    $tab="rem_relaciones";
-    $NumRegistros=6; 
-    $Columnas[0]="FechaDevolucion";		$Valores[0]=$FechaDevolucion;
-    $Columnas[1]="HoraDevolucion";		$Valores[1]=$HoraDevolucion;
-    $Columnas[2]="CantidadDevolucion";		$Valores[2]=$CantidadDevolucion;
-    $Columnas[3]="idItemCotizacion";            $Valores[3]=$idItem;
-    $Columnas[4]="idRemision";                  $Valores[4]=$idRemision;
-    $Columnas[5]="Usuarios_idUsuarios";         $Valores[5]=$idUser;
+    $tab="rem_pre_devoluciones";
+    $NumRegistros=4; 
+    $Columnas[0]="idRemision";		$Valores[0]=$idRemision;
+    $Columnas[1]="idItemCotizacion";	$Valores[1]=$idItem;
+    $Columnas[2]="Cantidad";		$Valores[2]=$CantidadDevolucion;
+    $Columnas[3]="Usuarios_idUsuarios"; $Valores[3]=$idUser;
     
     $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
    
