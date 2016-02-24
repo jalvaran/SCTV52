@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-02-2016 a las 13:05:57
+-- Tiempo de generación: 23-02-2016 a las 19:21:51
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -2869,17 +2869,35 @@ CREATE TABLE IF NOT EXISTS `comprobantes_ingreso` (
   `Clientes_idClientes` int(11) NOT NULL,
   `Valor` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Tipo` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
+  `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_ingreso`
 --
 
-INSERT INTO `comprobantes_ingreso` (`ID`, `Fecha`, `Clientes_idClientes`, `Valor`, `Tipo`) VALUES
-(1, '2016-02-12', 17, '20000', 'EFECTIVO'),
-(2, '2016-02-12', 17, '100000', 'EFECTIVO'),
-(3, '2016-02-12', 17, '122121', 'EFECTIVO');
+INSERT INTO `comprobantes_ingreso` (`ID`, `Fecha`, `Clientes_idClientes`, `Valor`, `Tipo`, `Concepto`, `Usuarios_idUsuarios`) VALUES
+(1, '2016-02-12', 17, '20000', 'EFECTIVO', '', 3),
+(2, '2016-02-12', 17, '100000', 'EFECTIVO', '', 3),
+(3, '2016-02-12', 17, '122121', 'EFECTIVO', '', 3),
+(4, '2016-02-12', 17, '40000', 'EFECTIVO', '', 3),
+(5, '2016-02-12', 17, '200000', 'EFECTIVO', '', 3),
+(6, '2016-02-12', 17, '500000', 'EFECTIVO', 'Anticipo por remision 17', 3),
+(7, '2016-02-12', 17, '100000', 'EFECTIVO', 'Anticipo por remision 18', 3),
+(8, '2016-02-12', 17, '100000', 'EFECTIVO', 'Anticipo por remision 19', 3),
+(9, '2016-02-12', 17, '500000', 'EFECTIVO', 'Anticipo por remision 20', 3),
+(10, '2016-02-12', 17, '100000', 'EFECTIVO', 'Anticipo por remision 21', 3),
+(11, '2016-02-12', 17, '100000', 'EFECTIVO', 'Anticipo por remision 22', 3),
+(12, '2016-02-16', 17, '100000', 'EFECTIVO', 'Anticipo por remision 25', 3),
+(13, '2016-02-16', 2, '100000', 'EFECTIVO', 'Anticipo por remision 26', 3),
+(14, '2016-02-16', 17, '30000', 'EFECTIVO', 'Anticipo por remision 27', 3),
+(15, '2016-02-16', 17, '50000', 'EFECTIVO', 'Anticipo por remision 30', 3),
+(16, '2016-02-16', 17, '1000', 'EFECTIVO', 'Anticipo por remision 31', 3),
+(17, '2016-02-23', 17, '10000', 'EFECTIVO', 'Anticipo por remision 32', 3),
+(18, '2016-02-23', 17, '50000', 'EFECTIVO', 'Anticipo por remision 33', 3),
+(19, '2016-02-23', 17, '20000', 'EFECTIVO', 'Anticipo por remision 34', 3);
 
 -- --------------------------------------------------------
 
@@ -2961,7 +2979,7 @@ CREATE TABLE IF NOT EXISTS `cotizacionesv5` (
   `NumSolicitud` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `NumOrden` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `cotizacionesv5`
@@ -2980,7 +2998,11 @@ INSERT INTO `cotizacionesv5` (`ID`, `Fecha`, `Clientes_idClientes`, `Usuarios_id
 (10, '2016-02-09', 2, 3, '', '', ''),
 (11, '2016-02-10', 17, 3, 'Posible', '', ''),
 (12, '2016-02-10', 17, 3, '', '', ''),
-(13, '2016-02-10', 17, 3, '', '', '');
+(13, '2016-02-10', 17, 3, '', '', ''),
+(14, '2016-02-16', 17, 3, 'dsa', '', ''),
+(15, '2016-02-16', 17, 3, '', '', ''),
+(16, '2016-02-16', 17, 3, '', '', ''),
+(17, '2016-02-23', 17, 3, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -3007,7 +3029,7 @@ CREATE TABLE IF NOT EXISTS `cot_itemscotizaciones` (
   `Devuelto` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `CuentaPUC` varchar(45) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=56 ;
 
 --
 -- Volcado de datos para la tabla `cot_itemscotizaciones`
@@ -3060,7 +3082,15 @@ INSERT INTO `cot_itemscotizaciones` (`ID`, `NumCotizacion`, `Descripcion`, `Refe
 (44, 12, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '100', '12', '1200', '192', '1392', '', '', '100', '1200', 'AQ', '', '4135'),
 (45, 12, 'Audiometrias Tamiz ', 'EAAT', 'servicios', '15000', '1', '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
 (46, 13, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
-(47, 13, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '1', '200', '32', '232', '', '', '100', '100', 'AQ', '', '4135');
+(47, 13, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '1', '200', '32', '232', '', '', '100', '100', 'AQ', '', '4135'),
+(48, 14, 'TOALLA VAQUIRIN BB BAN FELIZ', 'VAQ328', 'productosventa', '16500', '1', '16500', '0', '16500', '', '', '12000', '12000', 'PR', '', '4135'),
+(49, 14, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
+(50, 14, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
+(51, 15, 'SANDALIA GOCH DAMA', 'REF189', 'productosventa', '8500', '1', '8500', '0', '8500', '', '', '5800', '5800', 'PR', '', '4135'),
+(52, 15, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
+(53, 16, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '19500', '1', '19500', '0', '19500', '', '', '14250', '14250', 'PR', '', '4135'),
+(54, 17, 'GORRA HOMBRE', 'REF293', 'productosventa', '8500', '1', '8500', '0', '8500', '', '', '6000', '6000', 'PR', '', '4135'),
+(55, 17, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '10', '810', '129.6', '939.6', '', '', '40', '400', 'AQ', '', '4135');
 
 -- --------------------------------------------------------
 
@@ -10507,7 +10537,7 @@ CREATE TABLE IF NOT EXISTS `librodiario` (
   `idCentroCosto` int(11) NOT NULL,
   `idEmpresa` int(11) NOT NULL,
   PRIMARY KEY (`idLibroDiario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3433 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3465 ;
 
 --
 -- Volcado de datos para la tabla `librodiario`
@@ -13961,7 +13991,39 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (3427, '2016-02-07', 'FACTURA', '20', '', '', '', '', '', '', '', '', '', '', '', '', 'Ventas Por Atn Admin', '6135', 'Comercio al por mayor y al por menor', 'ventas', '', '0', '', 'NO', 'NO', 0, 0),
 (3428, '2016-02-07', 'FACTURA', '20', '', '', '', '', '', '', '', '', '', '', '', '', 'Ventas Por Atn Admin', '1435', 'Mercanc?as no fabricadas por la empresa', 'ventas', '0', '', '0', 'NO', 'NO', 0, 0),
 (3431, '2016-02-12', 'ComprobanteIngreso', '3', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 14', '110510', 'CAJA MENOR', 'Anticipos', '122121', '0', '122121', 'NO', 'NO', 1, 1),
-(3432, '2016-02-12', 'ComprobanteIngreso', '3', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 14', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '122121', '-122121', 'NO', 'NO', 1, 1);
+(3432, '2016-02-12', 'ComprobanteIngreso', '3', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 14', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '122121', '-122121', 'NO', 'NO', 1, 1),
+(3433, '2016-02-12', 'ComprobanteIngreso', '4', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 15', '110510', 'CAJA MENOR', 'Anticipos', '40000', '0', '40000', 'NO', 'NO', 1, 1),
+(3434, '2016-02-12', 'ComprobanteIngreso', '4', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 15', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '40000', '-40000', 'NO', 'NO', 1, 1),
+(3435, '2016-02-12', 'ComprobanteIngreso', '5', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 16', '110510', 'CAJA MENOR', 'Anticipos', '200000', '0', '200000', 'NO', 'NO', 1, 1),
+(3436, '2016-02-12', 'ComprobanteIngreso', '5', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 16', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '200000', '-200000', 'NO', 'NO', 1, 1),
+(3437, '2016-02-12', 'ComprobanteIngreso', '6', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 17', '110510', 'CAJA MENOR', 'Anticipos', '500000', '0', '500000', 'NO', 'NO', 1, 1),
+(3438, '2016-02-12', 'ComprobanteIngreso', '6', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 17', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '500000', '-500000', 'NO', 'NO', 1, 1),
+(3439, '2016-02-12', 'ComprobanteIngreso', '7', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 18', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Anticipos', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(3440, '2016-02-12', 'ComprobanteIngreso', '7', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 18', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(3441, '2016-02-12', 'ComprobanteIngreso', '8', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 19', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Anticipos', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(3442, '2016-02-12', 'ComprobanteIngreso', '8', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 19', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(3443, '2016-02-12', 'ComprobanteIngreso', '9', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 20', '110510', 'CAJA MENOR', 'Anticipos', '500000', '0', '500000', 'NO', 'NO', 1, 1),
+(3444, '2016-02-12', 'ComprobanteIngreso', '9', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 20', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '500000', '-500000', 'NO', 'NO', 1, 1),
+(3445, '2016-02-12', 'ComprobanteIngreso', '10', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 21', '110510', 'CAJA MENOR', 'Anticipos', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(3446, '2016-02-12', 'ComprobanteIngreso', '10', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 21', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(3447, '2016-02-12', 'ComprobanteIngreso', '11', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 22', '110510', 'CAJA MENOR', 'Anticipos', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(3448, '2016-02-12', 'ComprobanteIngreso', '11', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 22', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(3449, '2016-02-16', 'ComprobanteIngreso', '12', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 25', '110510', 'CAJA MENOR', 'Anticipos', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(3450, '2016-02-16', 'ComprobanteIngreso', '12', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 25', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(3451, '2016-02-16', 'ComprobanteIngreso', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anticipo por remision 26', '110510', 'CAJA MENOR', 'Anticipos', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(3452, '2016-02-16', 'ComprobanteIngreso', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anticipo por remision 26', '2705900833180', 'Anticipos recibidos Cliente: Techno Soluciones NIT 900833180', 'Anticipos', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(3453, '2016-02-16', 'ComprobanteIngreso', '14', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 27', '110510', 'CAJA MENOR', 'Anticipos', '30000', '0', '30000', 'NO', 'NO', 1, 1),
+(3454, '2016-02-16', 'ComprobanteIngreso', '14', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 27', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '30000', '-30000', 'NO', 'NO', 1, 1),
+(3455, '2016-02-16', 'ComprobanteIngreso', '15', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 30', '110510', 'CAJA MENOR', 'Anticipos', '50000', '0', '50000', 'NO', 'NO', 1, 1),
+(3456, '2016-02-16', 'ComprobanteIngreso', '15', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 30', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '50000', '-50000', 'NO', 'NO', 1, 1),
+(3457, '2016-02-16', 'ComprobanteIngreso', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 31', '110510', 'CAJA MENOR', 'Anticipos', '1000', '0', '1000', 'NO', 'NO', 1, 1),
+(3458, '2016-02-16', 'ComprobanteIngreso', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 31', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '1000', '-1000', 'NO', 'NO', 1, 1),
+(3459, '2016-02-23', 'ComprobanteIngreso', '17', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 32', '110510', 'CAJA MENOR', 'Anticipos', '10000', '0', '10000', 'NO', 'NO', 1, 1),
+(3460, '2016-02-23', 'ComprobanteIngreso', '17', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 32', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '10000', '-10000', 'NO', 'NO', 1, 1),
+(3461, '2016-02-23', 'ComprobanteIngreso', '18', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 33', '110510', 'CAJA MENOR', 'Anticipos', '50000', '0', '50000', 'NO', 'NO', 1, 1),
+(3462, '2016-02-23', 'ComprobanteIngreso', '18', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 33', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '50000', '-50000', 'NO', 'NO', 1, 1),
+(3463, '2016-02-23', 'ComprobanteIngreso', '19', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 34', '110510', 'CAJA MENOR', 'Anticipos', '20000', '0', '20000', 'NO', 'NO', 1, 1),
+(3464, '2016-02-23', 'ComprobanteIngreso', '19', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anticipo por remision 34', '2705890312749', 'Anticipos recibidos Cliente: SEGURIDAD ATLAS LTDA NIT 890312749', 'Anticipos', '0', '20000', '-20000', 'NO', 'NO', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -14004,7 +14066,14 @@ CREATE TABLE IF NOT EXISTS `precotizacion` (
   `CuentaPUC` varchar(45) NOT NULL,
   `Tabla` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Volcado de datos para la tabla `precotizacion`
+--
+
+INSERT INTO `precotizacion` (`ID`, `NumSolicitud`, `Cantidad`, `Referencia`, `ValorUnitario`, `SubTotal`, `Descripcion`, `IVA`, `Descuento`, `ValorDescuento`, `PrecioCosto`, `SubtotalCosto`, `Total`, `TipoItem`, `idUsuario`, `CuentaPUC`, `Tabla`) VALUES
+(10, '', 1, 'FAT350', 14900, 14900, 'TOALLA FATELARES ESTRELLA 60X120', 0, 0, 0, '11000', '11000', '14900', 'PR', 3, '4135', 'productosventa');
 
 -- --------------------------------------------------------
 
@@ -14071,8 +14140,8 @@ CREATE TABLE IF NOT EXISTS `productosalquiler` (
 --
 
 INSERT INTO `productosalquiler` (`idProductosVenta`, `Referencia`, `Nombre`, `Exitencias`, `PrecioVenta`, `CostoUnitario`, `IVA`, `Departamento`, `CuentaPUC`, `ImagenRuta`, `PesoUnitario`, `PesoTotal`, `CostoUnitarioActivo`) VALUES
-(1, 'AC001', 'BASE COLLAR GALVANIZADA', '10', '81', '40', '0.16', 13, '4135', '', '24', '240', '10000'),
-(2, 'AC002', 'BASE TORNILLO NIVELADOR', '30', '200', '100', '0.16', 13, '4135', '', '36', '1080', '20000');
+(1, 'AC001', 'BASE COLLAR GALVANIZADA', '10', '81', '40', '0.16', 13, '4135', '', '0.5', '240', '10000'),
+(2, 'AC002', 'BASE TORNILLO NIVELADOR', '30', '200', '100', '0.16', 13, '4135', '', '0.5', '1080', '20000');
 
 -- --------------------------------------------------------
 
@@ -15618,6 +15687,7 @@ CREATE TABLE IF NOT EXISTS `prod_departamentos` (
   `Nombre` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Tabla` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `TipoItem` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
+  `ManejaExistencias` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idDepartamentos`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=14 ;
 
@@ -15625,20 +15695,20 @@ CREATE TABLE IF NOT EXISTS `prod_departamentos` (
 -- Volcado de datos para la tabla `prod_departamentos`
 --
 
-INSERT INTO `prod_departamentos` (`idDepartamentos`, `Nombre`, `Tabla`, `TipoItem`) VALUES
-(1, 'ROPA', 'productosventa', 'PR'),
-(2, 'HOGAR', 'productosventa', 'PR'),
-(3, 'MISCELANEA', 'productosventa', 'PR'),
-(4, 'CALZADO', 'productosventa', 'PR'),
-(5, 'ESCOLAR', 'productosventa', 'PR'),
-(6, 'PROMOCION', 'productosventa', 'PR'),
-(7, 'EXCLUIDOS', 'productosventa', 'PR'),
-(8, 'KIT', 'productosventa', 'PR'),
-(9, 'VALORACION POR ESPECIALISTA', 'servicios', 'MO'),
-(10, 'EXAMENES PARA INGRESO LABORAL', 'servicios', 'MO'),
-(11, 'EXAMENES CERTIFICADOS EN ALTURAS', 'servicios', 'MO'),
-(12, 'PAQUETES CERTIFICADOS EN ALTURAS', 'servicios', 'MO'),
-(13, 'ALQUILER ANDAMIOS CERTIFICADOS', 'productosalquiler', 'AQ');
+INSERT INTO `prod_departamentos` (`idDepartamentos`, `Nombre`, `Tabla`, `TipoItem`, `ManejaExistencias`) VALUES
+(1, 'ROPA', 'productosventa', 'PR', 'SI'),
+(2, 'HOGAR', 'productosventa', 'PR', 'SI'),
+(3, 'MISCELANEA', 'productosventa', 'PR', 'SI'),
+(4, 'CALZADO', 'productosventa', 'PR', 'SI'),
+(5, 'ESCOLAR', 'productosventa', 'PR', 'SI'),
+(6, 'PROMOCION', 'productosventa', 'PR', 'SI'),
+(7, 'EXCLUIDOS', 'productosventa', 'PR', 'SI'),
+(8, 'KIT', 'productosventa', 'PR', 'SI'),
+(9, 'VALORACION POR ESPECIALISTA', 'servicios', 'MO', 'NO'),
+(10, 'EXAMENES PARA INGRESO LABORAL', 'servicios', 'MO', 'NO'),
+(11, 'EXAMENES CERTIFICADOS EN ALTURAS', 'servicios', 'MO', 'NO'),
+(12, 'PAQUETES CERTIFICADOS EN ALTURAS', 'servicios', 'MO', 'NO'),
+(13, 'ALQUILER ANDAMIOS CERTIFICADOS', 'productosalquiler', 'AQ', 'SI');
 
 -- --------------------------------------------------------
 
@@ -17550,56 +17620,126 @@ CREATE TABLE IF NOT EXISTS `remisiones` (
   `Anticipo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `Dias` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `Estado` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
+  `CentroCosto` int(11) NOT NULL,
+  `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=35 ;
 
 --
 -- Volcado de datos para la tabla `remisiones`
 --
 
-INSERT INTO `remisiones` (`ID`, `Fecha`, `Clientes_idClientes`, `Cotizaciones_idCotizaciones`, `Obra`, `Direccion`, `Ciudad`, `Telefono`, `Retira`, `FechaDespacho`, `HoraDespacho`, `ObservacionesRemision`, `Anticipo`, `Dias`, `Estado`) VALUES
-(1, '2015-09-24', 0, '1', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', ''),
-(2, '2015-09-24', 0, '4', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', ''),
-(3, '2015-09-25', 0, '8', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', ''),
-(4, '2015-09-24', 0, '2', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', ''),
-(5, '2015-09-24', 0, '5', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', ''),
-(6, '2015-09-24', 0, '5', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', ''),
-(7, '2015-09-24', 0, '1', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', ''),
-(8, '2016-02-14', 2, '2', 'dsadsa', 'dsadsa', 'dasdas', 'dsadsa', 'dasdsa', '2016-02-09 15:37:38', '', '0', '', '', ''),
-(9, '2016-02-12', 17, '2', 'QBCO', 'CARRETERA', 'BUGA', '3232131', 'JULIAN', '2016-02-12', '09:29:23', 'PRUEBA OBSERVACIONES', '100000', '3', 'A'),
-(10, '2016-02-12', 17, '3', 'dsa', 'dsa', 'dsa', 'dsa', 'das', '2016-02-12', '09:59:57', '', '1000', '2', 'A'),
-(11, '2016-02-12', 17, '3', 'atlas', 'carrera 15 1-61', 'buga', '2366011', 'julian', '2016-02-12', '10:16:45', 'ninguna', '200000', '3', 'A'),
-(12, '2016-02-12', 17, '2', 'techno', 'cra 7 No 7832', 'BUGA', '321231', 'JULIAN', '2016-02-12', '10:59:16', 'PRUEBA CON INGRESO', '20000', '3', 'A'),
-(13, '2016-02-12', 17, '2', 'dasd', 'dsad', 'dsa', 'dsa', 'dsa', '2016-02-12', '12:31:31', 'PRUEBA CON INGRESO', '100000', '3', 'A'),
-(14, '2016-02-12', 17, '2', 'dsa', 'dsa', 'dsa', 'dsa', 'das', '2016-02-12', '12:34:28', 'PRUEBA CON INGRESO', '122121', '3', 'A');
+INSERT INTO `remisiones` (`ID`, `Fecha`, `Clientes_idClientes`, `Cotizaciones_idCotizaciones`, `Obra`, `Direccion`, `Ciudad`, `Telefono`, `Retira`, `FechaDespacho`, `HoraDespacho`, `ObservacionesRemision`, `Anticipo`, `Dias`, `Estado`, `CentroCosto`, `Usuarios_idUsuarios`) VALUES
+(1, '2015-09-24', 0, '1', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
+(2, '2015-09-24', 0, '4', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
+(3, '2015-09-25', 0, '8', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
+(4, '2015-09-24', 0, '2', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
+(5, '2015-09-24', 0, '5', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
+(6, '2015-09-24', 0, '5', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
+(7, '2015-09-24', 0, '1', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
+(8, '2016-02-14', 2, '2', 'dsadsa', 'dsadsa', 'dasdas', 'dsadsa', 'dasdsa', '2016-02-09 15:37:38', '', '0', '', '', '', 0, 0),
+(9, '2016-02-12', 17, '2', 'QBCO', 'CARRETERA', 'BUGA', '3232131', 'JULIAN', '2016-02-12', '09:29:23', 'PRUEBA OBSERVACIONES', '100000', '3', 'A', 0, 0),
+(10, '2016-02-12', 17, '3', 'dsa', 'dsa', 'dsa', 'dsa', 'das', '2016-02-12', '09:59:57', '', '1000', '2', 'A', 0, 0),
+(11, '2016-02-12', 17, '3', 'atlas', 'carrera 15 1-61', 'buga', '2366011', 'julian', '2016-02-12', '10:16:45', 'ninguna', '200000', '3', 'A', 0, 0),
+(12, '2016-02-12', 17, '2', 'techno', 'cra 7 No 7832', 'BUGA', '321231', 'JULIAN', '2016-02-12', '10:59:16', 'PRUEBA CON INGRESO', '20000', '3', 'A', 0, 0),
+(13, '2016-02-12', 17, '2', 'dasd', 'dsad', 'dsa', 'dsa', 'dsa', '2016-02-12', '12:31:31', 'PRUEBA CON INGRESO', '100000', '3', 'A', 0, 0),
+(14, '2016-02-12', 17, '2', 'dsa', 'dsa', 'dsa', 'dsa', 'das', '2016-02-12', '12:34:28', 'PRUEBA CON INGRESO', '122121', '3', 'A', 0, 0),
+(15, '2016-02-12', 17, '4', 'atlas', 'cra 2121', 'buga', '323123', 'julian', '2016-02-12', '13:20:29', 'ese mismo', '40000', '6', 'A', 0, 0),
+(16, '2016-02-12', 17, '5', 'HERPO', 'CALLE 7 CON 13', 'BUGA', '322321321', 'JULIAN', '2016-02-12', '13:21:51', 'NOTHING', '200000', '3', 'A', 0, 0),
+(17, '2016-02-12', 17, '5', 'guele bicha', 'alla', 'ahi', '3231', 'ese man', '2016-02-12', '13:27:31', 'essas ', '500000', '5', 'A', 0, 0),
+(18, '2016-02-12', 17, '2', 'esa', 'ahi', 'esea', 'dasda', 'ese man', '2016-02-12', '14:07:14', 'esas', '100000', '4', 'A', 1, 0),
+(19, '2016-02-12', 17, '5', 'dsad', 'dasda', 'dsad', 'dasd', 'dsa', '2016-02-12', '15:51:37', 'dasds', '100000', '2', 'A', 1, 0),
+(20, '2016-02-12', 17, '9', 'dsad', 'dsad', 'dsa', 'dsa', 'dsa', '2016-02-12', '15:54:17', 'dasdsa', '500000', '4', 'A', 1, 0),
+(21, '2016-02-12', 17, '9', 'fsdf', 'fdsf', 'fds', 'fds', 'fdsfds', '2016-02-12', '15:56:07', 'fdsfdsf', '100000', '3', 'A', 3, 0),
+(22, '2016-02-12', 17, '9', 'dsad', 'dsad', 'dsa', 'ddsad', 'dsad', '2016-02-12', '15:57:12', 'dsadsa', '100000', '4', 'A', 1, 3),
+(23, '', 0, '', '', '', '', '', '', '', '3', '', '', '', '', 0, 0),
+(24, '', 0, '', '', '', '', '', '', '', '3', '', '', '', '', 0, 0),
+(25, '2016-02-16', 17, '3', 'dsad', 'dsadsa', 'dsad', 'dasd', 'dsadsa', '2016-02-16', '08:06:05', 'dsadsa', '100000', '4', 'A', 0, 0),
+(26, '2016-02-16', 2, '6', 'dsa', 'dsa', 'dsa', 'dsa', 'dsa', '2016-02-16', '08:26:18', 'dsa', '100000', '3', 'A', 0, 0),
+(27, '2016-02-16', 17, '12', 'dasda', 'dsadsa', 'dasdsa', 'dsads', 'dasda', '2016-02-16', '13:27:16', 'dsadsa', '30000', '3', 'A', 1, 3),
+(28, '2016-02-16', 17, '12', 'ATLAS', 'CRA 15 1-61', 'BUGA', '2366011', 'JULIAN', '2016-02-16', '14:06:13', 'OBSERVACIONES', '50000', '4', 'A', 1, 3),
+(29, '2016-02-16', 17, '12', 'DSA', 'DSA', 'DSA', 'DSA', 'DAS', '2016-02-16', '14:07:54', 'OBSERVACIONES', '50000', '5', 'A', 1, 3),
+(30, '2016-02-16', 17, '12', 'DSAD', 'DSAD', 'DSA', 'DSA', 'DAS', '2016-02-16', '14:14:04', 'OBSERVACIONES', '50000', '3', 'A', 1, 3),
+(31, '2016-02-16', 17, '12', 'dsad', 'dsa', 'dsa', 'dsa', 'dsa', '2016-02-16', '15:27:37', 'das', '1000', '1', 'A', 1, 3),
+(32, '2016-02-23', 17, '12', 'cristar', 'calle 1 con 21', 'buga', '3177740609', 'julian', '2016-02-23', '09:14:41', '', '10000', '1', 'A', 1, 3),
+(33, '2016-02-23', 17, '12', 'ATLAS', 'ALLA', 'BUGA', '312321321', 'JULIAN', '2016-02-23', '16:20:56', 'ESAS MISMAS', '50000', '4', 'A', 1, 3),
+(34, '2016-02-23', 17, '14', 'dsad', 'dsa', 'dsa', 'das', 'dsads', '2016-02-23', '19:14:04', 'dads', '20000', '5', 'A', 1, 3);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rem_itemscotizaciones`
+-- Estructura de tabla para la tabla `rem_devoluciones`
 --
 
-CREATE TABLE IF NOT EXISTS `rem_itemscotizaciones` (
-  `ID` int(16) NOT NULL DEFAULT '0',
-  `NumRemision` int(16) NOT NULL,
-  `Descripcion` varchar(300) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Referencia` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `Tabla` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
-  `ValorUnitario` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Cantidad` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `Subtotal` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `IVA` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Total` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Descuento` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `ValorDescuento` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `PrecioCosto` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `SubtotalCosto` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `TipoItem` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `Devuelto` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `CuentaPUC` varchar(45) CHARACTER SET utf8 NOT NULL,
+CREATE TABLE IF NOT EXISTS `rem_devoluciones` (
+  `ID` int(16) NOT NULL AUTO_INCREMENT,
+  `idRemision` int(16) NOT NULL,
+  `idItemCotizacion` int(16) NOT NULL,
+  `Cantidad` int(16) NOT NULL,
+  `ValorUnitario` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Subtotal` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Dias` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Total` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `NumDevolucion` int(16) NOT NULL,
+  `FechaDevolucion` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `HoraDevolucion` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rem_pre_devoluciones`
+--
+
+CREATE TABLE IF NOT EXISTS `rem_pre_devoluciones` (
+  `ID` int(16) NOT NULL AUTO_INCREMENT,
+  `idRemision` int(16) NOT NULL,
+  `idItemCotizacion` int(16) NOT NULL,
+  `Cantidad` int(16) NOT NULL,
+  `ValorUnitario` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Subtotal` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Dias` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Total` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Usuarios_idUsuarios` int(11) NOT NULL,
+  KEY `ID` (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `rem_pre_devoluciones`
+--
+
+INSERT INTO `rem_pre_devoluciones` (`ID`, `idRemision`, `idItemCotizacion`, `Cantidad`, `ValorUnitario`, `Subtotal`, `Dias`, `Total`, `Usuarios_idUsuarios`) VALUES
+(6, 33, 44, 4, '100', '400', '4', '1600', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rem_relaciones`
+--
+
+CREATE TABLE IF NOT EXISTS `rem_relaciones` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `FechaEntrega` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `CantidadEntregada` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `idItemCotizacion` int(11) NOT NULL,
+  `idRemision` int(11) NOT NULL,
+  `Usuarios_idUsuarios` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `rem_relaciones`
+--
+
+INSERT INTO `rem_relaciones` (`ID`, `FechaEntrega`, `CantidadEntregada`, `idItemCotizacion`, `idRemision`, `Usuarios_idUsuarios`) VALUES
+(1, '2016-02-23', '1', 43, 33, 3),
+(2, '2016-02-23', '12', 44, 33, 3),
+(3, '2016-02-23', '1', 45, 33, 3),
+(4, '2016-02-23', '1', 48, 34, 3),
+(5, '2016-02-23', '1', 49, 34, 3),
+(6, '2016-02-23', '1', 50, 34, 3);
 
 -- --------------------------------------------------------
 
@@ -19541,7 +19681,7 @@ CREATE TABLE IF NOT EXISTS `vestasactivas` (
   `NumCotizacion` int(16) NOT NULL,
   `SaldoFavor` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idVestasActivas`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `vestasactivas`
@@ -19549,8 +19689,7 @@ CREATE TABLE IF NOT EXISTS `vestasactivas` (
 
 INSERT INTO `vestasactivas` (`idVestasActivas`, `Nombre`, `Usuario_idUsuario`, `Clientes_idClientes`, `NumVenta`, `NumFactura`, `NumCotizacion`, `SaldoFavor`) VALUES
 (1, 'INICIALIZACION', 'INI', 1, 11, 11, 14, ''),
-(2, 'Venta por: JULIAN ', '3', 1, 21, 21, 25, '0'),
-(3, 'Venta por: JULIAN ', '3', 1, 21, 21, 25, '0');
+(4, 'Venta por: JULIAN ', '3', 1, 9, 9, 15, '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

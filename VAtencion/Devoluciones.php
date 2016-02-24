@@ -168,7 +168,7 @@ include_once("procesaDevolucion.php");
 				
                             $DatosItems=$obVenta->DevuelveValores("cot_itemscotizaciones", "ID", $DatosItemRemision["idItemCotizacion"]);
                             $Entregas=$obVenta->Sume('rem_relaciones', "CantidadEntregada", " WHERE idItemCotizacion=$DatosItemRemision[idItemCotizacion] AND idRemision=$idRemision");
-                            $Salidas=$obVenta->Sume("rem_relaciones", "CantidadDevolucion", " WHERE idItemCotizacion=$DatosItemRemision[idItemCotizacion] AND idRemision=$idRemision");
+                            $Salidas=$obVenta->Sume("rem_pre_devoluciones", "Cantidad", " WHERE idItemCotizacion=$DatosItemRemision[idItemCotizacion] AND idRemision=$idRemision");
                                              
                             $PendienteDevolver=$Entregas-$Salidas;
                             ///////////////Creo Formulario para edicion
