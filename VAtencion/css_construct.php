@@ -460,6 +460,48 @@ class CssIni{
 		print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" class="btn btn-success">');
 		
 	}
+        
+        /////////////////////Agrega los javascripts
+	
+	function AgregaJS(){
+            print('<script src="js/jquery.js"></script>
+            <script src="js/bootstrap-transition.js"></script>
+            <script src="js/bootstrap-alert.js"></script>
+            <script src="js/bootstrap-modal.js"></script>
+            <script src="js/bootstrap-dropdown.js"></script>
+            <script src="js/bootstrap-scrollspy.js"></script>
+            <script src="js/bootstrap-tab.js"></script>
+            <script src="js/bootstrap-tooltip.js"></script>
+            <script src="js/bootstrap-popover.js"></script>
+            <script src="js/bootstrap-button.js"></script>
+            <script src="js/bootstrap-collapse.js"></script>
+            <script src="js/bootstrap-carousel.js"></script>
+            <script src="js/bootstrap-typeahead.js"></script>
+            <script src="js/funciones.js"></script>');
+		
+	}
+        
+        /////////////////////Agrega el boton para subir
+	
+	function AgregaSubir(){
+            print('<a style="display:scroll; position:fixed; bottom:10px; right:10px;" href="#" title="Volver arriba"><img src="../images/up1_amarillo.png" /></a>');
+		
+	}
+        
+        /////////////////////Crear un DIV
+	
+	function CrearDiv($ID, $Class, $Alineacion){
+            print("<div id='$ID' class='$Class' align='$Alineacion'>");
+		
+	}
+        
+        /////////////////////Crear un DIV
+	
+	function CerrarDiv(){
+            print("</div>");
+		
+	}
+        
 	//////////////////////////////////FIN
 }
 	
