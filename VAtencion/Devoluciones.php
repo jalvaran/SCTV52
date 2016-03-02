@@ -157,8 +157,8 @@ print("<body>");
                 $DatosItems=$obVenta->DevuelveValores("cot_itemscotizaciones", "ID", $DatosItemRemision["idItemCotizacion"]);
                 $Entregas=$obVenta->Sume('rem_relaciones', "CantidadEntregada", " WHERE idItemCotizacion=$DatosItemRemision[idItemCotizacion] AND idRemision=$idRemision");
                 $Salidas=$obVenta->Sume("rem_pre_devoluciones", "Cantidad", " WHERE idItemCotizacion=$DatosItemRemision[idItemCotizacion] AND idRemision=$idRemision");
-
-                $PendienteDevolver=$Entregas-$Salidas;
+                $Salidas2=$obVenta->Sume("rem_devoluciones", "Cantidad", " WHERE idItemCotizacion=$DatosItemRemision[idItemCotizacion] AND idRemision=$idRemision");
+                $PendienteDevolver=$Entregas-$Salidas-$Salidas2;
                 ///////////////Creo Formulario para edicion
                 $css->FilaTabla(14);
                 $css->ColTabla($DatosItems["Referencia"],1);
@@ -228,15 +228,25 @@ print("<body>");
         }
 
         $css->CerrarTabla();
-        $css->CrearFormularioEvento("FormGuardaDevolucion", $myPage, "post", "self","");
-        $TotalDevolucion=number_format($obVenta->Sume("rem_pre_devoluciones", "Total", "WHERE idRemision='$idRemision'"));
+        /////////////////Mostramos Totales y Se crea el formulario para guardar la devolucion
+        ////
+        ////
+        
+        $TotalDevolucion=$obVenta->Sume("rem_pre_devoluciones", "Total", "WHERE idRemision='$idRemision'");
+        $css->CrearFormularioEvento("FormGuardaDevolucion", $myPage, "post", "_self","");
+        $css->CrearInputText("TxtIdRemision","hidden","",$idRemision,"","black","","",150,30,0,0);
+        $css->CrearInputText("TxtTotalDevolucion","hidden","",$TotalDevolucion,"","black","","",150,30,0,0);
+        
         $css->CrearTabla();
         $css->FilaTabla(16);
         $css->ColTabla("<h3 align='right'>Total</h3>", 1);
-        $css->ColTabla("<h3 align='right'>$TotalDevolucion</h3>", 1);
+        $css->ColTabla("<h3 align='right'>".number_format($TotalDevolucion)."</h3>", 1);
         $css->CierraFilaTabla();
         $css->FilaTabla(16);
         print("<td colspan=2 style='text-align:center'>");
+        $css->CrearInputText("TxtFechaDevolucion","text","",date("Y-m-d"),"Fecha","black","","",150,30,0,1);
+	$css->CrearInputText("TxtHoraDevolucion","text","",date("H:i:s"),"Hora","black","","",150,30,0,1);
+        print("<br>");
         $css->CrearTextArea("TxtObservacionesDevolucion","","","Observaciones para esta Devolucion","black","","",300,100,0,0);
         print("<br>Facturar: ");
         $css->CrearSelect("CmbFactura", "");
