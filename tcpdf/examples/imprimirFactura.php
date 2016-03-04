@@ -44,45 +44,32 @@ $NITEP=$DatosEmpresaPro["NIT"];
 		  
 $nombre_file="Factura_".$DatosFactura["Fecha"]."_".$DatosCliente["RazonSocial"];
 		   
-// Extend the TCPDF class to create custom Header and Footer
-class MYPDF extends TCPDF {
-	//Page header
-	public function Header() {
-		// get the current page break margin
-		$bMargin = $this->getBreakMargin();
-		// get current auto-page-break mode
-		$auto_page_break = $this->AutoPageBreak;
-		// disable auto-page-break
-		$this->SetAutoPageBreak(false, 0);
-		// set bacground image
-		$img_file = K_PATH_IMAGES.'tsfondo.jpg';
-		//$this->Image($img_file, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
-		// restore auto-page-break status
-		$this->SetAutoPageBreak($auto_page_break, $bMargin);
-		// set the starting point for the page content
-		$this->setPageMark();
-	}
-}
 // create new PDF document
-$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Techno Soluciones');
 $pdf->SetTitle('Facturas TS');
 $pdf->SetSubject('Facturas');
 $pdf->SetKeywords('Techno Soluciones, PDF, Facturas, CCTV, Alarmas, Computadores, Software');
+// set default header data
+$pdf->SetHeaderData(PDF_HEADER_LOGO, 60, PDF_HEADER_TITLE.'', "");
+
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
 // set margins
-$pdf->SetMargins(10, 10, 10);
-$pdf->SetHeaderMargin(0);
-$pdf->SetFooterMargin(0);
-// remove default footer
-$pdf->setPrintFooter(false);
+$pdf->SetMargins(10, 35, PDF_MARGIN_RIGHT);
+$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
 // set auto page breaks
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 // set some language-dependent strings (optional)
@@ -183,24 +170,10 @@ $pdf->MultiCell(90, 25, $tbl, 0, 'R', 1, 0, '', '', true,0, true, true, 10, 'M')
 ////Descripcion de los Items Facturados
 ////
 ////
-$pdf->writeHTML("<br>", true, false, false, false, '');
-$tbl = <<<EOD
-<table cellspacing="1" cellpadding="2" border="1">
-    <tr>
-        <td align="center" ><strong>Vendedor</strong></td>
-        <td align="center" ><strong>Forma de Pago</strong></td>
-    </tr>
-    <tr>
-        <td align="center" >$nombreUsuario $ApellidoUsuario</td>
-        <td align="center" >$DatosFactura[FormaPago]</td>
-    </tr>
-     
-</table>
-        
-EOD;
-
-$pdf->MultiCell(180, 200, $tbl, 1, 'C', 1, 0, '', '', true,0, true, true, 10, 'M');
-
+$SumaDias=$obVenta->SumeColumna("facturas_items", "Dias", "idFactura", $idFactura);
+if($SumaDias>0){
+    require_once('factura_items_f1.php');
+}
 //Close and output PDF document
 $pdf->Output($nombre_file.'.pdf', 'I');
 //============================================================+

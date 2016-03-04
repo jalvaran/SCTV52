@@ -846,7 +846,7 @@ public function CalculePesoRemision($idCotizacion)
     ///////////////////////////////////////////////////////////////////
     public function InsertarItemsDevolucionAItemsFactura($Datos){
         $idDevolucion=$Datos["NumDevolucion"];
-        $NumFactura=$Datos["NumFactura"];
+        $NumFactura=$Datos["ID"];
         $FechaFactura=$Datos["FechaFactura"];
         
         $sql="SELECT rd.Cantidad, rd.ValorUnitario,rd.Subtotal,rd.Dias,rd.Total,"
@@ -877,7 +877,7 @@ public function CalculePesoRemision($idCotizacion)
             $tab="facturas_items";
             $NumRegistros=25;
             $Columnas[0]="ID";			$Valores[0]=$ID;
-            $Columnas[1]="NumeroFactura";	$Valores[1]=$NumFactura;
+            $Columnas[1]="idFactura";           $Valores[1]=$NumFactura;
             $Columnas[2]="TablaItems";          $Valores[2]=$DatosDevolucion["Tabla"];
             $Columnas[3]="Referencia";          $Valores[3]=$DatosDevolucion["Referencia"];
             $Columnas[4]="Nombre";              $Valores[4]=$DatosProducto["Nombre"];
