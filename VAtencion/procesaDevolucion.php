@@ -197,7 +197,12 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 $Datos["NumDevolucion"]=$idDevolucion;
                 $Datos["NumFactura"]=$idFactura;
                 $Datos["FechaFactura"]=$FechaFactura;
-                $obVenta->InsertarItemsDevolucionAItemsFactura($Datos);
+                $Datos["ID"]=$ID;
+                
+                $obVenta->InsertarItemsDevolucionAItemsFactura($Datos);///Relaciono los items de la factura
+                //$obVenta->ActualizaFaturaXItems($Datos);
+                
+                $obVenta->ActualizaRegistro("rem_devoluciones_totalizadas", "Facturas_idFacturas", $idFactura, "ID", $idDevolucion);
             }    
            
         }

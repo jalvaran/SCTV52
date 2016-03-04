@@ -848,11 +848,16 @@ public function CalculePesoRemision($idCotizacion)
         $idDevolucion=$Datos["NumDevolucion"];
         $NumFactura=$Datos["NumFactura"];
         $FechaFactura=$Datos["FechaFactura"];
+        
         $sql="SELECT rd.Cantidad, rd.ValorUnitario,rd.Subtotal,rd.Dias,rd.Total,"
                         . "ci.Referencia,ci.Tabla,ci.TipoItem"
                         . " FROM rem_devoluciones rd INNER JOIN cot_itemscotizaciones ci ON rd.idItemCotizacion=ci.ID"
                         . " WHERE rd.NumDevolucion='$idDevolucion' ";
         $Consulta=$this->Query($sql);
+        $TotalSubtotal=0;
+        $TotalIVA=0;
+        $GranTotal=0;
+        $TotalCostos=0;
         while($DatosDevolucion=  mysql_fetch_array($Consulta)){
 
             $DatosProducto=$this->DevuelveValores($DatosDevolucion["Tabla"], "Referencia", $DatosDevolucion["Referencia"]);
@@ -861,8 +866,13 @@ public function CalculePesoRemision($idCotizacion)
             ///
             $IVA=$DatosProducto["IVA"];
             $IVAItem=$IVA*$DatosDevolucion['Total'];
+            $TotalIVA=$TotalIVA+$IVAItem; //se realiza la sumatoria del iva
             $TotalItem=$DatosDevolucion['Total']+$IVAItem;
+            $TotalSubtotal=$TotalSubtotal+$DatosDevolucion['Total'];//se realiza la sumatoria del subtotal
+            $GranTotal=$GranTotal+$TotalItem;//se realiza la sumatoria del total
             $SubtotalCosto=$DatosProducto['CostoUnitario']*$DatosDevolucion['Cantidad'];
+            $TotalCostos=$TotalCostos+$SubtotalCosto;//se realiza la sumatoria de los costos
+            
             $ID=date("YmdHis").microtime(true);
             $tab="facturas_items";
             $NumRegistros=25;
@@ -894,6 +904,14 @@ public function CalculePesoRemision($idCotizacion)
             
             $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
         }
+        $ID=$Datos["ID"]; 
+        $TotalSubtotal=round($TotalSubtotal);
+        $TotalIVA=round($TotalIVA);
+        $GranTotal=round($GranTotal);
+        $TotalCostos=round($TotalCostos);
+        $sql="UPDATE facturas SET Subtotal='$TotalSubtotal', IVA='$TotalIVA', Total='$GranTotal', "
+                . "SaldoFact='$GranTotal', TotalCostos='$TotalCostos' WHERE idFacturas='$ID'";
+        $this->Query($sql);
     }
                 
 //////////////////////////////Fin	
