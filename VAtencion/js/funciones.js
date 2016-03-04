@@ -151,3 +151,23 @@ function Confirmar(){
       
     } 
 }
+
+// esta funcion permite mostrar u ocultar un elemento
+function MuestraOculta(id){
+    
+    estado=document.getElementById(id).style.display;
+    if(estado=="none" | estado==""){
+        document.getElementById(id).style.display="block";
+    }
+    if(estado=="block"){
+        document.getElementById(id).style.display="none";
+    }
+    
+}
+
+// esta funcion permite deshabilitar o habilitar un elemento
+function Habilita(id,estado){
+    
+    document.getElementById(id).disabled=estado;
+       
+}

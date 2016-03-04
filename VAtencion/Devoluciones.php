@@ -15,14 +15,16 @@ $idRemision="";
 		
 		$idRemision=$_REQUEST['TxtAsociarRemision'];
 	}
-include_once("procesaDevolucion.php");
+
 	
 print("<html>");
 print("<head>");
 $css =  new CssIni("Devoluciones");
+
 print("</head>");
 print("<body>");
     $obVenta=new ProcesoVenta($idUser);
+    include_once("procesaDevolucion.php");
     $myPage="Devoluciones.php";
     $css->CabeceraIni("SoftConTech Devoluciones"); //Inicia la cabecera de la pagina
     
@@ -39,7 +41,7 @@ print("<body>");
     ///////////////Creamos el contenedor
     /////
     /////
-    $css->CrearDiv("principal", "container", "center");
+    $css->CrearDiv("principal", "container", "center",1,1);
     print("<br>");
     ///////////////Creamos la imagen representativa de la pagina
     /////
@@ -55,16 +57,24 @@ print("<body>");
         $css->CrearFilaNotificacion("Devolucion almacenada Correctamente <a href='$RutaPrintCot' target='_blank'>Imprimir Devolucion No. $_REQUEST[TxtidDevolucion]</a>",16);
         $css->CerrarTabla();
         if(!empty($_REQUEST["TxtidFactura"])){
-            $RutaPrint="../tcpdf/examples/imprimirFacturaAlquiler.php?ImgPrintFactura=".$_REQUEST["TxtidFactura"];			
-            $css->CrearTabla();
-            $css->CrearFilaNotificacion("Factura Creada Correctamente <a href='$RutaPrint' target='_blank'>Imprimir Factura No. $_REQUEST[TxtidIngreso]</a>",16);
-            $css->CerrarTabla();
+            
+            $idFactura=$_REQUEST["TxtidFactura"];
+            if($idFactura>0){
+                $RutaPrint="../tcpdf/examples/imprimirFacturaAlquiler.php?ImgPrintFactura=".$idFactura;			
+                $css->CrearTabla();
+                $css->CrearFilaNotificacion("Factura Creada Correctamente <a href='$RutaPrint' target='_blank'>Imprimir Factura No. $idFactura</a>",16);
+                $css->CerrarTabla();
+            }else{
+                
+               $css->AlertaJS("No se pudo crear la factura porque no hay resoluciones disponibles", 1, "", ""); 
+            }
+            
         }
     }
     ///////////////Se crea el DIV que servirá de contenedor secundario
     /////
     /////
-    $css->CrearDiv("Secundario", "container", "center");
+    $css->CrearDiv("Secundario", "container", "center",1,1);
    										
     ////////////////////////////////////Si se solicita buscar una Remision
     /////
@@ -248,12 +258,72 @@ print("<body>");
 	$css->CrearInputText("TxtHoraDevolucion","text","",date("H:i:s"),"Hora","black","","",150,30,0,1);
         print("<br>");
         $css->CrearTextArea("TxtObservacionesDevolucion","","","Observaciones para esta Devolucion","black","","",300,100,0,0);
-        print("<br>Facturar: ");
-        $css->CrearSelect("CmbFactura", "");
+        print("<br>Facturar: <br>");
+        $css->CrearSelect("CmbFactura", "MuestraOculta('OpcionesFact')");
             $css->CrearOptionSelect("NO", "NO", 0);
             $css->CrearOptionSelect("SI", "SI", 1);
         $css->CerrarSelect();
+        $css->CrearDiv("OpcionesFact", "", "center", 1,1);
+        
+        print("Centro de costos: <br>");
+        $css->CrearSelect("CmbCentroCostos", "");
+            $Consulta=$obVenta->ConsultarTabla("centrocosto", "");
+            if(mysql_num_rows($Consulta)){
+            while($DatosCentroCosto=  mysql_fetch_array($Consulta)){
+                $css->CrearOptionSelect($DatosCentroCosto["ID"], $DatosCentroCosto["Nombre"], 0);
+            }
+            }else{
+                $css->AlertaJS("No hay centros de costo creados por favor cree uno", 1, "", "");
+            }
+        $css->CerrarSelect();
         print("<br>");
+        print("Resolucion:<br> ");
+        $css->CrearSelect("CmbResolucion", "");
+            $Consulta=$obVenta->ConsultarTabla("empresapro_resoluciones_facturacion", "WHERE Completada<>'SI'");
+            if(mysql_num_rows($Consulta)){
+            while($DatosResolucion=  mysql_fetch_array($Consulta)){
+                $css->CrearOptionSelect($DatosResolucion["ID"], $DatosResolucion["NumResolucion"], 0);
+            }
+            }else{
+                
+                $css->AlertaJS("No hay resoluciones de facturacion disponibles por favor cree una", 1, "", "");
+                
+                
+            }
+        $css->CerrarSelect();
+        print("<br>Forma de Pago:<br> ");
+        $css->CrearSelect("CmbFormaPago", "");
+            $css->CrearOptionSelect("Contado", "Contado", 1);
+            $css->CrearOptionSelect("15", "15 Dias", 0);
+            $css->CrearOptionSelect("30", "30 Dias", 0);
+            $css->CrearOptionSelect("60", "60 Dias", 0);
+            $css->CrearOptionSelect("90", "90 Dias", 0);
+        $css->CerrarSelect();
+        
+        print("<br>");
+        
+        print("Cuenta donde ingresa el dinero: <br>");
+        $css->CrearSelect("CmbCuentaDestino", "");
+            $Consulta=$obVenta->ConsultarTabla("cuentasfrecuentes", "WHERE ClaseCuenta='ACTIVOS'");
+            if(mysql_num_rows($Consulta)){
+            while($DatosCuentasFrecuentes=  mysql_fetch_array($Consulta)){
+                $css->CrearOptionSelect($DatosCuentasFrecuentes["CuentaPUC"], $DatosCuentasFrecuentes["Nombre"], 0);
+            }
+            }else{
+                print("<script>alert('No hay cuentas frecuentes creadas debe crear al menos una')</script>");
+            }
+        $css->CerrarSelect();
+        print("<br>Fecha de la Factura: <br>");
+        $css->CrearInputText("TxtFechaFactura","text","",date("Y-m-d"),"FechaFactura","black","","",130,30,0,1);
+        print("<br>");
+        
+        $css->CrearInputText("TxtOrdenCompra","text","","","Orden de Compra","black","","",150,30,0,0);
+        $css->CrearInputText("TxtOrdenSalida","text","","","Orden de Salida","black","","",150,30,0,0);
+        print("<br>");
+        $css->CrearTextArea("TxtObservacionesFactura","","","Observaciones para esta Factura","black","","",300,100,0,0);
+        
+        $css->CerrarDiv();
+        
         $css->CrearBotonConfirmado("BtnGuardarDevolucion","Guardar");
         print("</td>");
         $css->CierraFilaTabla();

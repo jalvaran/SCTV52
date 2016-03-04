@@ -728,7 +728,17 @@ public function Query($sql)
 					
     $Consul=mysql_query($sql) or die("no se pudo realizar la consulta $sql en query php_conexion: " . mysql_error());
     return($Consul);
-}	
+}
+
+////////////////////////////////////////////////////////////////////
+//////////////////////Funcion fetcharray mysql
+///////////////////////////////////////////////////////////////////
+public function FetchArray($Datos)
+  {		
+					
+    $Vector=  mysql_fetch_array($Datos) or die("no se pudo realizar el fecth_array de $Datos en FetchArray php_conexion: " . mysql_error());
+    return($Vector);
+}
 ////////////////////////////////////////////////////////////////////
 //////////////////////Funcion Registra Anticipo
 ///////////////////////////////////////////////////////////////////
@@ -822,7 +832,7 @@ public function CalculePesoRemision($idCotizacion)
         $Peso=0;
         $Consulta=$this->ConsultarTabla("cot_itemscotizaciones", "WHERE NumCotizacion=$idCotizacion");
         while($DatosItems=  mysql_fetch_array($Consulta)){
-            if($DatosItems["Tabla"]="productosalquiler"){
+            if($DatosItems["Tabla"]=="productosalquiler"){
                 $Producto=  $this->DevuelveValores("productosalquiler", "Referencia", $DatosItems["Referencia"]);
                 $Peso=$Peso+($Producto["PesoUnitario"]*$DatosItems["Cantidad"]);
             }
@@ -831,7 +841,7 @@ public function CalculePesoRemision($idCotizacion)
 
         return($Peso);
 	}
-        
+                
 //////////////////////////////Fin	
 }
 

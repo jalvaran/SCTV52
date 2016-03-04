@@ -490,8 +490,17 @@ class CssIni{
         
         /////////////////////Crear un DIV
 	
-	function CrearDiv($ID, $Class, $Alineacion){
-            print("<div id='$ID' class='$Class' align='$Alineacion'>");
+	function CrearDiv($ID, $Class, $Alineacion,$Visible, $Habilitado){
+            if($Visible==1)
+                $V="block";
+            else
+                $V="none";
+            
+            if($Habilitado==1) ///pensado a futuro, aun no esta en uso
+                $H="true";
+            else
+                $H="false";
+            print("<div id='$ID' class='$Class' align='$Alineacion' style='display:$V;' >");
 		
 	}
         
@@ -502,6 +511,23 @@ class CssIni{
 		
 	}
         
+        /////////////////////Crear una Alerta
+	
+	function AlertaJS($Mensaje,$Tipo,$Formatos,$Iconos){
+            if($Tipo==1){
+                $Alerta="alert";
+            }
+            if($Tipo==2){
+                $Alerta="confirm";
+            }
+            if($Tipo==3){
+                $Alerta="prompt";
+            }
+            print("<script>$Alerta('$Mensaje');</script>");
+		
+	}
+        
+               
 	//////////////////////////////////FIN
 }
 	
