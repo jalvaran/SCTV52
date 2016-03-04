@@ -96,7 +96,7 @@ if (@file_exists(dirname(__FILE__).'/lang/spa.php')) {
 //$pdf->SetFont('helvetica', 'B', 6);
 // add a page
 $pdf->AddPage();
-$pdf->SetFont('helvetica', '', 8);
+$pdf->SetFont('helvetica', '', 7);
 ///////////////////////////////////////////////////////
 //////////////encabezado//////////////////
 ////////////////////////////////////////////////////////
@@ -126,11 +126,11 @@ $tbl = <<<EOD
     </tr>
     <tr nobr="true">
         <th><strong>Teléfono:</strong> $DatosCliente[Telefono]</th>
-        <th><strong>Teléfono:</strong> $DatosRemision[Telefono]</th>
+        <th><strong>Remision:</strong> $DatosRemision[ID]</th>
     </tr>
     <tr nobr="true">
         <th><strong>Ciudad:</strong> $DatosCliente[Ciudad]</th>
-        <th><strong>Remision:</strong> $DatosRemision[ID]</th>
+        <th><strong>Factura:</strong> $DatosDevolucion[Facturas_idFacturas]</th>
     </tr> 
     <tr nobr="true">
         <th><strong>NIT:</strong> $DatosCliente[Num_Identificacion]</th>
@@ -150,8 +150,9 @@ $tbl = <<<EOD
  <tr nobr="true">
   <th><h3>Ref</h3></th>
   <th colspan="3"><h3>Descripción</h3></th>
-  <th><h3>Valor Unitario</h3></th>
   <th><h3>Cantidad</h3></th>
+  <th><h3>Valor Unitario</h3></th>
+  <th><h3>Subtotal</h3></th>
   <th><h3>Dias</h3></th>
   <th><h3>Total</h3></th>
  </tr>
@@ -159,31 +160,32 @@ $tbl = <<<EOD
 EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');
 ////////////////////////////////////////////////////////
-$PesoTotal=$obVenta->CalculePesoRemision($DatosRemision['Cotizaciones_idCotizaciones']); 
-$Consulta=$obVenta->ConsultarTabla("cot_itemscotizaciones","WHERE NumCotizacion='$DatosRemision[Cotizaciones_idCotizaciones]'");
-$Subtotal=0;
-$IVA=0;
-$Total=0;
+
+$sql="SELECT rd.Total,rd.Subtotal,rd.Dias,rd.ValorUnitario,rd.Cantidad,ci.Referencia,ci.Descripcion"
+        . ", rd.idItemCotizacion , rd.idRemision "
+        . "FROM rem_devoluciones rd INNER JOIN cot_itemscotizaciones ci ON "
+        . "rd.idItemCotizacion=ci.ID WHERE rd.NumDevolucion='$idDevolucion'";
+$Consulta=$obVenta->Query($sql);
+$GranTotal=0;
         
 while($registros2=mysql_fetch_array($Consulta)){
 		 
-$Subtotal=$Subtotal+($registros2["Subtotal"]*$DatosRemision["Dias"]);
-$IVA=$IVA+($registros2["IVA"]*$DatosRemision["Dias"]);
-$Total=$Total+($registros2["Total"]*$DatosRemision["Dias"]);
+$GranTotal=$GranTotal+$registros2["Total"];
 $registros2["Total"]=number_format($registros2["Total"]);
-$registros2["Subtotal"]=number_format(round($registros2["Subtotal"]*$DatosRemision["Dias"]));	
+$registros2["Subtotal"]=number_format($registros2["Subtotal"]);	
 $registros2["ValorUnitario"]=number_format(round($registros2["ValorUnitario"]));	
-			
 			
 $tbl = <<<EOD
 <table border="1" cellpadding="2" cellspacing="2" align="center">
+         
  <tr nobr="true">
-  <td>$registros2[Referencia]</td>
-  <td colspan="3">$registros2[Descripcion]</td>
-  <td>$$registros2[ValorUnitario]</td>
-  <td>$registros2[Cantidad]</td>
-  <td>$DatosRemision[Dias]</td>
-  <td>$$registros2[Subtotal]</td>
+  <th>$registros2[Referencia]</th>
+  <th colspan="3">$registros2[Descripcion]</th>
+  <th>$registros2[Cantidad]</th>
+  <th>$$registros2[ValorUnitario]</th>
+  <th>$$registros2[Subtotal]</th>
+  <th>$registros2[Dias]</th>
+  <th>$$registros2[Total]</th>
  </tr>
  </table>
 EOD;
@@ -191,25 +193,85 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 			
 		  
 }
-$Subtotal=  number_format($Subtotal);
-$IVA=  number_format($IVA);
-$Total=  number_format($Total);
+
+//////////////Se dibuja el total de la devolcion
+///
+///
+///
+$GranTotal=  number_format($GranTotal);
 $tbl = <<<EOD
 <table border="1" cellpadding="2" cellspacing="2" align="center">
  <tr nobr="true">
   <td colspan="5" align="center"><h3>Observaciones</h3></td></tr>
   <tr nobr="true">
-  <td colspan="5" align="left">Cotizacion No.: $DatosRemision[Cotizaciones_idCotizaciones], Peso Total de la
-      Remision: $PesoTotal Kgs, Observaciones adicionales: $observaciones</td></tr>
+  <td colspan="5" align="left">Valores Sin IVA, $observaciones</td></tr>
   <tr nobr="true">
-  <td colspan="4" align="rigth"><h3>SubTotal</h3></td><td>$$Subtotal</td></tr>
-  <tr nobr="true"><td colspan="4" align="rigth"><h3>IVA</h3></td><td>$$IVA</td></tr>
-  <tr nobr="true"><td colspan="4" align="rigth"><h3>Total</h3></td><td>$$Total</td>
+  <td colspan="4" align="rigth"><h3>Esta Devolucion: </h3></td><td>$$GranTotal</td>
+  
  </tr>
  </table>
 EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');		
-		
+
+//////////////////Se dibujan los faltantes
+////
+////
+
+
+////////////////////Datos de los items
+$tbl = <<<EOD
+<br><H3>FALTANTES:</H3><br>
+   <table border="1" cellpadding="2" cellspacing="2" align="center">
+  
+ <tr nobr="true">
+  <th><h3>Ref</h3></th>
+  <th colspan="3"><h3>Descripción</h3></th>
+  <th><h3>Cantidad Entregada</h3></th>
+  <th><h3>Devoluciones</h3></th>
+  <th><h3>Faltantes</h3></th>
+  
+ </tr>
+ </table>
+EOD;
+$pdf->writeHTML($tbl, false, false, false, false, '');
+////////////////////////////////////////////////////////
+
+$sql="SELECT rr.CantidadEntregada,rr.idItemCotizacion,rr.idRemision, ci.Referencia,ci.Descripcion"
+        . " FROM rem_relaciones rr "
+        . "INNER JOIN cot_itemscotizaciones ci  "
+        . "ON rr.idItemCotizacion=ci.ID"
+        . " WHERE rr.idRemision='$DatosRemision[ID]'";
+$Consulta=$obVenta->Query($sql);
+       
+while($DatosItemRemision=mysql_fetch_array($Consulta)){
+
+//$Entregas=$obVenta->Sume('rem_relaciones', "CantidadEntregada", " WHERE idItemCotizacion='$registros2[idItemCotizacion]' AND idRemision='$registros2[idRemision]'");
+$Devoluciones=$obVenta->Sume("rem_devoluciones", "Cantidad", " WHERE idItemCotizacion='$DatosItemRemision[idItemCotizacion]' AND idRemision='$DatosRemision[ID]'");
+$Faltantes=$DatosItemRemision["CantidadEntregada"]-$Devoluciones;
+    
+$tbl = <<<EOD
+<table border="1" cellpadding="2" cellspacing="2" align="center">
+         
+ <tr nobr="true">
+  <th>$DatosItemRemision[Referencia]</th>
+  <th colspan="3">$DatosItemRemision[Descripcion]</th>
+  <th>$DatosItemRemision[CantidadEntregada]</th>
+  <th>$Devoluciones</th>
+  <th>$Faltantes</th>
+  
+ </tr>
+ </table>
+EOD;
+$pdf->writeHTML($tbl, false, false, false, false, '');
+			
+		  
+}
+
+
+/////////////////////////////////////////Se dibija el mensaje final
+/////
+////
+////
 $tbl = <<<EOD
 </br>
  
@@ -217,18 +279,17 @@ $tbl = <<<EOD
 <span style="font-family:'Bookman Old Style';font-size:10px;"><strong><em>Realizado por: $DatosUsuario[Nombre] $DatosUsuario[Apellido]
 </em></strong></span></div>
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
-<span style="font-family:'Bookman Old Style';font-size:10px;">Certifico que los equipos remisionados los he recibido en buen estado y funcionamiento por lo cual me hago responsable de los daños,
-        faltantes especiales y perdidas que a su devolucion se presenten, así mismo exonero de toda responsabilidad al Sr. Oscar Jimenez G. por cualquier hecho o percance que se llegare a presentar durante el uso de los equipos.
-        El transporte corre por cuenta del cliente, los equipos deben entregarse desarmados en la puerta de la obra.
+<span style="font-family:'Bookman Old Style';font-size:10px;">Los elementos o artículos faltantes se cobrarán por su valor en el comercio.
+       Los funcionarios de Alturas no deben recoger ni desarmar equipos.
 </span></div><br><br>
 
 <div id="Div_Firmas" style="text-align:left;">
-<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:left;">Recibe: ______________________________</span>
-<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:right;"> Entrega: ______________________________</span></div>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:left;">Cliente: ______________________________</span>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:right;"> Despachos: ______________________________</span></div>
 
         
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
-<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px;">Remision Generada por SOFTCONTECH V5.0, Software Diseñado por TECHNO SOLUCIONES SAS, 317 774 0609, info@technosoluciones.com</div></span>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px;">Documento Generado por SOFTCONTECH V5.0, Software Diseñado por TECHNO SOLUCIONES SAS, 317 774 0609, info@technosoluciones.com</div></span>
 EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');		
 //Close and output PDF document
