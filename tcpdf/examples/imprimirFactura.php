@@ -1,5 +1,6 @@
 <?php
 require_once('tcpdf_include.php');
+//require_once('../../librerias/numerosletras.php');
 include("../../modelo/php_conexion.php");
 ////////////////////////////////////////////
 /////////////Verifico que haya una sesion activa
@@ -65,10 +66,10 @@ $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 // set margins
 $pdf->SetMargins(10, 35, PDF_MARGIN_RIGHT);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+$pdf->SetFooterMargin(10);
 
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(TRUE, 10);
 
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -174,6 +175,44 @@ $SumaDias=$obVenta->SumeColumna("facturas_items", "Dias", "idFactura", $idFactur
 if($SumaDias>0){
     require_once('factura_items_f1.php');
 }
+
+
+////Totales de la factura
+////
+////
+
+$SubtotalFactura=number_format($obVenta->SumeColumna("facturas_items", "SubtotalItem", "idFactura", $idFactura));
+$IVAFactura=number_format($obVenta->SumeColumna("facturas_items", "IVAItem", "idFactura", $idFactura));
+$TotalFactura=number_format($obVenta->SumeColumna("facturas_items", "TotalItem", "idFactura", $idFactura));
+//$TotalLetras=numtoletras($TotalFactura, "PESOS COLOMBIANOS");
+
+
+$tbl = <<<EOD
+<table cellspacing="1" cellpadding="2" border="1">
+    <tr>
+        <td height="25" colspan="4">Observaciones: $DatosFactura[ObservacionesFact]</td> 
+        
+        <td align="rigth"><h3>SUBTOTAL:</h3></td>
+        <td align="rigth"><h3>$ $SubtotalFactura</h3></td>
+    </tr>
+    <tr>
+        <td colspan="4" height="25">$DatosEmpresaPro[ObservacionesLegales]</td> 
+        <td align="rigth"><h3>IVA:</h3></td>
+        <td align="rigth"><h3>$ $IVAFactura</h3></td>
+    </tr>
+    <tr>
+        <td colspan="2" height="50" align="center"><br/><br/><br/><br/><br/>Firma Autorizada</td> 
+        <td colspan="2" height="50" align="center"><br/><br/><br/><br/><br/>Firma Recibido</td> 
+        <td align="rigth"><h3>TOTAL:</h3></td>
+        <td align="rigth"><h3>$ $TotalFactura</h3></td>
+    </tr>
+     
+</table>
+
+        
+EOD;
+
+$pdf->MultiCell(180, 30, $tbl, 0, 'L', 1, 0, '', '', true,0, true, true, 10, 'M');
 //Close and output PDF document
 $pdf->Output($nombre_file.'.pdf', 'I');
 //============================================================+

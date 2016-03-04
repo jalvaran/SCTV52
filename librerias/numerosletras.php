@@ -1,20 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-    <head>
-        <title>Conversión numeros a letras</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-
-    <body onLoad="document.forma1.cantidad.focus();">
-        <form name="forma1" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <input type="text" name="cantidad" value="<?php echo isset($_POST['cantidad']) ? $_POST['cantidad'] : ''; ?>" size="50" maxlength="21" />  
-            <input type="submit" name="boton1" value="Convertir...">
-            <br/> 
-            <textarea cols="70" rows="5"><?php echo isset($_POST['cantidad']) ? numtoletras($_POST['cantidad'],"PESOS COLOMBIANOS") : ''; ?></textarea>
-        </form>
-    </body>
-</html>
-
 <?php
 
 
