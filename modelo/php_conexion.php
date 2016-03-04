@@ -841,6 +841,60 @@ public function CalculePesoRemision($idCotizacion)
 
         return($Peso);
 	}
+         ////////////////////////////////////////////////////////////////////
+    //////////////////////Funcion Agregar items de devolucion a una factura peso de una remision
+    ///////////////////////////////////////////////////////////////////
+    public function InsertarItemsDevolucionAItemsFactura($Datos){
+        $idDevolucion=$Datos["NumDevolucion"];
+        $NumFactura=$Datos["NumFactura"];
+        $FechaFactura=$Datos["FechaFactura"];
+        $sql="SELECT rd.Cantidad, rd.ValorUnitario,rd.Subtotal,rd.Dias,rd.Total,"
+                        . "ci.Referencia,ci.Tabla,ci.TipoItem"
+                        . " FROM rem_devoluciones rd INNER JOIN cot_itemscotizaciones ci ON rd.idItemCotizacion=ci.ID"
+                        . " WHERE rd.NumDevolucion='$idDevolucion' ";
+        $Consulta=$this->Query($sql);
+        while($DatosDevolucion=  mysql_fetch_array($Consulta)){
+
+            $DatosProducto=$this->DevuelveValores($DatosDevolucion["Tabla"], "Referencia", $DatosDevolucion["Referencia"]);
+            ////Empiezo a insertar en la tabla items facturas
+            ///
+            ///
+            $IVA=$DatosProducto["IVA"];
+            $IVAItem=$IVA*$DatosDevolucion['Total'];
+            $TotalItem=$DatosDevolucion['Total']+$IVAItem;
+            $SubtotalCosto=$DatosProducto['CostoUnitario']*$DatosDevolucion['Cantidad'];
+            $ID=date("YmdHis").microtime(true);
+            $tab="facturas_items";
+            $NumRegistros=25;
+            $Columnas[0]="ID";			$Valores[0]=$ID;
+            $Columnas[1]="NumeroFactura";	$Valores[1]=$NumFactura;
+            $Columnas[2]="TablaItems";          $Valores[2]=$DatosDevolucion["Tabla"];
+            $Columnas[3]="Referencia";          $Valores[3]=$DatosDevolucion["Referencia"];
+            $Columnas[4]="Nombre";              $Valores[4]=$DatosProducto["Nombre"];
+            $Columnas[5]="Departamento";	$Valores[5]=$DatosProducto["Departamento"];
+            $Columnas[6]="SubGrupo1";           $Valores[6]=$DatosProducto['Sub1'];
+            $Columnas[7]="SubGrupo2";           $Valores[7]=$DatosProducto['Sub2'];
+            $Columnas[8]="SubGrupo3";           $Valores[8]=$DatosProducto['Sub3'];
+            $Columnas[9]="SubGrupo4";           $Valores[9]=$DatosProducto['Sub4'];
+            $Columnas[10]="SubGrupo5";          $Valores[10]=$DatosProducto['Sub5'];
+            $Columnas[11]="ValorUnitarioItem";	$Valores[11]=$DatosDevolucion['ValorUnitario'];
+            $Columnas[12]="Cantidad";		$Valores[12]=$DatosDevolucion['Cantidad'];
+            $Columnas[13]="Dias";		$Valores[13]=$DatosDevolucion['Dias'];
+            $Columnas[14]="SubtotalItem";       $Valores[14]=$DatosDevolucion['Total'];
+            $Columnas[15]="IVAItem";		$Valores[15]=$IVAItem;
+            $Columnas[16]="TotalItem";		$Valores[16]=$TotalItem;
+            $Columnas[17]="PorcentajeIVA";	$Valores[17]=($IVA*100)."%";
+            $Columnas[18]="PrecioCostoUnitario";$Valores[18]=$DatosProducto['CostoUnitario'];
+            $Columnas[19]="SubtotalCosto";	$Valores[19]=$SubtotalCosto;
+            $Columnas[20]="TipoItem";		$Valores[20]=$DatosDevolucion["TipoItem"];
+            $Columnas[21]="CuentaPUC";		$Valores[21]=$DatosProducto['CuentaPUC'];
+            $Columnas[22]="GeneradoDesde";	$Valores[22]="rem_devoluciones";
+            $Columnas[23]="NumeroIdentificador";$Valores[23]=$idDevolucion;
+            $Columnas[24]="FechaFactura";       $Valores[24]=$FechaFactura;
+            
+            $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+        }
+    }
                 
 //////////////////////////////Fin	
 }

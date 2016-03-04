@@ -157,8 +157,9 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 ////////////////Inserto datos de la factura
                 /////
                 ////
+                $ID=date("YmdHis").microtime(true);
                 $tab="facturas";
-                $NumRegistros=23; 
+                $NumRegistros=24; 
                 
                 $Columnas[0]="TipoFactura";		    $Valores[0]=$DatosResolucion["Tipo"];
                 $Columnas[1]="Prefijo";                     $Valores[1]=$DatosResolucion["Prefijo"];
@@ -183,6 +184,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 $Columnas[20]="ObservacionesFact";          $Valores[20]=$ObservacionesFactura;
                 $Columnas[21]="CentroCosto";                $Valores[21]=$CentroCostos;
                 $Columnas[22]="idResolucion";               $Valores[22]=$ResolucionDian;
+                $Columnas[23]="idFacturas";                 $Valores[23]=$ID;
                 
                 $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
                 
@@ -192,9 +194,10 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 //////////////////////Agrego Items a la Factura desde la devolucion
                 /////
                 /////
-                
-                
-                
+                $Datos["NumDevolucion"]=$idDevolucion;
+                $Datos["NumFactura"]=$idFactura;
+                $Datos["FechaFactura"]=$FechaFactura;
+                $obVenta->InsertarItemsDevolucionAItemsFactura($Datos);
             }    
            
         }
