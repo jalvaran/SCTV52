@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-02-2016 a las 19:21:51
+-- Tiempo de generación: 04-03-2016 a las 00:57:19
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -3650,7 +3650,37 @@ CREATE TABLE IF NOT EXISTS `empresapro` (
 --
 
 INSERT INTO `empresapro` (`idEmpresaPro`, `RazonSocial`, `NIT`, `Direccion`, `Telefono`, `Celular`, `Ciudad`, `ResolucionDian`, `Email`, `WEB`, `PuntoEquilibrio`) VALUES
-(1, 'PUNTO MODA', '14878497-6 REG. COMUN', 'CARRERA 15 No. 16-19/21', '2396695', '1', 'BUGA', 'RES. DIAN 50000382810 DE 29-01-2015\r\nFACTURA AUT. B106518 A B6000000', 'info@technosoluciones.com', 'www.technosoluciones.com', '5000000');
+(1, 'PUNTO MODA', '14878497-6 REG. COMUN', 'CARRERA 15 No. 16-19/21', '2396695', '1', 'BUGA', 'RES. DIAN 50000382810 DE 29-01-2015\nFACTURA AUT. B106518 A B6000000', 'info@technosoluciones.com', 'www.technosoluciones.com', '5000000');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresapro_resoluciones_facturacion`
+--
+
+CREATE TABLE IF NOT EXISTS `empresapro_resoluciones_facturacion` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NumResolucion` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `Fecha` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `NumSolicitud` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Tipo` varchar(4) COLLATE utf8_spanish2_ci NOT NULL,
+  `Factura` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Prefijo` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Desde` int(16) NOT NULL,
+  `Hasta` int(16) NOT NULL,
+  `FechaVencimiento` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `idEmpresaPro` int(11) NOT NULL,
+  `Estado` varchar(2) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'OC: Ocupada',
+  `Completada` varchar(2) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'NO',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `empresapro_resoluciones_facturacion`
+--
+
+INSERT INTO `empresapro_resoluciones_facturacion` (`ID`, `NumResolucion`, `Fecha`, `NumSolicitud`, `Tipo`, `Factura`, `Prefijo`, `Desde`, `Hasta`, `FechaVencimiento`, `idEmpresaPro`, `Estado`, `Completada`) VALUES
+(1, '150000055430', '2015-03-26', '242', '02', 'Computador', 'A', 1, 1000, '2017-03-26', 1, '', 'NO');
 
 -- --------------------------------------------------------
 
@@ -3659,7 +3689,11 @@ INSERT INTO `empresapro` (`idEmpresaPro`, `RazonSocial`, `NIT`, `Direccion`, `Te
 --
 
 CREATE TABLE IF NOT EXISTS `facturas` (
-  `idFacturas` int(11) NOT NULL AUTO_INCREMENT,
+  `idFacturas` varchar(45) NOT NULL,
+  `idResolucion` int(11) NOT NULL,
+  `TipoFactura` varchar(10) NOT NULL,
+  `Prefijo` varchar(45) NOT NULL,
+  `NumeroFactura` int(16) NOT NULL,
   `Fecha` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `OCompra` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `OSalida` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -3671,6 +3705,7 @@ CREATE TABLE IF NOT EXISTS `facturas` (
   `SaldoFact` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `Cotizaciones_idCotizaciones` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `EmpresaPro_idEmpresaPro` int(11) NOT NULL,
+  `CentroCosto` int(11) NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   `Clientes_idClientes` int(11) NOT NULL,
   `TotalCostos` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -3683,32 +3718,14 @@ CREATE TABLE IF NOT EXISTS `facturas` (
   KEY `fk_Facturas_Usuarios1_idx` (`Usuarios_idUsuarios`),
   KEY `fk_Facturas_Clientes1_idx` (`Clientes_idClientes`),
   KEY `fk_Facturas_Cotizaciones1_idx` (`Cotizaciones_idCotizaciones`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `facturas`
 --
 
-INSERT INTO `facturas` (`idFacturas`, `Fecha`, `OCompra`, `OSalida`, `FormaPago`, `Subtotal`, `IVA`, `Descuentos`, `Total`, `SaldoFact`, `Cotizaciones_idCotizaciones`, `EmpresaPro_idEmpresaPro`, `Usuarios_idUsuarios`, `Clientes_idClientes`, `TotalCostos`, `CerradoDiario`, `FechaCierreDiario`, `HoraCierreDiario`, `ObservacionesFact`) VALUES
-(1, '2016-01-29', 'NO', '0', 'Contado', '46000', '7360', '0', '53360', '53360', '1', 1, 3, 17, '', '', '', '', ''),
-(2, '2016-01-29', 'NO', '2', 'Contado', '111000', '17760', '0', '128760', '128760', '6', 1, 3, 17, '', '', '', '', ''),
-(3, '2016-01-29', 'NO', '3', 'Contado', '111000', '17760', '0', '128760', '128760', '6', 1, 3, 17, '', '', '', '', ''),
-(4, '2016-01-29', 'NO', '4', 'Contado', '111000', '17760', '0', '128760', '128760', '6', 1, 3, 17, '', '', '', '', ''),
-(5, '2016-01-29', 'NO', '5', 'Contado', '111000', '17760', '0', '128760', '128760', '6', 1, 3, 17, '', '', '', '', ''),
-(6, '2016-01-29', 'NO', '', 'Contado', '41000', '6560', '0', '47560', '47560', '5', 1, 2, 17, '', '', '', '', ''),
-(7, '2016-01-29', 'NO', '', 'Contado', '41000', '6560', '0', '47560', '47560', '5', 1, 2, 17, '', '', '', '', ''),
-(8, '2016-02-07', '', '8', 'Contado', '7900', '0', '0', '7900', '7900', '15', 1, 3, 1, '5200', '', '', '', ''),
-(10, '2016-01-31', '', '10', 'Contado', '7900', '0', '0', '7900', '0', '13', 1, 3, 1, '0', '', '', '', ''),
-(11, '2016-01-31', '', '11', 'Contado', '7900', '0', '0', '7900', '0', '14', 1, 3, 1, '0', '', '', '', ''),
-(12, '2016-02-07', '', '12', 'Contado', '35900', '0', '0', '35900', '35900', '16', 1, 3, 1, '25200', '', '', '', ''),
-(13, '2016-02-07', '', '13', 'Contado', '11500', '0', '0', '11500', '11500', '17', 1, 3, 1, '8000', '', '', '', ''),
-(14, '2016-02-07', '', '14', 'Credito', '14900', '0', '0', '14900', '0', '18', 1, 3, 66, '11000', '', '', '', ''),
-(15, '2016-02-07', '', '15', 'Credito', '7900', '0', '0', '7900', '-5000', '19', 1, 3, 66, '0', '', '', '', ''),
-(16, '2016-02-07', '', '16', 'Credito', '47500', '0', '0', '47500', '37500', '20', 1, 3, 66, '35000', '', '', '', ''),
-(17, '2016-02-07', '', '17', 'Contado', '0', '', '0', '', '', '21', 1, 3, 1, '', '', '', '', ''),
-(18, '2016-02-07', '', '18', 'Contado', '7900', '0', '0', '7900', '7900', '22', 1, 3, 1, '5200', '', '', '', ''),
-(19, '2016-02-07', '', '19', 'Contado', '5900', '0', '0', '5900', '5900', '23', 1, 3, 1, '4200', '', '', '', ''),
-(20, '2016-02-07', '', '20', 'Credito', '0', '', '0', '', '', '24', 1, 3, 0, '', '', '', '', '');
+INSERT INTO `facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefijo`, `NumeroFactura`, `Fecha`, `OCompra`, `OSalida`, `FormaPago`, `Subtotal`, `IVA`, `Descuentos`, `Total`, `SaldoFact`, `Cotizaciones_idCotizaciones`, `EmpresaPro_idEmpresaPro`, `CentroCosto`, `Usuarios_idUsuarios`, `Clientes_idClientes`, `TotalCostos`, `CerradoDiario`, `FechaCierreDiario`, `HoraCierreDiario`, `ObservacionesFact`) VALUES
+('201603040055051457070905.6093', 1, '02', 'A', 1, '2016-03-04', '', '', 'Contado', '', '', '', '', '', '', 1, 1, 3, 17, '', '', '', '', '');
 
 --
 -- Disparadores `facturas`
@@ -3758,17 +3775,7 @@ CREATE TABLE IF NOT EXISTS `facturas_abonos` (
   `FechaCierreDiario` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `HoraCierreDiario` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idFacturasAbonos`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
-
---
--- Volcado de datos para la tabla `facturas_abonos`
---
-
-INSERT INTO `facturas_abonos` (`idFacturasAbonos`, `Fecha`, `Monto`, `CuentaIngreso`, `NombreCuenta`, `Usuarios_idUsuarios`, `Facturas_idFacturas`, `CerradoDiario`, `FechaCierreDiario`, `HoraCierreDiario`) VALUES
-(1, '2016-02-07', '10000', '110510', 'CAJA MENOR', 3, 14, '', '', ''),
-(2, '2016-02-07', '4900', '110510', 'CAJA MENOR', 3, 14, '', '', ''),
-(3, '2016-02-07', '5000', '110510', 'CAJA MENOR', 3, 15, '', '', ''),
-(4, '2016-02-07', '10000', '110510', 'CAJA MENOR', 3, 16, '', '', '');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 --
 -- Disparadores `facturas_abonos`
@@ -4064,6 +4071,51 @@ INSERT INTO `facturas_formapago` (`idFacturas_FormaPago`, `Total`, `Paga`, `Devu
 (10, '7900', '17900', '10000', 'EFECTIVO', '18'),
 (11, '5900', '0', '', 'EFECTIVO', '19'),
 (12, '', '0', '0', 'SEPARADO', '20');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturas_items`
+--
+
+CREATE TABLE IF NOT EXISTS `facturas_items` (
+  `ID` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `FechaFactura` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `NumeroFactura` int(16) NOT NULL,
+  `TablaItems` varchar(100) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Tabla donde se encuentra el producto o servicio',
+  `Referencia` varchar(200) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Referencia del producto o servicio',
+  `Nombre` varchar(500) COLLATE utf8_spanish2_ci NOT NULL,
+  `Departamento` int(11) NOT NULL,
+  `SubGrupo1` int(11) NOT NULL,
+  `SubGrupo2` int(11) NOT NULL,
+  `SubGrupo3` int(11) NOT NULL,
+  `SubGrupo4` int(11) NOT NULL,
+  `SubGrupo5` int(11) NOT NULL,
+  `ValorUnitarioItem` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Cantidad` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Dias` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `SubtotalItem` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `IVAItem` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `TotalItem` varchar(45) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Total del valor del Item',
+  `PorcentajeIVA` varchar(10) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'que porcentaje de IVA se le aplico',
+  `PrecioCostoUnitario` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `SubtotalCosto` varchar(45) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Costo total del item',
+  `TipoItem` varchar(10) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Define si se realiza ajustes a inventarios',
+  `CuentaPUC` int(11) NOT NULL COMMENT 'Cuenta donde se llevara el asiento contable ',
+  `GeneradoDesde` varchar(100) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Tabla que agrega el item',
+  `NumeroIdentificador` varchar(45) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Identificar del que agrega el item',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `facturas_items`
+--
+
+INSERT INTO `facturas_items` (`ID`, `FechaFactura`, `NumeroFactura`, `TablaItems`, `Referencia`, `Nombre`, `Departamento`, `SubGrupo1`, `SubGrupo2`, `SubGrupo3`, `SubGrupo4`, `SubGrupo5`, `ValorUnitarioItem`, `Cantidad`, `Dias`, `SubtotalItem`, `IVAItem`, `TotalItem`, `PorcentajeIVA`, `PrecioCostoUnitario`, `SubtotalCosto`, `TipoItem`, `CuentaPUC`, `GeneradoDesde`, `NumeroIdentificador`) VALUES
+('201603040055051457070905.6643', '2016-03-04', 1, 'productosalquiler', 'AC001', 'BASE COLLAR GALVANIZADA', 13, 0, 0, 0, 0, 0, '81', '1', '4', '324', '51.84', '375.84', '16%', '40', '40', 'AQ', 4135, 'rem_devoluciones', '1'),
+('201603040055051457070905.6673', '2016-03-04', 1, 'productosalquiler', 'AC002', 'BASE TORNILLO NIVELADOR', 13, 0, 0, 0, 0, 0, '100', '1', '7', '700', '112', '812', '16%', '100', '100', 'AQ', 4135, 'rem_devoluciones', '1'),
+('201603040055051457070905.6713', '2016-03-04', 1, 'servicios', 'EAAT', 'Audiometrias Tamiz ', 11, 0, 0, 0, 0, 0, '15000', '1', '4', '60000', '9600', '69600', '16%', '7000', '7000', 'MO', 416510, 'rem_devoluciones', '1'),
+('201603040055051457070905.6743', '2016-03-04', 1, 'productosalquiler', 'AC002', 'BASE TORNILLO NIVELADOR', 13, 0, 0, 0, 0, 0, '100', '4', '12', '4800', '768', '5568', '16%', '100', '400', 'AQ', 4135, 'rem_devoluciones', '1');
 
 -- --------------------------------------------------------
 
@@ -14131,6 +14183,11 @@ CREATE TABLE IF NOT EXISTS `productosalquiler` (
   `PesoUnitario` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `PesoTotal` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `CostoUnitarioActivo` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Sub1` int(11) NOT NULL,
+  `Sub2` int(11) NOT NULL,
+  `Sub3` int(11) NOT NULL,
+  `Sub4` int(11) NOT NULL,
+  `Sub5` int(11) NOT NULL,
   PRIMARY KEY (`idProductosVenta`),
   UNIQUE KEY `Referencia` (`Referencia`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
@@ -14139,9 +14196,9 @@ CREATE TABLE IF NOT EXISTS `productosalquiler` (
 -- Volcado de datos para la tabla `productosalquiler`
 --
 
-INSERT INTO `productosalquiler` (`idProductosVenta`, `Referencia`, `Nombre`, `Exitencias`, `PrecioVenta`, `CostoUnitario`, `IVA`, `Departamento`, `CuentaPUC`, `ImagenRuta`, `PesoUnitario`, `PesoTotal`, `CostoUnitarioActivo`) VALUES
-(1, 'AC001', 'BASE COLLAR GALVANIZADA', '10', '81', '40', '0.16', 13, '4135', '', '0.5', '240', '10000'),
-(2, 'AC002', 'BASE TORNILLO NIVELADOR', '30', '200', '100', '0.16', 13, '4135', '', '0.5', '1080', '20000');
+INSERT INTO `productosalquiler` (`idProductosVenta`, `Referencia`, `Nombre`, `Exitencias`, `PrecioVenta`, `CostoUnitario`, `IVA`, `Departamento`, `CuentaPUC`, `ImagenRuta`, `PesoUnitario`, `PesoTotal`, `CostoUnitarioActivo`, `Sub1`, `Sub2`, `Sub3`, `Sub4`, `Sub5`) VALUES
+(1, 'AC001', 'BASE COLLAR GALVANIZADA', '10', '81', '40', '0.16', 13, '4135', '', '0.5', '240', '10000', 0, 0, 0, 0, 0),
+(2, 'AC002', 'BASE TORNILLO NIVELADOR', '30', '200', '100', '0.16', 13, '4135', '', '0.5', '1080', '20000', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -17685,7 +17742,43 @@ CREATE TABLE IF NOT EXISTS `rem_devoluciones` (
   `HoraDevolucion` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `rem_devoluciones`
+--
+
+INSERT INTO `rem_devoluciones` (`ID`, `idRemision`, `idItemCotizacion`, `Cantidad`, `ValorUnitario`, `Subtotal`, `Dias`, `Total`, `NumDevolucion`, `FechaDevolucion`, `HoraDevolucion`, `Usuarios_idUsuarios`) VALUES
+(1, 33, 43, 1, '81', '81', '4', '324', 1, '2016-03-04', '00:54:48', 3),
+(2, 33, 44, 1, '100', '100', '7', '700', 1, '2016-03-04', '00:54:48', 3),
+(3, 33, 45, 1, '15000', '15000', '4', '60000', 1, '2016-03-04', '00:54:48', 3),
+(4, 33, 44, 4, '100', '400', '12', '4800', 1, '2016-03-04', '00:54:48', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rem_devoluciones_totalizadas`
+--
+
+CREATE TABLE IF NOT EXISTS `rem_devoluciones_totalizadas` (
+  `ID` int(16) NOT NULL AUTO_INCREMENT,
+  `FechaDevolucion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `HoraDevolucion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `idRemision` int(16) NOT NULL,
+  `TotalDevolucion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ObservacionesDevolucion` text COLLATE utf8_spanish2_ci NOT NULL,
+  `Usuarios_idUsuarios` int(16) NOT NULL,
+  `Clientes_idClientes` int(16) NOT NULL,
+  `Facturas_idFacturas` int(16) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `rem_devoluciones_totalizadas`
+--
+
+INSERT INTO `rem_devoluciones_totalizadas` (`ID`, `FechaDevolucion`, `HoraDevolucion`, `idRemision`, `TotalDevolucion`, `ObservacionesDevolucion`, `Usuarios_idUsuarios`, `Clientes_idClientes`, `Facturas_idFacturas`) VALUES
+(1, '2016-03-04', '00:54:48', 33, '65824', '', 3, 17, 0);
 
 -- --------------------------------------------------------
 
@@ -17704,14 +17797,7 @@ CREATE TABLE IF NOT EXISTS `rem_pre_devoluciones` (
   `Total` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   KEY `ID` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=7 ;
-
---
--- Volcado de datos para la tabla `rem_pre_devoluciones`
---
-
-INSERT INTO `rem_pre_devoluciones` (`ID`, `idRemision`, `idItemCotizacion`, `Cantidad`, `ValorUnitario`, `Subtotal`, `Dias`, `Total`, `Usuarios_idUsuarios`) VALUES
-(6, 33, 44, 4, '100', '400', '4', '1600', 3);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -17758,6 +17844,11 @@ CREATE TABLE IF NOT EXISTS `servicios` (
   `Departamento` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `ImagenRuta` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `CuentaPUC` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `Sub1` int(11) NOT NULL,
+  `Sub2` int(11) NOT NULL,
+  `Sub3` int(11) NOT NULL,
+  `Sub4` int(11) NOT NULL,
+  `Sub5` int(11) NOT NULL,
   PRIMARY KEY (`idProductosVenta`),
   UNIQUE KEY `Referencia` (`Referencia`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=32 ;
@@ -17766,34 +17857,34 @@ CREATE TABLE IF NOT EXISTS `servicios` (
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`idProductosVenta`, `Referencia`, `Nombre`, `PrecioVenta`, `PrecioEspecial`, `CostoUnitario`, `IVA`, `Departamento`, `ImagenRuta`, `CuentaPUC`) VALUES
-(1, 'SOEIPE', 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', '16000', '14000', '7000', '0.16', '9', '', '416510'),
-(2, 'VETA', 'Tamiz audiometrias', '15000', '14000', '7000', '0.16', '9', '', '416510'),
-(3, 'VEAC', 'Audiometria clinica', '25000', '23000', '12500', '0.16', '9', '', '416510'),
-(5, 'VELAV', 'Logoaudiometria (audiometria verbal)', '15000', '13000', '6500', '0.16', '9', '', '416510'),
-(6, 'VEPA', 'Protectores auditivos', '22000', '20000', '10000', '0.16', '9', '', '416510'),
-(7, 'VEOP', 'Optometria', '15000', '13000', '5000', '0.16', '9', '', '416510'),
-(8, 'VEVI', 'Visiometrias', '14000', '13000', '7000', '0.16', '9', '', '416510'),
-(9, 'VEES', 'Espirometrias', '17000', '15000', '7000', '0.16', '9', '', '416510'),
-(10, 'ELKOH', 'KOH', '7000', '6000', '3500', '0.16', '10', '', '416520'),
-(11, 'ELVDRL', 'VDRL', '7500', '6000', '3500', '0.16', '10', '', '416520'),
-(12, 'ELPE', 'Prueba de embarazo', '14000', '12000', '6000', '0.16', '10', '', '416520'),
-(13, 'ELFG', 'Frotis de Garganta', '12500', '11000', '6000', '0.16', '10', '', '416520'),
-(14, 'ELHIV', 'HIV', '30000', '27000', '18000', '0.16', '10', '', '416520'),
-(15, 'ELCO', 'Coprologico', '6500', '5500', '3000', '0.16', '10', '', '416520'),
-(16, 'ELGS', 'Grupo Sanguineo', '6000', '5000', '3000', '0.16', '10', '', '416520'),
-(17, 'ELCH', 'Cuadro hematico', '14500', '12500', '7000', '0.16', '10', '', '416520'),
-(18, 'ELTR', 'Transaminasas', '18000', '16000', '9000', '0.16', '10', '', '416520'),
-(20, 'ELCOSA', 'Colinesterasa', '19000', '17000', '9000', '0.16', '10', '', '416520'),
-(21, 'EAGLI', 'Glicemia', '8000', '7000', '4000', '0.16', '11', '', '416520'),
-(22, 'EACOL', 'Colesterol', '8500', '7500', '4000', '0.16', '11', '', '416520'),
-(23, 'EATRI', 'Trigliceridos', '8500', '7500', '4000', '0.16', '11', '', '416520'),
-(24, 'EAAT', 'Audiometrias Tamiz ', '15000', '14000', '7000', '0.16', '11', '', '416510'),
-(25, 'EAVIS', 'Visiometria', '13000', '11000', '7000', '0.16', '11', '', '416510'),
-(27, 'EAPLI', 'Perfil lipidico', '23000', '21000', '12000', '0.16', '11', '', '416510'),
-(28, 'EACTA', 'Certificado trabajo en alturas', '17000', '15000', '8000', '0.16', '11', '', '416510'),
-(30, 'PAELTA', 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', '60000', '80000', '50000', '0.16', '11', '', '416510'),
-(31, 'RSER31', 'prueba', '50000', '50000', '10000', '0.16', '9', '', '4135');
+INSERT INTO `servicios` (`idProductosVenta`, `Referencia`, `Nombre`, `PrecioVenta`, `PrecioEspecial`, `CostoUnitario`, `IVA`, `Departamento`, `ImagenRuta`, `CuentaPUC`, `Sub1`, `Sub2`, `Sub3`, `Sub4`, `Sub5`) VALUES
+(1, 'SOEIPE', 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', '16000', '14000', '7000', '0.16', '9', '', '416510', 0, 0, 0, 0, 0),
+(2, 'VETA', 'Tamiz audiometrias', '15000', '14000', '7000', '0.16', '9', '', '416510', 0, 0, 0, 0, 0),
+(3, 'VEAC', 'Audiometria clinica', '25000', '23000', '12500', '0.16', '9', '', '416510', 0, 0, 0, 0, 0),
+(5, 'VELAV', 'Logoaudiometria (audiometria verbal)', '15000', '13000', '6500', '0.16', '9', '', '416510', 0, 0, 0, 0, 0),
+(6, 'VEPA', 'Protectores auditivos', '22000', '20000', '10000', '0.16', '9', '', '416510', 0, 0, 0, 0, 0),
+(7, 'VEOP', 'Optometria', '15000', '13000', '5000', '0.16', '9', '', '416510', 0, 0, 0, 0, 0),
+(8, 'VEVI', 'Visiometrias', '14000', '13000', '7000', '0.16', '9', '', '416510', 0, 0, 0, 0, 0),
+(9, 'VEES', 'Espirometrias', '17000', '15000', '7000', '0.16', '9', '', '416510', 0, 0, 0, 0, 0),
+(10, 'ELKOH', 'KOH', '7000', '6000', '3500', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(11, 'ELVDRL', 'VDRL', '7500', '6000', '3500', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(12, 'ELPE', 'Prueba de embarazo', '14000', '12000', '6000', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(13, 'ELFG', 'Frotis de Garganta', '12500', '11000', '6000', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(14, 'ELHIV', 'HIV', '30000', '27000', '18000', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(15, 'ELCO', 'Coprologico', '6500', '5500', '3000', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(16, 'ELGS', 'Grupo Sanguineo', '6000', '5000', '3000', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(17, 'ELCH', 'Cuadro hematico', '14500', '12500', '7000', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(18, 'ELTR', 'Transaminasas', '18000', '16000', '9000', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(20, 'ELCOSA', 'Colinesterasa', '19000', '17000', '9000', '0.16', '10', '', '416520', 0, 0, 0, 0, 0),
+(21, 'EAGLI', 'Glicemia', '8000', '7000', '4000', '0.16', '11', '', '416520', 0, 0, 0, 0, 0),
+(22, 'EACOL', 'Colesterol', '8500', '7500', '4000', '0.16', '11', '', '416520', 0, 0, 0, 0, 0),
+(23, 'EATRI', 'Trigliceridos', '8500', '7500', '4000', '0.16', '11', '', '416520', 0, 0, 0, 0, 0),
+(24, 'EAAT', 'Audiometrias Tamiz ', '15000', '14000', '7000', '0.16', '11', '', '416510', 0, 0, 0, 0, 0),
+(25, 'EAVIS', 'Visiometria', '13000', '11000', '7000', '0.16', '11', '', '416510', 0, 0, 0, 0, 0),
+(27, 'EAPLI', 'Perfil lipidico', '23000', '21000', '12000', '0.16', '11', '', '416510', 0, 0, 0, 0, 0),
+(28, 'EACTA', 'Certificado trabajo en alturas', '17000', '15000', '8000', '0.16', '11', '', '416510', 0, 0, 0, 0, 0),
+(30, 'PAELTA', 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', '60000', '80000', '50000', '0.16', '11', '', '416510', 0, 0, 0, 0, 0),
+(31, 'RSER31', 'prueba', '50000', '50000', '10000', '0.16', '9', '', '4135', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -19689,7 +19780,7 @@ CREATE TABLE IF NOT EXISTS `vestasactivas` (
 
 INSERT INTO `vestasactivas` (`idVestasActivas`, `Nombre`, `Usuario_idUsuario`, `Clientes_idClientes`, `NumVenta`, `NumFactura`, `NumCotizacion`, `SaldoFavor`) VALUES
 (1, 'INICIALIZACION', 'INI', 1, 11, 11, 14, ''),
-(4, 'Venta por: JULIAN ', '3', 1, 9, 9, 15, '');
+(4, 'Venta por: JULIAN ', '3', 1, 28, 28, 32, '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
