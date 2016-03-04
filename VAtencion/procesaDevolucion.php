@@ -115,7 +115,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
         ////////////////////////////////Preguntamos por disponibilidad
         ///////////
         ///////////
-        $idFactura="NO";
+        $ID="";
         $DatosResolucion=$obVenta->DevuelveValores("empresapro_resoluciones_facturacion", "ID", $ResolucionDian);
         if($DatosResolucion["Completada"]=="NO"){           ///Pregunto si la resolucion ya fue completada
             $Disponibilidad=$DatosResolucion["Estado"];
@@ -159,7 +159,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 ////
                 $ID=date("YmdHis").microtime(true);
                 $tab="facturas";
-                $NumRegistros=24; 
+                $NumRegistros=25; 
                 
                 $Columnas[0]="TipoFactura";		    $Valores[0]=$DatosResolucion["Tipo"];
                 $Columnas[1]="Prefijo";                     $Valores[1]=$DatosResolucion["Prefijo"];
@@ -185,6 +185,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 $Columnas[21]="CentroCosto";                $Valores[21]=$CentroCostos;
                 $Columnas[22]="idResolucion";               $Valores[22]=$ResolucionDian;
                 $Columnas[23]="idFacturas";                 $Valores[23]=$ID;
+                $Columnas[24]="Hora";                       $Valores[24]=date("H:i:s");
                 
                 $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
                 
@@ -202,7 +203,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 $obVenta->InsertarItemsDevolucionAItemsFactura($Datos);///Relaciono los items de la factura
                 //$obVenta->ActualizaFaturaXItems($Datos);
                 
-                $obVenta->ActualizaRegistro("rem_devoluciones_totalizadas", "Facturas_idFacturas", $idFactura, "ID", $idDevolucion);
+                $obVenta->ActualizaRegistro("rem_devoluciones_totalizadas", "Facturas_idFacturas", $ID, "ID", $idDevolucion);
             }    
            
         }
@@ -212,7 +213,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
     }
     
     $obVenta->BorraReg("rem_pre_devoluciones", "idRemision", $idRemision);
-    header("location:Devoluciones.php?TxtidDevolucion=$idDevolucion&TxtidFactura=$idFactura");
+    header("location:Devoluciones.php?TxtidDevolucion=$idDevolucion&TxtidFactura=$ID");
 }        
 
 

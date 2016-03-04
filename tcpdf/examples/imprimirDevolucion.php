@@ -242,13 +242,14 @@ $sql="SELECT rr.CantidadEntregada,rr.idItemCotizacion,rr.idRemision, ci.Referenc
         . "ON rr.idItemCotizacion=ci.ID"
         . " WHERE rr.idRemision='$DatosRemision[ID]'";
 $Consulta=$obVenta->Query($sql);
-       
+ $BanderaFaltantes=0;      
 while($DatosItemRemision=mysql_fetch_array($Consulta)){
 
 //$Entregas=$obVenta->Sume('rem_relaciones', "CantidadEntregada", " WHERE idItemCotizacion='$registros2[idItemCotizacion]' AND idRemision='$registros2[idRemision]'");
 $Devoluciones=$obVenta->Sume("rem_devoluciones", "Cantidad", " WHERE idItemCotizacion='$DatosItemRemision[idItemCotizacion]' AND idRemision='$DatosRemision[ID]'");
 $Faltantes=$DatosItemRemision["CantidadEntregada"]-$Devoluciones;
-    
+$BanderaFaltantes=$BanderaFaltantes+$Faltantes;
+if($Faltantes<>0){    
 $tbl = <<<EOD
 <table border="1" cellpadding="2" cellspacing="2" align="center">
          
@@ -263,11 +264,14 @@ $tbl = <<<EOD
  </table>
 EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');
-			
+  
+}
+    
 		  
 }
-
-
+if($BanderaFaltantes==0){
+    $pdf->writeHTML("<br><h3>No se encontraron faltantes</h3><br>", false, false, false, false, '');  
+}
 /////////////////////////////////////////Se dibija el mensaje final
 /////
 ////

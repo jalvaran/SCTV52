@@ -59,10 +59,11 @@ print("<body>");
         if(!empty($_REQUEST["TxtidFactura"])){
             
             $idFactura=$_REQUEST["TxtidFactura"];
-            if($idFactura>0){
-                $RutaPrint="../tcpdf/examples/imprimirFacturaAlquiler.php?ImgPrintFactura=".$idFactura;			
+            if($idFactura<>""){
+                $RutaPrint="../tcpdf/examples/imprimirFactura.php?ImgPrintFactura=".$idFactura;
+                $DatosFactura=$obVenta->DevuelveValores("facturas", "idFacturas", $idFactura);
                 $css->CrearTabla();
-                $css->CrearFilaNotificacion("Factura Creada Correctamente <a href='$RutaPrint' target='_blank'>Imprimir Factura No. $idFactura</a>",16);
+                $css->CrearFilaNotificacion("Factura Creada Correctamente <a href='$RutaPrint' target='_blank'>Imprimir Factura No. $DatosFactura[NumeroFactura]</a>",16);
                 $css->CerrarTabla();
             }else{
                 
