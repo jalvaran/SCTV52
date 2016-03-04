@@ -117,7 +117,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
         ///////////
         $idFactura="NO";
         $DatosResolucion=$obVenta->DevuelveValores("empresapro_resoluciones_facturacion", "ID", $ResolucionDian);
-        if($DatosResolucion["Completada"]<>"SI"){           ///Pregunto si la resolucion ya fue completada
+        if($DatosResolucion["Completada"]=="NO"){           ///Pregunto si la resolucion ya fue completada
             $Disponibilidad=$DatosResolucion["Estado"];
                                               //si entra a verificar es porque estaba ocupada y cambiará a 1
             while($Disponibilidad=="OC"){                   //miro que esté disponible para facturar, esto para no crear facturas dobles
@@ -135,11 +135,21 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 
                 //$obVenta->InserteItemsDevolucionAFacturas($idRemision);
                 $sql="SELECT MAX(NumeroFactura) as FacturaActual FROM facturas WHERE Prefijo='$DatosResolucion[Prefijo]' "
-                        . "AND TipoFactura='$DatosResolucion[Tipo]'";
+                        . "AND TipoFactura='$DatosResolucion[Tipo]' AND idResolucion='$ResolucionDian'";
                 $Consulta=$obVenta->Query($sql);
                 $Consulta=$obVenta->FetchArray($Consulta);
                 $FacturaActual=$Consulta["FacturaActual"];
                 $idFactura=$FacturaActual+1;
+                //Verificamos si ya se completó el numero de la resolucion y si es así se cambia su estado
+                if($DatosResolucion["Hasta"]==$idFactura){ 
+                    $obVenta->ActualizaRegistro("empresapro_resoluciones_facturacion", "Completada", "SI", "ID", $ResolucionDian);
+                }
+                //Verificamos si es la primer factura que se creará con esta resolucion
+                //Si es así se inicia desde el numero autorizado
+                if($idFactura==1){
+                   $idFactura=$DatosResolucion["Desde"];
+                }
+                //Convertimos los dias en credito
                 $FormaPagoFactura=$TipoPago;
                 if($TipoPago<>"Contado"){
                     $FormaPagoFactura="Credito";
@@ -148,7 +158,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 /////
                 ////
                 $tab="facturas";
-                $NumRegistros=22; 
+                $NumRegistros=23; 
                 
                 $Columnas[0]="TipoFactura";		    $Valores[0]=$DatosResolucion["Tipo"];
                 $Columnas[1]="Prefijo";                     $Valores[1]=$DatosResolucion["Prefijo"];
@@ -172,14 +182,18 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 $Columnas[19]="HoraCierreDiario";           $Valores[19]="";
                 $Columnas[20]="ObservacionesFact";          $Valores[20]=$ObservacionesFactura;
                 $Columnas[21]="CentroCosto";                $Valores[21]=$CentroCostos;
+                $Columnas[22]="idResolucion";               $Valores[22]=$ResolucionDian;
                 
                 $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+                
                 //libero la resolucion
                 $obVenta->ActualizaRegistro("empresapro_resoluciones_facturacion", "Estado", "", "ID", $ResolucionDian);
                 
                 //////////////////////Agrego Items a la Factura desde la devolucion
                 /////
-                ////
+                /////
+                
+                
                 
             }    
            
