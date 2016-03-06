@@ -173,7 +173,7 @@ $pdf->MultiCell(90, 25, $tbl, 0, 'R', 1, 0, '', '', true,0, true, true, 10, 'M')
 ////
 $SumaDias=$obVenta->SumeColumna("facturas_items", "Dias", "idFactura", $idFactura);
 if($SumaDias>0){
-    require_once('factura_items_f1.php');
+    require_once('factura_items_f1.php');   ///Formato de factura don cantidades y dias
 }
 
 
@@ -213,6 +213,13 @@ $tbl = <<<EOD
 EOD;
 
 $pdf->MultiCell(180, 30, $tbl, 0, 'L', 1, 0, '', '', true,0, true, true, 10, 'M');
+
+
+if($SumaDias>0){
+    require_once('factura_items_f2.php');    ///Hoja con la descripcion de los dias facturados
+}
+
+
 //Close and output PDF document
 $pdf->Output($nombre_file.'.pdf', 'I');
 //============================================================+

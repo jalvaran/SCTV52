@@ -157,7 +157,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 ////////////////Inserto datos de la factura
                 /////
                 ////
-                $ID=date("YmdHis").microtime(true);
+                $ID=date("YmdHis").microtime(false);
                 $tab="facturas";
                 $NumRegistros=25; 
                 
