@@ -3,7 +3,7 @@
 	$con = mysql_connect("localhost","root","pirlo1985");
 	mysql_select_db("softcontech_v5",$con) or die(mysql_error());
 	date_default_timezone_set("America/Bogota");
-	
+	$db="softcontech_v5";
 	$CuentaDestino=110510;   //Cuenta Por defecto para caja menor
 	$CuentaIngresos=4135;
 	$TablaCuentaIngreso="cuentas";
@@ -736,7 +736,7 @@ public function Query($sql)
 public function FetchArray($Datos)
   {		
 					
-    $Vector=  mysql_fetch_array($Datos) or die("no se pudo realizar el fecth_array de $Datos en FetchArray php_conexion: " . mysql_error());
+    $Vector=  mysql_fetch_array($Datos);
     return($Vector);
 }
 ////////////////////////////////////////////////////////////////////

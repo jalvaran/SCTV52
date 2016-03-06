@@ -201,9 +201,9 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 $Datos["ID"]=$ID;
                 
                 $obVenta->InsertarItemsDevolucionAItemsFactura($Datos);///Relaciono los items de la factura
-                //$obVenta->ActualizaFaturaXItems($Datos);
-                
                 $obVenta->ActualizaRegistro("rem_devoluciones_totalizadas", "Facturas_idFacturas", $ID, "ID", $idDevolucion);
+                //$obVenta->InsertarFacturaLibroDiario($Datos);///Inserto Items en el libro diario
+                //$obVenta->InsertarFacturaEnCartera($Datos);///Inserto La factura en la cartera
             }    
            
         }
