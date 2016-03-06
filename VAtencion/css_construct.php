@@ -461,6 +461,13 @@ class CssIni{
 		
 	}
         
+        /////////////////////Crea un Boton Naranja
+	
+	function CrearBotonNaranja($nombre,$value){
+		print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" class="btn btn-warning">');
+		
+	}
+        
         /////////////////////Agrega los javascripts
 	
 	function AgregaJS(){

@@ -198,6 +198,23 @@ print("<body>");
 
                 $css->CierraFilaTabla();
             }
+    /////Creamos el boton para agregar toda la remision a la devolucion
+    ///  Pensado a futuro
+    ///
+            /*
+    print("<tr>");
+    print("<td colspan='6' style='text-align: center;'>");
+    $css->CrearFormularioEvento("FrmAgregarTodo",$myPage,"post","_self","");
+    $css->CrearInputText("TxtIdRemision","hidden","",$idRemision,"","black","","",150,30,0,0);
+    $css->CrearInputNumber("TxtDias","number","Agregar Todo a Dias: ",$DatosRemision["Dias"],"Dias","black","","",70,30,0,1,1,1000,"any");
+    print("<br>");
+    $css->CrearBotonNaranja("BtnEditar","+ Todo");
+    $css->CerrarForm();
+    print("</td>");
+    print("</tr>");
+             * 
+             * 
+             */
     $css->CerrarTabla();
 			
     ///////////////////////////////////////////
