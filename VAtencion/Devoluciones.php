@@ -23,7 +23,7 @@ $css =  new CssIni("Devoluciones");
 
 print("</head>");
 print("<body>");
-    $obVenta=new ProcesoVenta($idUser);
+    $obVenta = new ProcesoVenta($idUser);
     include_once("procesaDevolucion.php");
     $myPage="Devoluciones.php";
     $css->CabeceraIni("SoftConTech Devoluciones"); //Inicia la cabecera de la pagina

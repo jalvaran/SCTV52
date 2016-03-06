@@ -185,7 +185,18 @@ class CssIni{
 	/////////////////////Crea un Select
 	
 	function CrearSelect($nombre,$evento){
-		print('<select name="'.$nombre.'" onchange="'.$evento.'">');
+		print('<select name="'.$nombre.'" onchange="'.$evento.'" >');
+		
+	}
+        
+        /////////////////////Crea un Select personalizado
+	
+	function CrearSelectPers($Vector){
+            $nombre=$Vector["Nombre"];
+            $Evento=$Vector["Evento"];
+            $Ancho=$Vector["Ancho"];
+            $Alto=$Vector["Alto"];
+            print('<select name="'.$nombre.'" '.$Evento.' style="width:'.$Ancho.'px; height:'.$Alto.'px;" >');
 		
 	}
 	
