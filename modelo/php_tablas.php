@@ -16,7 +16,7 @@ class Tabla{
      */
     public $Campos = array("A","B","C","D","E","F","G","H","I","J","K","L",
     "M","N","O","P","Q","R","S","T","C","V","W","X","Y","Z","AA","AB");
-    
+    public $Condicionales = array(" ","=","*",">","<",">=","<=","<>");
     function __construct($db){
         $this->DataBase=$db;
         $this->obCon=new ProcesoVenta(1);
@@ -159,14 +159,20 @@ public function DibujeTabla($Vector)
                 $DatosSel["Ancho"]=50;
                 $DatosSel["Alto"]=30;
                 $this->css->CrearSelectPers($DatosSel);
-                    
-                    $this->css->CrearOptionSelect("1", " =", 1);
-                    $this->css->CrearOptionSelect("2", " *", 0);
-                    $this->css->CrearOptionSelect("3", " >", 0);
-                    $this->css->CrearOptionSelect("4", " <", 0);
-                    $this->css->CrearOptionSelect("5", ">=", 0);
-                    $this->css->CrearOptionSelect("6", "<=", 0);
-                    $this->css->CrearOptionSelect("7", "<>", 0);
+                    $IndexCondicion="Cond_".$NombreCol; // Condicional para aplicacion del filtro
+                    $Activo=0;
+                    for($h=1;$h<=7;$h++){
+                        if(isset($_REQUEST[$IndexCondicion])){
+                            if($_REQUEST[$IndexCondicion]==$h){
+                               $Activo=1; 
+                            }else{
+                               $Activo=0; 
+                            }
+                              
+                        }
+                        
+                       $this->css->CrearOptionSelect($h, $this->Condicionales[$h], $Activo);
+                    }
                 $this->css->CerrarSelect();
                 $ValorFiltro="";
                 if(!empty($_REQUEST["Filtro_".$NombreCol])){
