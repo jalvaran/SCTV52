@@ -11,6 +11,12 @@ class Tabla{
     private $DataBase;
     public $obCon;
     public $css;
+    /*
+     * Se utilizará para seleccionar las columnas de la exportacion a excel
+     */
+    public $Campos = array("A","B","C","D","E","F","G","H","I","J","K","L",
+    "M","N","O","P","Q","R","S","T","C","V","W","X","Y","Z","AA","AB");
+    
     function __construct($db){
         $this->DataBase=$db;
         $this->obCon=new ProcesoVenta(1);
@@ -128,6 +134,7 @@ public function DibujeTabla($Vector)
     $myPage="$Tabla[Tabla]".".php";
     $NumCols=count($Columnas);
     $this->css->CrearFormularioEvento("FrmFiltros", "$Tabla[Tabla]".".php", "post", "_self", "");
+    $this->css->CrearInputText("TxtSql", "hidden", "", $statement, "", "", "", "", "", "", "", "");
     $ColFiltro=$NumCols-1;
     $this->css->CrearTabla();
     $this->css->FilaTabla(18);
@@ -219,126 +226,109 @@ public function DibujeTabla($Vector)
 //////////////////////Verificamos si hay peticiones de exportacion
 ///////////////////////////////////////////////////////////////////
     
-public function VerifiqueExport($Vector)
-  {
+public function VerifiqueExport($Vector)  {
+    
     if(isset($_REQUEST["BtnExportarExcel"])){
-        //include("conexion.php");
-
-$con=mysql_connect("localhost","root","pirlo1985") or die("problemas con el servidor");
- mysql_select_db("softcontech_v4",$con) or die("la base de datos no abre");
- 
- $sql = "SELECT cli.RazonSocial as RazonSocial, cli.Num_Identificacion as NIT, c.Descripcion as Descripcion, c.Referencia as Referencia, 
- c.Cantidad as Cantidad, c.Subtotal as Subtotal, c.IVA as IVA, c.Total as Total, 
- c.SubtotalCosto as SubtotalCosto, fac.Fecha as Fecha, fac.SaldoFact as Saldo, fac.idFacturas as Factura, cli.Telefono as Telefono
- FROM ventas_separados vs INNER JOIN Facturas fac ON vs.Facturas_idFacturas =fac.idFacturas 
- INNER JOIN Cotizaciones c ON fac.Cotizaciones_idCotizaciones=c.NumCotizacion 
- INNER JOIN clientes cli ON cli.idClientes =fac.Clientes_idClientes 
- WHERE vs.Retirado='NO' ORDER BY fac.idFacturas DESC";          
- $resultado = mysql_query ($sql, $con) or die (mysql_error());
- $registros = mysql_num_rows ($resultado);
- 
- 
+       $statement=$_REQUEST["TxtSql"];
+    require_once '../librerias/Excel/PHPExcel.php';
+   $objPHPExcel = new PHPExcel();    
+        
+   $Tabla["Tabla"]=$Vector["Tabla"];
+    $tbl=$Tabla["Tabla"];
+    $Titulo=$Vector["Titulo"];
+    $VerDesde=$Vector["VerDesde"];
+    $Limit=$Vector["Limit"];
+    $Order=$Vector["Order"];
+    
+    $tbl=$Vector["Tabla"];
+    $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
    
+    $i=0;
+ $a=0;
+ foreach($Columnas as $NombreCol){ 
+     if(!isset($Vector["Excluir"][$NombreCol])){
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue($this->Campos[$a]."1",$NombreCol);
+        $VisualizarRegistro[$i]=1;
+        $a++;	
+     }
+     if(isset($Vector[$NombreCol]["Vinculo"])){
+                $VinculoRegistro[$i]["Vinculado"]=1;
+                $VinculoRegistro[$i]["TablaVinculo"]=$Vector[$NombreCol]["TablaVinculo"];
+                $VinculoRegistro[$i]["IDTabla"]=$Vector[$NombreCol]["IDTabla"];  
+                $VinculoRegistro[$i]["Display"]=$Vector[$NombreCol]["Display"];
+     }
+     $i++;
+ }
+    
+    
+   $IndexFiltro="Filtro_".$NombreCol;  //Campo que trae el valor del filtro a aplicar
+    $IndexCondicion="Cond_".$NombreCol; // Condicional para aplicacion del filtro
+    $IndexTablaVinculo="TablaVinculo_".$NombreCol; // Si hay campos vinculados se encontra la tabla vinculada aqui 
+    $IndexIDTabla="IDTabla_".$NombreCol;           // Id de la tabla vinculada
+    $IndexDisplay="Display_".$NombreCol;           // Campo que se quiere ver
+        
    
-   if ($registros > 0) {
-   require_once '../librerias/Excel/PHPExcel.php';
-   $objPHPExcel = new PHPExcel();
     
    //Informacion del excel
    $objPHPExcel->
     getProperties()
         ->setCreator("www.technosoluciones.com")
         ->setLastModifiedBy("www.technosoluciones.com")
-        ->setTitle("Exportar tabla separados desde base de datos")
-        ->setSubject("ventas_separados")
+        ->setTitle("Exportar $tbl  desde base de datos")
+        ->setSubject("$tbl")
         ->setDescription("Documento generado con PHPExcel")
         ->setKeywords("techno soluciones")
-        ->setCategory("ventas_separados");    
+        ->setCategory("$tbl");    
+ $NumCols=count($Columnas);
  
- $i = 1;
  
- $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A'.$i,'Producto');              
-	  $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('B'.$i, 'Referencia'  );	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('C'.$i, 'Cantidad');	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('D'.$i, 'Subtotal' );	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('E'.$i, 'IVA');	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('F'.$i, 'Total' );
-			
-			$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('G'.$i, 'Costo');	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('H'.$i, 'Fecha');	
-
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('I'.$i, 'Factura');	
-
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('J'.$i, 'Saldo');	
-
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('K'.$i, 'Cliente');	
-
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('L'.$i, 'NIT');
-
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('M'.$i, 'TELEFONO');			
- 
-   $i = 2;    
-   while ($registro = mysql_fetch_object ($resultado)) {
-        		
-      $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A'.$i, $registro->Descripcion);
-	  $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('B'.$i, $registro->Referencia);	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('C'.$i, $registro->Cantidad);	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('D'.$i, $registro->Subtotal);	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('E'.$i, $registro->IVA);	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('F'.$i, $registro->Total);
-			
-			$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('G'.$i, $registro->SubtotalCosto);	
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('H'.$i, $registro->Fecha);	
-			
-			$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('I'.$i, $registro->Factura);	
-			
-			$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('J'.$i, $registro->Saldo);	
-			
-			$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('K'.$i, $registro->RazonSocial);	
-			
-			$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('L'.$i, $registro->NIT);	
-
-			$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('M'.$i, $registro->Telefono);	
-
-			
-      $i++;
-       
-   }
-}
+ $i=0;
+ $a=0;
+ $c=2;
+ $sql="SELECT * FROM $statement ";
+        $Consulta=  $this->obCon->Query($sql);
+        while($DatosTabla=mysql_fetch_object($Consulta)){
+            foreach($Columnas as $NombreCol){
+                if(isset($VisualizarRegistro[$i])){
+                    if(!isset($VinculoRegistro[$i]["Vinculado"])){
+                        $objPHPExcel->setActiveSheetIndex(0)
+                        ->setCellValue($this->Campos[$a].$c,$DatosTabla->$NombreCol);
+                    }else{
+                        $TablaVinculo=$VinculoRegistro[$i]["TablaVinculo"];
+                        $ColDisplay=$VinculoRegistro[$i]["Display"];
+                        $idTablaVinculo=$VinculoRegistro[$i]["IDTabla"];
+                        $ID=$DatosTabla->$NombreCol;
+                        //print("datos: $TablaVinculo $ColDisplay $idTablaVinculo $ID");                    
+                        $sql1="SELECT $ColDisplay  FROM $TablaVinculo WHERE $idTablaVinculo ='$ID'";
+                        $Consul=$this->obCon->Query($sql1);
+                        $DatosVinculo=  mysql_fetch_array($Consul);
+                        $objPHPExcel->setActiveSheetIndex(0)
+                        ->setCellValue($this->Campos[$a].$c,$DatosVinculo[$ColDisplay]);
+                    }
+                    $a++;
+                    
+                }
+                
+                $i++;
+                if($i==$NumCols){
+                    $i=0;
+                    $c++;
+                    $a=0;
+                }
+            }
+        }
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="Separados.xls"');
+header('Content-Disposition: attachment;filename="'.$tbl.'.xls"');
 header('Cache-Control: max-age=0');
  
 $objWriter=PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel2007');
 $objWriter->save('php://output');
-exit;
-    }
+exit; 
+   
+}
+
+    
 }
 
 

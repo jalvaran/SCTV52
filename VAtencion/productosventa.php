@@ -27,7 +27,7 @@ $myTabla="productosventa";
 $myPage="Devoluciones.php";
 $myTitulo="Productos Venta";
 $Vector["Tabla"]=$myTabla;
-$statement = $obTabla->CreeFiltro($Vector);
+
 
 /////Asigno Datos necesarios para la visualizacion de la tabla en el formato que se desea
 ////
@@ -37,7 +37,8 @@ $Vector["Tabla"]=$myTabla;          //Tabla
 $Vector["Titulo"]=$myTitulo;        //Titulo
 $Vector["VerDesde"]=$startpoint;    //Punto desde donde empieza
 $Vector["Limit"]=$limit;            //Numero de Registros a mostrar
-
+$statement = $obTabla->CreeFiltro($Vector);
+//print($statement);
 ///Columnas excluidas
 //
 //
