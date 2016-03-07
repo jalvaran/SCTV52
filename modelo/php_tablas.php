@@ -20,10 +20,10 @@ class Tabla{
 //////////////////////Funcion devolver los nombres de las columnas de una tabla
 ///////////////////////////////////////////////////////////////////
     
-public function Columnas($Vetor)
+public function Columnas($Vector)
   {
     
-    $Tabla=$Vetor["Tabla"];
+    $Tabla=$Vector["Tabla"];
     $sql="SHOW COLUMNS FROM `$this->DataBase`.`$Tabla`;";
     $Results=$this->obCon->Query($sql);
     $i=0;
@@ -35,6 +35,78 @@ public function Columnas($Vetor)
     return($Nombres);
 }
     
+
+////////////////////////////////////////////////////////////////////
+//////////////////////Funcion arme filtros
+///////////////////////////////////////////////////////////////////
+    
+public function CreeFiltro($Vector)
+  {
+       
+    $Columnas=$this->Columnas($Vector);
+    $Tabla=$Vector["Tabla"];
+    $Filtro=" $Tabla";
+    $z=0;
+    
+    $NumCols=count($Columnas);
+    foreach($Columnas as $NombreCol){
+        $IndexFiltro="Filtro_".$NombreCol;  //Campo que trae el valor del filtro a aplicar
+        $IndexCondicion="Cond_".$NombreCol; // Condicional para aplicacion del filtro
+        $IndexTablaVinculo="TablaVinculo_".$NombreCol; // Si hay campos vinculados se encontra la tabla vinculada aqui 
+        $IndexIDTabla="IDTabla_".$NombreCol;           // Id de la tabla vinculada
+        $IndexDisplay="Display_".$NombreCol;           // Campo que se quiere ver
+        if(!empty($_REQUEST[$IndexFiltro])){
+            $Valor=$_REQUEST[$IndexFiltro];
+            if(!empty($_REQUEST[$IndexTablaVinculo])){
+                $sql="SELECT $_REQUEST[$IndexIDTabla] FROM $_REQUEST[$IndexTablaVinculo] "
+                        . "WHERE $_REQUEST[$IndexDisplay] = '$Valor'";
+                $DatosVinculados=$this->obCon->Query($sql);
+                $DatosVinculados=$this->obCon->FetchArray($DatosVinculados);
+                //print($sql);
+                $Valor=$DatosVinculados[$_REQUEST[$IndexIDTabla]];
+            }
+            
+            if($z==0){
+                $Filtro.=" WHERE ";
+                $z=1;
+            }
+            $Filtro.=$NombreCol;
+            switch ($_REQUEST[$IndexCondicion]){
+                case 1:
+                    $Filtro.="='$Valor'";
+                    break;
+                case 2:
+                    $Filtro.=" LIKE '%$Valor%'";
+                    break;
+                case 3:
+                    $Filtro.=">'$Valor'";
+                    break;
+                case 4:
+                    $Filtro.="<'$Valor'";
+                    break;
+                case 5:
+                    $Filtro.=">='$Valor'";
+                    break;
+                case 6:
+                    $Filtro.="<='$Valor'";
+                    break;
+                case 7:
+                    $Filtro.="<>'$Valor'";
+                    break;
+            }
+            $And=" AND ";
+            
+            
+            $Filtro.=$And;
+           
+        }
+       
+    }
+    if($z>0){
+        $Filtro=substr($Filtro, 0, -4);
+    }
+    return($Filtro);
+}
 ////////////////////////////////////////////////////////////////////
 //////////////////////Funcion para crear una tabla con los datos de una tabla
 ///////////////////////////////////////////////////////////////////
@@ -47,6 +119,7 @@ public function DibujeTabla($Vector)
     $Titulo=$Vector["Titulo"];
     $VerDesde=$Vector["VerDesde"];
     $Limit=$Vector["Limit"];
+    $Order=$Vector["Order"];
     $statement=$Vector["statement"];
     
     $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
@@ -84,7 +157,7 @@ public function DibujeTabla($Vector)
                     $this->css->CrearOptionSelect("6", "<=", 0);
                     $this->css->CrearOptionSelect("7", "<>", 0);
                 $this->css->CerrarSelect();
-                $this->css->CrearInputText("Fitro_".$NombreCol, "Text", "", "", "Filtrar", "black", "", "", $Ancho, 30, 0, 0);
+                $this->css->CrearInputText("Filtro_".$NombreCol, "Text", "", "", "Filtrar", "black", "", "", $Ancho, 30, 0, 0);
                 
                 print("</td>");
                 $VisualizarRegistro[$i]=1;
@@ -92,9 +165,11 @@ public function DibujeTabla($Vector)
             if(isset($Vector[$NombreCol]["Vinculo"])){
                 $VinculoRegistro[$i]["Vinculado"]=1;
                 $VinculoRegistro[$i]["TablaVinculo"]=$Vector[$NombreCol]["TablaVinculo"];
-                $VinculoRegistro[$i]["IDTabla"]=$Vector[$NombreCol]["IDTabla"];
-                
+                $VinculoRegistro[$i]["IDTabla"]=$Vector[$NombreCol]["IDTabla"];  
                 $VinculoRegistro[$i]["Display"]=$Vector[$NombreCol]["Display"];
+                $this->css->CrearInputText("TablaVinculo_".$NombreCol, "hidden", "", $Vector[$NombreCol]["TablaVinculo"], "", "black", "", "", $Ancho, 30, 0, 0);
+                $this->css->CrearInputText("IDTabla_".$NombreCol, "hidden", "", $Vector[$NombreCol]["IDTabla"], "", "black", "", "", $Ancho, 30, 0, 0);
+                $this->css->CrearInputText("Display_".$NombreCol, "hidden", "", $Vector[$NombreCol]["Display"], "", "black", "", "", $Ancho, 30, 0, 0);
             }
             $i++;
             
@@ -102,7 +177,7 @@ public function DibujeTabla($Vector)
         
         $this->css->CierraFilaTabla();
         
-        $sql="SELECT * FROM $statement LIMIT $VerDesde,$Limit";
+        $sql="SELECT * FROM $statement ORDER BY $Order LIMIT $VerDesde,$Limit ";
         $Consulta=  $this->obCon->Query($sql);
         while($DatosProducto=$this->obCon->FetchArray($Consulta)){
             $this->css->FilaTabla(12);

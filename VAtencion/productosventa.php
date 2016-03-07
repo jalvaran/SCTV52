@@ -26,7 +26,10 @@ $obVenta = new ProcesoVenta(1);
 $myTabla="productosventa";
 $myPage="Devoluciones.php";
 $myTitulo="Productos Venta";
-$statement = " $myTabla ";
+$Vector["Tabla"]=$myTabla;
+$statement = $Filtro=$obTabla->CreeFiltro($Vector);
+
+//include_once("procesaTablas.php");    //Php que se encargará de procesar las peticiones
 
 print("<html>");
 print("<head>");
@@ -41,7 +44,7 @@ $css->CabeceraFin();
     /////
     /////
 $css->CrearDiv("principal", "container", "center",1,1);
-
+//print($statement);
 ///////////////Creamos la imagen representativa de la pagina
     /////
     /////	
@@ -50,7 +53,7 @@ $css->CrearImageLink("../VMenu/Menu.php", "../images/productos.png", "_self",200
 /////Asigno Datos necesarios para la visualizacion de la tabla en el formato que se desea
 ////
 ///
-
+//print($statement);
 $Vector["Tabla"]=$myTabla;          //Tabla
 $Vector["Titulo"]=$myTitulo;        //Titulo
 $Vector["VerDesde"]=$startpoint;    //Punto desde donde empieza
@@ -104,10 +107,11 @@ $Vector["Sub5"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
 $Vector["Sub5"]["TablaVinculo"]="prod_sub5";  //tabla de donde se vincula
 $Vector["Sub5"]["IDTabla"]="idSub5"; //id de la tabla que se vincula
 $Vector["Sub5"]["Display"]="NombreSub5";                    //Columna que quiero mostrar
-///Filtros
+///Filtros y orden
 
 $Vector["statement"]=$statement;   //Filtro necesario para la paginacion
 
+$Vector["Order"]=" idProductosVenta DESC ";   //Orden
 ////Paginacion
 ////
 $Ruta="";
@@ -118,6 +122,7 @@ print("</div>");
 ///Dibujo la tabla
 ////
 ///
+
 $obTabla->DibujeTabla($Vector);
 
 $css->CerrarDiv();//Cerramos contenedor Principal
