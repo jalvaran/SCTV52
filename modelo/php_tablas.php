@@ -1,10 +1,11 @@
 <?php
 
 include_once("php_conexion.php");
-include_once("../VAtencion/css_construct.php");
-//////////////////////////////////////////////////////////////////////////
-////////////Clase para guardar ventas ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+
+/*
+ * Esta clase contiene los datos necesarios para tratar y dibujar las tablas
+ * 
+ */
 
 class Tabla{
     private $DataBase;
@@ -13,12 +14,13 @@ class Tabla{
     function __construct($db){
         $this->DataBase=$db;
         $this->obCon=new ProcesoVenta(1);
-        $this->css=new CssIni("");;
+        //$this->css=new CssIni("");
     }
-       
-////////////////////////////////////////////////////////////////////
-//////////////////////Funcion devolver los nombres de las columnas de una tabla
-///////////////////////////////////////////////////////////////////
+   
+    
+/*
+ *Funcion devolver los nombres de las columnas de una tabla
+ */
     
 public function Columnas($Vector)
   {
@@ -113,7 +115,7 @@ public function CreeFiltro($Vector)
     
 public function DibujeTabla($Vector)
   {
-    
+    $this->css=new CssIni("");
     $Tabla["Tabla"]=$Vector["Tabla"];
     $tbl=$Tabla["Tabla"];
     $Titulo=$Vector["Titulo"];
@@ -123,7 +125,7 @@ public function DibujeTabla($Vector)
     $statement=$Vector["statement"];
     
     $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
-    
+    $myPage="$Tabla[Tabla]".".php";
     $NumCols=count($Columnas);
     $this->css->CrearFormularioEvento("FrmFiltros", "$Tabla[Tabla]".".php", "post", "_self", "");
     $ColFiltro=$NumCols-1;
@@ -131,8 +133,10 @@ public function DibujeTabla($Vector)
     $this->css->FilaTabla(18);
     print("<td ><strong>$Titulo </strong>");
     print("</td>");
-    print("<td style='text-align: center' colspan=$ColFiltro>");
+    print("<td style='text-align: left' colspan=$ColFiltro>");
+    $this->css->CrearLink("","_self","Limpiar ");
     $this->css->CrearBotonVerde("BtnFiltrar", "Filtrar");
+    $this->css->CrearBoton("BtnExportarExcel", "Exportar a Excel");
     print("</td>");
     $this->css->CierraFilaTabla();
         $this->css->FilaTabla(14);
@@ -157,7 +161,11 @@ public function DibujeTabla($Vector)
                     $this->css->CrearOptionSelect("6", "<=", 0);
                     $this->css->CrearOptionSelect("7", "<>", 0);
                 $this->css->CerrarSelect();
-                $this->css->CrearInputText("Filtro_".$NombreCol, "Text", "", "", "Filtrar", "black", "", "", $Ancho, 30, 0, 0);
+                $ValorFiltro="";
+                if(!empty($_REQUEST["Filtro_".$NombreCol])){
+                    $ValorFiltro=$_REQUEST["Filtro_".$NombreCol];
+                }
+                $this->css->CrearInputText("Filtro_".$NombreCol, "Text", "", $ValorFiltro, "Filtrar", "black", "", "", $Ancho, 30, 0, 0);
                 
                 print("</td>");
                 $VisualizarRegistro[$i]=1;
@@ -203,14 +211,142 @@ public function DibujeTabla($Vector)
         $this->css->CierraFilaTabla();
     $this->css->CerrarTabla();
     $this->css->CerrarForm();
-    return($sql);
+    
+    //return($sql);
 }
-  
+ 
+////////////////////////////////////////////////////////////////////
+//////////////////////Verificamos si hay peticiones de exportacion
+///////////////////////////////////////////////////////////////////
+    
+public function VerifiqueExport($Vector)
+  {
+    if(isset($_REQUEST["BtnExportarExcel"])){
+        //include("conexion.php");
+
+$con=mysql_connect("localhost","root","pirlo1985") or die("problemas con el servidor");
+ mysql_select_db("softcontech_v4",$con) or die("la base de datos no abre");
+ 
+ $sql = "SELECT cli.RazonSocial as RazonSocial, cli.Num_Identificacion as NIT, c.Descripcion as Descripcion, c.Referencia as Referencia, 
+ c.Cantidad as Cantidad, c.Subtotal as Subtotal, c.IVA as IVA, c.Total as Total, 
+ c.SubtotalCosto as SubtotalCosto, fac.Fecha as Fecha, fac.SaldoFact as Saldo, fac.idFacturas as Factura, cli.Telefono as Telefono
+ FROM ventas_separados vs INNER JOIN Facturas fac ON vs.Facturas_idFacturas =fac.idFacturas 
+ INNER JOIN Cotizaciones c ON fac.Cotizaciones_idCotizaciones=c.NumCotizacion 
+ INNER JOIN clientes cli ON cli.idClientes =fac.Clientes_idClientes 
+ WHERE vs.Retirado='NO' ORDER BY fac.idFacturas DESC";          
+ $resultado = mysql_query ($sql, $con) or die (mysql_error());
+ $registros = mysql_num_rows ($resultado);
+ 
+ 
+   
+   
+   if ($registros > 0) {
+   require_once '../librerias/Excel/PHPExcel.php';
+   $objPHPExcel = new PHPExcel();
+    
+   //Informacion del excel
+   $objPHPExcel->
+    getProperties()
+        ->setCreator("www.technosoluciones.com")
+        ->setLastModifiedBy("www.technosoluciones.com")
+        ->setTitle("Exportar tabla separados desde base de datos")
+        ->setSubject("ventas_separados")
+        ->setDescription("Documento generado con PHPExcel")
+        ->setKeywords("techno soluciones")
+        ->setCategory("ventas_separados");    
+ 
+ $i = 1;
+ 
+ $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.$i,'Producto');              
+	  $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('B'.$i, 'Referencia'  );	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('C'.$i, 'Cantidad');	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('D'.$i, 'Subtotal' );	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('E'.$i, 'IVA');	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('F'.$i, 'Total' );
+			
+			$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('G'.$i, 'Costo');	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('H'.$i, 'Fecha');	
+
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('I'.$i, 'Factura');	
+
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('J'.$i, 'Saldo');	
+
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('K'.$i, 'Cliente');	
+
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('L'.$i, 'NIT');
+
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('M'.$i, 'TELEFONO');			
+ 
+   $i = 2;    
+   while ($registro = mysql_fetch_object ($resultado)) {
+        		
+      $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.$i, $registro->Descripcion);
+	  $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('B'.$i, $registro->Referencia);	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('C'.$i, $registro->Cantidad);	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('D'.$i, $registro->Subtotal);	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('E'.$i, $registro->IVA);	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('F'.$i, $registro->Total);
+			
+			$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('G'.$i, $registro->SubtotalCosto);	
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('H'.$i, $registro->Fecha);	
+			
+			$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('I'.$i, $registro->Factura);	
+			
+			$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('J'.$i, $registro->Saldo);	
+			
+			$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('K'.$i, $registro->RazonSocial);	
+			
+			$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('L'.$i, $registro->NIT);	
+
+			$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('M'.$i, $registro->Telefono);	
+
+			
+      $i++;
+       
+   }
+}
+header('Content-Type: application/vnd.ms-excel');
+header('Content-Disposition: attachment;filename="Separados.xls"');
+header('Cache-Control: max-age=0');
+ 
+$objWriter=PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel2007');
+$objWriter->save('php://output');
+exit;
+    }
+}
+
+
     
 // FIN Clases	
 }
 
 
 // FIN
+ 
 ?>
-	

@@ -283,6 +283,13 @@ class CssIni{
 		print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" class="btn btn-primary">');
 		
 	}
+        
+        /////////////////////Crea un Boton Submit
+	
+	function CrearBotonReset($nombre,$value){
+		print('<input type="reset" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" class="btn btn-warning">');
+		
+	}
 	
 	/////////////////////Crea un Cuadro de Dialogo
 	

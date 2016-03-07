@@ -20,35 +20,14 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 include_once ('funciones/function.php');  //En esta funcion está la paginacion
 
 include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
-include_once("css_construct.php");
+
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
 $myTabla="productosventa";
 $myPage="Devoluciones.php";
 $myTitulo="Productos Venta";
 $Vector["Tabla"]=$myTabla;
-$statement = $Filtro=$obTabla->CreeFiltro($Vector);
-
-//include_once("procesaTablas.php");    //Php que se encargará de procesar las peticiones
-
-print("<html>");
-print("<head>");
-$css =  new CssIni($myTitulo);
-print("</head>");
-print("<body>");
-//Cabecera
-$css->CabeceraIni($myTitulo); //Inicia la cabecera de la pagina
-$css->CabeceraFin(); 
-
-///////////////Creamos el contenedor
-    /////
-    /////
-$css->CrearDiv("principal", "container", "center",1,1);
-//print($statement);
-///////////////Creamos la imagen representativa de la pagina
-    /////
-    /////	
-$css->CrearImageLink("../VMenu/Menu.php", "../images/productos.png", "_self",200,200);
+$statement = $obTabla->CreeFiltro($Vector);
 
 /////Asigno Datos necesarios para la visualizacion de la tabla en el formato que se desea
 ////
@@ -112,6 +91,30 @@ $Vector["Sub5"]["Display"]="NombreSub5";                    //Columna que quiero
 $Vector["statement"]=$statement;   //Filtro necesario para la paginacion
 
 $Vector["Order"]=" idProductosVenta DESC ";   //Orden
+$obTabla->VerifiqueExport($Vector);
+
+include_once("css_construct.php");
+print("<html>");
+print("<head>");
+
+$css =  new CssIni($myTitulo);
+print("</head>");
+print("<body>");
+//Cabecera
+$css->CabeceraIni($myTitulo); //Inicia la cabecera de la pagina
+$css->CabeceraFin(); 
+
+///////////////Creamos el contenedor
+    /////
+    /////
+$css->CrearDiv("principal", "container", "center",1,1);
+//print($statement);
+///////////////Creamos la imagen representativa de la pagina
+    /////
+    /////	
+$css->CrearImageLink("../VMenu/Menu.php", "../images/productos.png", "_self",200,200);
+
+
 ////Paginacion
 ////
 $Ruta="";
@@ -125,10 +128,17 @@ print("</div>");
 
 $obTabla->DibujeTabla($Vector);
 
+
 $css->CerrarDiv();//Cerramos contenedor Principal
 
 $css->AgregaJS(); //Agregamos javascripts
 $css->AgregaSubir();    
 ////Fin HTML  
+///Verifico si hay peticiones para exportar
+///
+///
+
 print("</body></html>");
+
+
 ?>
