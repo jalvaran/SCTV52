@@ -7,6 +7,7 @@
 $Parametros = json_decode(urldecode($_GET['TxtParametros']));  //Decodifico el Vector y llega como un objeto
 $IDEdit=$_GET['TxtIdEdit'];
 $VarEdit["ID"]=$IDEdit;
+$TablaEdit=$Parametros->Tabla;
 $myPage="EditarRegistro.php";
 $myTitulo="Editar Registro En ".$Parametros->Titulo;
 
@@ -20,7 +21,8 @@ include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las 
 include_once("css_construct.php");
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
-include_once("procesaInsercion.php"); //Procesa la insercion
+include_once("procesadores/procesaEdicion.Conf.php"); //Procesa la insercion
+include_once("procesadores/procesaEdicion.php"); //Procesa la insercion
 print("<html>");
 print("<head>");
 

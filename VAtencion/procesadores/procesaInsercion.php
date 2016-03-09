@@ -1,5 +1,5 @@
 <?php
-include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
+//include_once("../../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
 /* 
  * Este archivo se encarga de eschuchar las peticiones para guardar un archivo
  */
@@ -8,6 +8,7 @@ include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las 
  * Si se Solicita Guardar un Registro
  */
 if(!empty($_REQUEST["BtnGuardarRegistro"])){
+    include_once("../../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
     $obTabla = new Tabla($db);
     $obVenta = new ProcesoVenta(1);
     $tab=$_REQUEST["TxtTablaInsert"];
@@ -35,6 +36,6 @@ if(!empty($_REQUEST["BtnGuardarRegistro"])){
         
         //print("<script>alert('ID: $ID')</script>");
     }
-    header("location:$tab.php");
+    header("location:../$tab.php");
 }
 ?>

@@ -21,7 +21,8 @@ include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las 
 include_once("css_construct.php");
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
-include_once("procesaInsercion.php"); //Procesa la insercion
+include_once("procesadores/procesaInsercion.Conf.php"); //Procesa la insercion
+include_once("procesadores/procesaInsercion.php"); //Procesa la insercion
 print("<html>");
 print("<head>");
 
@@ -41,7 +42,7 @@ $css->CrearDiv("principal", "container", "center",1,1);
     /////
     /////	
 $css->CrearImageLink("$Parametros->Tabla.php", "../images/volver.png", "_self",133,200);
-$obTabla->FormularioInsertRegistro($Parametros);
+$obTabla->FormularioInsertRegistro($Parametros,$VarInsert);
 
 $css->CerrarDiv();//Cerramos contenedor Principal
 
