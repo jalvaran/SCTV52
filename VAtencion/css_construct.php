@@ -185,7 +185,22 @@ class CssIni{
 	/////////////////////Crea un Select
 	
 	function CrearSelect($nombre,$evento){
-		print('<select name="'.$nombre.'" onchange="'.$evento.'" >');
+		print('<select required name="'.$nombre.'" onchange="'.$evento.'" >');
+		
+	}
+        
+        /////////////////////Crea un Select con requerimiento
+	
+	function CrearSelect2($Vector){
+            $nombre=$Vector["Nombre"];
+            $evento=$Vector["Evento"];
+            $funcion=$Vector["Funcion"];
+            if($Vector["Required"]==1){
+                $R="required";
+            }else{
+                $R="";
+            }
+            print("<select $R name='$nombre' $evento='$funcion'>");
 		
 	}
         
@@ -248,13 +263,14 @@ class CssIni{
 		else
 			$ReadOnly="";
 		
-		if($Required==1)
-			$Required="required";
-		else
-			$Required="";
-		
-			print('<strong style="color:'.$color.'">'.$label.'<textarea name="'.$nombre.'" id="'.$nombre.'" placeholder="'.$placeh.'" '.$TxtEvento.' = "'.$TxtFuncion.'" 
-			'.$ReadOnly.' '.$Required.' autocomplete="off" style="width: '.$Ancho.'px;height: '.$Alto.'px;">'.$value.'</textarea></strong>');
+		if($Required==1){
+			print("<strong style= 'color:$color'>$label<textarea name='$nombre' id='$nombre' placeholder='$placeh' $TxtEvento = '$TxtFuncion'" 
+			." $ReadOnly autocomplete='off' style='width: ".$Ancho."px; height: ".$Alto."px;' required>".$value."</textarea></strong>");
+                }else{
+			print("<strong style= 'color:$color'>$label<textarea name='$nombre' id='$nombre' placeholder='$placeh' $TxtEvento = '$TxtFuncion'" 
+			." $ReadOnly autocomplete='off' style='width: ".$Ancho."px; height: ".$Alto."px;' >".$value."</textarea></strong>");
+                }
+			
 		
 	}
 	

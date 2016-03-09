@@ -9,12 +9,14 @@ $Parametros = json_decode(urldecode($_REQUEST['TxtParametros']));  //Decodifico 
 $myPage="InsertarRegistro.php";
 $myTitulo="Nuevo Registro En ".$Parametros->Titulo;
 
-
+//Con esto visualizo los parametros recibidos
+/* 
+ * 
 echo ("<pre>");
 print_r($Parametros);
 print($Parametros->CodigoBarras->TablaVinculo);
 echo ("</pre>");
-
+ */
 include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
 include_once("css_construct.php");
 $obTabla = new Tabla($db);
