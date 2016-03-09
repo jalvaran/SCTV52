@@ -412,7 +412,7 @@ public function VerifiqueExport($Vector)  {
  */
 
     
-public function FormularioInsertRegistro($Parametros)  {
+public function FormularioInsertRegistro($Parametros,$VarInsert)  {
     //print_r($Vector);
     $this->css=new CssIni("");
     $Tabla["Tabla"]=$Parametros->Tabla;
@@ -426,7 +426,7 @@ public function FormularioInsertRegistro($Parametros)  {
     $myPage="$Tabla[Tabla]".".php";
     $NumCols=count($Columnas);
     
-    $this->css->CrearFormularioEvento("FrmGuardarRegistro", "procesaInsercion.php", "post", "_self", "");
+    $this->css->CrearFormularioEvento("FrmGuardarRegistro", "procesadores/procesaInsercion.php", "post", "_self", "");
     $this->css->CrearInputText("TxtTablaInsert", "hidden", "", $tbl, "", "", "", "", "", "", "", "");
     $this->css->CrearTabla();
     $this->css->FilaTabla(18);
@@ -439,7 +439,14 @@ public function FormularioInsertRegistro($Parametros)  {
         
     foreach($Columnas as $NombreCol){
         $this->css->FilaTabla(14);
-        if(!property_exists($Parametros->Excluir,$NombreCol)){  //Si la columna no está excluida
+        $excluir=0;
+        if(property_exists($Parametros->Excluir,$NombreCol)){
+            $excluir=1;
+        }
+        if(isset($VarInsert[$tbl][$NombreCol]["Excluir"])){
+            $excluir=1;
+        }
+        if(!$excluir){  //Si la columna no está excluida
            $lengCampo=preg_replace('/[^0-9]+/', '', $ColumnasInfo["Type"][$i]); //Determinamos la longitud del campo
            if($lengCampo<1){
                $lengCampo=45;
@@ -535,8 +542,9 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
     $myPage="$Tabla[Tabla]".".php";
     $NumCols=count($Columnas);
     
-    $this->css->CrearFormularioEvento("FrmGuardarRegistro", "procesaEdicion.php", "post", "_self", "");
+    $this->css->CrearFormularioEvento("FrmGuardarRegistro", "procesadores/procesaEdicion.php", "post", "_self", "");
     $this->css->CrearInputText("TxtTablaEdit", "hidden", "", $tbl, "", "", "", "", "", "", "", "");
+    $this->css->CrearInputText("TxtIDEdit", "hidden", "", $IDEdit, "", "", "", "", "", "", "", "");
     $this->css->CrearTabla();
     $this->css->FilaTabla(18);
     print("<td style='text-align: center'><strong>$Titulo</strong>");
@@ -545,10 +553,17 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
     
     
     $i=0;
-        
+       
     foreach($Columnas as $NombreCol){
         $this->css->FilaTabla(14);
-        if(!property_exists($Parametros->Excluir,$NombreCol)){  //Si la columna no está excluida
+        $excluir=0;
+        if(property_exists($Parametros->Excluir,$NombreCol)){
+            $excluir=1;
+        }
+        if(isset($VarEdit[$tbl][$NombreCol]["Excluir"])){
+            $excluir=1;
+        }
+        if(!$excluir){  //Si la columna no está excluida
            $lengCampo=preg_replace('/[^0-9]+/', '', $ColumnasInfo["Type"][$i]); //Determinamos la longitud del campo
            if($lengCampo<1){
                $lengCampo=45;
