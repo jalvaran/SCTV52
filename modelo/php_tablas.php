@@ -8,7 +8,7 @@ include_once("php_conexion.php");
  */
 
 class Tabla{
-    private $DataBase;
+    public $DataBase;
     public $obCon;
     public $css;
     /*
@@ -259,14 +259,15 @@ public function DibujeTabla($Vector)
         
         $sql="SELECT * FROM $statement ORDER BY $Order LIMIT $VerDesde,$Limit ";
         $Consulta=  $this->obCon->Query($sql);
+        $Parametros=urlencode(json_encode($Vector));
         while($DatosProducto=$this->obCon->FetchArray($Consulta)){
             $this->css->FilaTabla(12);
             print("<td>");
-            $Ruta="VerRegistro.php?TxtTabla=$tbl&TxtIdVer=$DatosProducto[0]";
+            $Ruta="VerRegistro.php?TxtIdVer=$DatosProducto[0]";
             $this->css->CrearLink($Ruta,"_blank", "Ver");
             
             print(" / / ");
-            $Ruta="EditarRegistro.php?TxtTabla=$tbl&TxtIdEdit=$DatosProducto[0]";
+            $Ruta="EditarRegistro.php?&TxtIdEdit=$DatosProducto[0]&TxtParametros=$Parametros";
             $this->css->CrearLink($Ruta, "_self", "Editar");
             print("</td>");
             for($i=0;$i<$NumCols;$i++){
@@ -513,12 +514,115 @@ public function FormularioInsertRegistro($Parametros)  {
     //return($sql);
 }
 
+/*
+ * 
+ * Funcion para crear un formulario de edicion de un registro
+ * 
+ */
 
     
-// FIN Clases	
+public function FormularioEditarRegistro($Parametros,$VarEdit)  {
+    //print_r($Vector);
+    $this->css=new CssIni("");
+    $Tabla["Tabla"]=$Parametros->Tabla;
+    $tbl=$Tabla["Tabla"];
+    $Titulo=$Parametros->Titulo;
+    $IDEdit=$VarEdit["ID"];
+    
+    $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
+    $ColumnasInfo=$this->ColumnasInfo($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
+    
+    $myPage="$Tabla[Tabla]".".php";
+    $NumCols=count($Columnas);
+    
+    $this->css->CrearFormularioEvento("FrmGuardarRegistro", "procesaEdicion.php", "post", "_self", "");
+    $this->css->CrearInputText("TxtTablaEdit", "hidden", "", $tbl, "", "", "", "", "", "", "", "");
+    $this->css->CrearTabla();
+    $this->css->FilaTabla(18);
+    print("<td style='text-align: center'><strong>$Titulo</strong>");
+    print("</td>");
+    $this->css->CierraFilaTabla();
+    
+    
+    $i=0;
+        
+    foreach($Columnas as $NombreCol){
+        $this->css->FilaTabla(14);
+        if(!property_exists($Parametros->Excluir,$NombreCol)){  //Si la columna no está excluida
+           $lengCampo=preg_replace('/[^0-9]+/', '', $ColumnasInfo["Type"][$i]); //Determinamos la longitud del campo
+           if($lengCampo<1){
+               $lengCampo=45;
+           }
+           $ColID=$Columnas[0];
+           $Condicion=" $ColID='$IDEdit'";
+           $SelColumnas=$NombreCol;
+           $DatosRegistro =  $this->obCon->ValorActual($tbl, $SelColumnas, $Condicion);
+           $Value=$DatosRegistro[$NombreCol];
+           if($ColumnasInfo["Key"][$i]=="PRI"){ //Verificamos si la llave es primaria
+                $ReadOnly=1;
+                
+                
+           }else{
+                $ReadOnly=0;
+           }
+           $Required=0;
+           if(property_exists($Parametros->Required,$NombreCol)){
+               $Required=1;
+           }
+            
+            print("<td style='text-align: center'>");
+            
+            print($NombreCol."<br>");
+            if(property_exists($Parametros,$NombreCol)){
+                $Display=$Parametros->$NombreCol->Display;
+                $IDTabla=$Parametros->$NombreCol->IDTabla;
+                $TablaVinculo=$Parametros->$NombreCol->TablaVinculo;
+                
+                $sql="SELECT * FROM $TablaVinculo";
+
+                $Consulta=$this->obCon->Query($sql);
+                $VectorSel["Nombre"]="$NombreCol";
+                $VectorSel["Evento"]="";
+                $VectorSel["Funcion"]="";
+                $VectorSel["Required"]=$Required;
+                $this->css->CrearSelect2($VectorSel);
+                $this->css->CrearOptionSelect("", "Seleccione Una Opcion", 0);
+                while($Opciones=$this->obCon->FetchArray($Consulta)){
+                    $pre=0;
+                    if($Value==$Opciones[$IDTabla]){
+                        $pre=1;
+                    }
+                    $this->css->CrearOptionSelect($Opciones[$IDTabla], $Opciones[$IDTabla]."-".$Opciones[$Display]."-".$Opciones[2], $pre);              
+                }
+                $this->css->CerrarSelect(); 
+                
+            }else{
+                if($lengCampo<100){
+
+                    $this->css->CrearInputText("$NombreCol", "Text", "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
+                }else{
+                    $this->css->CrearTextArea("$NombreCol", "", $Value, "", "$NombreCol", "black", "", "","100",$lengCampo."0", $ReadOnly, 1);
+                }
+            }
+                print("<td></tr>");    
+
+        }
+
+        $i++;
+    }
+    $this->css->FilaTabla(18);
+    print("<td style='text-align: center'>");
+    $this->css->CrearBotonConfirmado("BtnEditarRegistro", "Editar Registro"); 
+    print("</td>");
+    $this->css->CierraFilaTabla();
+    $this->css->CerrarTabla();
+    $this->css->CerrarForm();    
+    //return($sql);
 }
 
 
-// FIN
- 
+
+// FIN Clases	
+}
+
 ?>

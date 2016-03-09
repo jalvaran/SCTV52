@@ -29,6 +29,10 @@ if(!empty($_REQUEST["BtnGuardarRegistro"])){
         $ID=$obTabla->ObtengaAutoIncrement($Vector);
         $ID=$ID-1;
         $obVenta->ActualizaRegistro("productosventa", "CodigoBarras", $ID, "idProductosVenta", $ID);
+        if(empty($_REQUEST["Referencia"])){
+            $obVenta->ActualizaRegistro("productosventa", "Referencia", "REF".$ID, "idProductosVenta", $ID);
+        }
+        
         //print("<script>alert('ID: $ID')</script>");
     }
     header("location:$tab.php");

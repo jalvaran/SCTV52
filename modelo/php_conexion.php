@@ -241,7 +241,18 @@ class ProcesoVenta{
 		$reg=mysql_query("select * from $tabla where $ColumnaFiltro = '$idItem'") or die("no se pudo consultar los valores de la tabla $tabla en DevuelveValores: " . mysql_error());
 		$reg=mysql_fetch_array($reg);	
 		return ($reg);
-	}	
+	}
+        
+////////////////////////////////////////////////////////////////////
+//////////////////////Funcion devuelve el valor de una columna
+///////////////////////////////////////////////////////////////////
+
+	public function ValorActual($tabla,$Columnas,$Condicion){
+	
+		$reg=mysql_query("SELECT $Columnas FROM $tabla WHERE $Condicion") or die("no se pudo consultar los valores de la tabla $tabla en ValorActual: " . mysql_error());
+		$reg=mysql_fetch_array($reg);	
+		return ($reg);
+	}
 	
 ////////////////////////////////////////////////////////////////////
 //////////////////////Funcion realiza asiento contable factura

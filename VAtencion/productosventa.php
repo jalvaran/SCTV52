@@ -20,7 +20,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 include_once ('funciones/function.php');  //En esta funcion está la paginacion
 
 include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
-include_once("ProductosVenta.ini.php");  //Clases de donde se escribirán las tablas
+include_once("Configuraciones/ProductosVenta.ini.php");  //Clases de donde se escribirán las tablas
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
 
