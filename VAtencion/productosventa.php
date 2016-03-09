@@ -26,7 +26,7 @@ $obVenta = new ProcesoVenta(1);
 $myTabla="productosventa";
 $myPage="Devoluciones.php";
 $myTitulo="Productos Venta";
-$Vector["Tabla"]=$myTabla;
+
 
 
 /////Asigno Datos necesarios para la visualizacion de la tabla en el formato que se desea
@@ -40,11 +40,21 @@ $Vector["Limit"]=$limit;            //Numero de Registros a mostrar
 $statement = $obTabla->CreeFiltro($Vector);
 //print($statement);
 ///Columnas excluidas
-//
-//
-$Vector["Excluir"]["ImagenesProductos_idImagenesProductos"]=1;   //Indico que esta columna tendra un vinculo
-//
-//
+
+$Vector["Excluir"]["ImagenesProductos_idImagenesProductos"]=1;   //Indico que esta columna no se mostrará
+$Vector["Excluir"]["Especial"]=1;
+$Vector["Excluir"]["PrecioMayorista"]=1;
+///Columnas requeridas al momento de una insercion
+$Vector["Required"]["Departamento"]=1;   
+$Vector["Required"]["Nombre"]=1; 
+$Vector["Required"]["PrecioVenta"]=1;
+$Vector["Required"]["CostoUnitario"]=1;
+$Vector["Required"]["CostoTotal"]=1;
+$Vector["Required"]["IVA"]=1;
+$Vector["Required"]["Bodega_idBodega"]=1;
+$Vector["Required"]["CuentaPUC"]=1;
+
+
 //Selecciono las Columnas que tendran valores de otras tablas
 //
 //
@@ -52,6 +62,7 @@ $Vector["CodigoBarras"]["Vinculo"]=1;   //Indico que esta columna tendra un vinc
 $Vector["CodigoBarras"]["TablaVinculo"]="prod_codbarras";  //tabla de donde se vincula
 $Vector["CodigoBarras"]["IDTabla"]="ProductosVenta_idProductosVenta"; //id de la tabla que se vincula
 $Vector["CodigoBarras"]["Display"]="CodigoBarras";                    //Columna que quiero mostrar
+
 
 $Vector["Bodega_idBodega"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
 $Vector["Bodega_idBodega"]["TablaVinculo"]="bodega";  //tabla de donde se vincula

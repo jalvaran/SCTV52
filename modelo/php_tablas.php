@@ -42,7 +42,54 @@ public function Columnas($Vector)
     }
     return($Nombres);
 }
+   
+/*
+ *Funcion devolver todas los atributos de las columnas de una tablas
+ */
     
+public function ColumnasInfo($Vector)
+  {
+    
+    $Tabla=$Vector["Tabla"];
+    $sql="SHOW COLUMNS FROM `$this->DataBase`.`$Tabla`;";
+    $Results=$this->obCon->Query($sql);
+    $i=0;
+    while($Columnas = $this->obCon->FetchArray($Results) ){
+        $Nombres["Field"][$i]=$Columnas["Field"];
+        $Nombres["Type"][$i]=$Columnas["Type"];
+        $Nombres["Null"][$i]=$Columnas["Null"];
+        $Nombres["Key"][$i]=$Columnas["Key"];
+        $Nombres["Default"][$i]=$Columnas["Default"];
+        $Nombres["Extra"][$i]=$Columnas["Extra"];
+        $i++;
+        
+    }
+    return($Nombres);
+}
+
+
+/*
+ *Funcion devolver el ultimo autoincremento
+ */
+    
+public function ObtengaAutoIncrement($Vector){
+    
+    $Tabla=$Vector["Tabla"];
+    $sql="SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA='$this->DataBase' and TABLE_NAME='$Tabla'";
+    $Results=$this->obCon->Query($sql);
+    $Results=$this->obCon->FetchArray($Results);
+    return($Results["AUTO_INCREMENT"]);
+}
+
+/*
+ *Funcion devolver un ID Unico
+ */
+    
+public function ObtengaID(){
+    
+    $ID=date("YmdHis").microtime(false);
+    return($ID);
+}
 
 ////////////////////////////////////////////////////////////////////
 //////////////////////Funcion arme filtros
@@ -115,12 +162,16 @@ public function CreeFiltro($Vector)
     }
     return($Filtro);
 }
-////////////////////////////////////////////////////////////////////
-//////////////////////Funcion para crear una tabla con los datos de una tabla
-///////////////////////////////////////////////////////////////////
+/*
+ * 
+ * Funcion para crear una tabla con los datos de una tabla
+ * 
+ */
+
     
 public function DibujeTabla($Vector)
   {
+    //print_r($Vector);
     $this->css=new CssIni("");
     $Tabla["Tabla"]=$Vector["Tabla"];
     $tbl=$Tabla["Tabla"];
@@ -133,6 +184,11 @@ public function DibujeTabla($Vector)
     $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
     $myPage="$Tabla[Tabla]".".php";
     $NumCols=count($Columnas);
+    $this->css->CrearFormularioEvento("FrmAgregar", "InsertarRegistro.php", "post", "_self", "");
+    
+    $this->css->CrearInputText("TxtParametros", "hidden", "", urlencode(json_encode($Vector)), "", "", "", "", "", "", "", "");
+    $this->css->CrearBotonNaranja("BtnAgregar", "Agregar Nuevo Registro");
+    $this->css->CerrarForm();
     $this->css->CrearFormularioEvento("FrmFiltros", "$Tabla[Tabla]".".php", "post", "_self", "");
     $this->css->CrearInputText("TxtSql", "hidden", "", $statement, "", "", "", "", "", "", "", "");
     $ColFiltro=$NumCols-1;
@@ -143,6 +199,7 @@ public function DibujeTabla($Vector)
     print("<td style='text-align: left' colspan=$ColFiltro>");
     $this->css->CrearLink("","_self","Limpiar ");
     $this->css->CrearBotonVerde("BtnFiltrar", "Filtrar");
+    
     $this->css->CrearBoton("BtnExportarExcel", "Exportar a Excel");
     print("</td>");
     $this->css->CierraFilaTabla();
@@ -324,17 +381,112 @@ public function VerifiqueExport($Vector)  {
                 }
             }
         }
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="'.$tbl.'.xls"');
-header('Cache-Control: max-age=0');
- 
-$objWriter=PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel2007');
-$objWriter->save('php://output');
-exit; 
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="'.$tbl.'.xls"');
+    header('Cache-Control: max-age=0');
+
+    $objWriter=PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel2007');
+    $objWriter->save('php://output');
+    exit; 
    
+    }    
 }
 
+/*
+ * 
+ * Funcion para crear un formulario para crear un nuevo registro en una tabla
+ * 
+ */
+
     
+public function FormularioInsertRegistro($Parametros)  {
+    //print_r($Vector);
+    $this->css=new CssIni("");
+    $Tabla["Tabla"]=$Parametros->Tabla;
+    $tbl=$Tabla["Tabla"];
+    $Titulo=$Parametros->Titulo;
+    
+    
+    $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
+    $ColumnasInfo=$this->ColumnasInfo($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
+    
+    $myPage="$Tabla[Tabla]".".php";
+    $NumCols=count($Columnas);
+    
+    $this->css->CrearFormularioEvento("FrmGuardar", "InsertarRegistro.php", "post", "_self", "");
+   
+    $this->css->CrearTabla();
+    $this->css->FilaTabla(18);
+    print("<td style='text-align: center'><strong>$Titulo</strong>");
+    print("</td>");
+    $this->css->CierraFilaTabla();
+    
+    
+    $i=0;
+        
+    foreach($Columnas as $NombreCol){
+        $this->css->FilaTabla(14);
+        if(!property_exists($Parametros->Excluir,$NombreCol)){  //Si la columna no está excluida
+           $lengCampo=preg_replace('/[^0-9]+/', '', $ColumnasInfo["Type"][$i]); //Determinamos la longitud del campo
+           if($lengCampo<1){
+               $lengCampo=45;
+           }
+           $Value=$ColumnasInfo["Default"][$i];
+           
+           if($ColumnasInfo["Key"][$i]=="PRI"){ //Verificamos si la llave es primaria
+                $ReadOnly=1;
+                
+                if(!$ColumnasInfo["Extra"][$i]=="auto_increment"){ //Verificamos si tiene auto increment
+                    $Value = $this->ObtengaID(); //Obtiene un timestamp para crear un id unico
+                }
+           }else{
+                $ReadOnly=0;
+           }
+           $Required=0;
+            print("<td style='text-align: center'>");
+            
+            print($NombreCol."<br>");
+            if(property_exists($Parametros,$NombreCol)){
+                $Display=$Parametros->$NombreCol->Display;
+                $IDTabla=$Parametros->$NombreCol->IDTabla;
+                $TablaVinculo=$Parametros->$NombreCol->TablaVinculo;
+                if($Display<>"CodigoBarras"){
+                    $sql="SELECT $Display, $IDTabla FROM $TablaVinculo";
+                    //print($sql);
+                    $Consulta=$this->obCon->Query($sql);
+                    $this->css->CrearSelect("Ins_$NombreCol", "");
+                    $this->css->CrearOptionSelect("", "Seleccione Una Opcion", 1);
+                    while($Opciones=$this->obCon->FetchArray($Consulta)){
+                            $this->css->CrearOptionSelect($Opciones[$IDTabla], $Opciones[$Display], 0);              
+                    }
+                    $this->css->CerrarSelect(); 
+                }else{
+                  
+                    $this->css->CrearInputText("Ins_$NombreCol", "text", "", "", "$NombreCol", "black", "", "", $lengCampo."0", 30, 1, $Required);
+                              
+                }
+            }else{
+                if($lengCampo<100){
+
+                    $this->css->CrearInputText("Ins_$NombreCol", "Text", "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
+                }else{
+                    $this->css->CrearTextArea("Ins_$NombreCol", "", $Value, "", "$NombreCol", "black", "", "",100,$lengCampo."0", $ReadOnly, $Required);
+                }
+            }
+                print("<td></tr>");    
+
+        }
+
+        $i++;
+    }
+    $this->css->FilaTabla(18);
+    print("<td style='text-align: center'>");
+    $this->css->CrearBotonConfirmado("BtnGuardarRegistro", "Guardar Registro"); 
+    print("</td>");
+    $this->css->CierraFilaTabla();
+    $this->css->CerrarTabla();
+    $this->css->CerrarForm();    
+    //return($sql);
 }
 
 
