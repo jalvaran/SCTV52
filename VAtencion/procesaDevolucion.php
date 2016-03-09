@@ -122,7 +122,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                                               //si entra a verificar es porque estaba ocupada y cambiará a 1
             while($Disponibilidad=="OC"){                   //miro que esté disponible para facturar, esto para no crear facturas dobles
                 print("Esperando disponibilidad<br>");
-                sleep(1);
+                usleep(300);
                 $DatosResolucion=$obVenta->DevuelveValores("empresapro_resoluciones_facturacion", "ID", $ResolucionDian);
                 $Disponibilidad=$DatosResolucion["Estado"];
                 
@@ -199,10 +199,10 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 $Datos["NumFactura"]=$idFactura;
                 $Datos["FechaFactura"]=$FechaFactura;
                 $Datos["ID"]=$ID;
-                
+                $Datos["CuentaDestino"]=$CuentaDestino;
                 $obVenta->InsertarItemsDevolucionAItemsFactura($Datos);///Relaciono los items de la factura
                 $obVenta->ActualizaRegistro("rem_devoluciones_totalizadas", "Facturas_idFacturas", $ID, "ID", $idDevolucion);
-                //$obVenta->InsertarFacturaLibroDiario($Datos);///Inserto Items en el libro diario
+                $obVenta->InsertarFacturaLibroDiario($Datos);///Inserto Items en el libro diario
                 //$obVenta->InsertarFacturaEnCartera($Datos);///Inserto La factura en la cartera
             }    
            

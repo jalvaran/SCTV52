@@ -9,7 +9,10 @@
 	$TablaCuentaIngreso="cuentas";
 	$CuentaIVAGen=2408;
 	$TablaIVAGen="cuentas";
+        $IDTablaIVAGen="idPUC";
 	$RegCREE="SI";
+        $CuentaCREE=135595;
+        $ContraPartidaCREE=23657502;
 	$CuentaCostoMercancia=6135;
 	$CuentaInventarios=1435;
 	$AjustaInventario="SI";
@@ -21,7 +24,8 @@
 class Consultar_Producto{
 	private $consulta;
 	private $fetch;
-	
+        
+        
 	function __construct($codigo){
 		$this->consulta = mysql_query("SELECT * FROM productosventa WHERE Referencia='$codigo'");
 		$this->fetch = mysql_fetch_array($this->consulta);
@@ -43,6 +47,9 @@ class ProcesoVenta{
 	private $idUser;
 	private $NumCotizacion;
 	private $NombreUser;
+        public  $CuentaIVAGen=2408;
+        public  $TablaIVAGen="cuentas";
+        public  $IDTablaIVAGen="idPUC";
 	
 	function __construct($idUserR){
 		$this->consulta =mysql_query("SELECT MAX(NumCotizacion) as NumCotizacion ,MAX(NumVenta) as NumVenta, MAX(NumFactura) as NumFactura  FROM vestasactivas
@@ -154,8 +161,8 @@ class ProcesoVenta{
 		
 	/////Suma un valor en especifico de una tabla	
 		
-	function SumeColumna($Tabla,$NombreColumnaSuma, $NombreColumnaFiltro,$filtro)
-	{
+	function SumeColumna($Tabla,$NombreColumnaSuma, $NombreColumnaFiltro,$filtro){
+	
 	
 		
 	$sql="SELECT SUM($NombreColumnaSuma) AS suma FROM $Tabla WHERE $NombreColumnaFiltro = '$filtro'";
@@ -169,8 +176,8 @@ class ProcesoVenta{
         
         /////Suma un valor en especifico de una tabla segun una condicion
 		
-	function Sume($Tabla,$NombreColumnaSuma, $Condicion)
-	{
+	function Sume($Tabla,$NombreColumnaSuma, $Condicion){
+	
 	
 		
 	$sql="SELECT SUM($NombreColumnaSuma) AS suma FROM $Tabla $Condicion";
@@ -184,8 +191,8 @@ class ProcesoVenta{
 	
 	///Totaliza una venta
 	
-	function ObtengaTotalesVenta($NumVenta)
-  {
+	function ObtengaTotalesVenta($NumVenta){
+  
 	
 		
 	$sql="SELECT SUM(TotalVenta) AS TotalVenta, SUM(Impuestos) AS Impuestos, SUM(TotalCosto) AS TotalCosto FROM ventas 
@@ -428,7 +435,196 @@ class ProcesoVenta{
 			}
 	}	
 	
-	
+
+        
+////////////////////////////////////////////////////////////////////
+//////////////////////Funcion realiza asiento contable facturas item por item
+///////////////////////////////////////////////////////////////////
+
+    public function InsertarFacturaLibroDiario($Datos){
+
+            $idFact=$Datos["ID"];		
+            $DatosFactura=$this->DevuelveValores("facturas","idFacturas",$idFact);
+            $fecha=	$DatosFactura["Fecha"];	
+            $CuentaDestino=$Datos["CuentaDestino"];
+            $DatosCliente=$this->DevuelveValores("clientes","idClientes",$DatosFactura['Clientes_idClientes']);
+            $idCliente=$DatosFactura['Clientes_idClientes'];
+            $NIT=$DatosCliente["Num_Identificacion"];
+            $RazonSocialC=$DatosCliente["RazonSocial"];
+
+            $sql="SELECT * FROM facturas_items WHERE idFactura='$idFact'";
+            $Consulta=$this->Query($sql);
+            $tab="librodiario";
+            $NumRegistros=24;
+            while($DatosItems=$this->FetchArray($Consulta)){
+                
+		$Subtotal=$DatosItems["SubtotalItem"];
+                $Total=$DatosItems["TotalItem"];
+                $Impuestos=$DatosItems["IVAItem"];
+                $TotalCostosM=$DatosItems["SubtotalCosto"];
+		if($DatosFactura['FormaPago']=="Contado"){
+			$CuentaPUC=$CuentaDestino;
+			$DatosCuenta=$this->DevuelveValores("cuentasfrecuentes","CuentaPUC",$CuentaPUC);
+			
+			$NombreCuenta=$DatosCuenta["Nombre"];
+		}else{	
+			$CuentaPUC="130505$NIT";
+			$NombreCuenta="Clientes Nacionales $RazonSocialC NIT $NIT";
+		}
+		
+		
+		$Columnas[0]="Fecha";			$Valores[0]=$fecha;
+		$Columnas[1]="Tipo_Documento_Intero";	$Valores[1]="FACTURA";
+		$Columnas[2]="Num_Documento_Interno";	$Valores[2]=$idFact;
+		$Columnas[3]="Tercero_Tipo_Documento";	$Valores[3]=$DatosCliente['Tipo_Documento'];
+		$Columnas[4]="Tercero_Identificacion";	$Valores[4]=$NIT;
+		$Columnas[5]="Tercero_DV";		$Valores[5]=$DatosCliente['DV'];
+		$Columnas[6]="Tercero_Primer_Apellido";	$Valores[6]=$DatosCliente['Primer_Apellido'];
+		$Columnas[7]="Tercero_Segundo_Apellido";$Valores[7]=$DatosCliente['Segundo_Apellido'];
+		$Columnas[8]="Tercero_Primer_Nombre";	$Valores[8]=$DatosCliente['Primer_Nombre'];
+		$Columnas[9]="Tercero_Otros_Nombres";	$Valores[9]=$DatosCliente['Otros_Nombres'];
+		$Columnas[10]="Tercero_Razon_Social";	$Valores[10]=$RazonSocialC;
+		$Columnas[11]="Tercero_Direccion";      $Valores[11]=$DatosCliente['Direccion'];
+		$Columnas[12]="Tercero_Cod_Dpto";	$Valores[12]=$DatosCliente['Cod_Dpto'];
+		$Columnas[13]="Tercero_Cod_Mcipio";	$Valores[13]=$DatosCliente['Cod_Mcipio'];
+		$Columnas[14]="Tercero_Pais_Domicilio"; $Valores[14]=$DatosCliente['Pais_Domicilio'];
+		
+		$Columnas[15]="CuentaPUC";		$Valores[15]=$CuentaPUC;
+		$Columnas[16]="NombreCuenta";		$Valores[16]=$NombreCuenta;
+		$Columnas[17]="Detalle";		$Valores[17]="Ventas";
+		$Columnas[18]="Debito";			$Valores[18]=$Total;
+		$Columnas[19]="Credito";		$Valores[19]="0";
+		$Columnas[20]="Neto";			$Valores[20]=$Valores[18];
+		$Columnas[21]="Mayor";			$Valores[21]="NO";
+		$Columnas[22]="Esp";			$Valores[22]="NO";
+		$Columnas[23]="Concepto";		$Valores[23]="Ventas";
+									
+		$this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+		
+		
+		///////////////////////Registramos ingresos
+		
+		$CuentaPUC=$DatosItems["CuentaPUC"]; 
+		$Longitud=strlen($CuentaPUC);
+                if($Longitud>4){
+                    $TablaCuenta="subcuentas";
+                    $idTablaCuenta="PUC";
+                }else{
+                    $TablaCuenta="cuentas";
+                    $idTablaCuenta="idPUC";
+                }
+		$DatosCuenta=$this->DevuelveValores($TablaCuenta,$idTablaCuenta,$CuentaPUC);
+		$NombreCuenta=$DatosCuenta["Nombre"];
+		
+		$Valores[15]=$CuentaPUC;
+		$Valores[16]=$NombreCuenta;
+		$Valores[18]="0";
+		$Valores[19]=$Subtotal;
+		$Valores[20]=$Valores[19]*(-1);  											//Credito se escribe el total de la venta menos los impuestos
+		
+		$this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+		
+		///////////////////////Registramos IVA Generado si aplica
+		
+		if($Impuestos<>0){
+		
+                    $CuentaPUC=$this->CuentaIVAGen; //2408   IVA Generado
+                    $DatosCuenta=$this->DevuelveValores($this->TablaIVAGen,$this->IDTablaIVAGen,$CuentaPUC);
+
+                    $NombreCuenta=$DatosCuenta["Nombre"];
+
+                    $Valores[15]=$CuentaPUC;
+                    $Valores[16]=$NombreCuenta;
+                    $Valores[18]="0";
+                    $Valores[19]=round($Impuestos); 			//Credito se escribe el total de la venta
+                    $Valores[20]=$Valores[19]*(-1);  	//para la sumatoria contemplar el balance
+
+                    $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+		
+		}
+					
+					
+					///////////////////////////////////////////////////////////////
+		////////////Registramos Autoretencion
+		if($RegCREE=="SI"){
+			
+			$CREE=$this->DevuelveValores("impret","Nombre","CREE");
+			
+			$ValorCREE=round($Subtotal*$CREE['Valor']);
+			
+			$CuentaPUC=$CuentaCREE; //  Autorretenciones CREE
+			
+			$DatosCuenta=$this->DevuelveValores("subcuentas","PUC",$CuentaPUC);
+			$NombreCuenta=$DatosCuenta["Nombre"];
+			
+			$Valores[15]=$CuentaPUC;
+			$Valores[16]=$NombreCuenta;
+			$Valores[18]=$ValorCREE;     //Valor del CREE
+			$Valores[19]=0; 			
+			$Valores[20]=$ValorCREE;  	//para la sumatoria contemplar el balance
+			
+			$this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+		
+		///////////////////////////////////////////////////////////////
+		////////////contra partida de la Autoretencion
+		
+			$CuentaPUC=$ContraPartidaCREE; //  Cuentas por pagar Autorretenciones CREE
+			
+			$DatosCuenta=$this->DevuelveValores("subcuentas","PUC",$CuentaPUC);
+			$NombreCuenta=$DatosCuenta["Nombre"];
+			
+			$Valores[15]=$CuentaPUC;
+			$Valores[16]=$NombreCuenta;
+			$Valores[18]=0;     //Valor del CREE
+			$Valores[19]=$ValorCREE; 			
+			$Valores[20]=$ValorCREE*(-1);  	//para la sumatoria contemplar el balance
+			
+			$this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+			
+			}
+					
+			///////////////////////Ajustamos el inventario
+                        $AjustaInventario="";
+			if($DatosItems["TipoItem"]=="PR"){
+                            $AjustaInventario="SI";
+                        }
+			if($AjustaInventario=="SI"){
+				
+				$CuentaPUC=$CuentaCostoMercancia; //6135   costo de mercancia vendida
+				
+				$DatosCuenta=$this->DevuelveValores('cuentas',"idPUC",$CuentaPUC);
+				$NombreCuenta=$DatosCuenta["Nombre"];
+				
+				$Valores[15]=$CuentaPUC;
+				$Valores[16]=$NombreCuenta;
+				$Valores[18]=$TotalCostosM;//Debito se escribe el costo de la mercancia vendida
+				$Valores[19]="0"; 			
+				$Valores[20]=$TotalCostosM;  	//para la sumatoria contemplar el balance
+				
+				$this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+				
+				///////////////////////Ajustamos el inventario
+				
+				$CuentaPUC=$CuentaInventarios; //1435   Mercancias no fabricadas por la empresa
+				
+				$DatosCuenta=$this->DevuelveValores('cuentas',"idPUC",$CuentaPUC);
+				$NombreCuenta=$DatosCuenta["Nombre"];
+				
+				$Valores[15]=$CuentaPUC;
+				$Valores[16]=$NombreCuenta;
+				$Valores[18]="0";
+				$Valores[19]=$TotalCostosM;//Credito se escribe el costo de la mercancia vendida			
+				$Valores[20]=$TotalCostosM*(-1);  	//para la sumatoria contemplar el balance
+				
+				$this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+				
+			}
+
+            }
+
+
+
+    }        
 	////////////////////////////////////////////////////////////////////
 //////////////////////Funcion imprima factura
 ///////////////////////////////////////////////////////////////////
