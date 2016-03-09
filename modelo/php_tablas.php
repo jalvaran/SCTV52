@@ -443,6 +443,10 @@ public function FormularioInsertRegistro($Parametros)  {
                 $ReadOnly=0;
            }
            $Required=0;
+           if(property_exists($Parametros->Required,$NombreCol)){
+               $Required=1;
+           }
+            
             print("<td style='text-align: center'>");
             
             print($NombreCol."<br>");
@@ -451,13 +455,21 @@ public function FormularioInsertRegistro($Parametros)  {
                 $IDTabla=$Parametros->$NombreCol->IDTabla;
                 $TablaVinculo=$Parametros->$NombreCol->TablaVinculo;
                 if($Display<>"CodigoBarras"){
-                    $sql="SELECT $Display, $IDTabla FROM $TablaVinculo";
+                    $sql="SELECT * FROM $TablaVinculo";
                     //print($sql);
                     $Consulta=$this->obCon->Query($sql);
-                    $this->css->CrearSelect("Ins_$NombreCol", "");
-                    $this->css->CrearOptionSelect("", "Seleccione Una Opcion", 1);
+                    $VectorSel["Nombre"]="Ins_$NombreCol";
+                    $VectorSel["Evento"]="";
+                    $VectorSel["Funcion"]="";
+                    $VectorSel["Required"]=$Required;
+                    $this->css->CrearSelect2($VectorSel);
+                    $this->css->CrearOptionSelect("", "Seleccione Una Opcion", 0);
                     while($Opciones=$this->obCon->FetchArray($Consulta)){
-                            $this->css->CrearOptionSelect($Opciones[$IDTabla], $Opciones[$Display], 0);              
+                        $pre=0;
+                        if($Parametros->$NombreCol->Predeterminado==$Opciones[$IDTabla]){
+                            $pre=1;
+                        }
+                        $this->css->CrearOptionSelect($Opciones[$IDTabla], $Opciones[$IDTabla]."-".$Opciones[$Display]."-".$Opciones[2], $pre);              
                     }
                     $this->css->CerrarSelect(); 
                 }else{
@@ -470,7 +482,7 @@ public function FormularioInsertRegistro($Parametros)  {
 
                     $this->css->CrearInputText("Ins_$NombreCol", "Text", "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
                 }else{
-                    $this->css->CrearTextArea("Ins_$NombreCol", "", $Value, "", "$NombreCol", "black", "", "",100,$lengCampo."0", $ReadOnly, $Required);
+                    $this->css->CrearTextArea("Ins_$NombreCol", "", $Value, "", "$NombreCol", "black", "", "","100",$lengCampo."0", $ReadOnly, 1);
                 }
             }
                 print("<td></tr>");    
