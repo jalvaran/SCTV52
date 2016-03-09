@@ -81,6 +81,7 @@ public function ObtengaAutoIncrement($Vector){
     return($Results["AUTO_INCREMENT"]);
 }
 
+
 /*
  *Funcion devolver un ID Unico
  */
@@ -205,10 +206,11 @@ public function DibujeTabla($Vector)
     $this->css->CierraFilaTabla();
         $this->css->FilaTabla(14);
         $i=0;
-        
+        $this->css->ColTabla("<strong>Acciones</strong>","");
         foreach($Columnas as $NombreCol){
             
             if(!isset($Vector["Excluir"][$NombreCol])){
+                
                 print("<td><strong>$NombreCol</strong><br>");
                 $Ancho=strlen($NombreCol)."0";
                 $DatosSel["Nombre"]="Cond_".$NombreCol;
@@ -259,8 +261,17 @@ public function DibujeTabla($Vector)
         $Consulta=  $this->obCon->Query($sql);
         while($DatosProducto=$this->obCon->FetchArray($Consulta)){
             $this->css->FilaTabla(12);
+            print("<td>");
+            $Ruta="VerRegistro.php?TxtTabla=$tbl&TxtIdVer=$DatosProducto[0]";
+            $this->css->CrearLink($Ruta,"_blank", "Ver");
+            
+            print(" / / ");
+            $Ruta="EditarRegistro.php?TxtTabla=$tbl&TxtIdEdit=$DatosProducto[0]";
+            $this->css->CrearLink($Ruta, "_self", "Editar");
+            print("</td>");
             for($i=0;$i<$NumCols;$i++){
                 if(isset($VisualizarRegistro[$i])){
+                    
                     if(!isset($VinculoRegistro[$i]["Vinculado"])){
                         print("<td>$DatosProducto[$i]</td>");
                     }else{
@@ -272,6 +283,7 @@ public function DibujeTabla($Vector)
                         $sql1="SELECT $ColDisplay FROM $TablaVinculo WHERE $idTablaVinculo='$ID'";
                         $Consul=$this->obCon->Query($sql1);
                         $DatosVinculo=$this->obCon->FetchArray($Consul);
+                        
                         print("<td>$DatosVinculo[$ColDisplay]</td>");
                     }
                 }
@@ -413,8 +425,8 @@ public function FormularioInsertRegistro($Parametros)  {
     $myPage="$Tabla[Tabla]".".php";
     $NumCols=count($Columnas);
     
-    $this->css->CrearFormularioEvento("FrmGuardar", "InsertarRegistro.php", "post", "_self", "");
-   
+    $this->css->CrearFormularioEvento("FrmGuardarRegistro", "procesaInsercion.php", "post", "_self", "");
+    $this->css->CrearInputText("TxtTablaInsert", "hidden", "", $tbl, "", "", "", "", "", "", "", "");
     $this->css->CrearTabla();
     $this->css->FilaTabla(18);
     print("<td style='text-align: center'><strong>$Titulo</strong>");
@@ -458,7 +470,7 @@ public function FormularioInsertRegistro($Parametros)  {
                     $sql="SELECT * FROM $TablaVinculo";
                     //print($sql);
                     $Consulta=$this->obCon->Query($sql);
-                    $VectorSel["Nombre"]="Ins_$NombreCol";
+                    $VectorSel["Nombre"]="$NombreCol";
                     $VectorSel["Evento"]="";
                     $VectorSel["Funcion"]="";
                     $VectorSel["Required"]=$Required;
@@ -474,15 +486,15 @@ public function FormularioInsertRegistro($Parametros)  {
                     $this->css->CerrarSelect(); 
                 }else{
                   
-                    $this->css->CrearInputText("Ins_$NombreCol", "text", "", "", "$NombreCol", "black", "", "", $lengCampo."0", 30, 1, $Required);
+                    $this->css->CrearInputText("$NombreCol", "text", "", "", "$NombreCol", "black", "", "", $lengCampo."0", 30, 1, $Required);
                               
                 }
             }else{
                 if($lengCampo<100){
 
-                    $this->css->CrearInputText("Ins_$NombreCol", "Text", "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
+                    $this->css->CrearInputText("$NombreCol", "Text", "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
                 }else{
-                    $this->css->CrearTextArea("Ins_$NombreCol", "", $Value, "", "$NombreCol", "black", "", "","100",$lengCampo."0", $ReadOnly, 1);
+                    $this->css->CrearTextArea("$NombreCol", "", $Value, "", "$NombreCol", "black", "", "","100",$lengCampo."0", $ReadOnly, 1);
                 }
             }
                 print("<td></tr>");    
