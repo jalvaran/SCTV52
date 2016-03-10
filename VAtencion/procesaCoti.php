@@ -199,12 +199,12 @@
 		
 			
 			$tab="cot_itemscotizaciones";
-			$NumRegistros=13;  
+			$NumRegistros=14;  
 								
 			$Columnas[0]="NumCotizacion";				$Valores[0]=$NumCotizacion;
 			$Columnas[1]="Descripcion";					$Valores[1]=$DatosPrecoti["Descripcion"];
 			$Columnas[2]="Referencia";					$Valores[2]=$DatosPrecoti["Referencia"];
-			$Columnas[3]="Tabla";						$Valores[3]=$DatosPrecoti["Tabla"];
+			$Columnas[3]="TablaOrigen";						$Valores[3]=$DatosPrecoti["Tabla"];
 			$Columnas[4]="ValorUnitario";				$Valores[4]=$DatosPrecoti["ValorUnitario"];
 			$Columnas[5]="Cantidad";					$Valores[5]=$DatosPrecoti["Cantidad"];
 			$Columnas[6]="Subtotal";					$Valores[6]=$DatosPrecoti["SubTotal"];
@@ -214,7 +214,7 @@
 			$Columnas[10]="SubtotalCosto";				$Valores[10]=$DatosPrecoti["SubtotalCosto"];
 			$Columnas[11]="TipoItem";					$Valores[11]=$DatosPrecoti["TipoItem"];
 			$Columnas[12]="CuentaPUC";					$Valores[12]=$DatosPrecoti["CuentaPUC"];
-			
+			$Columnas[13]="idCliente";					$Valores[13]=$idCliente;
 			$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);	
 		
 		}

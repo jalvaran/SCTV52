@@ -46,4 +46,14 @@ $TablaConfig="cuentasfrecuentes";
 $VarInsert[$TablaConfig]["ClaseCuenta"]["Required"]=1;
 $VarInsert[$TablaConfig]["UsoFuturo"]["Excluir"]=1;
 
+
+/*
+ * Tabla cot_itemscotizaciones
+ * 
+ * Campos Requridos
+ */
+$TablaConfig="cot_itemscotizaciones";
+$VarInsert[$TablaConfig]["CuentaPUC"]["Required"]=1;
+
+
 ?>

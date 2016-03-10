@@ -78,4 +78,12 @@ $VarEdit[$TablaConfig]["Valor"]["Excluir"]=1;
 $TablaConfig="cuentasfrecuentes";
 $VarEdit[$TablaConfig]["ClaseCuenta"]["Required"]=1;
 $VarEdit[$TablaConfig]["UsoFuturo"]["Excluir"]=1;
+
+/*
+ * Tabla cot_itemscotizaciones
+ * 
+ * Campos Requridos
+ */
+$TablaConfig="cot_itemscotizaciones";
+$VarEdit[$TablaConfig]["CuentaPUC"]["Required"]=1;
 ?>

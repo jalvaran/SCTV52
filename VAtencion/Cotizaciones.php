@@ -92,8 +92,8 @@ include_once("procesaCoti.php");
 	 $ruta="../VAtencion/".$myPage;
 	 
 	 $css->CreaMenuBasico("Menu"); 
-	 $css->CreaSubMenuBasico("Historial de Cotizaciones","../admin/cotizaciones.php"); 
-	 $css->CreaSubMenuBasico("Buscar una cotizacion","BuscarCoti.php"); 
+	 $css->CreaSubMenuBasico("Historial de Cotizaciones","cot_itemscotizaciones.php"); 
+	 
 	 $css->CierraMenuBasico(); 
 	 ?>
 	
