@@ -1053,6 +1053,61 @@ public function CalculePesoRemision($idCotizacion)
 
         return($Peso);
 	}
+        
+        
+/*
+ * 
+ * Funcion para sumar dias a una fecha
+ */
+
+    public function SumeDiasFecha($Datos){		
+        $Fecha=$Datos["Fecha"]; 
+        $Dias=$Datos["Dias"]; 
+        $nuevafecha = date('Y-m-d', strtotime($Fecha) + 86400);
+        $nuevafecha = date('Y-m-d', strtotime("$Fecha + $Dias day"));
+
+        return($nuevafecha);
+
+    }
+    
+    
+    /*
+ * 
+ * Funcion ingresa factura a cartera
+ */
+
+    public function InsertarFacturaEnCartera($Datos){		
+        $idFactura=$Datos["idFactura"]; 
+        $FechaIngreso=$Datos["FechaFactura"]; 
+        $FechaVencimiento=$Datos["FechaVencimiento"];
+        $idCliente=$Datos["idCliente"];
+        $DatosCliente=$this->DevuelveValores("clientes", "idClientes", $idCliente);
+        $DatosFactura=$this->DevuelveValores("facturas", "idFacturas", $idFactura);
+        $RazonSocial=$DatosCliente["RazonSocial"];
+        $Telefono=$DatosCliente["Telefono"];
+        $Contacto=$DatosCliente["Contacto"];
+        $TelContacto=$DatosCliente["TelContacto"];
+        $TotalFactura=$DatosFactura["Total"];
+        $tab="cartera";       
+        $NumRegistros=12; 
+                
+        $Columnas[0]="Facturas_idFacturas";         $Valores[0]=$idFactura;
+        $Columnas[1]="FechaIngreso";                $Valores[1]=$FechaIngreso;
+        $Columnas[2]="FechaVencimiento";            $Valores[2]=$FechaVencimiento;
+        $Columnas[3]="DiasCartera";                 $Valores[3]=0;
+        $Columnas[4]="idCliente";                   $Valores[4]=$idCliente;
+        $Columnas[5]="RazonSocial";                 $Valores[5]=$RazonSocial;
+        $Columnas[6]="Telefono";                    $Valores[6]=$Telefono;
+        $Columnas[7]="Contacto";                    $Valores[7]=$Contacto;
+        $Columnas[8]="TelContacto";                 $Valores[8]=$TelContacto;
+        $Columnas[9]="TotalFactura";                $Valores[9]=$TotalFactura;
+        $Columnas[10]="TotalAbonos";                $Valores[10]=0;
+        $Columnas[11]="Saldo";                      $Valores[11]=$TotalFactura;
+        
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+                
+        
+    }
          ////////////////////////////////////////////////////////////////////
     //////////////////////Funcion Agregar items de devolucion a una factura peso de una remision
     ///////////////////////////////////////////////////////////////////

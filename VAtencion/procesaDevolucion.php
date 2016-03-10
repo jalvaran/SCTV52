@@ -112,6 +112,11 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
         $FechaFactura=$_REQUEST["TxtFechaFactura"];
         $Consulta=$obVenta->DevuelveValores("centrocosto", "ID", $CentroCostos);
         $EmpresaPro=$Consulta["EmpresaPro"];
+        if($TipoPago=="Contado"){
+            $SumaDias=0;
+        }else{
+            $SumaDias=$TipoPago;
+        }
         ////////////////////////////////Preguntamos por disponibilidad
         ///////////
         ///////////
@@ -152,7 +157,7 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 //Convertimos los dias en credito
                 $FormaPagoFactura=$TipoPago;
                 if($TipoPago<>"Contado"){
-                    $FormaPagoFactura="Credito";
+                    $FormaPagoFactura="Credito a $TipoPago dias";
                 }
                 ////////////////Inserto datos de la factura
                 /////
@@ -203,7 +208,18 @@ if(!empty($_REQUEST["BtnGuardarDevolucion"])){
                 $obVenta->InsertarItemsDevolucionAItemsFactura($Datos);///Relaciono los items de la factura
                 $obVenta->ActualizaRegistro("rem_devoluciones_totalizadas", "Facturas_idFacturas", $ID, "ID", $idDevolucion);
                 $obVenta->InsertarFacturaLibroDiario($Datos);///Inserto Items en el libro diario
-                //$obVenta->InsertarFacturaEnCartera($Datos);///Inserto La factura en la cartera
+               
+                if($TipoPago<>"Contado"){                   //Si es a Credito
+                    $Datos["Fecha"]=$FechaFactura; 
+                    $Datos["Dias"]=$SumaDias;
+                    $FechaVencimiento=$obVenta->SumeDiasFecha($Datos);
+                    $Datos["idFactura"]=$Datos["ID"]; 
+                    $Datos["FechaFactura"]=$FechaFactura; 
+                    $Datos["FechaVencimiento"]=$FechaVencimiento;
+                    $Datos["idCliente"]=$idCliente;
+                    $obVenta->InsertarFacturaEnCartera($Datos);///Inserto La factura en la cartera
+                }
+                
             }    
            
         }
