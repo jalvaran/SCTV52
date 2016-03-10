@@ -29,4 +29,21 @@ $TablaConfig="librodiario";
 $VarInsert[$TablaConfig]["idEmpresa"]["Required"]=1;
 $VarInsert[$TablaConfig]["idCentroCosto"]["Required"]=1;
 
+
+
+/*
+ * Tabla subcuentas
+ * Columnas excluidas
+ */
+$TablaConfig="subcuentas";
+$VarInsert[$TablaConfig]["Valor"]["Excluir"]=1;
+
+/*
+ * Parametros de configuracion subcuentas
+ * Columnas Excluidas
+ */
+$TablaConfig="cuentasfrecuentes";
+$VarInsert[$TablaConfig]["ClaseCuenta"]["Required"]=1;
+$VarInsert[$TablaConfig]["UsoFuturo"]["Excluir"]=1;
+
 ?>

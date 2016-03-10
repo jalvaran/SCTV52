@@ -63,4 +63,19 @@ $TablaConfig="librodiario";
 $VarEdit[$TablaConfig]["idEmpresa"]["Required"]=1;
 $VarEdit[$TablaConfig]["idCentroCosto"]["Required"]=1;
 
+
+/*
+ * Parametros de configuracion subcuentas
+ * Columnas Excluidas
+ */
+$TablaConfig="subcuentas";
+$VarEdit[$TablaConfig]["Valor"]["Excluir"]=1;
+
+/*
+ * Parametros de configuracion subcuentas
+ * CAmpos requeridos y Columnas Excluidas
+ */
+$TablaConfig="cuentasfrecuentes";
+$VarEdit[$TablaConfig]["ClaseCuenta"]["Required"]=1;
+$VarEdit[$TablaConfig]["UsoFuturo"]["Excluir"]=1;
 ?>

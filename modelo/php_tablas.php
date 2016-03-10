@@ -464,17 +464,20 @@ public function FormularioInsertRegistro($Parametros,$VarInsert)  {
                $lengCampo=100;
            }
            $Value=$ColumnasInfo["Default"][$i];
-           
+           $Required=0;
+           $ReadOnly=0;
            if($ColumnasInfo["Key"][$i]=="PRI"){ //Verificamos si la llave es primaria
-                $ReadOnly=1;
                 
+                $Required=1;
                 if(!$ColumnasInfo["Extra"][$i]=="auto_increment"){ //Verificamos si tiene auto increment
-                    $Value = $this->ObtengaID(); //Obtiene un timestamp para crear un id unico
+                   $Value = $this->ObtengaID(); //Obtiene un timestamp para crear un id unico
+                }else{
+                   $ReadOnly=1; 
                 }
            }else{
                 $ReadOnly=0;
            }
-           $Required=0;
+           
            if(isset($VarInsert[$tbl][$NombreCol]["Required"])){
                $Required=1;
            }
@@ -589,14 +592,18 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
            $SelColumnas=$NombreCol;
            $DatosRegistro =  $this->obCon->ValorActual($tbl, $SelColumnas, $Condicion);
            $Value=$DatosRegistro[$NombreCol];
+           $Required=0;
+           $ReadOnly=0;
            if($ColumnasInfo["Key"][$i]=="PRI"){ //Verificamos si la llave es primaria
-                $ReadOnly=1;
-                
-                
+                $Required=1;
+                if($ColumnasInfo["Extra"][$i]=="auto_increment"){ 
+                    $ReadOnly=1;
+                }
+                    
            }else{
                 $ReadOnly=0;
            }
-           $Required=0;
+           
            if(isset($VarEdit[$tbl][$NombreCol]["Required"])){
                $Required=1;
            }

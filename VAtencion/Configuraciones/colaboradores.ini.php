@@ -20,6 +20,14 @@ $Vector["Limit"]=$limit;            //Numero de Registros a mostrar
 
 $Vector["Excluir"]["Password"]=1;   //Indico que esta columna no se mostrará
 
+/*
+ * Deshabilito Acciones
+ * 
+ */
+
+      
+$Vector["VerRegistro"]["Deshabilitado"]=1;       
+
 ///Filtros y orden
 $Vector["Order"]=" $idTabla DESC ";   //Orden
 ?>

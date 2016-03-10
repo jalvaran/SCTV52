@@ -17,6 +17,14 @@ $Vector["VerDesde"]=$startpoint;    //Punto desde donde empieza
 $Vector["Limit"]=$limit;            //Numero de Registros a mostrar
 
 /*
+ * Deshabilito Acciones
+ * 
+ */
+
+        
+$Vector["VerRegistro"]["Deshabilitado"]=1; 
+
+/*
  * Datos vinculados
  * 
  */
