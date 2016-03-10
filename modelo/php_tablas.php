@@ -28,8 +28,7 @@ class Tabla{
  *Funcion devolver los nombres de las columnas de una tabla
  */
     
-public function Columnas($Vector)
-  {
+public function Columnas($Vector){
     
     $Tabla=$Vector["Tabla"];
     $sql="SHOW COLUMNS FROM `$this->DataBase`.`$Tabla`;";
@@ -47,8 +46,7 @@ public function Columnas($Vector)
  *Funcion devolver todas los atributos de las columnas de una tablas
  */
     
-public function ColumnasInfo($Vector)
-  {
+public function ColumnasInfo($Vector){
     
     $Tabla=$Vector["Tabla"];
     $sql="SHOW COLUMNS FROM `$this->DataBase`.`$Tabla`;";
@@ -92,12 +90,11 @@ public function ObtengaID(){
     return($ID);
 }
 
-////////////////////////////////////////////////////////////////////
-//////////////////////Funcion arme filtros
-///////////////////////////////////////////////////////////////////
+/*
+ * Funcion arme filtros
+ */
     
-public function CreeFiltro($Vector)
-  {
+public function CreeFiltro($Vector){
        
     $Columnas=$this->Columnas($Vector);
     $Tabla=$Vector["Tabla"];
@@ -168,8 +165,7 @@ public function CreeFiltro($Vector)
  * Funcion para crear una tabla con los datos de una tabla
  * 
  */
-
-    
+  
 public function DibujeTabla($Vector){
     //print_r($Vector);
     $this->css=new CssIni("");
@@ -304,9 +300,9 @@ public function DibujeTabla($Vector){
     //return($sql);
 }
  
-////////////////////////////////////////////////////////////////////
-//////////////////////Verificamos si hay peticiones de exportacion
-///////////////////////////////////////////////////////////////////
+/*
+ * Verificamos si hay peticiones de exportacion
+ */
     
 public function VerifiqueExport($Vector)  {
     
@@ -425,7 +421,6 @@ public function FormularioInsertRegistro($Parametros,$VarInsert)  {
     $tbl=$Tabla["Tabla"];
     $Titulo=$Parametros->Titulo;
     
-    
     $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
     $ColumnasInfo=$this->ColumnasInfo($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
     
@@ -449,6 +444,10 @@ public function FormularioInsertRegistro($Parametros,$VarInsert)  {
         
         if(isset($VarInsert[$tbl][$NombreCol]["Excluir"])){
             $excluir=1;
+        }
+        $TipoText="text";
+        if(isset($VarInsert[$tbl][$NombreCol]["TipoText"])){
+            $TipoText=$VarInsert[$tbl][$NombreCol]["TipoText"];
         }
         if(!$excluir){  //Si la columna no está excluida
            $lengCampo=preg_replace('/[^0-9]+/', '', $ColumnasInfo["Type"][$i]); //Determinamos la longitud del campo
@@ -501,13 +500,13 @@ public function FormularioInsertRegistro($Parametros,$VarInsert)  {
                     $this->css->CerrarSelect(); 
                 }else{
                   
-                    $this->css->CrearInputText("$NombreCol", "text", "", "", "$NombreCol", "black", "", "", $lengCampo."0", 30, 1, $Required);
+                    $this->css->CrearInputText("$NombreCol", $TipoText, "", "", "$NombreCol", "black", "", "", $lengCampo."0", 30, 1, $Required);
                               
                 }
             }else{
                 if($lengCampo<100){
 
-                    $this->css->CrearInputText("$NombreCol", "Text", "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
+                    $this->css->CrearInputText("$NombreCol", $TipoText, "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
                 }else{
                     $this->css->CrearTextArea("$NombreCol", "", $Value, "", "$NombreCol", "black", "", "","100",$lengCampo."0", $ReadOnly, 1);
                 }
@@ -564,7 +563,10 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
     foreach($Columnas as $NombreCol){
         $this->css->FilaTabla(14);
         $excluir=0;
-        
+        $TipoText="text";
+        if(isset($VarEdit[$tbl][$NombreCol]["TipoText"])){
+            $TipoText=$VarEdit[$tbl][$NombreCol]["TipoText"];
+        }
         if(isset($VarEdit[$tbl][$NombreCol]["Excluir"])){
             $excluir=1;
         }
@@ -622,7 +624,7 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
             }else{
                 if($lengCampo<100){
 
-                    $this->css->CrearInputText("$NombreCol", "Text", "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
+                    $this->css->CrearInputText("$NombreCol", $TipoText, "", $Value, "$NombreCol", "black", "", "", $lengCampo."0", 30, $ReadOnly, $Required);
                 }else{
                     $this->css->CrearTextArea("$NombreCol", "", $Value, "", "$NombreCol", "black", "", "","100",$lengCampo."0", $ReadOnly, 1);
                 }

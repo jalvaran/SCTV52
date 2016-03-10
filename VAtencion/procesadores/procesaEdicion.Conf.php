@@ -46,5 +46,11 @@ $VarEdit[$TablaConfig]["Cantidad"]["Excluir"]=1;
 
 $VarEdit[$TablaConfig]["Dias"]["Required"]=1;
 
+/*
+ * Tabla Usuarios
+ * Tipo de Texto
+ */
+$TablaConfig="usuarios";
+$VarEdit[$TablaConfig]["Password"]["TipoText"]="password";
 
 ?>
