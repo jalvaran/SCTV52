@@ -20,7 +20,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 include_once ('funciones/function.php');  //En esta funcion está la paginacion
 
 include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
-include_once("Configuraciones/usuarios.ini.php");  //Clases de donde se escribirán las tablas
+include_once("Configuraciones/impret.ini.php");  //Clases de donde se escribirán las tablas
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
 
@@ -50,7 +50,7 @@ $css->CrearDiv("principal", "container", "center",1,1);
 ///////////////Creamos la imagen representativa de la pagina
     /////
     /////	
-$css->CrearImageLink("../VMenu/Menu.php", "../images/usuarios.png", "_self",200,200);
+$css->CrearImageLink("../VMenu/Menu.php", "../images/impuestos.png", "_self",200,200);
 
 
 ////Paginacion
