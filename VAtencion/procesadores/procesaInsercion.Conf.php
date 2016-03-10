@@ -19,4 +19,14 @@ $VarInsert[$TablaConfig]["ImagenesProductos_idImagenesProductos"]["Excluir"]=1;
 $TablaConfig="usuarios";
 $VarInsert[$TablaConfig]["Password"]["TipoText"]="password";
 
+
+/*
+ * Tabla Usuarios
+ * Tipo de librodiario
+ * Campos Requridos
+ */
+$TablaConfig="librodiario";
+$VarInsert[$TablaConfig]["idEmpresa"]["Required"]=1;
+$VarInsert[$TablaConfig]["idCentroCosto"]["Required"]=1;
+
 ?>

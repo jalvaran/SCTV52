@@ -456,11 +456,12 @@ class ProcesoVenta{
             $idCliente=$DatosFactura['Clientes_idClientes'];
             $NIT=$DatosCliente["Num_Identificacion"];
             $RazonSocialC=$DatosCliente["RazonSocial"];
-
+            $EmpresaPro=$Datos["EmpresaPro"];
+            $CentroCostos=$Datos["CentroCostos"];
             $sql="SELECT * FROM facturas_items WHERE idFactura='$idFact'";
             $Consulta=$this->Query($sql);
             $tab="librodiario";
-            $NumRegistros=24;
+            $NumRegistros=26;
             while($DatosItems=$this->FetchArray($Consulta)){
                 
 		$Subtotal=$DatosItems["SubtotalItem"];
@@ -503,7 +504,9 @@ class ProcesoVenta{
 		$Columnas[21]="Mayor";			$Valores[21]="NO";
 		$Columnas[22]="Esp";			$Valores[22]="NO";
 		$Columnas[23]="Concepto";		$Valores[23]="Ventas";
-									
+		$Columnas[24]="idCentroCosto";		$Valores[24]=$CentroCostos;
+		$Columnas[25]="idEmpresa";		$Valores[25]=$EmpresaPro;
+                
 		$this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		
 		

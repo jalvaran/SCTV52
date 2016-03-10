@@ -53,4 +53,14 @@ $VarEdit[$TablaConfig]["Dias"]["Required"]=1;
 $TablaConfig="usuarios";
 $VarEdit[$TablaConfig]["Password"]["TipoText"]="password";
 
+
+/*
+ * Tabla librodiario
+ * 
+ * Campos Requridos
+ */
+$TablaConfig="librodiario";
+$VarEdit[$TablaConfig]["idEmpresa"]["Required"]=1;
+$VarEdit[$TablaConfig]["idCentroCosto"]["Required"]=1;
+
 ?>
