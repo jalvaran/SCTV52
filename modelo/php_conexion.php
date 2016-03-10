@@ -50,6 +50,11 @@ class ProcesoVenta{
         public  $CuentaIVAGen=2408;
         public  $TablaIVAGen="cuentas";
         public  $IDTablaIVAGen="idPUC";
+        public  $RegCREE="SI";
+        public  $CuentaCREE=135595;
+        public  $ContraPartidaCREE=23657502;
+	public  $CuentaCostoMercancia=6135;
+	public  $CuentaInventarios=1435;
 	
 	function __construct($idUserR){
 		$this->consulta =mysql_query("SELECT MAX(NumCotizacion) as NumCotizacion ,MAX(NumVenta) as NumVenta, MAX(NumFactura) as NumFactura  FROM vestasactivas
@@ -546,13 +551,13 @@ class ProcesoVenta{
 					
 					///////////////////////////////////////////////////////////////
 		////////////Registramos Autoretencion
-		if($RegCREE=="SI"){
+		if($this->RegCREE=="SI"){
 			
 			$CREE=$this->DevuelveValores("impret","Nombre","CREE");
 			
 			$ValorCREE=round($Subtotal*$CREE['Valor']);
 			
-			$CuentaPUC=$CuentaCREE; //  Autorretenciones CREE
+			$CuentaPUC=$this->CuentaCREE; //  Autorretenciones CREE
 			
 			$DatosCuenta=$this->DevuelveValores("subcuentas","PUC",$CuentaPUC);
 			$NombreCuenta=$DatosCuenta["Nombre"];
@@ -568,7 +573,7 @@ class ProcesoVenta{
 		///////////////////////////////////////////////////////////////
 		////////////contra partida de la Autoretencion
 		
-			$CuentaPUC=$ContraPartidaCREE; //  Cuentas por pagar Autorretenciones CREE
+			$CuentaPUC=$this->ContraPartidaCREE; //  Cuentas por pagar Autorretenciones CREE
 			
 			$DatosCuenta=$this->DevuelveValores("subcuentas","PUC",$CuentaPUC);
 			$NombreCuenta=$DatosCuenta["Nombre"];
@@ -590,7 +595,7 @@ class ProcesoVenta{
                         }
 			if($AjustaInventario=="SI"){
 				
-				$CuentaPUC=$CuentaCostoMercancia; //6135   costo de mercancia vendida
+				$CuentaPUC=$this->CuentaCostoMercancia; //6135   costo de mercancia vendida
 				
 				$DatosCuenta=$this->DevuelveValores('cuentas',"idPUC",$CuentaPUC);
 				$NombreCuenta=$DatosCuenta["Nombre"];
@@ -605,7 +610,7 @@ class ProcesoVenta{
 				
 				///////////////////////Ajustamos el inventario
 				
-				$CuentaPUC=$CuentaInventarios; //1435   Mercancias no fabricadas por la empresa
+				$CuentaPUC=$this->CuentaInventarios; //1435   Mercancias no fabricadas por la empresa
 				
 				$DatosCuenta=$this->DevuelveValores('cuentas',"idPUC",$CuentaPUC);
 				$NombreCuenta=$DatosCuenta["Nombre"];
@@ -1072,12 +1077,12 @@ public function CalculePesoRemision($idCotizacion)
             ///
             ///
             $IVA=$DatosProducto["IVA"];
-            $IVAItem=$IVA*$DatosDevolucion['Total'];
+            $IVAItem=round($IVA*$DatosDevolucion['Total']);
             $TotalIVA=$TotalIVA+$IVAItem; //se realiza la sumatoria del iva
             $TotalItem=$DatosDevolucion['Total']+$IVAItem;
             $TotalSubtotal=$TotalSubtotal+$DatosDevolucion['Total'];//se realiza la sumatoria del subtotal
             $GranTotal=$GranTotal+$TotalItem;//se realiza la sumatoria del total
-            $SubtotalCosto=$DatosProducto['CostoUnitario']*$DatosDevolucion['Cantidad'];
+            $SubtotalCosto=round($DatosProducto['CostoUnitario']*$DatosDevolucion['Cantidad']);
             $TotalCostos=$TotalCostos+$SubtotalCosto;//se realiza la sumatoria de los costos
             
             $ID=date("YmdHis").microtime(false);
