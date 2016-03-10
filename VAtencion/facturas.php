@@ -20,7 +20,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 include_once ('funciones/function.php');  //En esta funcion está la paginacion
 
 include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
-include_once("Configuraciones/librodiario.ini.php");  //Clases de donde se escribirán las tablas
+include_once("Configuraciones/Facturas.ini.php");  //Clases de donde se escribirán las tablas
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
 
@@ -50,7 +50,7 @@ $css->CrearDiv("principal", "container", "center",1,1);
 ///////////////Creamos la imagen representativa de la pagina
     /////
     /////	
-$css->CrearImageLink("../VMenu/Menu.php", "../images/librodiario.png", "_self",200,200);
+$css->CrearImageLink("../VMenu/Menu.php", "../images/facturas2.png", "_self",200,200);
 
 
 ////Paginacion
@@ -66,12 +66,19 @@ print("</div>");
 /*
  * Verifico que haya balance
  */
-$Consulta=$obVenta->Query("SELECT SUM(Neto) as Suma FROM $statement");
-$Neto=$obVenta->FetchArray($Consulta);
-$Neto=  number_format($Neto["Suma"]);
+
+$Consulta=$obVenta->Query("SELECT SUM(Total) as Total, SUM(IVA) as IVA, SUM(Subtotal) as Subtotal FROM $statement");
+$DatosFacturacion=$obVenta->FetchArray($Consulta);
+$Subtotal=  number_format($DatosFacturacion["Subtotal"]);
+$IVA=  number_format($DatosFacturacion["IVA"]);
+$Total=  number_format($DatosFacturacion["Total"]);
 $css->CrearTabla();
-$css->CrearFilaNotificacion("Debitos - Creditos = $Neto", 16);
+$css->CrearFilaNotificacion("Subtotal = $Subtotal <br>IVA = $IVA<br> Total = $Total", 16);
 $css->CerrarTabla();
+ 
+ 
+/////
+
 $obTabla->DibujeTabla($Vector);
 $css->CerrarDiv();//Cerramos contenedor Principal
 $css->AgregaJS(); //Agregamos javascripts

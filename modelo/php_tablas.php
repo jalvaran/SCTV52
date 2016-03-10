@@ -264,7 +264,13 @@ public function DibujeTabla($Vector){
             $this->css->FilaTabla(12);
             print("<td>");
             if(!isset($Vector["VerRegistro"]["Deshabilitado"])){
-                $Ruta="VerRegistro.php?TxtIdVer=$DatosProducto[0]";
+                $Ruta="";
+                if(isset($Vector["VerRegistro"]["Link"]) and isset($Vector["VerRegistro"]["ColumnaLink"])){
+                    $Ruta=$Vector["VerRegistro"]["Link"];
+                    $ColumnaLink=$Vector["VerRegistro"]["ColumnaLink"];
+                    $Ruta.=$DatosProducto[$ColumnaLink];
+                }
+                
                 $this->css->CrearLink($Ruta,"_blank", "Ver // ");
             }
             if(!isset($Vector["EditarRegistro"]["Deshabilitado"])){
