@@ -170,8 +170,7 @@ public function CreeFiltro($Vector)
  */
 
     
-public function DibujeTabla($Vector)
-  {
+public function DibujeTabla($Vector){
     //print_r($Vector);
     $this->css=new CssIni("");
     $Tabla["Tabla"]=$Vector["Tabla"];
@@ -447,9 +446,7 @@ public function FormularioInsertRegistro($Parametros,$VarInsert)  {
     foreach($Columnas as $NombreCol){
         $this->css->FilaTabla(14);
         $excluir=0;
-        if(property_exists($Parametros->Excluir,$NombreCol)){
-            $excluir=1;
-        }
+        
         if(isset($VarInsert[$tbl][$NombreCol]["Excluir"])){
             $excluir=1;
         }
@@ -457,6 +454,9 @@ public function FormularioInsertRegistro($Parametros,$VarInsert)  {
            $lengCampo=preg_replace('/[^0-9]+/', '', $ColumnasInfo["Type"][$i]); //Determinamos la longitud del campo
            if($lengCampo<1){
                $lengCampo=45;
+           }
+           if($ColumnasInfo["Type"][$i]=="text"){
+               $lengCampo=100;
            }
            $Value=$ColumnasInfo["Default"][$i];
            
@@ -470,7 +470,7 @@ public function FormularioInsertRegistro($Parametros,$VarInsert)  {
                 $ReadOnly=0;
            }
            $Required=0;
-           if(property_exists($Parametros->Required,$NombreCol)){
+           if(isset($VarInsert[$tbl][$NombreCol]["Required"])){
                $Required=1;
            }
             
@@ -572,6 +572,9 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
            $lengCampo=preg_replace('/[^0-9]+/', '', $ColumnasInfo["Type"][$i]); //Determinamos la longitud del campo
            if($lengCampo<1){
                $lengCampo=45;
+           }
+           if($ColumnasInfo["Type"][$i]=="text"){
+               $lengCampo=100;
            }
            $ColID=$Columnas[0];
            $Condicion=" $ColID='$IDEdit'";
