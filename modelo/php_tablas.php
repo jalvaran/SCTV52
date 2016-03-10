@@ -185,11 +185,12 @@ public function DibujeTabla($Vector)
     $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
     $myPage="$Tabla[Tabla]".".php";
     $NumCols=count($Columnas);
-    $this->css->CrearFormularioEvento("FrmAgregar", "InsertarRegistro.php", "post", "_self", "");
-    
-    $this->css->CrearInputText("TxtParametros", "hidden", "", urlencode(json_encode($Vector)), "", "", "", "", "", "", "", "");
-    $this->css->CrearBotonNaranja("BtnAgregar", "Agregar Nuevo Registro");
-    $this->css->CerrarForm();
+    if(!isset($Vector["NuevoRegistro"]["Deshabilitado"])){
+        $this->css->CrearFormularioEvento("FrmAgregar", "InsertarRegistro.php", "post", "_self", "");
+        $this->css->CrearInputText("TxtParametros", "hidden", "", urlencode(json_encode($Vector)), "", "", "", "", "", "", "", "");
+        $this->css->CrearBotonNaranja("BtnAgregar", "Agregar Nuevo Registro");
+        $this->css->CerrarForm();
+    }
     $this->css->CrearFormularioEvento("FrmFiltros", "$Tabla[Tabla]".".php", "post", "_self", "");
     $this->css->CrearInputText("TxtSql", "hidden", "", $statement, "", "", "", "", "", "", "", "");
     $ColFiltro=$NumCols-1;
@@ -213,6 +214,9 @@ public function DibujeTabla($Vector)
                 
                 print("<td><strong>$NombreCol</strong><br>");
                 $Ancho=strlen($NombreCol)."0";
+                if($Ancho<50){
+                    $Ancho=50;
+                }
                 $DatosSel["Nombre"]="Cond_".$NombreCol;
                 $DatosSel["Evento"]="";
                 $DatosSel["Ancho"]=50;
@@ -237,6 +241,7 @@ public function DibujeTabla($Vector)
                 if(!empty($_REQUEST["Filtro_".$NombreCol])){
                     $ValorFiltro=$_REQUEST["Filtro_".$NombreCol];
                 }
+                print("<br>");
                 $this->css->CrearInputText("Filtro_".$NombreCol, "Text", "", $ValorFiltro, "Filtrar", "black", "", "", $Ancho, 30, 0, 0);
                 
                 print("</td>");
@@ -263,12 +268,14 @@ public function DibujeTabla($Vector)
         while($DatosProducto=$this->obCon->FetchArray($Consulta)){
             $this->css->FilaTabla(12);
             print("<td>");
-            $Ruta="VerRegistro.php?TxtIdVer=$DatosProducto[0]";
-            $this->css->CrearLink($Ruta,"_blank", "Ver");
-            
-            print(" / / ");
-            $Ruta="EditarRegistro.php?&TxtIdEdit=$DatosProducto[0]&TxtParametros=$Parametros";
-            $this->css->CrearLink($Ruta, "_self", "Editar");
+            if(!isset($Vector["VerRegistro"]["Deshabilitado"])){
+                $Ruta="VerRegistro.php?TxtIdVer=$DatosProducto[0]";
+                $this->css->CrearLink($Ruta,"_blank", "Ver // ");
+            }
+            if(!isset($Vector["EditarRegistro"]["Deshabilitado"])){
+                $Ruta="EditarRegistro.php?&TxtIdEdit=$DatosProducto[0]&TxtParametros=$Parametros";
+                $this->css->CrearLink($Ruta, "_self", "Editar // ");
+            }
             print("</td>");
             for($i=0;$i<$NumCols;$i++){
                 if(isset($VisualizarRegistro[$i])){
@@ -557,9 +564,7 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
     foreach($Columnas as $NombreCol){
         $this->css->FilaTabla(14);
         $excluir=0;
-        if(property_exists($Parametros->Excluir,$NombreCol)){
-            $excluir=1;
-        }
+        
         if(isset($VarEdit[$tbl][$NombreCol]["Excluir"])){
             $excluir=1;
         }
@@ -581,7 +586,7 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
                 $ReadOnly=0;
            }
            $Required=0;
-           if(property_exists($Parametros->Required,$NombreCol)){
+           if(isset($VarEdit[$tbl][$NombreCol]["Required"])){
                $Required=1;
            }
             
