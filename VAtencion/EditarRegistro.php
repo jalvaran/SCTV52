@@ -40,8 +40,12 @@ $css->CrearDiv("principal", "container", "center",1,1);
 //print($statement);
 ///////////////Creamos la imagen representativa de la pagina
     /////
-    /////	
-$css->CrearImageLink("$Parametros->Tabla.php", "../images/volver.png", "_self",133,200);
+    /////
+$MyPage="$Parametros->Tabla.php";
+if(isset($VarEdit[$Parametros->Tabla]["MyPage"])){
+    $MyPage=$VarEdit[$Parametros->Tabla]["MyPage"];
+}
+$css->CrearImageLink($MyPage, "../images/volver.png", "_self",133,200);
 $obTabla->FormularioEditarRegistro($Parametros,$VarEdit);
 
 $css->CerrarDiv();//Cerramos contenedor Principal

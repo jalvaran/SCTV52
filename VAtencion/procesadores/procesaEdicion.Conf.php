@@ -86,4 +86,16 @@ $VarEdit[$TablaConfig]["UsoFuturo"]["Excluir"]=1;
  */
 $TablaConfig="cot_itemscotizaciones";
 $VarEdit[$TablaConfig]["CuentaPUC"]["Required"]=1;
+
+/*
+ * Tabla remisiones
+ * 
+ * Campos Requeridos
+ */
+$TablaConfig="remisiones";
+$VarEdit[$TablaConfig]["Usuarios_idUsuarios"]["Required"]=1;
+$VarEdit[$TablaConfig]["MyPage"]="historialremisiones.php";
+$VarEdit[$TablaConfig]["Cotizaciones_idCotizaciones"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["Anticipo"]["Excluir"]=1;
+
 ?>

@@ -178,7 +178,11 @@ public function DibujeTabla($Vector){
     $statement=$Vector["statement"];
     
     $Columnas=$this->Columnas($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
+    
     $myPage="$Tabla[Tabla]".".php";
+    if(isset($Vector["MyPage"])){
+        $myPage=$Vector["MyPage"];
+    }
     $NumCols=count($Columnas);
     if(!isset($Vector["NuevoRegistro"]["Deshabilitado"])){
         $this->css->CrearFormularioEvento("FrmAgregar", "InsertarRegistro.php", "post", "_self", "");
@@ -186,7 +190,7 @@ public function DibujeTabla($Vector){
         $this->css->CrearBotonNaranja("BtnAgregar", "Agregar Nuevo Registro");
         $this->css->CerrarForm();
     }
-    $this->css->CrearFormularioEvento("FrmFiltros", "$Tabla[Tabla]".".php", "post", "_self", "");
+    $this->css->CrearFormularioEvento("FrmFiltros", $myPage, "post", "_self", "");
     $this->css->CrearInputText("TxtSql", "hidden", "", $statement, "", "", "", "", "", "", "", "");
     $ColFiltro=$NumCols-1;
     $this->css->CrearTabla();
@@ -555,11 +559,15 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
     $ColumnasInfo=$this->ColumnasInfo($Tabla); //Se debe disenar la base de datos colocando siempre la llave primaria de primera
     
     $myPage="$Tabla[Tabla]".".php";
+    if(isset($VarEdit[$tbl]["MyPage"])){
+        $myPage=$VarEdit[$tbl]["MyPage"];
+    }
     $NumCols=count($Columnas);
     
     $this->css->CrearFormularioEvento("FrmGuardarRegistro", "procesadores/procesaEdicion.php", "post", "_self", "");
     $this->css->CrearInputText("TxtTablaEdit", "hidden", "", $tbl, "", "", "", "", "", "", "", "");
     $this->css->CrearInputText("TxtIDEdit", "hidden", "", $IDEdit, "", "", "", "", "", "", "", "");
+    $this->css->CrearInputText("TxtMyPage", "hidden", "", $myPage, "", "", "", "", "", "", "", "");
     $this->css->CrearTabla();
     $this->css->FilaTabla(18);
     print("<td style='text-align: center'><strong>$Titulo</strong>");

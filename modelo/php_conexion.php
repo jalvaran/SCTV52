@@ -1047,7 +1047,7 @@ public function CalculePesoRemision($idCotizacion)
         $Peso=0;
         $Consulta=$this->ConsultarTabla("cot_itemscotizaciones", "WHERE NumCotizacion=$idCotizacion");
         while($DatosItems=  mysql_fetch_array($Consulta)){
-            if($DatosItems["Tabla"]=="productosalquiler"){
+            if($DatosItems["TablaOrigen"]=="productosalquiler"){
                 $Producto=  $this->DevuelveValores("productosalquiler", "Referencia", $DatosItems["Referencia"]);
                 $Peso=$Peso+($Producto["PesoUnitario"]*$DatosItems["Cantidad"]);
             }

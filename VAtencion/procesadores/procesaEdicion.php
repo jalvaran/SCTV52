@@ -8,7 +8,10 @@ if(!empty($_REQUEST["BtnEditarRegistro"])){
     
     $obTabla = new Tabla($db);
     $obVenta = new ProcesoVenta(1);
+    
     $tab=$_REQUEST["TxtTablaEdit"];
+    $myPage1=explode(".",$_REQUEST["TxtMyPage"]);
+    $myPage=$myPage1[0];
     $IDEdit=$_REQUEST["TxtIDEdit"];
     $Vector["Tabla"]=$tab;
     $NombresColumnas=$obTabla->Columnas($Vector);
@@ -29,7 +32,7 @@ if(!empty($_REQUEST["BtnEditarRegistro"])){
     }
     $sql.=" WHERE $NombresColumnas[0] ='$IDEdit'";
     $obVenta->Query($sql);
-    header("location:../$tab.php");
+    header("location:../$myPage.php");
 }
 
 

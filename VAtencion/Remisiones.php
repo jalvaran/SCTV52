@@ -62,7 +62,9 @@ include_once("procesaRemision.php");
 	 $css->CerrarForm();
 	 
 	 $css->CabeceraFin(); 
-	 
+	 $css->CreaMenuBasico("Menu"); 
+            $css->CreaSubMenuBasico("Historial de Remisiones","historialremisiones.php");
+         $css->CierraMenuBasico(); 
 	 ?>
 	
 
