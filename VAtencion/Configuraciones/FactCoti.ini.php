@@ -31,7 +31,7 @@ $Vector["VerRegistro"]["Link"]=$Ruta;
 $Vector["VerRegistro"]["ColumnaLink"]="ID";
 
 //Nueva Accion
-$Ruta="Devoluciones.php?TxtAsociarRemision=";
+$Ruta="FacturaCotizacion.php?TxtAsociarCotizacion=";
 $Vector["NuevaAccionLink"][0]="AsociarCoti";
 $Vector["NuevaAccion"]["AsociarCoti"]["Titulo"]="Facturar";
 $Vector["NuevaAccion"]["AsociarCoti"]["Link"]=$Ruta;
