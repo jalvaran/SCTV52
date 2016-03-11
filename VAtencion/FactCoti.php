@@ -20,7 +20,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 include_once ('funciones/function.php');  //En esta funcion está la paginacion
 
 include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
-include_once("Configuraciones/Facturas.ini.php");  //Clases de donde se escribirán las tablas
+include_once("Configuraciones/FactCoti.ini.php");  //Clases de donde se escribirán las tablas
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
 
@@ -65,19 +65,6 @@ print("</div>");
 ///Dibujo la tabla
 ////
 ///
-/*
- * Verifico que haya balance
- */
-
-$Consulta=$obVenta->Query("SELECT SUM(Total) as Total, SUM(IVA) as IVA, SUM(Subtotal) as Subtotal FROM $statement");
-$DatosFacturacion=$obVenta->FetchArray($Consulta);
-$Subtotal=  number_format($DatosFacturacion["Subtotal"]);
-$IVA=  number_format($DatosFacturacion["IVA"]);
-$Total=  number_format($DatosFacturacion["Total"]);
-$css->CrearTabla();
-$css->CrearFilaNotificacion("Subtotal = $Subtotal <br>IVA = $IVA<br> Total = $Total", 16);
-$css->CerrarTabla();
- 
  
 /////
 

@@ -1039,7 +1039,7 @@ public function FetchArray($Datos)
             return($idIngreso);
 	}
         
-        ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 //////////////////////Funcion calcular peso de una remision
 ///////////////////////////////////////////////////////////////////
 public function CalculePesoRemision($idCotizacion)
@@ -1071,6 +1071,18 @@ public function CalculePesoRemision($idCotizacion)
 
         return($nuevafecha);
 
+    }
+    
+    /*
+ * 
+ * Funcion evitar la inyeccion de codigo sql
+ */
+
+    public function normalizar($string){		
+        $str=str_replace("'", "", $string);
+        $str=str_replace(";", ",", $str);
+        
+        return($str);
     }
     
     

@@ -281,6 +281,23 @@ public function DibujeTabla($Vector){
                 $Ruta="EditarRegistro.php?&TxtIdEdit=$DatosProducto[0]&TxtParametros=$Parametros";
                 $this->css->CrearLink($Ruta, "_self", "Editar // ");
             }
+            /*
+             * Espacio para nuevas acciones
+             */
+            if(isset($Vector["NuevaAccion"])){
+                //$NumAcciones=count($Vector["NuevaAccion"]["Titulo"]);
+                foreach($Vector["NuevaAccionLink"] as $NuevaAccion){
+                    $TituloLink=$Vector["NuevaAccion"][$NuevaAccion]["Titulo"];
+                    $Target=$Vector["NuevaAccion"][$NuevaAccion]["Target"];
+                    $Ruta=$Vector["NuevaAccion"][$NuevaAccion]["Link"];
+                    $ColumnaLink=$Vector["NuevaAccion"][$NuevaAccion]["ColumnaLink"];
+                    $Ruta.=$DatosProducto[$ColumnaLink];
+                    $this->css->CrearLink($Ruta,$Target, " // $TituloLink // ");
+                }
+                
+                
+            }
+            
             print("</td>");
             for($i=0;$i<$NumCols;$i++){
                 if(isset($VisualizarRegistro[$i])){
