@@ -38,10 +38,6 @@ print("<body>");
     $css->CerrarForm();
     
     $css->CabeceraFin(); 
-    
-    $css->CreaMenuBasico("Menu"); 
-            $css->CreaSubMenuBasico("Historial de Devoluciones","rem_devoluciones.php");
-         $css->CierraMenuBasico();
     ///////////////Creamos el contenedor
     /////
     /////
