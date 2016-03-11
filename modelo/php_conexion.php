@@ -1081,6 +1081,7 @@ public function CalculePesoRemision($idCotizacion)
     public function normalizar($string){		
         $str=str_replace("'", "", $string);
         $str=str_replace(";", ",", $str);
+        //$str=filter_var($string, FILTER_SANITIZE_STRING);
         
         return($str);
     }
@@ -1123,9 +1124,10 @@ public function CalculePesoRemision($idCotizacion)
                 
         
     }
-         ////////////////////////////////////////////////////////////////////
-    //////////////////////Funcion Agregar items de devolucion a una factura peso de una remision
-    ///////////////////////////////////////////////////////////////////
+/*
+ * Funcion Agregar items de devolucion a una factura peso de una remision
+ */
+    
     public function InsertarItemsDevolucionAItemsFactura($Datos){
         $idDevolucion=$Datos["NumDevolucion"];
         $NumFactura=$Datos["ID"];
@@ -1195,7 +1197,82 @@ public function CalculePesoRemision($idCotizacion)
                 . "SaldoFact='$GranTotal', TotalCostos='$TotalCostos' WHERE idFacturas='$ID'";
         $this->Query($sql);
     }
-                
+             
+    
+/*
+ * Funcion Agregar items de una cotizacion a una factura
+ */
+    
+    public function InsertarItemsCotizacionAItemsFactura($Datos){
+        
+        $idCotizacion=$Datos["NumCotizacion"];
+        $NumFactura=$Datos["ID"];
+        $FechaFactura=$Datos["FechaFactura"];
+        
+        $sql="SELECT * FROM cot_itemscotizaciones WHERE NumCotizacion='$idCotizacion'";
+        $Consulta=$this->Query($sql);
+        $TotalSubtotal=0;
+        $TotalIVA=0;
+        $GranTotal=0;
+        $TotalCostos=0;
+        while($DatosCotizacion=  mysql_fetch_array($Consulta)){
+
+            $DatosProducto=$this->DevuelveValores($DatosCotizacion["TablaOrigen"], "Referencia", $DatosCotizacion["Referencia"]);
+            ////Empiezo a insertar en la tabla items facturas
+            ///
+            ///
+            $SubtotalItem=$DatosCotizacion["Subtotal"];
+            $TotalSubtotal=$TotalSubtotal+$SubtotalItem; //se realiza la sumatoria del subtotal
+            
+            $IVAItem=$DatosCotizacion["IVA"];
+            $TotalIVA=$TotalIVA+$IVAItem; //se realiza la sumatoria del iva
+            
+            $TotalItem=$DatosCotizacion['Total'];
+            $GranTotal=$GranTotal+$TotalItem;//se realiza la sumatoria del total
+            
+            $SubtotalCosto=$DatosCotizacion['SubtotalCosto'];
+            $TotalCostos=$TotalCostos+$SubtotalCosto;//se realiza la sumatoria de los costos
+            
+            $ID=date("YmdHis").microtime(false);
+            $tab="facturas_items";
+            $NumRegistros=25;
+            $Columnas[0]="ID";			$Valores[0]=$ID;
+            $Columnas[1]="idFactura";           $Valores[1]=$NumFactura;
+            $Columnas[2]="TablaItems";          $Valores[2]=$DatosCotizacion["TablaOrigen"];
+            $Columnas[3]="Referencia";          $Valores[3]=$DatosCotizacion["Referencia"];
+            $Columnas[4]="Nombre";              $Valores[4]=$DatosProducto["Nombre"];
+            $Columnas[5]="Departamento";	$Valores[5]=$DatosProducto["Departamento"];
+            $Columnas[6]="SubGrupo1";           $Valores[6]=$DatosProducto['Sub1'];
+            $Columnas[7]="SubGrupo2";           $Valores[7]=$DatosProducto['Sub2'];
+            $Columnas[8]="SubGrupo3";           $Valores[8]=$DatosProducto['Sub3'];
+            $Columnas[9]="SubGrupo4";           $Valores[9]=$DatosProducto['Sub4'];
+            $Columnas[10]="SubGrupo5";          $Valores[10]=$DatosProducto['Sub5'];
+            $Columnas[11]="ValorUnitarioItem";	$Valores[11]=$DatosCotizacion['ValorUnitario'];
+            $Columnas[12]="Cantidad";		$Valores[12]=$DatosCotizacion['Cantidad'];
+            $Columnas[13]="Dias";		$Valores[13]=0;
+            $Columnas[14]="SubtotalItem";       $Valores[14]=$SubtotalItem;
+            $Columnas[15]="IVAItem";		$Valores[15]=$IVAItem;
+            $Columnas[16]="TotalItem";		$Valores[16]=$TotalItem;
+            $Columnas[17]="PorcentajeIVA";	$Valores[17]=($DatosProducto['IVA']*100)."%";
+            $Columnas[18]="PrecioCostoUnitario";$Valores[18]=$DatosProducto['CostoUnitario'];
+            $Columnas[19]="SubtotalCosto";	$Valores[19]=$SubtotalCosto;
+            $Columnas[20]="TipoItem";		$Valores[20]=$DatosCotizacion["TipoItem"];
+            $Columnas[21]="CuentaPUC";		$Valores[21]=$DatosProducto['CuentaPUC'];
+            $Columnas[22]="GeneradoDesde";	$Valores[22]="cotizaciones";
+            $Columnas[23]="NumeroIdentificador";$Valores[23]=$idCotizacion;
+            $Columnas[24]="FechaFactura";       $Valores[24]=$FechaFactura;
+            
+            $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+        }
+        $ID=$Datos["ID"]; 
+        $TotalSubtotal=round($TotalSubtotal);
+        $TotalIVA=round($TotalIVA);
+        $GranTotal=round($GranTotal);
+        $TotalCostos=round($TotalCostos);
+        $sql="UPDATE facturas SET Subtotal='$TotalSubtotal', IVA='$TotalIVA', Total='$GranTotal', "
+                . "SaldoFact='$GranTotal', TotalCostos='$TotalCostos' WHERE idFacturas='$ID'";
+        $this->Query($sql);
+    }    
 //////////////////////////////Fin	
 }
 

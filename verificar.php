@@ -1,5 +1,8 @@
 <?php
+
 session_start();
+//require_once('Classes/sanity.class.php');
+//$Sanidad = new input();
 include("modelo/php_conexion.php");
 
 	if(isset($_POST["user"]) && !empty($_POST["user"]) &&
@@ -8,7 +11,9 @@ include("modelo/php_conexion.php");
             $obCon=new ProcesoVenta(1);
             
             $User=$obCon->normalizar($_POST["user"]);
-            $sel=mysql_query("SELECT * FROM usuarios WHERE Login='$User'");
+            $sql="SELECT * FROM usuarios WHERE Login='$User'";
+            
+            $sel=mysql_query($sql);
             $sesion=mysql_fetch_array($sel);
 		  
 		

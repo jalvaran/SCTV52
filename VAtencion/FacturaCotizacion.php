@@ -24,7 +24,7 @@ $css =  new CssIni("Asociar una cotizacion a una factura");
 print("</head>");
 print("<body>");
     $obVenta = new ProcesoVenta($idUser);
-    include_once("procesadores/procesaCotizacion.php");
+    include_once("procesadores/procesaFacturarCoti.php");
     $myPage="FacturaCotizacion.php";
     $css->CabeceraIni("SoftConTech Facturar una Cotización"); //Inicia la cabecera de la pagina
        
@@ -71,7 +71,8 @@ print("<body>");
     if(!empty($idCotizacion)){
         //print("<script>alert('entra')</script>");
         $DatosCotizacion=$obVenta->DevuelveValores("cotizacionesv5","ID",$idCotizacion);
-        $DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$DatosCotizacion["Clientes_idClientes"]);
+        $idCliente=$DatosCotizacion["Clientes_idClientes"];
+        $DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$idCliente);
 
             $css->CrearTabla();
            
@@ -96,24 +97,34 @@ print("<body>");
 
     if(mysql_affected_rows()){
 
-
+        
         $css->CrearTabla();
         $css->CrearFilaNotificacion("PRE-FACTURA",18);
         $css->FilaTabla(16);
         $css->ColTabla("<strong>Referencia</strong>", 1);
         $css->ColTabla("<strong>Descripcion</strong>", 1);
-        $css->ColTabla("<strong>Valor Unitario</strong>", 1);
-        $css->ColTabla("<strong>Cantidad</strong>", 1);
+        $css->ColTabla("<strong>Valor Unitario / Cantidad</strong>", 1);
         $css->ColTabla("<strong>Total Item</strong>", 1);
         $css->ColTabla("<strong>Borrar</strong>", 1);
         $css->CierraFilaTabla();
 
         while($DatosItemsCotizacion=mysql_fetch_array($consulta)){
+            $idItem=$DatosItemsCotizacion["ID"];
             $css->FilaTabla(16);
             $css->ColTabla($DatosItemsCotizacion["Referencia"], 1);
             $css->ColTabla($DatosItemsCotizacion["Descripcion"], 1);
-            $css->ColTabla($DatosItemsCotizacion["ValorUnitario"], 1);
-            $css->ColTabla($DatosItemsCotizacion["Cantidad"], 1);
+            $DatosProducto=$obVenta->DevuelveValores($DatosItemsCotizacion["TablaOrigen"], "Referencia", $DatosItemsCotizacion["Referencia"]);
+            print("<td>");
+                $css->CrearForm("FormEditarCotizacion$idItem", $myPage, "post", "_self");
+                $css->CrearInputText("TxtIdCotizacion", "hidden", "", $idCotizacion, "", "", "", "", "", "", 0, 0);
+                $css->CrearInputText("TxtIdItemCotizacion", "hidden", "", $idItem, "", "", "", "", "", "", 0, 0);
+                $css->CrearInputNumber("TxtValorUnitario", "number", "", $DatosItemsCotizacion["ValorUnitario"], "ValorUnitario", "black", "", "", 120, 30, 0, 1, $DatosProducto["CostoUnitario"], $DatosItemsCotizacion["ValorUnitario"]."0", "any");
+                $css->CrearInputNumber("TxtCantidad", "number", "", $DatosItemsCotizacion["Cantidad"], "ValorUnitario", "black", "", "", 80, 30, 0, 1, 0.00001, "", "any");
+                $css->CrearBotonVerde("BtnEditar", "E");
+                $css->CerrarForm();
+            print("</td>");
+            
+            
             $css->ColTabla($DatosItemsCotizacion["Subtotal"], 1);
             
             $css->ColTablaDel($myPage,"cot_itemscotizaciones","ID",$DatosItemsCotizacion['ID'],$idCotizacion);
@@ -130,7 +141,7 @@ print("<body>");
         $Total=$obVenta->Sume("cot_itemscotizaciones", "Total", "WHERE NumCotizacion='$idCotizacion'");
         $css->CrearFormularioEvento("FormGeneraFactura", $myPage, "post", "_self","");
         $css->CrearInputText("TxtIdCotizacion","hidden","",$idCotizacion,"","black","","",150,30,0,0);
-               
+        $css->CrearInputText("TxtIdCliente","hidden","",$idCliente,"","black","","",150,30,0,0);      
         $css->CrearTabla();
         $css->FilaTabla(12);
         $css->ColTabla("<h4 align='right'>Subtotal</h4>", 1);
