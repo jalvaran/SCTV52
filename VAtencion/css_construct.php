@@ -53,6 +53,7 @@
 		</style>
 
 
+
 <?php
 	
 
@@ -84,7 +85,7 @@ class CssIni{
 		  }
 		</style>
 		<link href='css/bootstrap-responsive.css' rel='stylesheet'>
-
+                
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		  <script src='../assets/js/html5shiv.js'></script>
@@ -566,6 +567,25 @@ class CssIni{
             }
             print("<script>$Alerta('$Mensaje');</script>");
 		
+	}
+        
+        
+
+////////////////////////////Crear Footer	
+		
+function Footer(){
+		
+		print('<footer>    
+  <div style="text-align: center">
+    <div>
+       <a href="../VMenu/Menu.php" class="f_logo"><img src="../images/header-logo.png" alt=""></a>
+      <div class="copy">
+      &copy; 2016 | <a href="#">Privacy Policy</a> <br> Software  designed by <a href="http://technosoluciones.com/" rel="nofollow" target="_blank">Techno Soluciones SAS</a>
+      </div>
+    </div>
+  </div>
+</footer>
+		');
 	}
         
                

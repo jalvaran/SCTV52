@@ -80,6 +80,7 @@ $css->CerrarTabla();
 
 $obTabla->DibujeTabla($Vector);
 $css->CerrarDiv();//Cerramos contenedor Principal
+$css->Footer();
 $css->AgregaJS(); //Agregamos javascripts
 //$css->AgregaSubir();    
 ////Fin HTML  

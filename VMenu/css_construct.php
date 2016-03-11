@@ -213,8 +213,7 @@ function Footer(){
 
 ////////////////////////////Crea boton desplegable
 	
-	function CreaBotonDesplegable($NombreBoton,$TituloBoton)
-  {
+	function CreaBotonDesplegable($NombreBoton,$TituloBoton){
 	
 		
 	print('<li><a href="#'.$NombreBoton.'" role="button" class="btn" data-toggle="modal" title="'.$TituloBoton.'">
@@ -222,8 +221,7 @@ function Footer(){
 
 	}	
 	
-	function CreaBotonAgregaPreventa($Page,$idUser)
-  {
+	function CreaBotonAgregaPreventa($Page,$idUser){
 		
 	print('	<a class="brand" href="'.$Page.'?BtnAgregarPreventa='.$idUser.'">Agregar Preventa</a>');
 

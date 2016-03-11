@@ -55,7 +55,9 @@ $css->CrearImageLink("../VMenu/Menu.php", "../images/facturas2.png", "_self",200
 
 ////Paginacion
 ////
-$Ruta="";
+
+
+                $Ruta="";
 print("<div style='height: 50px;'>");   //Dentro de un DIV para no hacerlo tan grande
 print(pagination($Ruta,$statement,$limit,$page));
 print("</div>");
@@ -80,6 +82,7 @@ $css->CerrarTabla();
 /////
 
 $obTabla->DibujeTabla($Vector);
+
 $css->CerrarDiv();//Cerramos contenedor Principal
 $css->Footer();
 $css->AgregaJS(); //Agregamos javascripts
