@@ -442,9 +442,9 @@ class ProcesoVenta{
 	
 
         
-////////////////////////////////////////////////////////////////////
-//////////////////////Funcion realiza asiento contable facturas item por item
-///////////////////////////////////////////////////////////////////
+/*
+ * Funcion realiza asiento contable facturas item por item
+ */
 
     public function InsertarFacturaLibroDiario($Datos){
 
