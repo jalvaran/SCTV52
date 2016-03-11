@@ -98,4 +98,11 @@ $VarEdit[$TablaConfig]["MyPage"]="historialremisiones.php";
 $VarEdit[$TablaConfig]["Cotizaciones_idCotizaciones"]["Excluir"]=1;
 $VarEdit[$TablaConfig]["Anticipo"]["Excluir"]=1;
 
+/*
+ * Tabla cot_itemscotizaciones
+ * 
+ * Campos Requridos
+ */
+$TablaConfig="rem_devoluciones";
+$VarEdit[$TablaConfig]["Usuarios_idUsuarios"]["Required"]=1;
 ?>

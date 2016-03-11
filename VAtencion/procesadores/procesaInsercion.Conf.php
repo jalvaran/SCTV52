@@ -55,5 +55,11 @@ $VarInsert[$TablaConfig]["UsoFuturo"]["Excluir"]=1;
 $TablaConfig="cot_itemscotizaciones";
 $VarInsert[$TablaConfig]["CuentaPUC"]["Required"]=1;
 
-
+/*
+ * Tabla cot_itemscotizaciones
+ * 
+ * Campos Requridos
+ */
+$TablaConfig="rem_devoluciones";
+$VarInsert[$TablaConfig]["Usuarios_idUsuarios"]["Required"]=1;
 ?>
