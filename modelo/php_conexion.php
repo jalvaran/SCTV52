@@ -1263,6 +1263,19 @@ public function CalculePesoRemision($idCotizacion)
             $Columnas[24]="FechaFactura";       $Valores[24]=$FechaFactura;
             
             $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+            if($DatosCotizacion["TipoItem"]=="PR"){
+                
+                $DatosKardex["Cantidad"]=$DatosCotizacion['Cantidad'];
+                $DatosKardex["idProductosVenta"]=$DatosProducto["idProductosVenta"];
+                $DatosKardex["CostoUnitario"]=$DatosProducto['CostoUnitario'];
+                $DatosKardex["Existencias"]=$DatosProducto['Existencias'];
+                $DatosKardex["Detalle"]="Factura";
+                $DatosKardex["idDocumento"]=$NumFactura;
+                $DatosKardex["TotalCosto"]=$SubtotalCosto;
+                $DatosKardex["Movimiento"]="SALIDA";
+                
+                $this->InserteKardex($DatosKardex);
+            }
         }
         $ID=$Datos["ID"]; 
         $TotalSubtotal=round($TotalSubtotal);
@@ -1272,7 +1285,48 @@ public function CalculePesoRemision($idCotizacion)
         $sql="UPDATE facturas SET Subtotal='$TotalSubtotal', IVA='$TotalIVA', Total='$GranTotal', "
                 . "SaldoFact='$GranTotal', TotalCostos='$TotalCostos' WHERE idFacturas='$ID'";
         $this->Query($sql);
-    }    
+        
+    }   
+    
+    
+    public function InserteKardex($DatosKardex){
+        $Fecha=date("Y-m-d");
+        $Saldo=$DatosKardex["Existencias"]-$DatosKardex["Cantidad"];
+        $TotalCostoSaldo=$Saldo*$DatosKardex["CostoUnitario"];
+        
+        /*
+         * Inserto el kardex del producto primer movimiento 
+         */
+        $tab="kardexmercancias";
+        $NumRegistros=8;
+        $Columnas[0]="Fecha";                           $Valores[0]=$Fecha;
+        $Columnas[1]="Movimiento";                      $Valores[1]=$DatosKardex["Movimiento"];
+        $Columnas[2]="Detalle";                         $Valores[2]=$DatosKardex["Detalle"];
+        $Columnas[3]="idDocumento";                     $Valores[3]=$DatosKardex["idDocumento"];
+        $Columnas[4]="Cantidad";                        $Valores[4]=$DatosKardex["Cantidad"];
+        $Columnas[5]="ValorUnitario";                   $Valores[5]=$DatosKardex["CostoUnitario"];
+        $Columnas[6]="ValorTotal";                      $Valores[6]=$DatosKardex["TotalCosto"];
+        $Columnas[7]="ProductosVenta_idProductosVenta"; $Valores[7]=$DatosKardex['idProductosVenta'];
+        
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+        
+        /*
+         * Inserto el kardex del producto segundo movimiento SALDOS 
+         */
+        
+        $Columnas[1]="Movimiento";                      $Valores[1]="SALDOS";
+        $Columnas[4]="Cantidad";                        $Valores[4]=$Saldo;
+        $Columnas[6]="ValorTotal";                      $Valores[6]=$TotalCostoSaldo;
+              
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+        /*
+         * Actualizo inventarios
+         */
+        $sql="UPDATE productosventa SET Existencias='$Saldo', CostoTotal='$TotalCostoSaldo'"
+                . "WHERE idProductosVenta=$DatosKardex[idProductosVenta]";
+        $this->Query($sql);
+        
+    }
 //////////////////////////////Fin	
 }
 
