@@ -171,3 +171,33 @@ function Habilita(id,estado){
     document.getElementById(id).disabled=estado;
        
 }
+
+function CalculeTotal() {
+
+	var Subtotal;
+	var IVA;
+	var Total;
+	
+	Subtotal = parseInt(document.getElementById("TxtSubtotal").value);
+	IVA = parseInt(document.getElementById("TxtIVA").value);
+	Total= parseInt(Subtotal) + parseInt(IVA);
+	
+	document.getElementById("TxtTotal").value=Total;
+
+}
+
+function CalculeTotalImpuestos() {
+
+	var TxtSancion;
+	var TxtIntereses;
+	var TxtImpuesto;
+	var Total;
+	
+	TxtSancion = parseInt(document.getElementById("TxtSancion").value);
+	TxtIntereses = parseInt(document.getElementById("TxtIntereses").value);
+	TxtImpuesto = parseInt(document.getElementById("TxtImpuesto").value);
+	Total= parseInt(TxtSancion) + parseInt(TxtIntereses) + parseInt(TxtImpuesto);
+	
+	document.getElementById("TxtTotal").value=Total;
+
+}

@@ -1,30 +1,30 @@
 <?php
 
 require_once('tcpdf_include.php');
-include("conexion.php");
+include("../../modelo/php_conexion.php");
 ////////////////////////////////////////////
 /////////////Verifico que haya una sesion activa
 ////////////////////////////////////////////
 session_start();
 if(!isset($_SESSION["username"]))
-   header("Location: index.html");
+   header("Location: index.php");
 
 ////////////////////////////////////////////
 /////////////Obtengo el ID de la Factura a que se imprimirá 
 ////////////////////////////////////////////
 
-$idEgresos = $_POST["ImgPrintComp"];
+$idEgresos = $_REQUEST["ImgPrintComp"];
 
 ////////////////////////////////////////////
 /////////////Me conecto a la db
 ////////////////////////////////////////////
 
-$con=mysql_connect($host,$user,$pw) or die("problemas con el servidor");
-mysql_select_db($db,$con) or die("la base de datos no abre");
+//$con=mysql_connect($host,$user,$pw) or die("problemas con el servidor");
+//mysql_select_db($db,$con) or die("la base de datos no abre");
 ////////////////////////////////////////////
 /////////////Obtengo datos del egresos
 ////////////////////////////////////////////
-		  $sel1=mysql_query("SELECT * FROM egresos WHERE idEgresos=$idEgresos",$con) or die("problemas con la consulta a egresos");
+		  $sel1=mysql_query("SELECT * FROM egresos WHERE idEgresos='$idEgresos'",$con) or die("problemas con la consulta a egresos");
 		  $DatosEgreso=mysql_fetch_array($sel1);	
 		  //$IDCoti=$DatosFactura["Cotizaciones_idCotizaciones"];
 		  
