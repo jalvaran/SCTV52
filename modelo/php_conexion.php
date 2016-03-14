@@ -1258,7 +1258,7 @@ public function CalculePesoRemision($idCotizacion)
             $Columnas[19]="SubtotalCosto";	$Valores[19]=$SubtotalCosto;
             $Columnas[20]="TipoItem";		$Valores[20]=$DatosCotizacion["TipoItem"];
             $Columnas[21]="CuentaPUC";		$Valores[21]=$DatosProducto['CuentaPUC'];
-            $Columnas[22]="GeneradoDesde";	$Valores[22]="cotizaciones";
+            $Columnas[22]="GeneradoDesde";	$Valores[22]="cotizacionesv5";
             $Columnas[23]="NumeroIdentificador";$Valores[23]=$idCotizacion;
             $Columnas[24]="FechaFactura";       $Valores[24]=$FechaFactura;
             

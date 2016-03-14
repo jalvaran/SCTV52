@@ -59,8 +59,8 @@
             $css->NuevaTabs(1);
                 $css->SubTabs("../VAtencion/facturas.php","_blank","../images/factura.png","Historial");
                 $css->SubTabs("../VAtencion/FactCoti.php","_blank","../images/cotizacion.png","Facturar desde Cotización");
-                $css->SubTabs("../VAtencion/FactRemi.php","_blank","../images/Remision.png","Facturar desde Remisión");
-                $css->SubTabs("../VAtencion/FactDevo.php","_blank","../images/devolucion.png","Facturar desde Devolución");
+                //$css->SubTabs("../VAtencion/FactRemi.php","_blank","../images/Remision.png","Facturar desde Remisión");    //Uso Futuro
+                //$css->SubTabs("../VAtencion/FactDevo.php","_blank","../images/devolucion.png","Facturar desde Devolución");//Uso Futuro
             $css->FinTabs();
 		
 	$css->FinMenu(); 

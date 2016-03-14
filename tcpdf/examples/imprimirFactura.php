@@ -171,11 +171,15 @@ $pdf->MultiCell(90, 25, $tbl, 0, 'R', 1, 0, '', '', true,0, true, true, 10, 'M')
 ////Descripcion de los Items Facturados
 ////
 ////
-$SumaDias=$obVenta->SumeColumna("facturas_items", "Dias", "idFactura", $idFactura);
-if($SumaDias>0){
+//$SumaDias=$obVenta->SumeColumna("facturas_items", "Dias", "idFactura", $idFactura);
+$DatosGeneracion=$obVenta->DevuelveValores("facturas_items", "idFactura", $idFactura);
+$Generado=$DatosGeneracion["GeneradoDesde"];
+if($Generado=="rem_devoluciones"){
     require_once('factura_items_f1.php');   ///Formato de factura don cantidades y dias
 }
-
+if($Generado=="cotizacionesv5"){
+    require_once('factura_items_cotizacion.php');   ///Formato de factura don cantidades y dias
+}
 
 ////Totales de la factura
 ////
@@ -215,7 +219,7 @@ EOD;
 $pdf->MultiCell(180, 30, $tbl, 0, 'L', 1, 0, '', '', true,0, true, true, 10, 'M');
 
 
-if($SumaDias>0){
+if($Generado=="rem_devoluciones"){
     require_once('factura_items_f2.php');    ///Hoja con la descripcion de los dias facturados
 }
 
