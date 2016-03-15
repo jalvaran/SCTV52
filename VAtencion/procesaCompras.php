@@ -30,12 +30,12 @@
 		$NumRegistros=19;
 		
 		$DatosProveedor=$tabla->DevuelveValores("proveedores","idProveedores",$idProveedor);
-		$CentroCostos=$tabla->DevuelveValores("servicio","id",$_REQUEST["CmbCentroCosto"]);
+		$CentroCostos=$tabla->DevuelveValores("centrocosto","ID",$_REQUEST["CmbCentroCosto"]);
 		$DatosTipoEgreso=$tabla->DevuelveValores("egresos_activos","id",$TipoEgreso);
 		$RazonSocial=$DatosProveedor["RazonSocial"];
 		$NIT=$DatosProveedor["Num_Identificacion"];
-		$idEmpresa=$CentroCostos["empresa_id"];
-		$idCentroCostos=$CentroCostos["id"];
+		$idEmpresa=$CentroCostos["EmpresaPro"];
+		$idCentroCostos=$CentroCostos["ID"];
 		
 		
 		$Columnas[0]="Fecha";				$Valores[0]=$fecha;
@@ -54,8 +54,8 @@
 		$Columnas[13]="NumFactura";			$Valores[13]=$NumFact;
 		$Columnas[14]="idProveedor";		$Valores[14]=$idProveedor;
 		$Columnas[15]="Cuenta";				$Valores[15]=$CuentaOrigen;
-		$Columnas[16]="empresa_id";			$Valores[16]=$idEmpresa;	
-		$Columnas[17]="servicio_id";		$Valores[17]=$idCentroCostos;	
+		$Columnas[16]="EmpresaPro";			$Valores[16]=$idEmpresa;	
+		$Columnas[17]="CentroCostos";		$Valores[17]=$idCentroCostos;	
 		$Columnas[18]="Soporte";			$Valores[18]=$destino;
 		
 		$tabla->InsertarRegistro("egresos",$NumRegistros,$Columnas,$Valores);
@@ -122,8 +122,8 @@
 		$Columnas[21]="Mayor";					$Valores[21]="NO";
 		$Columnas[22]="Esp";					$Valores[22]="NO";
 		$Columnas[23]="Concepto";				$Valores[23]=$Concepto;
-		$Columnas[24]="empresa_id";				$Valores[24]=$idEmpresa;
-		$Columnas[25]="servicio_id";			$Valores[25]=$idCentroCostos;
+		$Columnas[24]="idEmpresa";				$Valores[24]=$idEmpresa;
+		$Columnas[25]="idCentroCosto";			$Valores[25]=$idCentroCostos;
 							
 		$tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		
@@ -138,7 +138,7 @@
 			$NombreCuenta=$DatosCuenta["Nombre"];
 		}
 		if($_POST["TipoPago"]=="Programado"){
-			$CuentaPUC="2205".str_pad($idProveedor, 4, "0", STR_PAD_LEFT);
+			$CuentaPUC="2205$NIT";
 			$NombreCuenta="Proveedores Nacionales $RazonSocial $NIT";
 		}
 		

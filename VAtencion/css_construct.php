@@ -168,6 +168,12 @@ class CssIni{
 		print('<li><form name= "'.$nombre.'" action="'.$action.'" id="'.$nombre.'" method="'.$method.'" target="'.$target.'"></li>');
 		
 	}
+        /////////////////////Crea un Formulario
+	
+	function CrearForm2($nombre,$action,$method,$target){
+            print('<form name= "'.$nombre.'" action="'.$action.'" id="'.$nombre.'" method="'.$method.'" target="'.$target.'" enctype="multipart/form-data">');
+		
+	}
 	
 	/////////////////////Crea un Formulario
 	
@@ -623,11 +629,20 @@ function Footer(){
        	
 	}   
         
-        /////////////////////Crear una Chosen
+        /////////////////////Asignar ancho a un elemento por id
 	
 	function AnchoElemento($id, $Ancho){
              
           echo'<script>document.getElementById("'.$id.'").style.width = "'.$Ancho.'px";</script>';
+    
+	} 
+        
+        
+        /////////////////////Crear un upload
+	
+	function CrearUpload($Nombre){
+             
+          print('<input type="file" name="'.$Nombre.'" id="'.$Nombre.'"></input>');
     
 	} 
         

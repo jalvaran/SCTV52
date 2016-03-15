@@ -156,7 +156,8 @@ include_once("procesaEgresos.php");
 				if($TipoEgresos<>""){
 															
 					$DatosProveedor = $obVenta->DevuelveValores("proveedores","idProveedores", $_REQUEST['TxtAsociarProveedor']);
-					$css->CrearForm("FrmDatosEgreso",$myPage,"post","_self");
+					$css->CrearForm2("FrmDatosEgreso",$myPage,"post","_self");
+                                        
 					$css->CrearInputText("TxtTipoEgreso","hidden","",$TipoEgresos,"","","","",150,30,0,0);
 					$css->CrearInputText("CmbProveedor","hidden","",$_REQUEST['TxtAsociarProveedor'],"","","","",150,30,0,0);
 					$css->CrearTabla();
@@ -238,6 +239,9 @@ include_once("procesaEgresos.php");
 						
 						print("<td>");
 						$css->CrearInputText("TxtNumFactura","text",'Numero de Comprobante:<br>',"","Numero de Comprobante","black","","",300,30,0,1);
+                                                echo"<br>";
+                                                $css->CrearUpload("foto");
+                                                //print('<input type="file" name="foto" id="foto"></input>');
 						print("</td>");
 						print("<td>");
 						$css->CrearInputText("TxtTotal","number",'Total:<br>',"","Total","black","","",150,30,0,1);
@@ -251,6 +255,8 @@ include_once("procesaEgresos.php");
 						
 						print("<td>");
 						$css->CrearInputText("TxtNumFactura","text",'Numero de Formulario:<br>',"","Numero de Formulario","black","","",300,30,0,1);
+                                                echo"<br>";
+                                                $css->CrearUpload("foto");
 						print("</td>");
 						print("<td>");
 						$css->CrearInputText("TxtSancion","number",'Sanciones: <br>',"0","Sanciones","black","onkeyup","CalculeTotalImpuestos()",150,30,0,1);
@@ -269,6 +275,8 @@ include_once("procesaEgresos.php");
 						
 						print("<td>");
 						$css->CrearInputText("TxtNumFactura","text",'Numero de Factura:<br>',"","Numero de Comprobante","black","","",300,30,0,1);
+                                                //echo"<br>";
+                                                $css->CrearUpload("foto");
 						print("</td>");
 						print("<td>");
 						$css->CrearInputText("TxtSubtotal","number",'Subtotal: <br>',"","SubTotal","black","onkeyup","CalculeTotal()",150,30,0,1);
@@ -292,7 +300,7 @@ include_once("procesaEgresos.php");
 					
 					$css->CierraFilaTabla();
 					
-					$css->CierraFilaTabla();
+					//$css->CierraFilaTabla();
 					$css->CerrarTabla(); 
 					$css->CerrarForm();
 					

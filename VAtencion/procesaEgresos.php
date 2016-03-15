@@ -34,9 +34,20 @@
         
     }
 
-	//////Creo una Preventa
+	
 	if(!empty($_REQUEST['BtnGuardarEgreso'])){
 		
+                $destino="";
+                //echo "<script>alert ('entra')</script>";
+		if(!empty($_FILES['foto']['name'])){
+                    //echo "<script>alert ('entra foto')</script>";
+			$carpeta="../SoportesEgresos/";
+			opendir($carpeta);
+                        $Name=str_replace(' ','_',$_FILES['foto']['name']);  
+			$destino=$carpeta.$Name;
+			move_uploaded_file($_FILES['foto']['tmp_name'],$destino);
+		}
+             //echo "<script>alert ('pasa foto')</script>";
 		$tabla=new ProcesoVenta($idUser);
 		$CuentaOrigen=$_POST["CmbCuentaOrigen"];
 		$CuentaDestino=$_POST["CmbCuentaDestino"];
@@ -68,7 +79,7 @@
 		$NumFact=$_POST["TxtNumFactura"];		
 		//////registramos en egresos
 		
-		$NumRegistros=18;
+		
 		
 		$DatosProveedor=$tabla->DevuelveValores("proveedores","idProveedores",$idProveedor);
 		$CentroCostos=$tabla->DevuelveValores("centrocosto","ID",$_REQUEST["CmbCentroCosto"]);
@@ -77,7 +88,7 @@
 		$NIT=$DatosProveedor["Num_Identificacion"];
 		$idEmpresa=$CentroCostos["EmpresaPro"];
 		$idCentroCostos=$CentroCostos["ID"];
-		
+		$NumRegistros=19;
 		
 		$Columnas[0]="Fecha";				$Valores[0]=$fecha;
 		$Columnas[1]="Beneficiario";		$Valores[1]=$RazonSocial;
@@ -96,8 +107,9 @@
 		$Columnas[14]="idProveedor";		$Valores[14]=$idProveedor;
 		$Columnas[15]="Cuenta";				$Valores[15]=$CuentaOrigen;
 		$Columnas[16]="CentroCostos";			$Valores[16]=$idCentroCostos;	
-		$Columnas[17]="EmpresaPro";		$Valores[17]= $idEmpresa ;	
-		
+		$Columnas[17]="EmpresaPro";		$Valores[17]= $idEmpresa;	
+		$Columnas[18]="Soporte";		$Valores[18]= $destino;
+                
 		$tabla->InsertarRegistro("egresos",$NumRegistros,$Columnas,$Valores);
 		
 		/////////////////////////////////////////////////////////////////

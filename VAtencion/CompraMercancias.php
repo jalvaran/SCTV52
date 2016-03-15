@@ -168,9 +168,9 @@ include_once("procesaCompras.php");
 					$css->CrearSelect("CmbCentroCosto"," Centro de Costos:<br>","black","",1);
 					$css->CrearOptionSelect("","Seleccionar Centro de Costos",0);
 										
-					$Consulta = $obVenta->ConsultarTabla("servicio","WHERE Estado = 'A'");
+					$Consulta = $obVenta->ConsultarTabla("centrocosto","");
 					while($CentroCosto=mysql_fetch_array($Consulta)){
-							$css->CrearOptionSelect($CentroCosto['id'],$CentroCosto['nombre'],0);							
+							$css->CrearOptionSelect($CentroCosto['ID'],$CentroCosto['Nombre'],0);							
 					}
 					$css->CerrarSelect();
 					
@@ -216,7 +216,7 @@ include_once("procesaCompras.php");
 					print("<br>");
 					
 					
-					$css->CrearBotonFuncion("BtnGuardarEgreso","Guardar","onClick='Confirmar();return false'");	
+					$css->CrearBotonConfirmado("BtnGuardarEgreso","Guardar");	
 						print("</td>");
 					
 					$css->CierraFilaTabla();
