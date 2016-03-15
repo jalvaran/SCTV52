@@ -98,7 +98,9 @@ class CssIni{
 		  <link rel='apple-touch-icon-precomposed' sizes='72x72' href='ico/apple-touch-icon-72-precomposed.png'>
 						<link rel='apple-touch-icon-precomposed' href='ico/apple-touch-icon-57-precomposed.png'>
 									   <link rel='shortcut icon' href='../images/technoIco.ico'>
-		
+		<link rel='stylesheet' href='chousen/docsupport/style.css'>
+                <link rel='stylesheet' href='chousen/docsupport/prism.css'>
+                <link rel='stylesheet' href='chousen/source/chosen.css'>
 		
 		");
 		
@@ -337,6 +339,7 @@ class CssIni{
 		print(' </div>
                 </div>
             </div>
+            
             <div class="modal-footer">
         	    <button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i> <strong>Cerrar</strong></button>
             	
@@ -519,8 +522,27 @@ class CssIni{
             <script src="js/bootstrap-collapse.js"></script>
             <script src="js/bootstrap-carousel.js"></script>
             <script src="js/bootstrap-typeahead.js"></script>
-            <script src="js/funciones.js"></script>');
-		
+            <script src="js/funciones.js"></script>
+            <script src="chousen/source/jquery.min.js" type="text/javascript"></script>
+            <script src="chousen/source/chosen.jquery.js" type="text/javascript"></script>
+            <script src="chousen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+             ');
+            
+            ?>
+
+            <script type="text/javascript">
+            var config = {
+              '.chosen-select'           : {},
+              '.chosen-select-deselect'  : {allow_single_deselect:true},
+              '.chosen-select-no-single' : {disable_search_threshold:10},
+              '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+              '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+              $(selector).chosen(config[selector]);
+            }
+          </script>
+		<?php
 	}
         
         /////////////////////Agrega el boton para subir
@@ -588,7 +610,28 @@ function Footer(){
 		');
 	}
         
-               
+     
+/////////////////////Crear una Chosen
+	
+	function CrearSelectChosen($Nombre, $VarSelect){
+           $Ancho=$VarSelect["Ancho"];
+           $PlaceHolder=$VarSelect["PlaceHolder"];
+           //print("<br><br><br>");
+           
+           echo '<select id="'.$Nombre.'" data-placeholder="'.$PlaceHolder.'" class="chosen-select"  tabindex="2" name="'.$Nombre.'" style="width:200px;">';
+           
+       	
+	}   
+        
+        /////////////////////Crear una Chosen
+	
+	function AnchoElemento($id, $Ancho){
+             
+          echo'<script>document.getElementById("'.$id.'").style.width = "'.$Ancho.'px";</script>';
+    
+	} 
+        
+        
 	//////////////////////////////////FIN
 }
 	

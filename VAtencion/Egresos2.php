@@ -50,7 +50,40 @@ include_once("procesaEgresos.php");
 	 
 	  /////////////////Cuadro de dialogo de Clientes create
 	 $css->CrearCuadroDeDialogo("Proveedor","Crear Proveedor"); 
-	 $css->CreaSubMenuBasico("Crear Proveedor","../admin/proveedores.php");
+	 $css->CrearForm("FrmCrearCliente",$myPage,"post","_self");
+		 $css->CrearSelect("CmbTipoDocumento","Oculta()");
+		 $css->CrearOptionSelect('13','Cedula',1);
+		 $css->CrearOptionSelect('31','NIT',0);
+		 $css->CerrarSelect();
+		 //$css->CrearInputText("CmbPreVentaAct","hidden","",$idPreventa,"","","","",0,0,0,0);
+		 $css->CrearInputText("TxtNIT","number","","","Identificacion","black","","",200,30,0,1);
+		 $css->CrearInputText("TxtPA","text","","","Primer Apellido","black","onkeyup","CreaRazonSocial()",200,30,0,0);
+		 $css->CrearInputText("TxtSA","text","","","Segundo Apellido","black","onkeyup","CreaRazonSocial()",200,30,0,0);
+		 $css->CrearInputText("TxtPN","text","","","Primer Nombre","black","onkeyup","CreaRazonSocial()",200,30,0,0);
+		 $css->CrearInputText("TxtON","text","","","Otros Nombres","black","onkeyup","CreaRazonSocial()",200,30,0,0);
+		 $css->CrearInputText("TxtRazonSocial","text","","","Razon Social","black","","",200,30,0,1);
+		 $css->CrearInputText("TxtDireccion","text","","","Direccion","black","","",200,30,0,1);
+		 $css->CrearInputText("TxtTelefono","text","","","Telefono","black","","",200,30,0,1);
+		 $css->CrearInputText("TxtEmail","text","","","Email","black","","",200,30,0,1);
+                 //echo "<div style='width: 500px;display:block;position: relative;margin: 10px; height:300px;'>";
+                 $VarSelect["Ancho"]="200";
+                 $VarSelect["PlaceHolder"]="Seleccione el municipio";
+                 $css->CrearSelectChosen("CmbCodMunicipio", $VarSelect);
+                 
+                 $sql="SELECT * FROM cod_municipios_dptos";
+                 $Consulta=$obVenta->Query($sql);
+                    while($DatosMunicipios=$obVenta->FetchArray($Consulta)){
+                        $Sel=0;
+                        if($DatosMunicipios["ID"]==1010){
+                            $Sel=1;
+                        }
+                        $css->CrearOptionSelect($DatosMunicipios["ID"], $DatosMunicipios["Ciudad"], $Sel);
+                    }
+                 $css->CerrarSelect();
+                 echo '<br><br>';
+                                  
+		 $css->CrearBoton("BtnCrearProveedor", "Crear Proveedor");
+		 $css->CerrarForm();
 		 
 	 
 	 $css->CerrarCuadroDeDialogo(); 
@@ -70,6 +103,7 @@ include_once("procesaEgresos.php");
 	
 		<h2 align="center">
 			<?php 
+                                               
 				if(!empty($RutaPrintComp)){
 					
 					$css->CrearTabla();
@@ -275,7 +309,7 @@ include_once("procesaEgresos.php");
 	if(!empty($_REQUEST["TxtBuscarProveedor"])){
 		
 		$Key=$_REQUEST["TxtBuscarProveedor"];
-		$pa=mysql_query("SELECT * FROM proveedores	WHERE RazonSocial LIKE '%$Key%' OR Num_Identificacion = '$Key' LIMIT 10") or die(mysql_error());
+		$pa=mysql_query("SELECT * FROM proveedores WHERE RazonSocial LIKE '%$Key%' OR Num_Identificacion = '$Key' LIMIT 10") or die(mysql_error());
 		if(mysql_num_rows($pa)){
 			print("<br>");
 			$css->CrearTabla();
@@ -298,35 +332,17 @@ include_once("procesaEgresos.php");
 		
 	}
 			?>
-                              
-                              
-                      			
+                    		
 </div> <!-- /container -->
      
 
     
+<?php 
+$css->AgregaJS();
+$css->AnchoElemento("CmbCodMunicipio_chosen", 200);
+?>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap-transition.js"></script>
-    <script src="js/bootstrap-alert.js"></script>
-    <script src="js/bootstrap-modal.js"></script>
-    <script src="js/bootstrap-dropdown.js"></script>
-    <script src="js/bootstrap-scrollspy.js"></script>
-    <script src="js/bootstrap-tab.js"></script>
-    <script src="js/bootstrap-tooltip.js"></script>
-    <script src="js/bootstrap-popover.js"></script>
-    <script src="js/bootstrap-button.js"></script>
-    <script src="js/bootstrap-collapse.js"></script>
-    <script src="js/bootstrap-carousel.js"></script>
-    <script src="js/bootstrap-typeahead.js"></script>
-	
-
-   
-		
-<a style="display:scroll; position:fixed; bottom:10px; right:10px;" href="#" title="Volver arriba"><img src="../iconos/up1_amarillo.png" /></a>
+<a style="display:scroll; position:fixed; bottom:10px; right:10px;" href="#" title="Volver arriba"><img src="../images/up1_amarillo.png" /></a>
 
 	
  

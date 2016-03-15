@@ -1134,7 +1134,7 @@ public function CalculePesoRemision($idCotizacion)
         $FechaFactura=$Datos["FechaFactura"];
         
         $sql="SELECT rd.Cantidad, rd.ValorUnitario,rd.Subtotal,rd.Dias,rd.Total,"
-                        . "ci.Referencia,ci.Tabla,ci.TipoItem"
+                        . "ci.Referencia,ci.TablaOrigen,ci.TipoItem"
                         . " FROM rem_devoluciones rd INNER JOIN cot_itemscotizaciones ci ON rd.idItemCotizacion=ci.ID"
                         . " WHERE rd.NumDevolucion='$idDevolucion' ";
         $Consulta=$this->Query($sql);
@@ -1144,7 +1144,7 @@ public function CalculePesoRemision($idCotizacion)
         $TotalCostos=0;
         while($DatosDevolucion=  mysql_fetch_array($Consulta)){
 
-            $DatosProducto=$this->DevuelveValores($DatosDevolucion["Tabla"], "Referencia", $DatosDevolucion["Referencia"]);
+            $DatosProducto=$this->DevuelveValores($DatosDevolucion["TablaOrigen"], "Referencia", $DatosDevolucion["Referencia"]);
             ////Empiezo a insertar en la tabla items facturas
             ///
             ///

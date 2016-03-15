@@ -3,6 +3,12 @@
 //INGRESAR AL KARDEX LOS MOVIMIENTOS DE PRODUCTOS
 CREAR EQUIVALENTES NIFF Y LIBRO NIFF CON TRIGGERS
 EGRESOS
+    Notas contables
+    Crear un proveedor
+    Historial de egresos
+    Compra Mercancias
+    Compra de Equipos
+    
 INVENTARIOS
 CREACION DE KITS
 ALQUILER DE MAQUINARIA
