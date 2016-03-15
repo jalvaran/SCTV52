@@ -74,7 +74,7 @@ include_once("procesaEgresos.php");
                  $Consulta=$obVenta->Query($sql);
                     while($DatosMunicipios=$obVenta->FetchArray($Consulta)){
                         $Sel=0;
-                        if($DatosMunicipios["ID"]==1010){
+                        if($DatosMunicipios["ID"]==1011){
                             $Sel=1;
                         }
                         $css->CrearOptionSelect($DatosMunicipios["ID"], $DatosMunicipios["Ciudad"], $Sel);
@@ -309,7 +309,7 @@ include_once("procesaEgresos.php");
 	if(!empty($_REQUEST["TxtBuscarProveedor"])){
 		
 		$Key=$_REQUEST["TxtBuscarProveedor"];
-		$pa=mysql_query("SELECT * FROM proveedores WHERE RazonSocial LIKE '%$Key%' OR Num_Identificacion = '$Key' LIMIT 10") or die(mysql_error());
+		$pa=mysql_query("SELECT * FROM proveedores WHERE RazonSocial LIKE '%$Key%' OR Num_Identificacion LIKE '%$Key%' LIMIT 10") or die(mysql_error());
 		if(mysql_num_rows($pa)){
 			print("<br>");
 			$css->CrearTabla();
