@@ -52,6 +52,9 @@ $Vector["idProveedor"]["TablaVinculo"]="proveedores";  //tabla de donde se vincu
 $Vector["idProveedor"]["IDTabla"]="idProveedores"; //id de la tabla que se vincula
 $Vector["idProveedor"]["Display"]="RazonSocial"; 
 $Vector["idProveedor"]["Predeterminado"]=1;
+
+$Vector["Soporte"]["Link"]=1;   //Indico que esta columna tendra un vinculo
+
 ///Filtros y orden
 $Vector["Order"]=" $MyID DESC ";   //Orden
 ?>

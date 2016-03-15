@@ -208,7 +208,9 @@ public function DibujeTabla($Vector){
         $i=0;
         $this->css->ColTabla("<strong>Acciones</strong>","");
         foreach($Columnas as $NombreCol){
-            
+            if(isset($Vector[$NombreCol]["Link"])){
+                $Colink[$i]=1;
+            }
             if(!isset($Vector["Excluir"][$NombreCol])){
                 
                 print("<td><strong>$NombreCol</strong><br>");
@@ -268,6 +270,7 @@ public function DibujeTabla($Vector){
             $this->css->FilaTabla(12);
             print("<td>");
             if(!isset($Vector["VerRegistro"]["Deshabilitado"])){
+                
                 $Ruta="";
                 if(isset($Vector["VerRegistro"]["Link"]) and isset($Vector["VerRegistro"]["ColumnaLink"])){
                     $Ruta=$Vector["VerRegistro"]["Link"];
@@ -300,10 +303,19 @@ public function DibujeTabla($Vector){
             
             print("</td>");
             for($i=0;$i<$NumCols;$i++){
+                
                 if(isset($VisualizarRegistro[$i])){
                     
                     if(!isset($VinculoRegistro[$i]["Vinculado"])){
-                        print("<td>$DatosProducto[$i]</td>");
+                        print("<td>");
+                        if(isset($Colink[$i])){
+                            
+                            $this->css->CrearLink($DatosProducto[$i], "_blank", $DatosProducto[$i]);
+                        }else{
+                            print("$DatosProducto[$i]"); 
+                        }
+                        print("</td>");
+                       
                     }else{
                         $TablaVinculo=$VinculoRegistro[$i]["TablaVinculo"];
                         $ColDisplay=$VinculoRegistro[$i]["Display"];
@@ -314,7 +326,15 @@ public function DibujeTabla($Vector){
                         $Consul=$this->obCon->Query($sql1);
                         $DatosVinculo=$this->obCon->FetchArray($Consul);
                         
-                        print("<td>$DatosVinculo[$ColDisplay]</td>");
+                        print("<td>");
+                        if(isset($Colink[$i])){
+                            
+                            $this->css->CrearLink($DatosVinculo[$ColDisplay], "_blank", $DatosVinculo[$ColDisplay]);
+                        }else{
+                            print("$DatosVinculo[$ColDisplay]"); 
+                        }
+                        print("</td>");
+                        
                     }
                 }
             }
