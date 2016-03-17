@@ -9,7 +9,7 @@ EGRESOS
     //Historial de egresos
     Compra Mercancias
     Compra de Equipos
-    
+ORDENES DE TRABAJO
 INVENTARIOS
 CREACION DE KITS
 ALQUILER DE MAQUINARIA

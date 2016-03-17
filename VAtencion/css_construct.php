@@ -490,6 +490,30 @@ class CssIni{
 		print('<tr><div class="alert alert-success" align="center" style="font-size:'.$FontSize.'px"><strong>'.$Mensaje.'</strong></div></tr>');
 		
 	}
+        
+        /////////////////////Crear una fila para una tabla
+	function CrearNotificacionVerde($Mensaje,$FontSize){
+		print('<div class="alert alert-success" align="center" style="font-size:'.$FontSize.'px"><strong>'.$Mensaje.'</strong></div>');
+		
+	}
+        
+        /////////////////////Crear una fila para una tabla
+	function CrearNotificacionAzul($Mensaje,$FontSize){
+		print('<div class="alert alert-info" align="center" style="font-size:'.$FontSize.'px"><strong>'.$Mensaje.'</strong></div>');
+		
+	}
+        
+        /////////////////////Crear una fila para una tabla
+	function CrearNotificacionNaranja($Mensaje,$FontSize){
+		print('<div class="alert alert-warning" align="center" style="font-size:'.$FontSize.'px"><strong>'.$Mensaje.'</strong></div>');
+		
+	}
+        
+        /////////////////////Crear una fila para una tabla
+	function CrearNotificacionRoja($Mensaje,$FontSize){
+		print('<div class="alert alert-danger" align="center" style="font-size:'.$FontSize.'px"><strong>'.$Mensaje.'</strong></div>');
+		
+	}
 	
 	/////////////////////Crea un Boton Submit con evento
 	

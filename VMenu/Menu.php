@@ -62,6 +62,7 @@
 			$css->SubTabs("Admin.php","_blank","../images/proveedores.png","Proveedores");
 			$css->SubTabs("Admin.php","_blank","../images/cuentasxpagar.png","Cuentas Por Pagar");
 			$css->SubTabs("Admin.php","_blank","../images/inventarios.png","Inventarios");
+                        $css->SubTabs("../VAtencion/ordenesdetrabajo.php","_blank","../images/ordentrabajo.png","Ordenes de trabajo");
 			$css->SubTabs("Admin.php","_blank","../images/informes.png","Informes");
 			$css->SubTabs("Admin.php","_blank","../images/salir.png","Salir");
 			
