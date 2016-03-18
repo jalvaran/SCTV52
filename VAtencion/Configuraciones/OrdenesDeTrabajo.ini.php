@@ -26,9 +26,12 @@ $Vector["MyPage"]=$myPage;            //pagina
 ///Columnas excluidas
 
 //Link para la accion ver
-$Ruta="../tcpdf/examples/imprimircoti.php?ImgPrintCoti=";
+$Ruta="../tcpdf/examples/imprimirOT.php?idOT=";
 $Vector["VerRegistro"]["Link"]=$Ruta;
 $Vector["VerRegistro"]["ColumnaLink"]="ID";
+
+$Vector["Excluir"]["Estado"]=1;
+$Vector["Required"]["Hora"]=1;
 
 //Nueva Accion
 $Ruta="AgregaItemsOT.php?idOT=";
@@ -44,20 +47,15 @@ $Vector["NuevaAccion"]["AsociarCoti"]["Target"]="_self";
  */
 
 
-$Vector["Clientes_idClientes"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
-$Vector["Clientes_idClientes"]["TablaVinculo"]="clientes";  //tabla de donde se vincula
-$Vector["Clientes_idClientes"]["IDTabla"]="idClientes"; //id de la tabla que se vincula
-$Vector["Clientes_idClientes"]["Display"]="RazonSocial";                    //Columna que quiero mostrar
+$Vector["idCliente"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
+$Vector["idCliente"]["TablaVinculo"]="clientes";  //tabla de donde se vincula
+$Vector["idCliente"]["IDTabla"]="idClientes"; //id de la tabla que se vincula
+$Vector["idCliente"]["Display"]="RazonSocial";                    //Columna que quiero mostrar
 
-$Vector["CentroCosto"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
-$Vector["CentroCosto"]["TablaVinculo"]="centrocosto";  //tabla de donde se vincula
-$Vector["CentroCosto"]["IDTabla"]="ID"; //id de la tabla que se vincula
-$Vector["CentroCosto"]["Display"]="Nombre";                    //Columna que quiero mostrar
-
-$Vector["Usuarios_idUsuarios"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
-$Vector["Usuarios_idUsuarios"]["TablaVinculo"]="usuarios";  //tabla de donde se vincula
-$Vector["Usuarios_idUsuarios"]["IDTabla"]="idUsuarios"; //id de la tabla que se vincula
-$Vector["Usuarios_idUsuarios"]["Display"]="Apellido";                    //Columna que quiero mostrar
+$Vector["idUsuarioCreador"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
+$Vector["idUsuarioCreador"]["TablaVinculo"]="usuarios";  //tabla de donde se vincula
+$Vector["idUsuarioCreador"]["IDTabla"]="idUsuarios"; //id de la tabla que se vincula
+$Vector["idUsuarioCreador"]["Display"]="Apellido";                    //Columna que quiero mostrar
 
 ///Filtros y orden
 $Vector["Order"]=" $idTabla DESC ";   //Orden

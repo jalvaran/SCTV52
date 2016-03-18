@@ -16,20 +16,17 @@ if(!empty($_REQUEST["BtnEditarRegistro"])){
     $Vector["Tabla"]=$tab;
     $NombresColumnas=$obTabla->Columnas($Vector);
     $sql="UPDATE $tab SET ";
-    $NumCols=Count($NombresColumnas);
+    //$NumCols=Count($NombresColumnas);
     $i=1;
     foreach($NombresColumnas as $NombreCol){
         if(isset($_REQUEST[$NombreCol]) && !empty($_REQUEST[$NombreCol])){
-           
-           if($NumCols==$i){
-               $sql.=" $NombreCol = '$_REQUEST[$NombreCol]'";
-           }else{
-               $sql.=" $NombreCol = '$_REQUEST[$NombreCol]' , ";
-           }
-           
+
+            $sql.=" $NombreCol = '$_REQUEST[$NombreCol]' ,";
+        
         }
        $i++;
     }
+    $sql=substr($sql, 0, -1);
     $sql.=" WHERE $NombresColumnas[0] ='$IDEdit'";
     $obVenta->Query($sql);
     header("location:../$myPage.php");

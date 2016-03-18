@@ -56,4 +56,17 @@ $TablaConfig="cot_itemscotizaciones";
 $VarInsert[$TablaConfig]["CuentaPUC"]["Required"]=1;
 
 
+/*
+ * Tabla Usuarios
+ * Tipo de librodiario
+ * Campos Requridos
+ */
+$TablaConfig="ordenesdetrabajo";
+$VarInsert[$TablaConfig]["Hora"]["Required"]=1;
+$VarInsert[$TablaConfig]["idCliente"]["Required"]=1;
+$VarInsert[$TablaConfig]["idUsuarioCreador"]["Required"]=1;
+$VarInsert[$TablaConfig]["Descripcion"]["Required"]=1;
+$VarInsert[$TablaConfig]["FechaOT"]["Required"]=1;
+$VarInsert[$TablaConfig]["Estado"]["Excluir"]=1;
+
 ?>

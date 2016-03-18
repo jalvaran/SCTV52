@@ -121,7 +121,7 @@ print("<body>");
 
         $css->CierraFilaTabla();
         $css->CerrarTabla();
-
+        
         $css->CrearTabla();
         $css->CrearNotificacionAzul("ITEMS EN ESTA OT",18);
         $css->FilaTabla(16);
@@ -159,13 +159,9 @@ print("<body>");
         }
 
         $css->CerrarTabla();
-        
-        $css->CrearBotonConfirmado("BtnGenerarOT","Guardar");
-        print("</td>");
-        $css->CierraFilaTabla();
-
-        $css->CerrarTabla();
-        $css->CerrarForm();
+        $Ruta="../tcpdf/examples/imprimirOT.php?idOT=$idOT";
+        $css->CrearImageLink($Ruta, "../images/pdf.png", "_blank",100,250);
+       
     }else{
         $css->CrearNotificacionNaranja("No se encontraron Items",16);
     }

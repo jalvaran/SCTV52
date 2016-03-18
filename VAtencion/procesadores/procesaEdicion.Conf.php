@@ -98,4 +98,17 @@ $VarEdit[$TablaConfig]["MyPage"]="historialremisiones.php";
 $VarEdit[$TablaConfig]["Cotizaciones_idCotizaciones"]["Excluir"]=1;
 $VarEdit[$TablaConfig]["Anticipo"]["Excluir"]=1;
 
+
+/*
+ * Tabla ordenesdetrabajo
+ * Tipo de ordenesdetrabajo
+ * Campos Requridos
+ */
+$TablaConfig="ordenesdetrabajo";
+$VarEdit[$TablaConfig]["Hora"]["Required"]=1;
+$VarEdit[$TablaConfig]["idCliente"]["Required"]=1;
+$VarEdit[$TablaConfig]["idUsuarioCreador"]["Required"]=1;
+$VarEdit[$TablaConfig]["Descripcion"]["Required"]=1;
+$VarEdit[$TablaConfig]["FechaOT"]["Required"]=1;
+$VarEdit[$TablaConfig]["Estado"]["Excluir"]=1;
 ?>
