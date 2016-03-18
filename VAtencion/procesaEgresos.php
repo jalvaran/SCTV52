@@ -54,6 +54,9 @@
 		$idProveedor=$_POST["CmbProveedor"];
 		$Concepto=$_POST["TxtConcepto"];
 		$TipoEgreso=$_REQUEST['TxtTipoEgreso'];
+                $Retefuente=$_REQUEST['TxtRetefuente'];
+                $ReteIVA=$_REQUEST['TxtReteIVA'];
+                $ReteICA=$_REQUEST['TxtReteICA'];
 		$idUsuario=$idUser;
 		$IVA=0;
 		if($TipoEgreso==3){
@@ -74,8 +77,9 @@
 			$IVA=$_POST["TxtIVA"];
 			
 		}
-		$Total=$_POST["TxtTotal"];
-		$Valor=$_POST["TxtTotal"];
+                $Subtotal=$Subtotal-$ReteICA-$ReteIVA-$Retefuente;   //Se le restan las retenciones
+		$Total=$_POST["TxtTotal"]-$ReteICA-$ReteIVA-$Retefuente; 
+		$Valor=$_POST["TxtTotal"]-$ReteICA-$ReteIVA-$Retefuente;
 		$NumFact=$_POST["TxtNumFactura"];		
 		//////registramos en egresos
 		
@@ -167,27 +171,27 @@
 		$Columnas[2]="Num_Documento_Interno";	$Valores[2]=$NumEgreso;
 		$Columnas[3]="Tercero_Tipo_Documento";	$Valores[3]=$DatosProveedor['Tipo_Documento'];
 		$Columnas[4]="Tercero_Identificacion";	$Valores[4]=$NIT;
-		$Columnas[5]="Tercero_DV";				$Valores[5]=$DatosProveedor['DV'];
+		$Columnas[5]="Tercero_DV";		$Valores[5]=$DatosProveedor['DV'];
 		$Columnas[6]="Tercero_Primer_Apellido";	$Valores[6]=$DatosProveedor['Primer_Apellido'];
 		$Columnas[7]="Tercero_Segundo_Apellido";$Valores[7]=$DatosProveedor['Segundo_Apellido'];
 		$Columnas[8]="Tercero_Primer_Nombre";	$Valores[8]=$DatosProveedor['Primer_Nombre'];
 		$Columnas[9]="Tercero_Otros_Nombres";	$Valores[9]=$DatosProveedor['Otros_Nombres'];
 		$Columnas[10]="Tercero_Razon_Social";	$Valores[10]=$RazonSocial;
-		$Columnas[11]="Tercero_Direccion";		$Valores[11]=$DatosProveedor['Direccion'];
-		$Columnas[12]="Tercero_Cod_Dpto";		$Valores[12]=$DatosProveedor['Cod_Dpto'];
-		$Columnas[13]="Tercero_Cod_Mcipio";		$Valores[13]=$DatosProveedor['Cod_Mcipio'];
+		$Columnas[11]="Tercero_Direccion";	$Valores[11]=$DatosProveedor['Direccion'];
+		$Columnas[12]="Tercero_Cod_Dpto";	$Valores[12]=$DatosProveedor['Cod_Dpto'];
+		$Columnas[13]="Tercero_Cod_Mcipio";	$Valores[13]=$DatosProveedor['Cod_Mcipio'];
 		$Columnas[14]="Tercero_Pais_Domicilio"; $Valores[14]=$DatosProveedor['Pais_Domicilio'];
-		$Columnas[15]="CuentaPUC";				$Valores[15]=$CuentaPUC;
-		$Columnas[16]="NombreCuenta";			$Valores[16]=$NombreCuenta;
-		$Columnas[17]="Detalle";				$Valores[17]="egresos";		
-		$Columnas[18]="Debito";					$Valores[18]=$Subtotal;
-		$Columnas[19]="Credito";				$Valores[19]="0";
-		$Columnas[20]="Neto";					$Valores[20]=$Subtotal;
-		$Columnas[21]="Mayor";					$Valores[21]="NO";
-		$Columnas[22]="Esp";					$Valores[22]="NO";
-		$Columnas[23]="Concepto";				$Valores[23]=$Concepto;
-		$Columnas[24]="idCentroCosto";				$Valores[24]=$idCentroCostos;
-		$Columnas[25]="idEmpresa";			$Valores[25]=$idEmpresa;
+		$Columnas[15]="CuentaPUC";		$Valores[15]=$CuentaPUC;
+		$Columnas[16]="NombreCuenta";		$Valores[16]=$NombreCuenta;
+		$Columnas[17]="Detalle";		$Valores[17]="egresos";		
+		$Columnas[18]="Debito";			$Valores[18]=$Subtotal;
+		$Columnas[19]="Credito";		$Valores[19]="0";
+		$Columnas[20]="Neto";			$Valores[20]=$Subtotal;
+		$Columnas[21]="Mayor";			$Valores[21]="NO";
+		$Columnas[22]="Esp";			$Valores[22]="NO";
+		$Columnas[23]="Concepto";		$Valores[23]=$Concepto;
+		$Columnas[24]="idCentroCosto";		$Valores[24]=$idCentroCostos;
+		$Columnas[25]="idEmpresa";              $Valores[25]=$idEmpresa;
 							
 		$tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		
@@ -252,7 +256,87 @@
 			$tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		}
                 
+                if(!empty($Retefuente)){   //Si hay retencion en la fuente se registra
+                    
+			
+                    $DatosCuenta=$tabla->DevuelveValores("tiposretenciones","ID",1);
+                    $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
+                    $CuentaPUC=$DatosCuenta["CuentaActivo"];
+                    
+                    $Valores[15]=$CuentaPUC;
+                    $Valores[16]=$NombreCuenta;
+                    $Valores[18]=$Retefuente;
+                    $Valores[19]=0; 						
+                    $Valores[20]=$Retefuente;  											//Credito se escribe el total de la venta menos los impuestos
+
+                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el debito
+                    
+                    $NombreCuenta=$DatosCuenta["NombreCuentaPasivo"];
+                    $CuentaPUC=$DatosCuenta["CuentaPasivo"];
+                    
+                    $Valores[15]=$CuentaPUC;
+                    $Valores[16]=$NombreCuenta;
+                    $Valores[18]=0;
+                    $Valores[19]=$Retefuente; 						
+                    $Valores[20]=$Retefuente*(-1);  											//Credito se escribe el total de la venta menos los impuestos
+
+                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el credito
+                }
+                
+                if(!empty($ReteIVA)){   //Si hay retencion de IVA se registra
+                    
+			
+                    $DatosCuenta=$tabla->DevuelveValores("tiposretenciones","ID",2);
+                    $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
+                    $CuentaPUC=$DatosCuenta["CuentaActivo"];
+                    
+                    $Valores[15]=$CuentaPUC;
+                    $Valores[16]=$NombreCuenta;
+                    $Valores[18]=$ReteIVA;
+                    $Valores[19]=0; 						
+                    $Valores[20]=$ReteIVA;  											//Credito se escribe el total de la venta menos los impuestos
+
+                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el debito
+                    
+                    $NombreCuenta=$DatosCuenta["NombreCuentaPasivo"];
+                    $CuentaPUC=$DatosCuenta["CuentaPasivo"];
+                    
+                    $Valores[15]=$CuentaPUC;
+                    $Valores[16]=$NombreCuenta;
+                    $Valores[18]=0;
+                    $Valores[19]=$ReteIVA; 						
+                    $Valores[20]=$ReteIVA*(-1);  											//Credito se escribe el total de la venta menos los impuestos
+
+                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el credito
+                }
 		
+                
+                if(!empty($ReteICA)){   //Si hay retencion de ICA se registra
+                    
+			
+                    $DatosCuenta=$tabla->DevuelveValores("tiposretenciones","ID",3);
+                    $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
+                    $CuentaPUC=$DatosCuenta["CuentaActivo"];
+                    
+                    $Valores[15]=$CuentaPUC;
+                    $Valores[16]=$NombreCuenta;
+                    $Valores[18]=$ReteICA;
+                    $Valores[19]=0; 						
+                    $Valores[20]=$ReteICA;  											//Credito se escribe el total de la venta menos los impuestos
+
+                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el debito
+                    
+                    $NombreCuenta=$DatosCuenta["NombreCuentaPasivo"];
+                    $CuentaPUC=$DatosCuenta["CuentaPasivo"];
+                    
+                    $Valores[15]=$CuentaPUC;
+                    $Valores[16]=$NombreCuenta;
+                    $Valores[18]=0;
+                    $Valores[19]=$ReteICA; 						
+                    $Valores[20]=$ReteICA*(-1);  											//Credito se escribe el total de la venta menos los impuestos
+
+                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el credito
+                }
 		//print("<script>window.open('$RutaPrintComp','_blank');</script>");
 		
 	}

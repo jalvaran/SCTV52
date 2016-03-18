@@ -246,8 +246,12 @@ include_once("procesaEgresos.php");
 						print("<td>");
 						$css->CrearInputText("TxtTotal","number",'Total:<br>',"","Total","black","","",150,30,0,1);
 						print("<br>");
-						
-					
+                                                print("Aplicar retenciones?<br>");
+                                                $css->CrearSelect("CmbRetenciones", "MuestraOculta('DivRetenciones')");
+                                                    $css->CrearOptionSelect("NO", "NO", 0);
+                                                    $css->CrearOptionSelect("SI", "SI", 0);
+                                                $css->CerrarSelect();
+                                                print("<br>");
 					
 					}
 					
@@ -290,10 +294,22 @@ include_once("procesaEgresos.php");
 						$css->CrearInputText("TxtTotal","number",'Total:<br>',"","Total","black","","",150,30,1,1);
 						print("<br>");
 						
-						
+						print("Aplicar retenciones?<br>");
+                                                $css->CrearSelect("CmbRetenciones", "MuestraOculta('DivRetenciones')");
+                                                    $css->CrearOptionSelect("NO", "NO", 0);
+                                                    $css->CrearOptionSelect("SI", "SI", 0);
+                                                $css->CerrarSelect();
+                                                print("<br>");
 					}
 					
-					
+					$css->CrearDiv("DivRetenciones", "container", "left", 0, 1);
+                                            $css->CrearInputNumber("TxtRetefuente", "number", "Retefuente:<br>", 0, "", "black", "", "", 150, 30, 0, 1, 0, "", "any");
+                                             print("<br>");
+                                            $css->CrearInputNumber("TxtReteICA", "number", "Rete-ICA:<br>", 0, "", "black", "", "", 150, 30, 0, 1, 0, "", "any");
+                                             print("<br>");
+                                            $css->CrearInputNumber("TxtReteIVA", "number", "ReteIVA:<br>", 0, "", "black", "", "", 150, 30, 0, 1, 0, "", "any");
+                                             print("<br>");
+                                        $css->CerrarDiv();
 					
 					$css->CrearBotonConfirmado("BtnGuardarEgreso","Guardar");	
 						print("</td>");
