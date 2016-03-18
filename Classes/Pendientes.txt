@@ -4,12 +4,14 @@
 CREAR EQUIVALENTES NIFF Y LIBRO NIFF CON TRIGGERS
 EGRESOS
     //Adjuntos
-    Notas contables
+    //Notas contables
     //Crear un proveedor
     //Historial de egresos
+    Retenciones en Egresos
     Compra Mercancias
     Compra de Equipos
-ORDENES DE TRABAJO
+    
+//ORDENES DE TRABAJO
 INVENTARIOS
 CREACION DE KITS
 ALQUILER DE MAQUINARIA

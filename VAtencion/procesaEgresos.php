@@ -88,35 +88,69 @@
 		$NIT=$DatosProveedor["Num_Identificacion"];
 		$idEmpresa=$CentroCostos["EmpresaPro"];
 		$idCentroCostos=$CentroCostos["ID"];
-		$NumRegistros=19;
-		
-		$Columnas[0]="Fecha";				$Valores[0]=$fecha;
-		$Columnas[1]="Beneficiario";		$Valores[1]=$RazonSocial;
-		$Columnas[2]="NIT";					$Valores[2]=$NIT;
-		$Columnas[3]="Concepto";			$Valores[3]=$Concepto;
-		$Columnas[4]="Valor";				$Valores[4]=$Valor;
-		$Columnas[5]="Usuario_idUsuario";	$Valores[5]=$idUsuario;
-		$Columnas[6]="PagoProg";			$Valores[6]=$_POST["TipoPago"];
-		$Columnas[7]="FechaPagoPro";		$Valores[7]=$_POST["TxtFechaProgram"];
-		$Columnas[8]="TipoEgreso";			$Valores[8]=$DatosTipoEgreso["Nombre"];
-		$Columnas[9]="Direccion";			$Valores[9]=$DatosProveedor["Direccion"];
-		$Columnas[10]="Ciudad";				$Valores[10]=$DatosProveedor["Ciudad"];
-		$Columnas[11]="Subtotal";			$Valores[11]=$Subtotal;
-		$Columnas[12]="IVA";				$Valores[12]=$IVA;
-		$Columnas[13]="NumFactura";			$Valores[13]=$NumFact;
-		$Columnas[14]="idProveedor";		$Valores[14]=$idProveedor;
-		$Columnas[15]="Cuenta";				$Valores[15]=$CuentaOrigen;
-		$Columnas[16]="CentroCostos";			$Valores[16]=$idCentroCostos;	
-		$Columnas[17]="EmpresaPro";		$Valores[17]= $idEmpresa;	
-		$Columnas[18]="Soporte";		$Valores[18]= $destino;
+                $TipoPago=$_POST["TipoPago"];
                 
-		$tabla->InsertarRegistro("egresos",$NumRegistros,$Columnas,$Valores);
-		
+                if($TipoPago=="Contado"){
+                
+                    $NumRegistros=19;
+
+                    $Columnas[0]="Fecha";				$Valores[0]=$fecha;
+                    $Columnas[1]="Beneficiario";		$Valores[1]=$RazonSocial;
+                    $Columnas[2]="NIT";					$Valores[2]=$NIT;
+                    $Columnas[3]="Concepto";			$Valores[3]=$Concepto;
+                    $Columnas[4]="Valor";				$Valores[4]=$Valor;
+                    $Columnas[5]="Usuario_idUsuario";	$Valores[5]=$idUsuario;
+                    $Columnas[6]="PagoProg";			$Valores[6]=$_POST["TipoPago"];
+                    $Columnas[7]="FechaPagoPro";		$Valores[7]=$_POST["TxtFechaProgram"];
+                    $Columnas[8]="TipoEgreso";			$Valores[8]=$DatosTipoEgreso["Nombre"];
+                    $Columnas[9]="Direccion";			$Valores[9]=$DatosProveedor["Direccion"];
+                    $Columnas[10]="Ciudad";				$Valores[10]=$DatosProveedor["Ciudad"];
+                    $Columnas[11]="Subtotal";			$Valores[11]=$Subtotal;
+                    $Columnas[12]="IVA";				$Valores[12]=$IVA;
+                    $Columnas[13]="NumFactura";			$Valores[13]=$NumFact;
+                    $Columnas[14]="idProveedor";		$Valores[14]=$idProveedor;
+                    $Columnas[15]="Cuenta";				$Valores[15]=$CuentaOrigen;
+                    $Columnas[16]="CentroCostos";			$Valores[16]=$idCentroCostos;	
+                    $Columnas[17]="EmpresaPro";		$Valores[17]= $idEmpresa;	
+                    $Columnas[18]="Soporte";		$Valores[18]= $destino;
+
+                    $tabla->InsertarRegistro("egresos",$NumRegistros,$Columnas,$Valores);
+                    
+                    $NumEgreso=$tabla->ObtenerMAX("egresos","idEgresos", 1, "");
+                    $DocumentoSoporte="CompEgreso";
+                    $RutaPrintComp="../tcpdf/examples/imprimircomp.php?ImgPrintComp=$NumEgreso";
+                }
+                
+                if($TipoPago=="Programado"){
+                
+                    $NumRegistros=12;
+
+                    $Columnas[0]="Fecha";		$Valores[0]=$fecha;
+                    $Columnas[1]="Detalle";		$Valores[1]=$Concepto;
+                    $Columnas[2]="idProveedor";		$Valores[2]=$idProveedor;
+                    $Columnas[3]="Subtotal";		$Valores[3]=$Subtotal;
+                    $Columnas[4]="IVA";			$Valores[4]=$IVA;
+                    $Columnas[5]="Total";               $Valores[5]=$Valor;
+                    $Columnas[6]="Soporte";		$Valores[6]=$destino;
+                    $Columnas[7]="NumFactura";		$Valores[7]=$NumFact;
+                    $Columnas[8]="Usuario_idUsuario";	$Valores[8]=$idUsuario;
+                    $Columnas[9]="CentroCostos";	$Valores[9]=$idCentroCostos;
+                    $Columnas[10]="EmpresaPro";		$Valores[10]=$idEmpresa;
+                    $Columnas[11]="FechaProgramada";	$Valores[11]=$_POST["TxtFechaProgram"];
+                    
+                    $tabla->InsertarRegistro("notascontables",$NumRegistros,$Columnas,$Valores);
+                    
+                    $NumEgreso=$tabla->ObtenerMAX("notascontables","ID", 1, "");
+                    $DocumentoSoporte="NotaContable";
+                    $RutaPrintComp="../tcpdf/examples/NotaContablePrint.php?ImgPrintComp=$NumEgreso";
+                }
+                
+                
 		/////////////////////////////////////////////////////////////////
 		//////registramos en libro diario
 		
 		$tab="librodiario";
-		$NumEgreso=$tabla->ObtenerMAX("egresos","idEgresos", 1, "");
+		
 		$NumRegistros=26;
 		$CuentaPUC=$CuentaDestino;  			 /////Servicios
 		if($TipoEgreso==3) //Si es pago de impuestos
@@ -128,8 +162,8 @@
 		
 		
 		
-		$Columnas[0]="Fecha";					$Valores[0]=$fecha;
-		$Columnas[1]="Tipo_Documento_Intero";	$Valores[1]="CompEgreso";
+		$Columnas[0]="Fecha";                   $Valores[0]=$fecha;
+		$Columnas[1]="Tipo_Documento_Intero";	$Valores[1]=$DocumentoSoporte;
 		$Columnas[2]="Num_Documento_Interno";	$Valores[2]=$NumEgreso;
 		$Columnas[3]="Tercero_Tipo_Documento";	$Valores[3]=$DatosProveedor['Tipo_Documento'];
 		$Columnas[4]="Tercero_Identificacion";	$Valores[4]=$NIT;
@@ -217,7 +251,8 @@
 			
 			$tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		}
-		$RutaPrintComp="../tcpdf/examples/imprimircomp.php?ImgPrintComp=$NumEgreso";
+                
+		
 		//print("<script>window.open('$RutaPrintComp','_blank');</script>");
 		
 	}
