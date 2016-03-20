@@ -222,7 +222,7 @@ if(mysql_num_rows($reg)){//Si existen resultados
             	<tr><td>
                 	<div class="row-fluid">
                     	<div class="span4">
-                            <center><strong><?php echo $row['Nombre']; ?></strong></center><br>
+                            <center><strong><?php echo $row['Referencia']." ".$row['Nombre']; ?></strong></center><br>
                             <!--<img src="imagepro/<?php //echo $ImageRuta[3]; ?>" class="img-polaroid"> -->
                         </div>
                         <div class="span4"><br>

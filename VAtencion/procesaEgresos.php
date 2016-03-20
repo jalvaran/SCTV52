@@ -47,8 +47,7 @@
 			$destino=$carpeta.$Name;
 			move_uploaded_file($_FILES['foto']['tmp_name'],$destino);
 		}
-             //echo "<script>alert ('pasa foto')</script>";
-		$tabla=new ProcesoVenta($idUser);
+             	$tabla=new ProcesoVenta($idUser);
 		$CuentaOrigen=$_POST["CmbCuentaOrigen"];
 		$CuentaDestino=$_POST["CmbCuentaDestino"];
 		$idProveedor=$_POST["CmbProveedor"];
@@ -77,7 +76,7 @@
 			$IVA=$_POST["TxtIVA"];
 			
 		}
-                $Subtotal=$Subtotal;   //Se le restan las retenciones
+                //$Subtotal=$Subtotal;   //Se le restan las retenciones
 		$Total=$_POST["TxtTotal"]-$ReteICA-$ReteIVA-$Retefuente; 
 		$Valor=$_POST["TxtTotal"];
 		$NumFact=$_POST["TxtNumFactura"];		
