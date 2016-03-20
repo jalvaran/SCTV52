@@ -1,28 +1,38 @@
 //INSERTAR UN VALOR ADICIONAL EN LAS COTIZACIONES LIBRE
 //DESCARGAR DEL INVENTARIO LOS ITEMS TIPO PR
 //INGRESAR AL KARDEX LOS MOVIMIENTOS DE PRODUCTOS
-CREAR EQUIVALENTES NIFF Y LIBRO NIFF CON TRIGGERS
-EGRESOS
+
+//EGRESOS
     //Adjuntos
     //Notas contables
     //Crear un proveedor
     //Historial de egresos
-    Retenciones en Egresos
-    Compra Mercancias
-    Compra de Equipos
-    
+    //Retenciones en Egresos
+    //Compra Mercancias
+        
 //ORDENES DE TRABAJO
 INVENTARIOS
-CREACION DE KITS
-ALQUILER DE MAQUINARIA
+    CREACION DE KITS
+    ALQUILER DE MAQUINARIA
+    productos venta (Imprimir codigo de barras desde alli)
+    productos para alquilar
+    Servicios para la venta
+    Dar de Baja
+    Imprimir codigos de Barra
+    Ordenes de salida y entrada de activos
+    Activos
+    Crear Departamentos
+    Crear Subgrupos
+
+INGRESOS
+CARTERA
 VENTAS RAPIDAS
 DEVOLUCIONES EN VENTAS
 CERRAR TURNO
 INFORMES
-INGRESOS
-CARTERA
 CLIENTES
 PROVEEDORES
 CUENTASXPAGAR
+CREAR EQUIVALENTES NIFF Y LIBRO NIFF CON TRIGGERS
 SALIR
 REQUERIMIENTOS ASESOR FINANCIERO
