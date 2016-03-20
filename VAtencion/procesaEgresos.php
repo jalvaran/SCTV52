@@ -77,9 +77,9 @@
 			$IVA=$_POST["TxtIVA"];
 			
 		}
-                $Subtotal=$Subtotal-$ReteICA-$ReteIVA-$Retefuente;   //Se le restan las retenciones
+                $Subtotal=$Subtotal;   //Se le restan las retenciones
 		$Total=$_POST["TxtTotal"]-$ReteICA-$ReteIVA-$Retefuente; 
-		$Valor=$_POST["TxtTotal"]-$ReteICA-$ReteIVA-$Retefuente;
+		$Valor=$_POST["TxtTotal"];
 		$NumFact=$_POST["TxtNumFactura"];		
 		//////registramos en egresos
 		
@@ -156,7 +156,7 @@
 		$tab="librodiario";
 		
 		$NumRegistros=26;
-		$CuentaPUC=$CuentaDestino;  			 /////Servicios
+		$CuentaPUC=$CuentaDestino;  			 
 		if($TipoEgreso==3) //Si es pago de impuestos
 			$DatosCuenta=$tabla->DevuelveValores("cuentas","idPUC",$CuentaPUC);	
 		else
@@ -214,8 +214,8 @@
 		$Valores[15]=$CuentaPUC;
 		$Valores[16]=$NombreCuenta;
 		$Valores[18]="0";
-		$Valores[19]=$Valor; 						//Credito se escribe el total de la venta menos los impuestos
-		$Valores[20]=$Valor*(-1);  											//Credito se escribe el total de la venta menos los impuestos
+		$Valores[19]=$Total; 						//Credito se escribe el total de la venta menos los impuestos
+		$Valores[20]=$Total*(-1);  											//Credito se escribe el total de la venta menos los impuestos
 		
 		$tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
 		
@@ -260,17 +260,7 @@
                     
 			
                     $DatosCuenta=$tabla->DevuelveValores("tiposretenciones","ID",1);
-                    $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
-                    $CuentaPUC=$DatosCuenta["CuentaActivo"];
-                    
-                    $Valores[15]=$CuentaPUC;
-                    $Valores[16]=$NombreCuenta;
-                    $Valores[18]=$Retefuente;
-                    $Valores[19]=0; 						
-                    $Valores[20]=$Retefuente;  											//Credito se escribe el total de la venta menos los impuestos
-
-                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el debito
-                    
+                                        
                     $NombreCuenta=$DatosCuenta["NombreCuentaPasivo"];
                     $CuentaPUC=$DatosCuenta["CuentaPasivo"];
                     
@@ -287,17 +277,7 @@
                     
 			
                     $DatosCuenta=$tabla->DevuelveValores("tiposretenciones","ID",2);
-                    $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
-                    $CuentaPUC=$DatosCuenta["CuentaActivo"];
-                    
-                    $Valores[15]=$CuentaPUC;
-                    $Valores[16]=$NombreCuenta;
-                    $Valores[18]=$ReteIVA;
-                    $Valores[19]=0; 						
-                    $Valores[20]=$ReteIVA;  											//Credito se escribe el total de la venta menos los impuestos
-
-                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el debito
-                    
+                                        
                     $NombreCuenta=$DatosCuenta["NombreCuentaPasivo"];
                     $CuentaPUC=$DatosCuenta["CuentaPasivo"];
                     
@@ -315,17 +295,7 @@
                     
 			
                     $DatosCuenta=$tabla->DevuelveValores("tiposretenciones","ID",3);
-                    $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
-                    $CuentaPUC=$DatosCuenta["CuentaActivo"];
-                    
-                    $Valores[15]=$CuentaPUC;
-                    $Valores[16]=$NombreCuenta;
-                    $Valores[18]=$ReteICA;
-                    $Valores[19]=0; 						
-                    $Valores[20]=$ReteICA;  											//Credito se escribe el total de la venta menos los impuestos
-
-                    $tabla->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el debito
-                    
+                                        
                     $NombreCuenta=$DatosCuenta["NombreCuentaPasivo"];
                     $CuentaPUC=$DatosCuenta["CuentaPasivo"];
                     
