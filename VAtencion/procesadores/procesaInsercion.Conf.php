@@ -69,4 +69,9 @@ $VarInsert[$TablaConfig]["Descripcion"]["Required"]=1;
 $VarInsert[$TablaConfig]["FechaOT"]["Required"]=1;
 $VarInsert[$TablaConfig]["Estado"]["Excluir"]=1;
 
+$TablaConfig="productosalquiler";
+$VarInsert[$TablaConfig]["Kit"]["Required"]=1;
+$VarInsert[$TablaConfig]["Kit"]["Excluir"]=1;
+//$VarInsert[$TablaConfig]["Required"]["Kit"]=1;
+
 ?>
