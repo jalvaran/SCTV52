@@ -157,7 +157,7 @@ include_once("procesaCompras.php");
 				if($TipoEgresos<>""){
 															
 					$DatosProveedor = $obVenta->DevuelveValores("proveedores","idProveedores", $_REQUEST['TxtAsociarProveedor']);
-					$css->CrearForm("FrmDatosEgreso",$myPage,"post","_self");
+					$css->CrearForm2("FrmDatosEgreso",$myPage,"post","_self");
 					$css->CrearInputText("TxtTipoEgreso","hidden","",$TipoEgresos,"","","","",150,30,0,0);
 					$css->CrearInputText("CmbProveedor","hidden","",$_REQUEST['TxtAsociarProveedor'],"","","","",150,30,0,0);
 					$css->CrearTabla();
