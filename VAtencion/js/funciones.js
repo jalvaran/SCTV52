@@ -201,3 +201,17 @@ function CalculeTotalImpuestos() {
 	document.getElementById("TxtTotal").value=Total;
 
 }
+
+// esta funcion permite deshabilitar o habilitar un elemento
+function CambiaLinkKit(idProducto,idLink,idCantidad,idkit,page){
+    
+    
+    Cantidad=document.getElementById(idCantidad).value;
+    
+    Kit=document.getElementsByName(idkit)[0].value;
+    
+    link="procesadores/ProcesadorAgregaKits.php?Tabla=productosventa&IDProducto="+idProducto+"&TxtCantidad="+Cantidad+"&idKit="+Kit+"&Page="+page;
+    
+    document.getElementById(idLink).href=link;
+    
+}

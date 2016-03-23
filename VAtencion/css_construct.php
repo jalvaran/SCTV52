@@ -484,6 +484,10 @@ class CssIni{
 	function CrearLink($link,$target,$Titulo){
 		print('<a href="'.$link.'" target="'.$target.'">'.$Titulo.'</a>');
 	}
+        function CrearLinkID($link,$target,$Titulo,$VectorDatosExtra){
+            $ID=$VectorDatosExtra["ID"];
+            print('<a id="'.$ID.'" href="'.$link.'" target="'.$target.'">'.$Titulo.'</a>');
+	}
 	
 	/////////////////////Crear una fila para una tabla
 	function CrearFilaNotificacion($Mensaje,$FontSize){

@@ -257,6 +257,15 @@ public function DibujeTabla($Vector){
                 $this->css->CrearInputText("IDTabla_".$NombreCol, "hidden", "", $Vector[$NombreCol]["IDTabla"], "", "black", "", "", $Ancho, 30, 0, 0);
                 $this->css->CrearInputText("Display_".$NombreCol, "hidden", "", $Vector[$NombreCol]["Display"], "", "black", "", "", $Ancho, 30, 0, 0);
             }
+            
+            if(isset($Vector[$NombreCol]["NewLink"]) ){
+                $NewLink[$i]["Link"]=$Vector[$NombreCol]["NewLink"];
+                $NewLink[$i]["Titulo"]=$Vector[$NombreCol]["NewLinkTitle"];  
+            }
+                
+            if(isset($Vector["NewText"][$NombreCol]) ){
+               $NewText[$i]["NewText"]=$Vector["NewText"][$NombreCol];
+            }
             $i++;
             
         }
@@ -277,6 +286,8 @@ public function DibujeTabla($Vector){
                     $ColumnaLink=$Vector["VerRegistro"]["ColumnaLink"];
                     $Ruta.=$DatosProducto[$ColumnaLink];
                 }
+                
+                
                 
                 $this->css->CrearLink($Ruta,"_blank", "Ver // ");
             }
@@ -312,7 +323,26 @@ public function DibujeTabla($Vector){
                             
                             $this->css->CrearLink($DatosProducto[$i], "_blank", $DatosProducto[$i]);
                         }else{
-                            print("$DatosProducto[$i]"); 
+                            if(isset($NewLink[$i]["Link"])){
+                                $Page=$Vector["Kit"]["Page"];
+                                
+                                $idProducto=$DatosProducto[0];
+                                $idLink="LinkCol".$DatosProducto[0];
+                                $idCantidad="TxtCantidad".$DatosProducto[0];
+                                $idSelect="CmbKit".$DatosProducto[0];
+                                $this->css->CrearSelect($idSelect, "CambiaLinkKit('$idProducto','$idLink','$idCantidad','$idSelect','$Page')");
+                                    $ConsultaKits=$this->obCon->ConsultarTabla("kits", "");
+                                    $this->css->CrearOptionSelect(0, "Seleccione un kit", 1);
+                                    while($DatosKits=  $this->obCon->FetchArray($ConsultaKits)){
+                                        $this->css->CrearOptionSelect($DatosKits["ID"], $DatosKits["Nombre"], 0);
+                                    }
+                                $this->css->CerrarSelect();
+                                $this->css->CrearInputNumber($idCantidad, "number", "", 0, "Cantidad", "black", "onchange", "CambiaLinkKit('$idProducto','$idLink','$idCantidad','$idSelect','$Page')", 100, 30, 0, 0, 0, "", "any");
+                                $VectorDatosExtra["ID"]=$idLink;
+                                $this->css->CrearLinkID($NewLink[$i]["Link"], "_self", $NewLink[$i]["Titulo"],$VectorDatosExtra);
+                            }else{
+                                print("$DatosProducto[$i]"); 
+                            }
                         }
                         print("</td>");
                        
@@ -331,7 +361,9 @@ public function DibujeTabla($Vector){
                             
                             $this->css->CrearLink($DatosVinculo[$ColDisplay], "_blank", $DatosVinculo[$ColDisplay]);
                         }else{
-                            print("$DatosVinculo[$ColDisplay]"); 
+                            
+                            print("$DatosVinculo[$ColDisplay]");
+                            
                         }
                         print("</td>");
                         

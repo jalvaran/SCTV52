@@ -37,7 +37,14 @@ $Vector["Required"]["IVA"]=1;
 $Vector["Required"]["Bodega_idBodega"]=1;
 $Vector["Required"]["CuentaPUC"]=1;
 
+//
+//Nuevo link dentro de una columna
 
+$RutaNewLink="procesadores/ProcesadorAgregaKits.php?Tabla=productosventa&IDProducto=";
+$Vector["Kit"]["NewLink"]=$RutaNewLink;
+$Vector["Kit"]["NewLinkTitle"]="Agregar a Kit";
+$Vector["Kit"]["Page"]="productosventa.php";
+$Vector["NewText"]["Kit"]="TxtCantidad";
 //Selecciono las Columnas que tendran valores de otras tablas
 //
 //
