@@ -12,7 +12,8 @@
         
 //ORDENES DE TRABAJO
 INVENTARIOS
-    CREACION DE KITS
+    //CREACION DE KITS
+    Agregar a Kits desde todas las tablas de productos
     ALQUILER DE MAQUINARIA
     productos venta (Imprimir codigo de barras desde alli)
     productos para alquilar
@@ -25,7 +26,19 @@ INVENTARIOS
     Crear Subgrupos
 
 INGRESOS
+    Comprobantes de ingresos
+
+AGREGAR TODOS LOS ELEMNTOS DE UN KIT EN COTIZACIONES
+
 CARTERA
+    //Ver
+    //Ingresar Pago
+    Ingresar Abono
+    Ver Total
+    Castigar Cartera
+NOTAS CONTABLES
+    Notas Credito
+    Movimientos Contables
 VENTAS RAPIDAS
 DEVOLUCIONES EN VENTAS
 CERRAR TURNO

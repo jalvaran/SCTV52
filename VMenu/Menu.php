@@ -55,7 +55,7 @@
 			$css->SubTabs("Admin.php","_blank","../images/admin.png","Administrar");
 			$css->SubTabs("MnuVentas.php","_blank","../images/ventas.png","Ventas");
 			$css->SubTabs("MnuFacturacion.php","_blank","../images/facturar.png","Facturación");
-			$css->SubTabs("Admin.php","_blank","../images/cartera.png","Cartera");
+			$css->SubTabs("../VAtencion/cartera.php","_blank","../images/cartera.png","Cartera");
 			$css->SubTabs("Admin.php","_blank","../images/ingresos.png","Ingresos");
 			$css->SubTabs("MnuEgresos.php","_blank","../images/egresos.png","Egresos");
 			$css->SubTabs("Admin.php","_blank","../images/clientes.png","Clientes");

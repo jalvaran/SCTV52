@@ -1039,6 +1039,137 @@ public function FetchArray($Datos)
             return($idIngreso);
 	}
         
+        
+/*
+ * Funcion Registra Pago de una factura
+ * 
+ */
+
+    public function RegistrePagoFactura($idFactura,$fecha,$Pago,$CuentaDestino,$Retefuente,$ReteIVA,$ReteICA,$idUser,$Vector){
+        
+        $DatosFactura=$this->DevuelveValores("facturas","idFacturas",$idFactura);
+        $CentroCostos=$DatosFactura["CentroCosto"]; 
+        $idEmpresaPro=$DatosFactura["EmpresaPro_idEmpresaPro"];
+        $DatosCliente=$this->DevuelveValores("clientes","idClientes",$DatosFactura["Clientes_idClientes"]);
+        $DatosCuentasFrecuentes=$this->DevuelveValores("cuentasfrecuentes","CuentaPUC",$CuentaDestino);
+        $NIT=$DatosCliente["Num_Identificacion"];
+        $RazonSocialC=$DatosCliente["RazonSocial"];
+        $Detalle="Pago de Factura $DatosFactura[Prefijo] $DatosFactura[NumeroFactura]";
+        $ValorIngreso=$Pago-$Retefuente-$ReteIVA-$ReteICA;
+        //////Creo el comprobante de Ingreso
+
+        $tab="comprobantes_ingreso";
+        $NumRegistros=6;
+
+        $Columnas[0]="Fecha";               $Valores[0]=$fecha;
+        $Columnas[1]="Clientes_idClientes"; $Valores[1]=$DatosFactura["Clientes_idClientes"];
+        $Columnas[2]="Valor";               $Valores[2]=$ValorIngreso;
+        $Columnas[3]="Tipo";                $Valores[3]="EFECTIVO";
+        $Columnas[4]="Concepto";            $Valores[4]=$Detalle;
+        $Columnas[5]="Usuarios_idUsuarios"; $Valores[5]=$idUser;
+
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+
+        $idIngreso=$this->ObtenerMAX($tab,"ID", 1,"");
+
+        ////Registro el anticipo en el libro diario
+        
+        $tab="librodiario";
+        $NumRegistros=26;
+        $CuentaPUC="130505".$NIT;
+        $NombreCuenta="Clientes Nacionales $RazonSocialC $NIT";
+        
+        $Columnas[0]="Fecha";			$Valores[0]=$fecha;
+        $Columnas[1]="Tipo_Documento_Intero";	$Valores[1]="ComprobanteIngreso";
+        $Columnas[2]="Num_Documento_Interno";	$Valores[2]=$idIngreso;
+        $Columnas[3]="Tercero_Tipo_Documento";	$Valores[3]=$DatosCliente['Tipo_Documento'];
+        $Columnas[4]="Tercero_Identificacion";	$Valores[4]=$NIT;
+        $Columnas[5]="Tercero_DV";		$Valores[5]=$DatosCliente['DV'];
+        $Columnas[6]="Tercero_Primer_Apellido";	$Valores[6]=$DatosCliente['Primer_Apellido'];
+        $Columnas[7]="Tercero_Segundo_Apellido";$Valores[7]=$DatosCliente['Segundo_Apellido'];
+        $Columnas[8]="Tercero_Primer_Nombre";	$Valores[8]=$DatosCliente['Primer_Nombre'];
+        $Columnas[9]="Tercero_Otros_Nombres";	$Valores[9]=$DatosCliente['Otros_Nombres'];
+        $Columnas[10]="Tercero_Razon_Social";	$Valores[10]=$RazonSocialC;
+        $Columnas[11]="Tercero_Direccion";	$Valores[11]=$DatosCliente['Direccion'];
+        $Columnas[12]="Tercero_Cod_Dpto";	$Valores[12]=$DatosCliente['Cod_Dpto'];
+        $Columnas[13]="Tercero_Cod_Mcipio";	$Valores[13]=$DatosCliente['Cod_Mcipio'];
+        $Columnas[14]="Tercero_Pais_Domicilio"; $Valores[14]=$DatosCliente['Pais_Domicilio'];
+        $Columnas[15]="CuentaPUC";		$Valores[15]=$CuentaPUC;
+        $Columnas[16]="NombreCuenta";		$Valores[16]=$NombreCuenta;
+        $Columnas[17]="Detalle";		$Valores[17]="Pago";
+        $Columnas[18]="Debito";			$Valores[18]=0;
+        $Columnas[19]="Credito";		$Valores[19]=$Pago;
+        $Columnas[20]="Neto";			$Valores[20]=$Valores[19]*(-1);
+        $Columnas[21]="Mayor";			$Valores[21]="NO";
+        $Columnas[22]="Esp";			$Valores[22]="NO";
+        $Columnas[23]="Concepto";		$Valores[23]=$Detalle;
+        $Columnas[24]="idCentroCosto";		$Valores[24]=$CentroCostos;
+        $Columnas[25]="idEmpresa";		$Valores[25]=$idEmpresaPro;
+
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+
+
+        ///////////////////////Registramos contra partida del anticipo
+
+        $CuentaPUC=$CuentaDestino; 
+               
+        $Valores[15]=$CuentaPUC;
+        $Valores[16]=$DatosCuentasFrecuentes["Nombre"];
+        $Valores[18]=$ValorIngreso;
+        $Valores[19]=0; 			//Credito se escribe el total de la venta menos los impuestos
+        $Valores[20]=$Valores[18];  											//Credito se escribe el total de la venta menos los impuestos
+
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+        //Si hay retefuente se registra
+        if($Retefuente>0){
+            
+            $DatosCuenta=$this->DevuelveValores("tiposretenciones","ID",1);
+                                        
+            $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
+            $CuentaPUC=$DatosCuenta["CuentaActivo"];
+
+            $Valores[15]=$CuentaPUC;
+            $Valores[16]=$NombreCuenta;
+            $Valores[18]=$Retefuente;
+            $Valores[19]=0; 						
+            $Valores[20]=$Retefuente;  											//Credito se escribe el total de la venta menos los impuestos
+
+            $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el credito
+        }
+        //Si hay reteIVA se registra
+        if($ReteIVA>0){
+            
+            $DatosCuenta=$this->DevuelveValores("tiposretenciones","ID",2);
+                                        
+            $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
+            $CuentaPUC=$DatosCuenta["CuentaActivo"];
+
+            $Valores[15]=$CuentaPUC;
+            $Valores[16]=$NombreCuenta;
+            $Valores[18]=$ReteIVA;
+            $Valores[19]=0; 						
+            $Valores[20]=$ReteIVA;  											//Credito se escribe el total de la venta menos los impuestos
+
+            $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el credito
+        }
+        //Si hay reteICA se registra
+        if($ReteICA>0){
+            
+            $DatosCuenta=$this->DevuelveValores("tiposretenciones","ID",3);
+                                        
+            $NombreCuenta=$DatosCuenta["NombreCuentaActivo"];
+            $CuentaPUC=$DatosCuenta["CuentaActivo"];
+
+            $Valores[15]=$CuentaPUC;
+            $Valores[16]=$NombreCuenta;
+            $Valores[18]=$ReteICA;
+            $Valores[19]=0; 						
+            $Valores[20]=$ReteICA;  											//Credito se escribe el total de la venta menos los impuestos
+
+            $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el credito
+        }
+        return($idIngreso);
+    }        
 ////////////////////////////////////////////////////////////////////
 //////////////////////Funcion calcular peso de una remision
 ///////////////////////////////////////////////////////////////////

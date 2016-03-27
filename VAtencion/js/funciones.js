@@ -215,3 +215,22 @@ function CambiaLinkKit(idProducto,idLink,idCantidad,idkit,page){
     document.getElementById(idLink).href=link;
     
 }
+
+function CalculeTotalPagoIngreso() {
+
+	var Retefuente;
+	var ReteIVA;
+	var ReteICA;
+	var Total;
+	var TotalPago;
+        
+	Retefuente = document.getElementById("TxtRetefuente").value;
+	ReteIVA = document.getElementById("TxtReteIVA").value;
+	ReteICA = document.getElementById("TxtReteICA").value;
+        Total = document.getElementById("TxtPagoH").value;
+        
+	TotalPago= Total - Retefuente - ReteIVA - ReteICA;
+	
+	document.getElementById("TxtPago").value = TotalPago;
+
+}
