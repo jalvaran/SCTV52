@@ -1203,7 +1203,30 @@ public function CalculePesoRemision($idCotizacion)
         return($nuevafecha);
 
     }
+   
     
+/*
+ * 
+ * Funcion para sumar dias a una fecha
+ */
+
+    public function ActualiceDiasCartera(){		
+        $FechaActual=date("Y-m-d");
+        //$FechaActual='2016-05-10';
+        $sql="UPDATE `cartera` SET `DiasCartera`= DATEDIFF('$FechaActual', `FechaVencimiento`)";
+        $this->Query($sql);
+        $SumatoriaDias=$this->Sume("cartera", 'DiasCartera', '');
+        $sql="SELECT COUNT(idCartera) as NumRegistros FROM cartera";
+        $Consulta=$this->Query($sql);
+        $DatosCartera=$this->FetchArray($Consulta);
+        $NumRegistros=$DatosCartera["NumRegistros"];
+        if($NumRegistros>0){
+            $Promedio=$SumatoriaDias/$NumRegistros;
+        }else{
+            $Promedio="";
+        }
+        return($Promedio);
+    }    
     /*
  * 
  * Funcion evitar la inyeccion de codigo sql

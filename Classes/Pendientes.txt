@@ -27,12 +27,13 @@ INVENTARIOS
 
 INGRESOS
     Comprobantes de ingresos
-
+    Registrar un ingreso
 AGREGAR TODOS LOS ELEMNTOS DE UN KIT EN COTIZACIONES
 
 CARTERA
     //Ver
     //Ingresar Pago
+    Ver Rotacion
     Ingresar Abono
     Ver Total
     Castigar Cartera

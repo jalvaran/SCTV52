@@ -52,6 +52,15 @@ $css->CrearDiv("principal", "container", "center",1,1);
     /////	
 $css->CrearImageLink("../VMenu/Menu.php", "../images/cartera.png", "_self",200,200);
 
+$PromedioDias=$obVenta->ActualiceDiasCartera();
+$TotalCartera=$obVenta->Sume("cartera", "Saldo","");
+
+$css->CrearNotificacionAzul("Total en Cartera: $ $TotalCartera", 16);
+if($PromedioDias>30){
+    $css->CrearNotificacionRoja("Rotacion de Cartera: $PromedioDias", 16);
+}else{
+    $css->CrearNotificacionVerde("Rotacion de Cartera: $PromedioDias", 16);
+}
 
 ////Paginacion
 ////
