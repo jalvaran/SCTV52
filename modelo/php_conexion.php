@@ -1168,6 +1168,7 @@ public function FetchArray($Datos)
 
             $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores); //Registro el credito
         }
+        $this->ActualizaRegistro("facturas", "SaldoFact", 0, "idFacturas", $idFactura);
         return($idIngreso);
     }        
 ////////////////////////////////////////////////////////////////////

@@ -53,7 +53,7 @@ $css->CrearDiv("principal", "container", "center",1,1);
 $css->CrearImageLink("../VMenu/Menu.php", "../images/cartera.png", "_self",200,200);
 
 $PromedioDias=$obVenta->ActualiceDiasCartera();
-$TotalCartera=$obVenta->Sume("cartera", "Saldo","");
+$TotalCartera=  number_format($obVenta->Sume("cartera", "Saldo",""));
 
 $css->CrearNotificacionAzul("Total en Cartera: $ $TotalCartera", 16);
 if($PromedioDias>30){

@@ -1,16 +1,4 @@
-//INSERTAR UN VALOR ADICIONAL EN LAS COTIZACIONES LIBRE
-//DESCARGAR DEL INVENTARIO LOS ITEMS TIPO PR
-//INGRESAR AL KARDEX LOS MOVIMIENTOS DE PRODUCTOS
-
-//EGRESOS
-    //Adjuntos
-    //Notas contables
-    //Crear un proveedor
-    //Historial de egresos
-    //Retenciones en Egresos
-    //Compra Mercancias
-        
-//ORDENES DE TRABAJO
+NOTAS CREDITO PARA LOS ANTICIPOS O ASIGNACION DE ELLOS A FACTURAS
 INVENTARIOS
     //CREACION DE KITS
     Agregar a Kits desde todas las tablas de productos
@@ -28,14 +16,15 @@ INVENTARIOS
 INGRESOS
     Comprobantes de ingresos
     Registrar un ingreso
-AGREGAR TODOS LOS ELEMNTOS DE UN KIT EN COTIZACIONES
+
+AGREGAR TODOS LOS ELEMENTOS DE UN KIT EN COTIZACIONES
 
 CARTERA
     //Ver
     //Ingresar Pago
-    Ver Rotacion
+    //Ver Rotacion
     Ingresar Abono
-    Ver Total
+    //Ver Total
     Castigar Cartera
 NOTAS CONTABLES
     Notas Credito

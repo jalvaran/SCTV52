@@ -100,7 +100,7 @@ print("<body>");
                 $css->ColTabla('Fecha Despacho',1);
                 $css->ColTabla('Hora Despacho',1);
                 $css->ColTabla('Observaciones Remision',1);
-                $css->ColTabla('Anticipo',1);
+                $css->ColTabla('Ver Remision',1);
                 $css->ColTabla('Asociar',1);
             $css->CierraFilaTabla();
             while($DatosRemision=mysql_fetch_array($pa)){
