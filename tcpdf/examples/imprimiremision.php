@@ -150,11 +150,13 @@ $tbl = <<<EOD
   
  <tr nobr="true">
   <th><h3>Ref</h3></th>
-  <th colspan="3"><h3>Descripción</h3></th>
+  <th colspan="2"><h3>Descripción</h3></th>
   <th><h3>Valor Unitario</h3></th>
   <th><h3>Cantidad</h3></th>
   <th><h3>Dias</h3></th>
   <th><h3>Total</h3></th>
+  <th><h3>F. Dev.</h3></th>
+  <th><h3>C. Dev.</h3></th>      
  </tr>
  </table>
 EOD;
@@ -180,11 +182,13 @@ $tbl = <<<EOD
 <table border="1" cellpadding="2" cellspacing="2" align="center">
  <tr nobr="true">
   <td>$registros2[Referencia]</td>
-  <td colspan="3">$registros2[Descripcion]</td>
+  <td colspan="2">$registros2[Descripcion]</td>
   <td>$$registros2[ValorUnitario]</td>
   <td>$registros2[Cantidad]</td>
   <td>$DatosRemision[Dias]</td>
   <td>$$registros2[Subtotal]</td>
+    <td> </td>
+    <td> </td>
  </tr>
  </table>
 EOD;
@@ -224,8 +228,11 @@ $tbl = <<<EOD
 </span></div><br><br>
 
 <div id="Div_Firmas" style="text-align:left;">
-<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:left;">Recibe: ______________________________</span>
-<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:right;"> Entrega: ______________________________</span></div>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:left;">Recibe : ______________________________</span>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:right;"> Entrega : ______________________________ Fecha:________</span></div>
+<br> <br> <br>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:left;">Devuelve : ______________________________</span>
+<span style="color:#000000;font-family:'Bookman Old Style';font-size:8px; text-align:right;"> Recibe : ______________________________ Fecha:________</span></div>
 
         
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
