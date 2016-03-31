@@ -383,10 +383,13 @@
 	if(!empty($_REQUEST['BtnCrearCliente'])){
 		
 		
-		$idPreventa=$_REQUEST['CmbPreVentaAct'];
+		//$idPreventa=$_REQUEST['CmbPreVentaAct'];
 		$NIT=$_REQUEST['TxtNIT'];
+                $idMun=$_REQUEST['CmbCodMunicipio'];
 		$obVenta=new ProcesoVenta($idUser);
 		$DatosClientes=$obVenta->DevuelveValores('clientes',"Num_Identificacion",$NIT);
+                
+                $DatosMunicipios=$obVenta->DevuelveValores('cod_municipios_dptos',"ID",$idMun);
 		$DV="";
 		
 		
@@ -406,27 +409,23 @@
 			
 			$Columnas[0]="Tipo_Documento";						$Valores[0]=$_REQUEST['CmbTipoDocumento'];
 			$Columnas[1]="Num_Identificacion";					$Valores[1]=$_REQUEST['TxtNIT'];
-			$Columnas[2]="DV";									$Valores[2]=$DV;
+			$Columnas[2]="DV";							$Valores[2]=$DV;
 			$Columnas[3]="Primer_Apellido";						$Valores[3]=$_REQUEST['TxtPA'];
 			$Columnas[4]="Segundo_Apellido";					$Valores[4]=$_REQUEST['TxtSA'];
 			$Columnas[5]="Primer_Nombre";						$Valores[5]=$_REQUEST['TxtPN'];
 			$Columnas[6]="Otros_Nombres";						$Valores[6]=$_REQUEST['TxtON'];
 			$Columnas[7]="RazonSocial";							$Valores[7]=$_REQUEST['TxtRazonSocial'];
 			$Columnas[8]="Direccion";							$Valores[8]=$_REQUEST['TxtDireccion'];
-			$Columnas[9]="Cod_Dpto";							$Valores[9]=76;
-			$Columnas[10]="Cod_Mcipio";							$Valores[10]=111;
+			$Columnas[9]="Cod_Dpto";							$Valores[9]=$DatosMunicipios["Cod_Dpto"];
+			$Columnas[10]="Cod_Mcipio";							$Valores[10]=$DatosMunicipios["Cod_mcipio"];
 			$Columnas[11]="Pais_Domicilio";						$Valores[11]=169;
 			$Columnas[12]="Telefono";			    			$Valores[12]=$_REQUEST['TxtTelefono'];
 			$Columnas[13]="Ciudad";			    				$Valores[13]="BUGA";
 			$Columnas[14]="Email";			    				$Valores[14]=$_REQUEST['TxtEmail'];
 			
 			$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
-			
-			$DatosClientes=$obVenta->DevuelveValores('clientes',"Num_Identificacion",$NIT);
-			
-			$obVenta->ActualizaRegistro('vestasactivas',"Clientes_idClientes",$DatosClientes["idClientes"],"idVestasActivas",$idPreventa);
-			
-			print("<script language='JavaScript'>alert('Se ha creado el Cliente $_REQUEST[TxtRazonSocial] y se asignó a esta preventa')</script>");
+				
+			print("<script language='JavaScript'>alert('Se ha creado el Cliente $_REQUEST[TxtRazonSocial]')</script>");
 			
 		}else{
 			

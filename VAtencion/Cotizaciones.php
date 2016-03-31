@@ -84,7 +84,24 @@ include_once("procesaCoti.php");
 		 $css->CrearInputText("TxtRazonSocial","text","","","Razon Social","black","","",200,30,0,1);
 		 $css->CrearInputText("TxtDireccion","text","","","Direccion","black","","",200,30,0,1);
 		 $css->CrearInputText("TxtTelefono","text","","","Telefono","black","","",200,30,0,1);
+                 
 		 $css->CrearInputText("TxtEmail","text","","","Email","black","","",200,30,0,1);
+                 
+                 $VarSelect["Ancho"]="200";
+                 $VarSelect["PlaceHolder"]="Seleccione el municipio";
+                 $css->CrearSelectChosen("CmbCodMunicipio", $VarSelect);
+                 
+                 $sql="SELECT * FROM cod_municipios_dptos";
+                 $Consulta=$obVenta->Query($sql);
+                    while($DatosMunicipios=$obVenta->FetchArray($Consulta)){
+                        $Sel=0;
+                        if($DatosMunicipios["ID"]==1011){
+                            $Sel=1;
+                        }
+                        $css->CrearOptionSelect($DatosMunicipios["ID"], $DatosMunicipios["Ciudad"], $Sel);
+                    }
+                 $css->CerrarSelect();
+                 echo '<br><br>';
 		 $css->CrearBoton("BtnCrearCliente", "Crear Cliente");
 		 $css->CerrarForm();
 	 
@@ -330,23 +347,10 @@ include_once("procesaCoti.php");
 
     
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap-transition.js"></script>
-    <script src="js/bootstrap-alert.js"></script>
-    <script src="js/bootstrap-modal.js"></script>
-    <script src="js/bootstrap-dropdown.js"></script>
-    <script src="js/bootstrap-scrollspy.js"></script>
-    <script src="js/bootstrap-tab.js"></script>
-    <script src="js/bootstrap-tooltip.js"></script>
-    <script src="js/bootstrap-popover.js"></script>
-    <script src="js/bootstrap-button.js"></script>
-    <script src="js/bootstrap-collapse.js"></script>
-    <script src="js/bootstrap-carousel.js"></script>
-    <script src="js/bootstrap-typeahead.js"></script>
-	
+<?php 
+    $css->AgregaJS();
+    $css->AnchoElemento("CmbCodMunicipio_chosen", 200);
+?>
 
    
 		

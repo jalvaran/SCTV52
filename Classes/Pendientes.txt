@@ -9,7 +9,7 @@ Hacer Pagina de Anticipos
 Ajustar el movimiento contable del iva asumido a regimen simplificado
 Modificar proveedores y colocarle terceros
 poder realizar movimientos contables para sacar dinero desde un anticipo a un pago de transporte
-agregar el campo de ciudad en la creacion de los clientes
+//agregar el campo de ciudad en la creacion de los clientes
 INVENTARIOS
     //CREACION DE KITS
     Agregar a Kits desde todas las tablas de productos
