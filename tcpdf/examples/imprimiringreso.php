@@ -21,11 +21,18 @@ $fecha=$DatosIngreso["Fecha"];
 $Concepto=$DatosIngreso["Concepto"];
 $Clientes_idClientes=$DatosIngreso["Clientes_idClientes"];
 $Usuarios_idUsuarios=$DatosIngreso["Usuarios_idUsuarios"];
+$Tercero=$DatosIngreso["Tercero"];
+if($Clientes_idClientes>0){
+    $DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$Clientes_idClientes);
+}else{
+    $DatosCliente=$obVenta->DevuelveValores("proveedores","idProveedores",$Tercero);
+}
 
-$DatosCliente=$obVenta->DevuelveValores("clientes","idClientes",$Clientes_idClientes);
+
+
 $DatosEmpresaPro=$obVenta->DevuelveValores("empresapro","idEmpresaPro",1);
 		  
-$nombre_file="Remision_".$fecha."_".$DatosCliente["RazonSocial"];
+$nombre_file="Comprobante_Ingreso_".$fecha."_".$DatosCliente["RazonSocial"];
 		   
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {

@@ -1,10 +1,11 @@
+Modulo de anticipos
 NOTAS CREDITO PARA LOS ANTICIPOS O ASIGNACION DE ELLOS A FACTURAS
 Cotizacion incluyendo numero de dias
 Cargo basico que no sume por numero de dias
 Facturar desde remision
 Anular Facturas
 Mostrar Email en Carteras
-Cambiar cuenta de anticipos por la 238020
+//Cambiar cuenta de anticipos por la 238020
 Hacer Pagina de Anticipos
 Ajustar el movimiento contable del iva asumido a regimen simplificado
 Modificar proveedores y colocarle terceros
