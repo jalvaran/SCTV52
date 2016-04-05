@@ -1,4 +1,5 @@
 Modulo de anticipos
+    Crear tabla de anticipos e ingresar los datos en ella.
 NOTAS CREDITO PARA LOS ANTICIPOS O ASIGNACION DE ELLOS A FACTURAS
 Cotizacion incluyendo numero de dias
 Cargo basico que no sume por numero de dias
