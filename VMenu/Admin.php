@@ -19,7 +19,7 @@
 	  
 	}
 	
-	if ($_SESSION['tipouser']=="operador")
+	if ($_SESSION['tipouser']<>"administrador")
 	{
 	  exit("Usted No esta autorizado para ingresar a esta parte <a href='Menu.php' >Menu </a>");
 	  

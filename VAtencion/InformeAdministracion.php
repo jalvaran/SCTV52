@@ -16,11 +16,11 @@ if (!isset($_SESSION['username']))
   
 }
 
-if ($_SESSION['tipouser']=="operador")
-{
-  exit("Usted no tiene permisos para visualizar esta pagina");
-  
-}
+if ($_SESSION['tipouser']<>"administrador")
+	{
+	  exit("Usted No esta autorizado para ingresar a esta parte <a href='Menu.php' >Menu </a>");
+	  
+	}
 $fecha=date("Y-m-d");
 $NombreUser=$_SESSION['nombre'];
 $idUser=$_SESSION['idUser'];	
