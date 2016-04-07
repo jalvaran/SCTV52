@@ -1,9 +1,9 @@
 <?php
 
-$myTabla="clientes";
-$idTabla="idClientes";
-$myPage="clientes.php";
-$myTitulo="Clientes";
+$myTabla="proveedores";
+$idTabla="idProveedores";
+$myPage="proveedores.php";
+$myTitulo="Proveedores";
 
 
 
@@ -35,7 +35,6 @@ $Vector["Cod_Mcipio"]["Vinculo"]=1;   //Indico que esta columna tendra un vincul
 $Vector["Cod_Mcipio"]["TablaVinculo"]="cod_municipios_dptos";  //tabla de donde se vincula
 $Vector["Cod_Mcipio"]["IDTabla"]="Cod_mcipio"; //id de la tabla que se vincula
 $Vector["Cod_Mcipio"]["Display"]="Ciudad"; 
-//$Vector["Cod_Dpto"]["Predeterminado"]=1004;
 
 $Vector["Pais_Domicilio"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
 $Vector["Pais_Domicilio"]["TablaVinculo"]="cod_paises";  //tabla de donde se vincula
@@ -46,6 +45,7 @@ $Vector["Tipo_Documento"]["Vinculo"]=1;   //Indico que esta columna tendra un vi
 $Vector["Tipo_Documento"]["TablaVinculo"]="cod_documentos";  //tabla de donde se vincula
 $Vector["Tipo_Documento"]["IDTabla"]="Codigo"; //id de la tabla que se vincula
 $Vector["Tipo_Documento"]["Display"]="Descripcion"; 
+//$Vector["Cod_Dpto"]["Predeterminado"]=1004;
 
 ///Filtros y orden
 $Vector["Order"]=" $idTabla DESC ";   //Orden
