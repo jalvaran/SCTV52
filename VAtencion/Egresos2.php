@@ -1,9 +1,10 @@
+<?php
+session_start();
+?>
 <script src="../shortcuts.js" type="text/javascript">
 </script>
 <script src="js/funciones.js"></script>
 <?php 
-
-session_start();
 
 include_once("../modelo/php_conexion.php");
 include_once("css_construct.php");

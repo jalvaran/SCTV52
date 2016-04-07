@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <script src="js/funciones.js"></script>
 <html lang="es">
@@ -8,8 +11,7 @@
 	 
 	 
 	 <?php
-	 session_start();
-
+	 
 	include_once("../modelo/php_conexion.php");
 	include_once("css_construct.php");
 

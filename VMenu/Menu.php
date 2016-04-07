@@ -1,10 +1,13 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
      <head>
 	 <title>SoftContech</title>
      <meta charset="utf-8">
 	 <?php
-	 session_start();
+	 
 
 	include_once("../modelo/php_conexion.php");
 	include_once("css_construct.php");

@@ -1,5 +1,5 @@
-
 <?php 
+
 ////////////////////////////////////(///////////////////////////////
 //////////////////////FUNCIONES CALCULAR DIGITO DE VERIFICACION/////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -66,8 +66,7 @@
 	}
 	
 	if(!empty($_REQUEST['TxtAsociarCliente'])){
-		$idCliente=$_REQUEST['TxtAsociarCliente'];
-		
+		$idCliente=$_REQUEST['TxtAsociarCliente'];		
 		header("location:Cotizaciones.php?TxtIdCliente=$idCliente");
 	}
 		
@@ -436,4 +435,5 @@
 		
 			
 	}
+        
 	?>

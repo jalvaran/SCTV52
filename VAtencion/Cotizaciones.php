@@ -1,9 +1,11 @@
+<?php
+ob_start();
+session_start();
+?>
 <script src="../shortcuts.js" type="text/javascript">
 </script>
 <script src="js/funciones.js"></script>
 <?php 
-
-session_start();
 
 include_once("../modelo/php_conexion.php");
 include_once("css_construct.php");
@@ -367,3 +369,6 @@ include_once("procesaCoti.php");
 atajos();
 posiciona('TxtCodigoBarras');
 </script> 
+<?php
+ob_end_flush();
+?>
