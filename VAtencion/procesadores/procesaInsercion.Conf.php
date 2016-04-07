@@ -11,6 +11,8 @@ $VarInsert[$TablaConfig]["Referencia"]["Excluir"]=1;
 $VarInsert[$TablaConfig]["idProductosVenta"]["Excluir"]=1;
 $VarInsert[$TablaConfig]["CostoTotal"]["Excluir"]=1;
 $VarInsert[$TablaConfig]["ImagenesProductos_idImagenesProductos"]["Excluir"]=1;
+$VarInsert[$TablaConfig]["Kit"]["Excluir"]=1;
+$VarInsert[$TablaConfig]["Especial"]["Excluir"]=1;
 
 /*
  * Tabla Usuarios
@@ -73,5 +75,18 @@ $TablaConfig="productosalquiler";
 $VarInsert[$TablaConfig]["Kit"]["Required"]=1;
 $VarInsert[$TablaConfig]["Kit"]["Excluir"]=1;
 //$VarInsert[$TablaConfig]["Required"]["Kit"]=1;
+
+$TablaConfig="clientes";
+$VarInsert[$TablaConfig]["Num_Identificacion"]["Required"]=1;   
+$VarInsert[$TablaConfig]["Tipo_Documento"]["Required"]=1;   
+$VarInsert[$TablaConfig]["DV"]["Required"]=1;   
+$VarInsert[$TablaConfig]["RazonSocial"]["Required"]=1; 
+$VarInsert[$TablaConfig]["Direccion"]["Required"]=1;   
+$VarInsert[$TablaConfig]["Cod_Dpto"]["Required"]=1;   
+$VarInsert[$TablaConfig]["Cod_Mcipio"]["Required"]=1;   
+$VarInsert[$TablaConfig]["Pais_Domicilio"]["Required"]=1;   
+$VarInsert[$TablaConfig]["Telefono"]["Required"]=1;   
+$VarInsert[$TablaConfig]["Ciudad"]["Required"]=1;   
+$VarInsert[$TablaConfig]["CIUU"]["Required"]=1;   
 
 ?>

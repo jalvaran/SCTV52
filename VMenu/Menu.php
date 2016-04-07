@@ -58,8 +58,8 @@
 			$css->SubTabs("../VAtencion/cartera.php","_blank","../images/cartera.png","Cartera");
 			$css->SubTabs("MnuIngresos.php","_blank","../images/ingresos.png","Ingresos");
 			$css->SubTabs("MnuEgresos.php","_blank","../images/egresos.png","Egresos");
-			$css->SubTabs("Admin.php","_blank","../images/clientes.png","Clientes");
-			$css->SubTabs("Admin.php","_blank","../images/proveedores.png","Proveedores");
+			$css->SubTabs("../VAtencion/clientes.php","_blank","../images/clientes.png","Clientes");
+			$css->SubTabs("../VAtencion/proveedores.php","_blank","../images/proveedores.png","Proveedores");
 			$css->SubTabs("Admin.php","_blank","../images/cuentasxpagar.png","Cuentas Por Pagar");
 			$css->SubTabs("MnuInventarios.php","_blank","../images/inventarios.png","Inventarios");
                         $css->SubTabs("../VAtencion/ordenesdetrabajo.php","_blank","../images/ordentrabajo.png","Ordenes de trabajo");

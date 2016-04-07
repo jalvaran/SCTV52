@@ -570,14 +570,17 @@ public function FormularioInsertRegistro($Parametros,$VarInsert)  {
                     $VectorSel["Evento"]="";
                     $VectorSel["Funcion"]="";
                     $VectorSel["Required"]=$Required;
-                    $this->css->CrearSelect2($VectorSel);
+                    $VarSelect["Ancho"]=100;
+                    $VarSelect["PlaceHolder"]="Seleccione una opcion";
+                    //$this->css->CrearSelect2($VectorSel);
+                    $this->css->CrearSelectChosen($NombreCol, $VarSelect);
                     $this->css->CrearOptionSelect("", "Seleccione Una Opcion", 0);
                     while($Opciones=$this->obCon->FetchArray($Consulta)){
                         $pre=0;
                         if($Parametros->$NombreCol->Predeterminado==$Opciones[$IDTabla]){
                             $pre=1;
                         }
-                        $this->css->CrearOptionSelect($Opciones[$IDTabla], $Opciones[$IDTabla]."-".$Opciones[$Display]."-".$Opciones[2], $pre);              
+                        $this->css->CrearOptionSelect($Opciones[$IDTabla], $Opciones[$IDTabla]." - ".$Opciones[$Display]." - ".$Opciones[2], $pre);              
                     }
                     $this->css->CerrarSelect(); 
                 }else{

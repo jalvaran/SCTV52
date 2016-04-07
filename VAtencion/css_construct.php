@@ -676,7 +676,7 @@ function Footer(){
            $PlaceHolder=$VarSelect["PlaceHolder"];
            //print("<br><br><br>");
            
-           echo '<select id="'.$Nombre.'" data-placeholder="'.$PlaceHolder.'" class="chosen-select"  tabindex="2" name="'.$Nombre.'" style="width:200px;">';
+           echo '<select id="'.$Nombre.'" data-placeholder="'.$PlaceHolder.'" class="chosen-select"  tabindex="2" name="'.$Nombre.'" style="width:200px;" required=1>';
            
        	
 	}   
