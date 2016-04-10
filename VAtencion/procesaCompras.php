@@ -57,7 +57,7 @@
 		$Retefuente=$_REQUEST['TxtRetefuente'];
                 $ReteIVA=$_REQUEST['TxtReteIVA'];
                 $ReteICA=$_REQUEST['TxtReteICA'];
-                
+                $fecha=$_REQUEST['TxtFecha'];
 		$Subtotal=$_POST["TxtSubtotal"];
 		$IVA=$_POST["TxtIVA"];
 		$Total=$_POST["TxtTotal"]-$ReteICA-$ReteIVA-$Retefuente;

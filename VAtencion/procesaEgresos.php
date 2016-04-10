@@ -56,6 +56,7 @@
                 $Retefuente=$_REQUEST['TxtRetefuente'];
                 $ReteIVA=$_REQUEST['TxtReteIVA'];
                 $ReteICA=$_REQUEST['TxtReteICA'];
+                $fecha=$_REQUEST['TxtFecha'];
 		$idUsuario=$idUser;
 		$IVA=0;
 		if($TipoEgreso==3){

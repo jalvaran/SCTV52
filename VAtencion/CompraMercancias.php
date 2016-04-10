@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <script src="../shortcuts.js" type="text/javascript">
 </script>
 <script src="js/funciones.js"></script>
@@ -344,4 +347,6 @@ $css->AgregaSubir();
   
   
 </html>
-
+<?php
+ob_end_flush();
+?>
