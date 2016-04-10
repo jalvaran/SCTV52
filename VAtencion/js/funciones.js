@@ -165,6 +165,7 @@ function MuestraOculta(id){
     
 }
 
+
 // esta funcion permite deshabilitar o habilitar un elemento
 function Habilita(id,estado){
     
@@ -233,4 +234,24 @@ function CalculeTotalPagoIngreso() {
 	
 	document.getElementById("TxtPago").value = TotalPago;
 
+}
+
+// esta funcion permite mostrar u ocultar un elemento
+function MuestreDesdeCombo(idCombo,idElement){
+    
+    estado=document.getElementsByName(idCombo)[0].value;
+    
+    if(estado==""){
+        document.getElementById(idElement).style.display="none";
+    }else{
+        document.getElementById(idElement).style.display="block";
+    }
+    
+}
+
+// esta funcion permite mostrar u ocultar un elemento
+function prueba12(){
+    
+    alert("Si");
+    
 }

@@ -698,6 +698,14 @@ function Footer(){
     
 	} 
         
+        /////////////////////Crear un frame
+	
+	function frame($page,$border,$alto,$ancho,$VectorFrame){
+             
+          print("<iframe src='$page' frameborder=$border style='height: ".$alto."px; width:".$ancho."px'></iframe>"); 
+    
+	} 
+        
         
 	//////////////////////////////////FIN
 }

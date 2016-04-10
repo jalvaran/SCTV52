@@ -63,6 +63,7 @@
             $css->NuevaTabs(1);
                 $css->SubTabs("../VAtencion/egresos.php","_blank","../images/historial.png","Historial");
                 $css->SubTabs("../VAtencion/Egresos2.php","_blank","../images/egresos.png","Registrar Gasto");
+                $css->SubTabs("../VAtencion/EgresosItems.php","_blank","../images/egresoitems.png","Egreso por items");
                 $css->SubTabs("../VAtencion/CompraMercancias.php","_blank","../images/compramercancias.png","Comprar Mercancias o Equipos");    //Uso Futuro
                 //$css->SubTabs("../VAtencion/CompraEquipos.php","_blank","../images/equipos.png","Comprar Equipos");//Uso Futuro
             $css->FinTabs();
