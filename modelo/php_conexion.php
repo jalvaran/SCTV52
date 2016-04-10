@@ -1,9 +1,6 @@
 <?php
 	
-	$con = mysql_connect("localhost","root","pirlo1985");
-	mysql_select_db("softcontech_v5",$con) or die(mysql_error());
-	date_default_timezone_set("America/Bogota");
-	$db="softcontech_v5";
+	include_once 'php_settings.php';
 	$CuentaDestino=110510;   //Cuenta Por defecto para caja menor
 	$CuentaIngresos=4135;
 	$TablaCuentaIngreso="cuentas";
