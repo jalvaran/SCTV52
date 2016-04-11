@@ -1,3 +1,4 @@
+var idEgreso=0;
 
 function EnviaFormSC() {
 
@@ -237,10 +238,10 @@ function CalculeTotalPagoIngreso() {
 }
 
 // esta funcion permite mostrar u ocultar un elemento
-function MuestreDesdeCombo(idCombo,idElement){
+function MuestreDesdeCombo(idCombo,idElement,idCarga){
     
     estado=document.getElementsByName(idCombo)[0].value;
-    
+    idEgreso=estado;
     if(estado==""){
         document.getElementById(idElement).style.display="none";
     }else{
@@ -250,8 +251,15 @@ function MuestreDesdeCombo(idCombo,idElement){
 }
 
 // esta funcion permite mostrar u ocultar un elemento
-function prueba12(){
+function CargueIdEgreso(){
     
-    alert("Si");
+    document.getElementById('TxtidEgreso').value=idEgreso;
     
+}
+
+// esta funcion permite mostrar u ocultar un elemento
+function ObtengaValor(id){
+    
+    valor=document.getElementById(id).value;
+    return valor;
 }

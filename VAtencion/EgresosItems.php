@@ -75,14 +75,15 @@ print("<body>");
         print("</td>");
         $css->CierraFilaTabla();
     $css->CerrarTabla();
-    $css->CrearNotificacionAzul("Agregar Conceptos a Un Egreso", 18);
+   
+    $css->CrearNotificacionRoja("Agregar Conceptos a Un Egreso", 18);
     $css->CerrarForm();
     $css->CrearForm2("FrmAgregaItemE", "pre_egreso.php", "post", "FramePreEgreso");
     $css->CrearTabla();
     $css->FilaTabla(16);
     print("<td style='text-align:center'>");
     
-        $css->CrearSelect("CmbEgresoPre", "MuestreDesdeCombo('CmbEgresoPre','DivDatosItemEgreso');prueba12()");
+        $css->CrearSelect("CmbEgresoPre", "MuestreDesdeCombo('CmbEgresoPre','DivDatosItemEgreso');CargueIdEgreso()");
         
             $css->CrearOptionSelect("","Seleccionar Un Egreso",0);
             
@@ -94,14 +95,101 @@ print("<body>");
     print("</td>");
     $css->CierraFilaTabla();
     $css->CerrarTabla();
-    $css->CrearDiv("DivDatosItemEgreso", "container", "center", 0, 1);
+    $css->CrearDiv("DivDatosItemEgreso", "", "center", 0, 1);
     $css->CrearTabla();
     $css->FilaTabla(16);
-        $css->ColTabla("<strong>Fecha</strong>", 1);
-        $css->ColTabla("<strong>Cuenta Origen</strong>", 1);
+    $css->ColTabla("<strong>Egreso:</strong>", 1);
+    print("<td>");
+            $css->CrearInputText("TxtidEgreso", "text", "", "", "idEgreso", "black", "", "", 100, 30, 1, 1);
+    print("</td>");  
+    $css->CierraFilaTabla();   
+    $css->FilaTabla(16);
+        
+        $css->ColTabla("<strong>Centro de Costo</strong>", 1);
         $css->ColTabla("<strong>Tercero</strong>", 1);
-        $css->ColTabla("<strong>Detalle</strong>", 1);
+        $css->ColTabla("<strong>Cuenta Destino</strong>", 1);
+        
+    $css->CierraFilaTabla();    
+    $css->FilaTabla(16);
+        
+        
+        print("<td>");
+					
+            $css->CrearSelect("CmbCentroCosto"," Centro de Costos:<br>","black","",1);
+            $css->CrearOptionSelect("","Seleccionar Centro de Costos",0);
+
+            $Consulta = $obVenta->ConsultarTabla("centrocosto","");
+            while($CentroCosto=mysql_fetch_array($Consulta)){
+                            $css->CrearOptionSelect($CentroCosto['ID'],$CentroCosto['Nombre'],0);							
+            }
+            $css->CerrarSelect();
+
+        print("</td>");
+        print("<td>");
+            $VarSelect["Ancho"]="200";
+            $VarSelect["PlaceHolder"]="Seleccione el tercero";
+            $css->CrearSelectChosen("CmbTerceroItem", $VarSelect);
+            $css->CrearOptionSelect("", "Seleccione un tercero" , 0);
+            $sql="SELECT * FROM proveedores";
+            $Consulta=$obVenta->Query($sql);
+            
+               while($DatosProveedores=$obVenta->FetchArray($Consulta)){
+                   $Sel=0;
+                   
+                   $css->CrearOptionSelect($DatosProveedores["idProveedores"], "$DatosProveedores[RazonSocial] $DatosProveedores[Num_Identificacion]" , $Sel);
+               }
+            $css->CerrarSelect();
+        print("</td>");
+        print("<td>");
+            $VarSelect["Ancho"]="200";
+            $VarSelect["PlaceHolder"]="Seleccione la cuenta destino";
+            $css->CrearSelectChosen("CmbCuentaDestino", $VarSelect);
+            $css->CrearOptionSelect("", "Seleccione la cuenta destino" , 0);
+            $sql="SELECT * FROM subcuentas";
+            $Consulta=$obVenta->Query($sql);
+            
+               while($DatosProveedores=$obVenta->FetchArray($Consulta)){
+                   $Sel=0;
+                   
+                   $css->CrearOptionSelect($DatosProveedores["PUC"], "$DatosProveedores[PUC] $DatosProveedores[Nombre]" , $Sel);
+               }
+            
+            //Solo para cuando el PUC no está todo en subcuentas
+            $sql="SELECT * FROM cuentas";
+            $Consulta=$obVenta->Query($sql);
+            
+               while($DatosProveedores=$obVenta->FetchArray($Consulta)){
+                   $Sel=0;
+                   
+                   $css->CrearOptionSelect($DatosProveedores["idPUC"], "$DatosProveedores[idPUC] $DatosProveedores[Nombre]" , $Sel);
+               }
+            $css->CerrarSelect();
+        print("</td>");
+        $css->CierraFilaTabla();
+        $css->FilaTabla(16);
+        print("<td>");
+        $css->CrearInputNumber("TxtValorItem", "number", "<strong>Valor:</strong><br>", "", "Valor", "black", "", "", 220, 30, 0, 1, 1, "", 1);
+        print("<br>");
+       
+        $css->CrearSelect("CmbDebitoCredito", "");
+            $css->CrearOptionSelect("D", "Debito", 1);
+            $css->CrearOptionSelect("C", "Credito", 0);
+        $css->CerrarSelect();
+        print("</td>");
+    
+       
+        print("<td>");
+        $css->CrearTextArea("TxtConceptoEgreso","<strong>Concepto:</strong><br>","","Escriba el detalle del Egreso","black","","",300,100,0,1);
+        print("</td>");
+        print("<td>");
+        $css->CrearInputText("TxtNumFactura","text",'Numero de Comprobante:<br>',"","Numero de Comprobante","black","","",300,30,0,1);
+        echo"<br>";
+        $css->CrearUpload("foto");
+        
+        print("</td>");
+        
     $css->CierraFilaTabla();
+    
     
     
     $css->CerrarTabla();
@@ -111,5 +199,7 @@ print("<body>");
     $css->CerrarDiv();//Cerramos contenedor Principal
     $css->AgregaJS(); //Agregamos javascripts
     $css->AgregaSubir();
+    $css->AnchoElemento("CmbTerceroItem_chosen", 200);
+    $css->AnchoElemento("CmbCuentaDestino_chosen", 200);
     print("</body></html>");
 ?>
