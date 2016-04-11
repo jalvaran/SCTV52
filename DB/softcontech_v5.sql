@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-03-2016 a las 14:42:12
+-- Tiempo de generación: 11-04-2016 a las 00:22:55
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -216,14 +216,7 @@ CREATE TABLE IF NOT EXISTS `cartera` (
   `Saldo` double NOT NULL DEFAULT '0',
   `Observaciones` text,
   PRIMARY KEY (`idCartera`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
-
---
--- Volcado de datos para la tabla `cartera`
---
-
-INSERT INTO `cartera` (`idCartera`, `Facturas_idFacturas`, `FechaIngreso`, `FechaVencimiento`, `DiasCartera`, `idCliente`, `RazonSocial`, `Telefono`, `Contacto`, `TelContacto`, `TotalFactura`, `TotalAbonos`, `Saldo`, `Observaciones`) VALUES
-(6, '201603100836280.06322700 1457616988', '2016-03-10', '2016-04-09', -13, '17', 'SEGURIDAD ATLAS LTDA', '3923000', 'Arturo Rios', '3162902471', 470, 0, 470, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1042,7 +1035,7 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `Email` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `CIUU` int(11) NOT NULL,
   PRIMARY KEY (`idClientes`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=75 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=78 ;
 
 --
 -- Volcado de datos para la tabla `clientes`
@@ -1111,7 +1104,10 @@ INSERT INTO `clientes` (`idClientes`, `Tipo_Documento`, `Num_Identificacion`, `D
 (71, 13, '1234124', 0, 'dsadsa', '', '', '', 'fulano', 'dsa', '76', '111', '169', 'dsada', 'BUGA', '', '', 'dsad', 0),
 (72, 31, '532543543', 8, 'dsad', '', '', '', 'dsad', 'dsa', '76', '111', '169', 'dsa', 'BUGA', '', '', 'sdad', 0),
 (73, 31, '14983212', 3, 'BERMUDEZ', '', 'ANDRES', '', 'ANDRES  BERMUDEZ ', 'CALLERA', '76', '111', '169', '31212121', 'BUGA', '', '', 'andres@gmail.com', 0),
-(74, 13, '83213', 0, 'alvaran', 'valencia', 'peipid', 'dsapdosa', 'peipid dsapdosa alvaran valencia', 'dsa', '76', '111', '169', 'dsad', 'BUGA', '', '', 'dsad', 0);
+(74, 13, '83213', 0, 'alvaran', 'valencia', 'peipid', 'dsapdosa', 'peipid dsapdosa alvaran valencia', 'dsa', '76', '111', '169', 'dsad', 'BUGA', '', '', 'dsad', 0),
+(75, 31, '900323987', 5, 'PEREZ', 'BERENSUELA', 'ERMINSUN', 'MARCELO', 'ERMINSUN MARCELO PEREZ BERENSUELA', 'CALLE 56 No9832', '5', '674', '169', '32131', 'BUGA', '', '', 'peres@hotmail.com', 0),
+(76, 31, '900232455', 8, 'marcelino', '', 'carioca', '', 'carioca  marcelino ', 'cale dsd23232', '5', '001', '169', '32131', 'BUGA', '', '', '321321', 0),
+(77, 0, '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -2805,6 +2801,65 @@ CREATE TABLE IF NOT EXISTS `compras_precompra` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `comprobantes_contabilidad`
+--
+
+CREATE TABLE IF NOT EXISTS `comprobantes_contabilidad` (
+  `ID` int(16) NOT NULL AUTO_INCREMENT,
+  `Fecha` date NOT NULL,
+  `Hora` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
+  `Usuarios_idUsuarios` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=11 ;
+
+--
+-- Volcado de datos para la tabla `comprobantes_contabilidad`
+--
+
+INSERT INTO `comprobantes_contabilidad` (`ID`, `Fecha`, `Hora`, `Concepto`, `Usuarios_idUsuarios`) VALUES
+(7, '2016-04-10', 'Prueba', 'Prueba', 3),
+(8, '2016-04-10', '21:58', 'proese', 3),
+(9, '2016-04-10', '22:02', 'dsada', 3),
+(10, '2016-04-10', '23:19', 'dasdsa', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comprobantes_contabilidad_items`
+--
+
+CREATE TABLE IF NOT EXISTS `comprobantes_contabilidad_items` (
+  `ID` int(16) NOT NULL AUTO_INCREMENT,
+  `idComprobante` int(16) NOT NULL,
+  `Fecha` date NOT NULL,
+  `CentroCostos` int(11) NOT NULL,
+  `Tercero` int(11) NOT NULL,
+  `CuentaPUC` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Debito` int(16) NOT NULL,
+  `Credito` int(16) NOT NULL,
+  `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
+  `NumDocSoporte` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Soporte` text COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `comprobantes_contabilidad_items`
+--
+
+INSERT INTO `comprobantes_contabilidad_items` (`ID`, `idComprobante`, `Fecha`, `CentroCostos`, `Tercero`, `CuentaPUC`, `Debito`, `Credito`, `Concepto`, `NumDocSoporte`, `Soporte`) VALUES
+(1, 8, '2016-04-10', 1, 900298074, '1435', 321321, 0, 'dsadsa', '321321', '../SoportesEgresos/factura_venta_9309.pdf'),
+(2, 9, '2016-04-10', 1, 900704258, '110505', 0, 30000, 'peurere', '3213213', '../SoportesEgresos/subcuentas.csv'),
+(3, 9, '2016-04-10', 1, 900704258, '110505', 0, 45000, 'dsadsad', '421432', '../SoportesEgresos/imv.csv'),
+(4, 10, '2016-04-10', 1, 900298074, '1110', 0, 4321423, 'dsadsadsa', '21432432', '../SoportesEgresos/Desert.jpg'),
+(5, 9, '2016-04-10', 1, 900298074, '1110', 0, 321321, 'dsadsadsa', '21Âº21Âº2', '../SoportesEgresos/Hydrangeas.jpg'),
+(6, 9, '2016-04-10', 1, 900298074, '1105', 321321, 0, 'dssadsad', '3213213', ''),
+(7, 9, '2016-04-10', 1, 900605785, '1105', 321321, 0, 'dsadsada', '321321', '../SoportesEgresos/Penguins.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `comprobantes_ingreso`
 --
 
@@ -2812,56 +2867,90 @@ CREATE TABLE IF NOT EXISTS `comprobantes_ingreso` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Fecha` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Clientes_idClientes` int(11) NOT NULL,
+  `Tercero` int(11) NOT NULL,
   `Valor` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Tipo` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=49 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_ingreso`
 --
 
-INSERT INTO `comprobantes_ingreso` (`ID`, `Fecha`, `Clientes_idClientes`, `Valor`, `Tipo`, `Concepto`, `Usuarios_idUsuarios`) VALUES
-(1, '2016-02-12', 17, '20000', 'EFECTIVO', '', 3),
-(2, '2016-02-12', 17, '100000', 'EFECTIVO', '', 3),
-(3, '2016-02-12', 17, '122121', 'EFECTIVO', '', 3),
-(4, '2016-02-12', 17, '40000', 'EFECTIVO', '', 3),
-(5, '2016-02-12', 17, '200000', 'EFECTIVO', '', 3),
-(6, '2016-02-12', 17, '500000', 'EFECTIVO', 'Anticipo por remision 17', 3),
-(7, '2016-02-12', 17, '100000', 'EFECTIVO', 'Anticipo por remision 18', 3),
-(8, '2016-02-12', 17, '100000', 'EFECTIVO', 'Anticipo por remision 19', 3),
-(9, '2016-02-12', 17, '500000', 'EFECTIVO', 'Anticipo por remision 20', 3),
-(10, '2016-02-12', 17, '100000', 'EFECTIVO', 'Anticipo por remision 21', 3),
-(11, '2016-02-12', 17, '100000', 'EFECTIVO', 'Anticipo por remision 22', 3),
-(12, '2016-02-16', 17, '100000', 'EFECTIVO', 'Anticipo por remision 25', 3),
-(13, '2016-02-16', 2, '100000', 'EFECTIVO', 'Anticipo por remision 26', 3),
-(14, '2016-02-16', 17, '30000', 'EFECTIVO', 'Anticipo por remision 27', 3),
-(15, '2016-02-16', 17, '50000', 'EFECTIVO', 'Anticipo por remision 30', 3),
-(16, '2016-02-16', 17, '1000', 'EFECTIVO', 'Anticipo por remision 31', 3),
-(17, '2016-02-23', 17, '10000', 'EFECTIVO', 'Anticipo por remision 32', 3),
-(18, '2016-02-23', 17, '50000', 'EFECTIVO', 'Anticipo por remision 33', 3),
-(19, '2016-02-23', 17, '20000', 'EFECTIVO', 'Anticipo por remision 34', 3),
-(20, '2016-03-04', 17, '2000000', 'EFECTIVO', 'Anticipo por remision 35', 3),
-(21, '2016-03-06', 17, '200000', 'EFECTIVO', 'Anticipo por remision 37', 3),
-(22, '2016-03-09', 18, '500000', 'EFECTIVO', 'Anticipo por remision 38', 3),
-(23, '2016-03-14', 17, '10000', 'EFECTIVO', 'Anticipo por remision 40', 3),
-(24, '2016-03-14', 17, '100000', 'EFECTIVO', 'Anticipo por remision 41', 3),
-(25, '2016-03-18', 17, '10000', 'EFECTIVO', 'Anticipo por remision 42', 1),
-(26, '2016-03-27', 0, '0', 'EFECTIVO', 'Pago de Factura A 22', 3),
-(27, '2016-03-27', 0, '0', 'EFECTIVO', 'Pago de Factura A 32', 3),
-(28, '2016-03-27', 17, '123900', 'EFECTIVO', 'Pago de Factura A 22', 3),
-(29, '2016-03-27', 17, '113900', 'EFECTIVO', 'Pago de Factura A 22', 3),
-(30, '2016-03-27', 17, '63900', 'EFECTIVO', 'Pago de Factura A 22', 3),
-(31, '2016-03-27', 17, '63900', 'EFECTIVO', 'Pago de Factura A 22', 3),
-(32, '2016-03-27', 17, '19134', 'EFECTIVO', 'Pago de Factura A 32', 3),
-(33, '2016-03-27', 17, '123900', 'EFECTIVO', 'Pago de Factura A 22', 3),
-(34, '2016-03-27', 17, '16218', 'EFECTIVO', 'Pago de Factura A 31', 3),
-(35, '2016-03-27', 17, '6479390', 'EFECTIVO', 'Pago de Factura A 18', 3),
-(36, '2016-03-27', 17, '23084', 'EFECTIVO', 'Pago de Factura A 33', 3),
-(37, '2016-03-27', 18, '100000', 'EFECTIVO', 'Anticipo por remision 43', 3),
-(38, '2016-03-27', 18, '205640', 'EFECTIVO', 'Pago de Factura A 35', 3);
+INSERT INTO `comprobantes_ingreso` (`ID`, `Fecha`, `Clientes_idClientes`, `Tercero`, `Valor`, `Tipo`, `Concepto`, `Usuarios_idUsuarios`) VALUES
+(1, '2016-02-12', 17, 0, '20000', 'EFECTIVO', '', 3),
+(2, '2016-02-12', 17, 0, '100000', 'EFECTIVO', '', 3),
+(3, '2016-02-12', 17, 0, '122121', 'EFECTIVO', '', 3),
+(4, '2016-02-12', 17, 0, '40000', 'EFECTIVO', '', 3),
+(5, '2016-02-12', 17, 0, '200000', 'EFECTIVO', '', 3),
+(6, '2016-02-12', 17, 0, '500000', 'EFECTIVO', 'Anticipo por remision 17', 3),
+(7, '2016-02-12', 17, 0, '100000', 'EFECTIVO', 'Anticipo por remision 18', 3),
+(8, '2016-02-12', 17, 0, '100000', 'EFECTIVO', 'Anticipo por remision 19', 3),
+(9, '2016-02-12', 17, 0, '500000', 'EFECTIVO', 'Anticipo por remision 20', 3),
+(10, '2016-02-12', 17, 0, '100000', 'EFECTIVO', 'Anticipo por remision 21', 3),
+(11, '2016-02-12', 17, 0, '100000', 'EFECTIVO', 'Anticipo por remision 22', 3),
+(12, '2016-02-16', 17, 0, '100000', 'EFECTIVO', 'Anticipo por remision 25', 3),
+(13, '2016-02-16', 2, 0, '100000', 'EFECTIVO', 'Anticipo por remision 26', 3),
+(14, '2016-02-16', 17, 0, '30000', 'EFECTIVO', 'Anticipo por remision 27', 3),
+(15, '2016-02-16', 17, 0, '50000', 'EFECTIVO', 'Anticipo por remision 30', 3),
+(16, '2016-02-16', 17, 0, '1000', 'EFECTIVO', 'Anticipo por remision 31', 3),
+(17, '2016-02-23', 17, 0, '10000', 'EFECTIVO', 'Anticipo por remision 32', 3),
+(18, '2016-02-23', 17, 0, '50000', 'EFECTIVO', 'Anticipo por remision 33', 3),
+(19, '2016-02-23', 17, 0, '20000', 'EFECTIVO', 'Anticipo por remision 34', 3),
+(20, '2016-03-04', 17, 0, '2000000', 'EFECTIVO', 'Anticipo por remision 35', 3),
+(21, '2016-03-06', 17, 0, '200000', 'EFECTIVO', 'Anticipo por remision 37', 3),
+(22, '2016-03-09', 18, 0, '500000', 'EFECTIVO', 'Anticipo por remision 38', 3),
+(23, '2016-03-14', 17, 0, '10000', 'EFECTIVO', 'Anticipo por remision 40', 3),
+(24, '2016-03-14', 17, 0, '100000', 'EFECTIVO', 'Anticipo por remision 41', 3),
+(25, '2016-03-18', 17, 0, '10000', 'EFECTIVO', 'Anticipo por remision 42', 1),
+(26, '2016-03-27', 0, 0, '0', 'EFECTIVO', 'Pago de Factura A 22', 3),
+(27, '2016-03-27', 0, 0, '0', 'EFECTIVO', 'Pago de Factura A 32', 3),
+(28, '2016-03-27', 17, 0, '123900', 'EFECTIVO', 'Pago de Factura A 22', 3),
+(29, '2016-03-27', 17, 0, '113900', 'EFECTIVO', 'Pago de Factura A 22', 3),
+(30, '2016-03-27', 17, 0, '63900', 'EFECTIVO', 'Pago de Factura A 22', 3),
+(31, '2016-03-27', 17, 0, '63900', 'EFECTIVO', 'Pago de Factura A 22', 3),
+(32, '2016-03-27', 17, 0, '19134', 'EFECTIVO', 'Pago de Factura A 32', 3),
+(33, '2016-03-27', 17, 0, '123900', 'EFECTIVO', 'Pago de Factura A 22', 3),
+(34, '2016-03-27', 17, 0, '16218', 'EFECTIVO', 'Pago de Factura A 31', 3),
+(35, '2016-03-27', 17, 0, '6479390', 'EFECTIVO', 'Pago de Factura A 18', 3),
+(36, '2016-03-27', 17, 0, '23084', 'EFECTIVO', 'Pago de Factura A 33', 3),
+(37, '2016-03-27', 18, 0, '100000', 'EFECTIVO', 'Anticipo por remision 43', 3),
+(38, '2016-03-27', 18, 0, '205640', 'EFECTIVO', 'Pago de Factura A 35', 3),
+(39, '2016-04-04', 0, 4, '200000', 'EFECTIVO', 'Prestamo de Carmelo', 3),
+(40, '2016-03-07', 0, 2, '1000000', 'EFECTIVO', 'Ese Mismo', 3),
+(41, '2015-04-04', 0, 71, '230000', 'EFECTIVO', 'Prestamo', 3),
+(42, '2016-04-04', 0, 2, '321321', 'EFECTIVO', 'dsadsadas', 3),
+(43, '2016-04-04', 0, 29, '123445', 'EFECTIVO', 'dasdsa', 3),
+(44, '2016-04-04', 0, 2, '21212', 'EFECTIVO', 'asasas', 3),
+(45, '2016-04-04', 14, 0, '321321', 'EFECTIVO', 'assa', 3),
+(46, '2016-04-05', 22, 0, '45000', 'EFECTIVO', 'dsadsa', 3),
+(47, '2016-04-05', 0, 4, '560000', 'EFECTIVO', 'dsadsa', 3),
+(48, '2016-04-07', 17, 0, '470', 'EFECTIVO', 'Pago de Factura A 16', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comprobantes_pre`
+--
+
+CREATE TABLE IF NOT EXISTS `comprobantes_pre` (
+  `ID` int(16) NOT NULL AUTO_INCREMENT,
+  `Fecha` date NOT NULL,
+  `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
+  `idComprobanteContabilidad` int(16) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `comprobantes_pre`
+--
+
+INSERT INTO `comprobantes_pre` (`ID`, `Fecha`, `Concepto`, `idComprobanteContabilidad`) VALUES
+(5, '2016-04-10', 'proese', 8),
+(6, '2016-04-10', 'dsada', 9),
+(7, '2016-04-10', 'dasdsa', 10);
 
 -- --------------------------------------------------------
 
@@ -3545,6 +3634,7 @@ CREATE TABLE IF NOT EXISTS `egresos` (
   `UsuarioCierreDiario` varchar(45) NOT NULL,
   `CentroCostos` int(11) NOT NULL,
   `EmpresaPro` int(11) NOT NULL,
+  `Items` varchar(2) NOT NULL,
   PRIMARY KEY (`idEgresos`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=128 ;
 
@@ -3552,134 +3642,134 @@ CREATE TABLE IF NOT EXISTS `egresos` (
 -- Volcado de datos para la tabla `egresos`
 --
 
-INSERT INTO `egresos` (`idEgresos`, `Fecha`, `PagoProg`, `FechaPagoPro`, `FechaPago`, `Concepto`, `TipoEgreso`, `ServicioPago`, `Beneficiario`, `NIT`, `Direccion`, `Ciudad`, `Subtotal`, `IVA`, `Valor`, `NumFactura`, `idProveedor`, `Cuenta`, `Soporte`, `Usuario_idUsuario`, `CerradoDiario`, `FechaCierreDiario`, `HoraCierreDiario`, `UsuarioCierreDiario`, `CentroCostos`, `EmpresaPro`) VALUES
-(1, '2015-08-11', 'Contado', '2015-08-11', '', 'Compra de Mercancias', 'Compra Productos', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '5000', '800', '5800', '321321', '13', '110505', '', 1, 'NO', '', '', '', 0, 0),
-(2, '2015-08-11', 'Contado', '2015-08-11', '', 'Compra de Mercancias', 'Compra Productos', '', 'SUMINISTROS ELECTRICOS LA 28', '66710063', 'CALLE 28 No 24-56 ', 'TULUA', '58500', '9360', '67860', '231321', '40', '11100501', '', 1, 'NO', '', '', '', 0, 0),
-(3, '2015-08-11', 'Pagado', '2015-08-19', '2015-08-11', 'dsadas', 'PagaContratistas', '', 'CARMELO PALERMO', '700147288', 'CL 11 7 82', 'BUGA', '238', '321', '559', 'dsa344', '4', '110505', '', 1, 'NO', '', '', '', 0, 0),
-(4, '2015-08-12', 'Pagado', '2015-08-12', '2015-08-12', 'dsadsa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '100', '1', '101', '32342', '11', '110505', '', 1, 'NO', '', '', '', 0, 0),
-(5, '2015-08-13', 'Pagado', '2015-08-27', '2015-08-31', 'dasdas', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '231321', '321312', '552633', '321321', '11', '11100501', '', 1, 'SI', '2015-08-31', '08:27:14', 'TECHNO  SOLUCIONES', 0, 0),
-(6, '2015-08-13', 'Contado', '2015-08-13', '', 'Pago de la energia', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '21212', '20', '110505', '', 1, 'SI', '2015-08-13', '08:28:21', 'TECHNO  SOLUCIONES', 0, 0),
-(7, '2015-08-13', 'Contado', '2015-08-13', '', 'dfsadsa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '3213', '11', '110505', '', 1, 'SI', '2015-08-13', '08:31:21', 'TECHNO  SOLUCIONES', 0, 0),
-(8, '2015-08-13', 'Contado', '2015-08-13', '', 'sfdfs', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3132', '12', '110505', '', 1, 'SI', '2015-08-13', '08:32:59', 'TECHNO  SOLUCIONES', 0, 0),
-(9, '2015-08-13', 'Contado', '2015-08-13', '', 'sfdfs', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3132', '12', '110505', '', 1, 'SI', '2015-08-18', '10:24:15', 'TECHNO  SOLUCIONES', 0, 0),
-(10, '2015-08-20', 'Pagado', '2015-08-26', '2015-08-20', 'Pago del mes de mayo de internet', 'PagaServicios', '', 'UNE EPM TELECOMUNICACIONES S.A.', '900092385', 'CRA 16 No 11A SUR - 100', 'MEDELLIN', '100000', '16000', '116000', '12345', '48', '110510', '', 1, 'SI', '2015-08-31', '07:00:32', 'TECHNO  SOLUCIONES', 0, 0),
-(11, '2015-08-31', 'Pagado', '2015-08-31', '2015-08-31', 'dasdwa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '321321', '11', '110510', '', 1, 'SI', '2015-08-31', '08:27:27', 'TECHNO  SOLUCIONES', 0, 0),
-(12, '2015-08-31', 'Contado', '2015-08-31', '', 'dada', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '10000', '0', '10000', '321321', '22', '110510', '', 1, 'SI', '2015-08-31', '07:31:34', 'TECHNO  SOLUCIONES', 0, 0),
-(13, '2015-09-04', 'Contado', '2015-09-04', '', 'pago aquel', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '312321', '12', '110505', '', 1, 'SI', '2015-09-04', '12:03:11', 'TECHNO  SOLUCIONES', 0, 0),
-(14, '2015-09-04', 'Pagado', '2015-09-04', '2015-09-04', '321321', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3213', '12', '110505', '', 1, 'SI', '2015-09-04', '12:03:11', 'TECHNO  SOLUCIONES', 0, 0),
-(15, '2015-08-20', 'Pagado', '2015-08-26', '2015-09-10', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '5750', '920', '6670', '12321', '3', '11100501', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0),
-(16, '2015-08-20', 'Pagado', '2015-08-26', '2015-09-10', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '5750', '920', '6670', '12321', '3', '11100501', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0),
-(17, '2015-09-07', 'Contado', '2015-09-07', '', 'dgsdgs', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '12456', '11', '110510', '', 1, 'SI', '2015-09-07', '08:32:52', 'TECHNO  SOLUCIONES', 0, 0),
-(18, '2015-09-07', 'Pagado', '2015-09-07', '2015-09-10', 'fasfsd', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '20000', '0', '20000', '1234', '11', '110510', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0),
-(19, '2015-09-08', 'Contado', '2015-09-08', '', 'lkkljkl', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '123', '20', '110505', '', 1, 'SI', '2015-09-08', '11:28:46', 'Techno  Soluciones', 0, 0),
-(20, '2015-09-16', 'Pagado', '2015-09-24', '2015-09-16', 'pago de arriendo del mes de agosto', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '500000', '0', '500000', '', '31', '110510', '', 1, 'SI', '2015-09-17', '08:11:40', 'TECHNO  SOLUCIONES', 0, 0),
-(21, '2015-09-04', 'Pagado', '2015-09-04', '2015-09-24', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '50000', '0', '50000', '3213', '3', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0),
-(22, '2015-09-17', 'Contado', '2015-09-17', '', 'pago de factura', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '2111', '12', '110510', '', 2, 'SI', '2015-09-18', '08:03:18', 'ADMINISTRADOR SOFTCONTECH', 0, 0),
-(23, '2015-09-17', 'Contado', '2015-09-17', '', 'dsamdklsa', 'PagaServicios', '', 'TRANSPORTES CUNCHIPA S.A', '891900849', 'NO', 'TULUA', '20000', '10', '20010', '321321', '25', '110510', '', 1, 'SI', '2015-09-18', '08:02:56', 'TECHNO  SOLUCIONES', 0, 0),
-(24, '2015-09-18', 'Contado', '2015-09-18', '', 'pagos', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '321321', '20', '110510', '', 1, 'SI', '2015-09-18', '08:40:53', 'TECHNO  SOLUCIONES', 0, 0),
-(25, '2015-09-18', 'Contado', '2015-09-18', '', 'fsafds', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '50000', '0', '50000', '', '31', '110510', '', 1, 'SI', '2015-09-18', '08:40:53', 'TECHNO  SOLUCIONES', 0, 0),
-(26, '2015-09-20', 'Contado', '2015-09-20', '', 'Compra de Mercancias', 'Compra Productos', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '15000', '2400', '17400', '212', '22', '110505', '', 2, 'SI', '2015-10-08', '22:43:47', 'ADMINISTRADOR SOFTCONTECH', 0, 0),
-(27, '2015-09-21', 'Pagado', '2015-09-23', '2015-09-25', 'Pago de arriendo del mes de septiembre', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '500000', '0', '500000', '', '31', '110510', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(28, '2015-09-21', 'Contado', '2015-09-21', '', 'csaljdklaj', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '12', '10012', '1212', '20', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0),
-(29, '2015-09-21', 'Pagado', '2015-09-23', '2015-09-21', 'Compra de Mercancias', 'Compra Productos', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '56000', '8960', '64960', '21212', '22', '11100501', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0),
-(30, '2015-09-03', 'Contado', '2015-09-03', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '175000', '28000', '203000', '3213', '1', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0),
-(31, '2015-09-10', 'Contado', '2015-09-10', '', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '300000', '48000', '348000', '3213', '3', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0),
-(32, '2015-09-24', 'Contado', '2015-09-24', '', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '16000', '116000', '3232', '3', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0),
-(33, '2015-09-24', 'Contado', '2015-09-24', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '250000', '40000', '290000', '345', '1', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0),
-(34, '2015-09-25', 'Contado', '2015-09-25', '', 'lklk', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '10000', '0', '10000', '', '31', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(35, '2015-09-25', 'Contado', '2015-09-25', '', 'dvjdfbigj', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '5', '0', '5', '', '31', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(36, '2015-09-25', 'Contado', '2015-09-25', '', 'fdgfdhxdf', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '2000', '200', '2200', '1', '11', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(37, '2015-09-25', 'Contado', '2015-09-25', '', 'rhhth', 'PagaServicios', '', 'NOTARIA SEGUNDA DE BUGA', '16592215', 'CARRERA 16 6-45', 'BUGA', '1000', '100', '1100', '2', '26', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(38, '2015-09-25', 'Contado', '2015-09-25', '', 'uhkjhkjh', 'Pago Bancos', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '6000', '0', '6000', '3', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(39, '2015-09-25', 'Contado', '2015-09-25', '', 'gnfnghnh', 'CompraMercancias', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1000', '200', '1200', '2', '1', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(40, '2015-09-25', 'Contado', '2015-09-25', '', 'kjkykj', 'PagaContratistas', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1880', '200', '2080', '1234', '3', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(41, '2015-09-25', 'Contado', '2015-09-25', '', 'hnm jhmjm', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '0', '1000', '1000', '1234', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(42, '2015-09-25', 'Contado', '2015-09-25', '', 'hgjhg', 'PagaServicios', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1000', '100', '1100', '1', '3', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(43, '2015-09-25', 'Contado', '2015-09-25', '', 'ghjcfgjfg', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '0', '1200', '1200', '1', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(44, '2015-09-25', 'Contado', '2015-09-25', '', 'fdgdfh', 'PagaIVA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '3001', '0', '3001', '1', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(45, '2015-09-25', 'Contado', '2015-09-25', '', 'bncvncvn', 'PagaIVA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '1403', '0', '1403', '2', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(46, '2015-09-25', 'Contado', '2015-09-25', '', 'cghcghfg', 'PagaCree', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '6200', '0', '6200', '1', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(47, '2015-09-25', 'Contado', '2015-09-25', '', 'jvn,xcnkv,kn', 'PagaICA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '500', '0', '500', '2', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0),
-(48, '2015-09-25', 'Contado', '2015-09-25', '', 'ghdfhdfh', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '1000', '0', '1000', '', '31', '110505', '', 2, 'SI', '2015-10-08', '22:43:47', 'ADMINISTRADOR SOFTCONTECH', 0, 0),
-(49, '2015-09-27', 'Contado', '2015-09-27', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '64120', '10259', '74379', '3232', '1', '110505', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0),
-(50, '2015-09-27', 'Pagado', '2015-09-27', '2015-09-28', 'dsdas', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '121232', '0', '121232', '', '31', '110510', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0),
-(51, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-08', 'sdsadsa', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '321321', '0', '321321', '', '31', '110505', '', 1, 'SI', '2015-10-09', '10:37:11', 'TECHNO  SOLUCIONES', 0, 0),
-(52, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-20', 'fdfsd', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '321321', '0', '321321', '', '31', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0),
-(53, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-07', 'dsd', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '12121', '0', '12121', '', '31', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0),
-(54, '2015-09-27', 'Contado', '2015-09-27', '', 'fdfds', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '100000', '0', '100000', '21212', '32', '11100501', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0),
-(55, '2015-09-30', 'Pagado', '2015-10-02', '2015-09-30', 'pghghjghjghjghjg', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '30000', '0', '30000', '54546476576', '20', '110510', '', 1, 'SI', '2015-10-01', '12:48:56', 'TECHNO  SOLUCIONES', 0, 0),
-(56, '2015-09-30', 'Contado', '2015-09-30', '', 'Compra de Mercancias', 'Compra Productos', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '50000', '0', '50000', '4654654', '13', '110505', '', 1, 'SI', '2015-10-01', '12:48:56', 'TECHNO  SOLUCIONES', 0, 0),
-(57, '2015-10-01', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '100000', '16000', '116000', '2121', '1', '110510', '', 1, 'SI', '2015-10-02', '12:00:45', 'TECHNO  SOLUCIONES', 0, 0),
-(58, '2015-10-01', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '100000', '15000', '115000', '4321', '2', '110510', '', 1, 'SI', '2015-10-02', '12:00:45', 'TECHNO  SOLUCIONES', 0, 0),
-(59, '2015-10-02', 'Contado', '2015-10-02', '', 'sfsdfds', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '54', '10054', '32432', '11', '110510', '', 1, 'SI', '2015-10-02', '12:39:38', 'TECHNO  SOLUCIONES', 0, 0),
-(60, '2015-10-02', 'Contado', '2015-10-02', '', 'dwqdewq', 'PagaServicios', '', 'COOPETRANS DE TULUA', '891900254', 'Calle 27  1w-176', 'TULUA', '10000', '1000', '11000', '432432', '7', '110510', '', 1, 'SI', '2015-10-05', '15:26:47', 'TECHNO  SOLUCIONES', 0, 0),
-(61, '2015-10-05', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '30000', '1300', '31300', '34545', '2', '110510', '', 1, 'SI', '2015-10-05', '15:26:47', 'TECHNO  SOLUCIONES', 0, 0),
-(62, '2015-10-05', 'Contado', '2015-10-05', '', 'jbhvjhbhjb', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '50000', '0', '50000', '', '31', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0),
-(63, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '12355', '112355', '12334', '3', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0),
-(64, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '16000', '116000', '32321', '3', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0),
-(65, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'MULTIREDES Y TECNOLOGIA', '66975081', 'AV 5 No 29 DN 68 LOCAL 166 CC LA PASARELA', 'CALI', '10000', '1600', '11600', '1234', '44', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0),
-(66, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '10000', '1600', '11600', '1234', '3', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0),
-(67, '2015-10-07', 'Contado', '2015-10-07', '', 'asdlaskdlaksd', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '1234', '12', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0),
-(68, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '12000', '1200', '13200', '213213', '3', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0),
-(69, '2015-10-08', 'Contado', '2015-10-08', '', 'fsafas', 'PagaContratistas', '', 'CARMELO PALERMO', '700147288', 'CL 11 7 82', 'BUGA', '100000', '12121', '112121', '321321', '4', '110510', '', 1, 'SI', '2015-10-09', '10:37:11', 'TECHNO  SOLUCIONES', 0, 0),
-(70, '2015-10-09', 'Contado', '2015-10-09', '', 'PAGO DE TELEFONO MES DE SEPTIEMBRE SE PAGA POR CAJA MENOR POR PEPITA PEREZ', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '12345', '20', '110510', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0),
-(71, '2015-10-09', 'Contado', '2015-10-09', '', 'COMPRA DE CABLE PORQUE CUALQUIER COSA', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '10000', '0', '10000', 'NO', '22', '110510', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0),
-(72, '2015-10-09', 'Contado', '2015-10-09', '', 'PAGO A JULIAN ALVARAN POR TURNO DECEMBRINO', 'PagaContratistas', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '200000', '32000', '232000', 'NO', '31', '110505', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0),
-(73, '2015-10-05', '', '', '', 'Compra de mercancias', '', '', 'SURTIVALLE SA', '900876543', 'CALLE 5 6 25', 'TULUA', '100000', '16000', '116000', '6543', '70', '110505', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0),
-(74, '2015-10-20', 'Contado', '2015-10-20', '', 'Pago de telefono mes de diciembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '32131231', '20', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0),
-(75, '2015-10-20', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '10000', '1600', '11600', '1233', '1', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0),
-(76, '2015-10-23', 'Contado', '2015-10-23', '', 'jhkjhkjh', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '87987987', '20', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0),
-(77, '2015-10-23', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '343453', '454', '343907', '66565', '3', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0),
-(78, '2015-11-20', 'Pagado', '2015-11-30', '2015-11-23', 'pago de telefono del mes de noviembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '4567', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0),
-(79, '2015-11-23', 'Contado', '2015-11-23', '', 'PAGO DE TELEFONO FIJO BODEGA PRINCIPAL MES DE NOVIEMBRE', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '4343242', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0),
-(80, '2015-11-23', 'Pagado', '2015-12-02', '2015-11-23', 'PRUEBA', 'PagaServicios', '', 'COOPETRANS DE TULUA', '891900254', 'Calle 27  1w-176', 'TULUA', '10000', '0', '10000', '7575765', '7', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0),
-(81, '2015-11-24', 'Contado', '2015-11-24', '', 'pago del mes de noviembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '232321312', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0),
-(82, '2015-11-24', '', '', '', 'Compra de mercancias', '', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '20000', '0', '20000', '23131', '13', '11100501', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0),
-(83, '2015-12-08', 'Pagado', '2015-12-18', '2016-02-07', 'PAGO DE TELEFONO DE DICIEMBRE', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '231232321', '12', '110510', '', 3, '', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0),
-(84, '2015-12-17', 'Contado', '2015-12-16', '', 'PAGO DE TELEFONO DEL MES DE DICIEMBRE', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '2131321', '20', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0),
-(85, '2015-12-16', '', '', '', 'Compra de mercancias', '', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '200000', '21000', '221000', '2321312', '13', '11100501', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0),
-(86, '2016-01-04', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '10000', '2000', '12000', '121321', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0),
-(87, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '21000', '121000', '321321', '3', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0),
-(88, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '100000', '2121', '102121', '321321', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0),
-(89, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1212122321', '32321321', '1244443642', '454543534', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0),
-(90, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '213213', '321321', '534534', '321321', '31', '110505', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0),
-(91, '2016-01-10', 'Contado', '2016-01-10', '', 'COMPRA DE PANDEBONOS PARA ATENCION A JULIAN', 'PagaServicios', '', 'LEYDI VIVIANA VALERO MENA', '1115072489', 'CALLE 25C 7B-52', 'BUGA', '15000', '0', '15000', '1234', '72', '110510', '', 1, 'SI', '2016-01-10', '10:41:23', 'TECHNO  SOLUCIONES', 0, 0),
-(92, '2016-01-11', 'Pagado', '2016-01-21', '2016-01-18', 'Pago de telefono 313131 del mes de enero', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '0', '100000', '76786876', '12', '11100501', '', 1, '', '', '', '', 0, 0),
-(93, '2016-01-18', 'Contado', '2016-01-18', '', 'Transporte a Tulua por transporte de fulanito', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '8000', '0', '8000', '576576576765', '22', '110510', '', 1, '', '', '', '', 0, 0),
-(94, '2016-01-20', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '10000', '40000', '50000', '312321', '2', '110505', '', 3, 'SI', '2016-01-21', '16:41:24', 'JULIAN  ALVARAN', 0, 0),
-(95, '2016-01-26', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1000', '100', '1100', '3213', '3', '110510', '', 3, 'SI', '2016-01-26', '16:29:47', 'JULIAN  ALVARAN', 0, 0),
-(96, '2016-01-26', 'Pagado', '2016-02-01', '2016-01-26', 'PAGO DE TELEFONO DEL MES DE ENERO', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '3213213', '12', '110505', '', 3, 'SI', '2016-01-26', '16:29:47', 'JULIAN  ALVARAN', 0, 0),
-(97, '2016-01-27', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '321321', '321', '321642', '321321', '3', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0),
-(98, '2016-01-27', 'Contado', '2016-01-27', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '32132', '3213', '35345', '2121', '1', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0),
-(99, '2016-01-27', 'Contado', '2016-01-27', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '3213', '32213', '35426', '3213', '3', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0),
-(100, '2016-01-27', 'Contado', '2016-01-27', '', 'dhkjhsdjsw', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '100000', '12000', '112000', '2121', '11', '110510', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0),
-(101, '2016-03-14', 'Contado', '2016-03-14', '', 'dsadsa', 'Mantenimiento y Reparaciones', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '212121', '71', '110510', '', 3, '', '', '', '', 1, 1),
-(102, '2016-03-14', 'Contado', '2016-03-14', '', 'dsadsa', 'Mantenimiento y Reparaciones', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '212121', '71', '110510', '', 3, '', '', '', '', 1, 1),
-(103, '2016-03-14', 'Programado', '2016-03-14', '', 'dsadsa', 'Arrendamientos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '120000', '18000', '138000', 'ds3232', '71', '110510', '', 3, '', '', '', '', 1, 1),
-(104, '2016-03-14', 'Programado', '2016-03-14', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', '321321dsd', '71', '11100501', '', 3, '', '', '', '', 1, 1),
-(105, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadsa', 'Diversos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '12000', '112000', '321321', '71', '110510', '', 3, '', '', '', '', 1, 1),
-(106, '2016-03-15', 'Contado', '2016-03-15', '', 'dsad', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321321', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(107, '2016-03-15', 'Contado', '2016-03-15', '', 'dsad', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '3221', '0', '3221', 'dsadsa', '71', '110510', '', 3, '', '', '', '', 1, 1),
-(108, '2016-03-15', 'Contado', '2016-03-15', '', 'sas', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '12321', '0', '15855', 'wqq', '71', '110510', '', 3, '', '', '', '', 1, 1),
-(109, '2016-03-15', 'Contado', '2016-03-15', '', 'dsdsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '2121', '0', '2121', '32321', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(110, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '2211', '0', '2211', '323', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(111, '2016-03-15', 'Contado', '2016-03-15', '', 'dede', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '2344', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(112, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdfs', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '1000', '0', '1000', '3321312', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(113, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdfs', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '1000', '0', '1000', '3321312', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(114, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(115, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(116, '2016-03-15', 'Programado', '2016-03-15', '', 'dsds', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321', '0', '32321', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(117, '2016-03-15', 'Contado', '2016-03-15', '', 'dsdasdas', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '21', '0', '254', '323321321', '71', '110510', '', 3, '', '', '', '', 1, 1),
-(118, '2016-03-15', 'Programado', '2016-03-15', '', 'dasdsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32312', '0', '32312', '2121', '71', '110510', '../SoportesEgresos/', 3, '', '', '', '', 1, 1),
-(119, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321', '0', '32321', '21213', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(120, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32312321', '0', '32312321', '3232', '71', '110505', '', 3, '', '', '', '', 1, 1),
-(121, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321321312321', '0', '32321321312321', '2121321', '71', '110505', '../SoportesEgresos/', 3, '', '', '', '', 1, 1),
-(122, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '312321321', '0', '312321321', '321321', '71', '110505', '../SoportesEgresos/HOJA DE VIDA JULIAN ALVARAN.pdf', 3, '', '', '', '', 1, 1),
-(123, '2016-03-15', 'Programado', '2016-03-15', '', 'dsda', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '321321321', '0', '321321321', '321321', '71', '110505', '../SoportesEgresos/Carta a inmobiliaria.docx', 3, '', '', '', '', 1, 1),
-(124, '2016-03-15', 'Programado', '2016-03-15', '', 'sasa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '3213213', '0', '3213213', '231423', '71', '110505', '../SoportesEgresos/Carta_a_inmobiliaria_2.docx', 3, '', '', '', '', 1, 1),
-(125, '2016-03-15', 'Contado', '2016-03-15', '', 'fafasfa', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '321321', '0', '324855', '321321', '71', '110505', '../SoportesEgresos/Foto_E-M_Hoja_de_Vida.jpg', 3, '', '', '', '', 1, 1),
-(126, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '23121', '0', '23121', '321321', '71', '110505', '../SoportesEgresos/2016-02-04_AVICOLA_SANTA_RITA_SAS_(1).pdf', 3, '', '', '', '', 1, 1),
-(127, '2016-03-18', 'Contado', '2016-03-18', '', 'dsadsada', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', 'dsadsadsa', '71', '110505', '', 1, '', '', '', '', 1, 1);
+INSERT INTO `egresos` (`idEgresos`, `Fecha`, `PagoProg`, `FechaPagoPro`, `FechaPago`, `Concepto`, `TipoEgreso`, `ServicioPago`, `Beneficiario`, `NIT`, `Direccion`, `Ciudad`, `Subtotal`, `IVA`, `Valor`, `NumFactura`, `idProveedor`, `Cuenta`, `Soporte`, `Usuario_idUsuario`, `CerradoDiario`, `FechaCierreDiario`, `HoraCierreDiario`, `UsuarioCierreDiario`, `CentroCostos`, `EmpresaPro`, `Items`) VALUES
+(1, '2015-08-11', 'Contado', '2015-08-11', '', 'Compra de Mercancias', 'Compra Productos', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '5000', '800', '5800', '321321', '13', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
+(2, '2015-08-11', 'Contado', '2015-08-11', '', 'Compra de Mercancias', 'Compra Productos', '', 'SUMINISTROS ELECTRICOS LA 28', '66710063', 'CALLE 28 No 24-56 ', 'TULUA', '58500', '9360', '67860', '231321', '40', '11100501', '', 1, 'NO', '', '', '', 0, 0, ''),
+(3, '2015-08-11', 'Pagado', '2015-08-19', '2015-08-11', 'dsadas', 'PagaContratistas', '', 'CARMELO PALERMO', '700147288', 'CL 11 7 82', 'BUGA', '238', '321', '559', 'dsa344', '4', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
+(4, '2015-08-12', 'Pagado', '2015-08-12', '2015-08-12', 'dsadsa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '100', '1', '101', '32342', '11', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
+(5, '2015-08-13', 'Pagado', '2015-08-27', '2015-08-31', 'dasdas', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '231321', '321312', '552633', '321321', '11', '11100501', '', 1, 'SI', '2015-08-31', '08:27:14', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(6, '2015-08-13', 'Contado', '2015-08-13', '', 'Pago de la energia', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '21212', '20', '110505', '', 1, 'SI', '2015-08-13', '08:28:21', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(7, '2015-08-13', 'Contado', '2015-08-13', '', 'dfsadsa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '3213', '11', '110505', '', 1, 'SI', '2015-08-13', '08:31:21', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(8, '2015-08-13', 'Contado', '2015-08-13', '', 'sfdfs', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3132', '12', '110505', '', 1, 'SI', '2015-08-13', '08:32:59', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(9, '2015-08-13', 'Contado', '2015-08-13', '', 'sfdfs', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3132', '12', '110505', '', 1, 'SI', '2015-08-18', '10:24:15', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(10, '2015-08-20', 'Pagado', '2015-08-26', '2015-08-20', 'Pago del mes de mayo de internet', 'PagaServicios', '', 'UNE EPM TELECOMUNICACIONES S.A.', '900092385', 'CRA 16 No 11A SUR - 100', 'MEDELLIN', '100000', '16000', '116000', '12345', '48', '110510', '', 1, 'SI', '2015-08-31', '07:00:32', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(11, '2015-08-31', 'Pagado', '2015-08-31', '2015-08-31', 'dasdwa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '321321', '11', '110510', '', 1, 'SI', '2015-08-31', '08:27:27', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(12, '2015-08-31', 'Contado', '2015-08-31', '', 'dada', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '10000', '0', '10000', '321321', '22', '110510', '', 1, 'SI', '2015-08-31', '07:31:34', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(13, '2015-09-04', 'Contado', '2015-09-04', '', 'pago aquel', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '312321', '12', '110505', '', 1, 'SI', '2015-09-04', '12:03:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(14, '2015-09-04', 'Pagado', '2015-09-04', '2015-09-04', '321321', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3213', '12', '110505', '', 1, 'SI', '2015-09-04', '12:03:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(15, '2015-08-20', 'Pagado', '2015-08-26', '2015-09-10', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '5750', '920', '6670', '12321', '3', '11100501', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(16, '2015-08-20', 'Pagado', '2015-08-26', '2015-09-10', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '5750', '920', '6670', '12321', '3', '11100501', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(17, '2015-09-07', 'Contado', '2015-09-07', '', 'dgsdgs', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '12456', '11', '110510', '', 1, 'SI', '2015-09-07', '08:32:52', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(18, '2015-09-07', 'Pagado', '2015-09-07', '2015-09-10', 'fasfsd', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '20000', '0', '20000', '1234', '11', '110510', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(19, '2015-09-08', 'Contado', '2015-09-08', '', 'lkkljkl', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '123', '20', '110505', '', 1, 'SI', '2015-09-08', '11:28:46', 'Techno  Soluciones', 0, 0, ''),
+(20, '2015-09-16', 'Pagado', '2015-09-24', '2015-09-16', 'pago de arriendo del mes de agosto', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '500000', '0', '500000', '', '31', '110510', '', 1, 'SI', '2015-09-17', '08:11:40', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(21, '2015-09-04', 'Pagado', '2015-09-04', '2015-09-24', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '50000', '0', '50000', '3213', '3', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(22, '2015-09-17', 'Contado', '2015-09-17', '', 'pago de factura', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '2111', '12', '110510', '', 2, 'SI', '2015-09-18', '08:03:18', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
+(23, '2015-09-17', 'Contado', '2015-09-17', '', 'dsamdklsa', 'PagaServicios', '', 'TRANSPORTES CUNCHIPA S.A', '891900849', 'NO', 'TULUA', '20000', '10', '20010', '321321', '25', '110510', '', 1, 'SI', '2015-09-18', '08:02:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(24, '2015-09-18', 'Contado', '2015-09-18', '', 'pagos', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '321321', '20', '110510', '', 1, 'SI', '2015-09-18', '08:40:53', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(25, '2015-09-18', 'Contado', '2015-09-18', '', 'fsafds', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '50000', '0', '50000', '', '31', '110510', '', 1, 'SI', '2015-09-18', '08:40:53', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(26, '2015-09-20', 'Contado', '2015-09-20', '', 'Compra de Mercancias', 'Compra Productos', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '15000', '2400', '17400', '212', '22', '110505', '', 2, 'SI', '2015-10-08', '22:43:47', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
+(27, '2015-09-21', 'Pagado', '2015-09-23', '2015-09-25', 'Pago de arriendo del mes de septiembre', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '500000', '0', '500000', '', '31', '110510', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(28, '2015-09-21', 'Contado', '2015-09-21', '', 'csaljdklaj', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '12', '10012', '1212', '20', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(29, '2015-09-21', 'Pagado', '2015-09-23', '2015-09-21', 'Compra de Mercancias', 'Compra Productos', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '56000', '8960', '64960', '21212', '22', '11100501', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(30, '2015-09-03', 'Contado', '2015-09-03', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '175000', '28000', '203000', '3213', '1', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(31, '2015-09-10', 'Contado', '2015-09-10', '', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '300000', '48000', '348000', '3213', '3', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(32, '2015-09-24', 'Contado', '2015-09-24', '', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '16000', '116000', '3232', '3', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(33, '2015-09-24', 'Contado', '2015-09-24', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '250000', '40000', '290000', '345', '1', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(34, '2015-09-25', 'Contado', '2015-09-25', '', 'lklk', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '10000', '0', '10000', '', '31', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(35, '2015-09-25', 'Contado', '2015-09-25', '', 'dvjdfbigj', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '5', '0', '5', '', '31', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(36, '2015-09-25', 'Contado', '2015-09-25', '', 'fdgfdhxdf', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '2000', '200', '2200', '1', '11', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(37, '2015-09-25', 'Contado', '2015-09-25', '', 'rhhth', 'PagaServicios', '', 'NOTARIA SEGUNDA DE BUGA', '16592215', 'CARRERA 16 6-45', 'BUGA', '1000', '100', '1100', '2', '26', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(38, '2015-09-25', 'Contado', '2015-09-25', '', 'uhkjhkjh', 'Pago Bancos', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '6000', '0', '6000', '3', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(39, '2015-09-25', 'Contado', '2015-09-25', '', 'gnfnghnh', 'CompraMercancias', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1000', '200', '1200', '2', '1', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(40, '2015-09-25', 'Contado', '2015-09-25', '', 'kjkykj', 'PagaContratistas', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1880', '200', '2080', '1234', '3', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(41, '2015-09-25', 'Contado', '2015-09-25', '', 'hnm jhmjm', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '0', '1000', '1000', '1234', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(42, '2015-09-25', 'Contado', '2015-09-25', '', 'hgjhg', 'PagaServicios', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1000', '100', '1100', '1', '3', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(43, '2015-09-25', 'Contado', '2015-09-25', '', 'ghjcfgjfg', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '0', '1200', '1200', '1', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(44, '2015-09-25', 'Contado', '2015-09-25', '', 'fdgdfh', 'PagaIVA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '3001', '0', '3001', '1', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(45, '2015-09-25', 'Contado', '2015-09-25', '', 'bncvncvn', 'PagaIVA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '1403', '0', '1403', '2', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(46, '2015-09-25', 'Contado', '2015-09-25', '', 'cghcghfg', 'PagaCree', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '6200', '0', '6200', '1', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(47, '2015-09-25', 'Contado', '2015-09-25', '', 'jvn,xcnkv,kn', 'PagaICA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '500', '0', '500', '2', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(48, '2015-09-25', 'Contado', '2015-09-25', '', 'ghdfhdfh', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '1000', '0', '1000', '', '31', '110505', '', 2, 'SI', '2015-10-08', '22:43:47', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
+(49, '2015-09-27', 'Contado', '2015-09-27', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '64120', '10259', '74379', '3232', '1', '110505', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(50, '2015-09-27', 'Pagado', '2015-09-27', '2015-09-28', 'dsdas', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '121232', '0', '121232', '', '31', '110510', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(51, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-08', 'sdsadsa', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '321321', '0', '321321', '', '31', '110505', '', 1, 'SI', '2015-10-09', '10:37:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(52, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-20', 'fdfsd', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '321321', '0', '321321', '', '31', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(53, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-07', 'dsd', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '12121', '0', '12121', '', '31', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(54, '2015-09-27', 'Contado', '2015-09-27', '', 'fdfds', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '100000', '0', '100000', '21212', '32', '11100501', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(55, '2015-09-30', 'Pagado', '2015-10-02', '2015-09-30', 'pghghjghjghjghjg', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '30000', '0', '30000', '54546476576', '20', '110510', '', 1, 'SI', '2015-10-01', '12:48:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(56, '2015-09-30', 'Contado', '2015-09-30', '', 'Compra de Mercancias', 'Compra Productos', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '50000', '0', '50000', '4654654', '13', '110505', '', 1, 'SI', '2015-10-01', '12:48:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(57, '2015-10-01', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '100000', '16000', '116000', '2121', '1', '110510', '', 1, 'SI', '2015-10-02', '12:00:45', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(58, '2015-10-01', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '100000', '15000', '115000', '4321', '2', '110510', '', 1, 'SI', '2015-10-02', '12:00:45', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(59, '2015-10-02', 'Contado', '2015-10-02', '', 'sfsdfds', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '54', '10054', '32432', '11', '110510', '', 1, 'SI', '2015-10-02', '12:39:38', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(60, '2015-10-02', 'Contado', '2015-10-02', '', 'dwqdewq', 'PagaServicios', '', 'COOPETRANS DE TULUA', '891900254', 'Calle 27  1w-176', 'TULUA', '10000', '1000', '11000', '432432', '7', '110510', '', 1, 'SI', '2015-10-05', '15:26:47', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(61, '2015-10-05', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '30000', '1300', '31300', '34545', '2', '110510', '', 1, 'SI', '2015-10-05', '15:26:47', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(62, '2015-10-05', 'Contado', '2015-10-05', '', 'jbhvjhbhjb', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '50000', '0', '50000', '', '31', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(63, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '12355', '112355', '12334', '3', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(64, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '16000', '116000', '32321', '3', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(65, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'MULTIREDES Y TECNOLOGIA', '66975081', 'AV 5 No 29 DN 68 LOCAL 166 CC LA PASARELA', 'CALI', '10000', '1600', '11600', '1234', '44', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(66, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '10000', '1600', '11600', '1234', '3', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(67, '2015-10-07', 'Contado', '2015-10-07', '', 'asdlaskdlaksd', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '1234', '12', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(68, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '12000', '1200', '13200', '213213', '3', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(69, '2015-10-08', 'Contado', '2015-10-08', '', 'fsafas', 'PagaContratistas', '', 'CARMELO PALERMO', '700147288', 'CL 11 7 82', 'BUGA', '100000', '12121', '112121', '321321', '4', '110510', '', 1, 'SI', '2015-10-09', '10:37:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(70, '2015-10-09', 'Contado', '2015-10-09', '', 'PAGO DE TELEFONO MES DE SEPTIEMBRE SE PAGA POR CAJA MENOR POR PEPITA PEREZ', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '12345', '20', '110510', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(71, '2015-10-09', 'Contado', '2015-10-09', '', 'COMPRA DE CABLE PORQUE CUALQUIER COSA', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '10000', '0', '10000', 'NO', '22', '110510', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(72, '2015-10-09', 'Contado', '2015-10-09', '', 'PAGO A JULIAN ALVARAN POR TURNO DECEMBRINO', 'PagaContratistas', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '200000', '32000', '232000', 'NO', '31', '110505', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(73, '2015-10-05', '', '', '', 'Compra de mercancias', '', '', 'SURTIVALLE SA', '900876543', 'CALLE 5 6 25', 'TULUA', '100000', '16000', '116000', '6543', '70', '110505', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(74, '2015-10-20', 'Contado', '2015-10-20', '', 'Pago de telefono mes de diciembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '32131231', '20', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(75, '2015-10-20', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '10000', '1600', '11600', '1233', '1', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(76, '2015-10-23', 'Contado', '2015-10-23', '', 'jhkjhkjh', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '87987987', '20', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(77, '2015-10-23', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '343453', '454', '343907', '66565', '3', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(78, '2015-11-20', 'Pagado', '2015-11-30', '2015-11-23', 'pago de telefono del mes de noviembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '4567', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(79, '2015-11-23', 'Contado', '2015-11-23', '', 'PAGO DE TELEFONO FIJO BODEGA PRINCIPAL MES DE NOVIEMBRE', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '4343242', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(80, '2015-11-23', 'Pagado', '2015-12-02', '2015-11-23', 'PRUEBA', 'PagaServicios', '', 'COOPETRANS DE TULUA', '891900254', 'Calle 27  1w-176', 'TULUA', '10000', '0', '10000', '7575765', '7', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(81, '2015-11-24', 'Contado', '2015-11-24', '', 'pago del mes de noviembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '232321312', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(82, '2015-11-24', '', '', '', 'Compra de mercancias', '', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '20000', '0', '20000', '23131', '13', '11100501', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(83, '2015-12-08', 'Pagado', '2015-12-18', '2016-02-07', 'PAGO DE TELEFONO DE DICIEMBRE', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '231232321', '12', '110510', '', 3, '', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(84, '2015-12-17', 'Contado', '2015-12-16', '', 'PAGO DE TELEFONO DEL MES DE DICIEMBRE', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '2131321', '20', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(85, '2015-12-16', '', '', '', 'Compra de mercancias', '', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '200000', '21000', '221000', '2321312', '13', '11100501', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(86, '2016-01-04', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '10000', '2000', '12000', '121321', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(87, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '21000', '121000', '321321', '3', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(88, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '100000', '2121', '102121', '321321', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(89, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1212122321', '32321321', '1244443642', '454543534', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(90, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '213213', '321321', '534534', '321321', '31', '110505', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(91, '2016-01-10', 'Contado', '2016-01-10', '', 'COMPRA DE PANDEBONOS PARA ATENCION A JULIAN', 'PagaServicios', '', 'LEYDI VIVIANA VALERO MENA', '1115072489', 'CALLE 25C 7B-52', 'BUGA', '15000', '0', '15000', '1234', '72', '110510', '', 1, 'SI', '2016-01-10', '10:41:23', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(92, '2016-01-11', 'Pagado', '2016-01-21', '2016-01-18', 'Pago de telefono 313131 del mes de enero', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '0', '100000', '76786876', '12', '11100501', '', 1, '', '', '', '', 0, 0, ''),
+(93, '2016-01-18', 'Contado', '2016-01-18', '', 'Transporte a Tulua por transporte de fulanito', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '8000', '0', '8000', '576576576765', '22', '110510', '', 1, '', '', '', '', 0, 0, ''),
+(94, '2016-01-20', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '10000', '40000', '50000', '312321', '2', '110505', '', 3, 'SI', '2016-01-21', '16:41:24', 'JULIAN  ALVARAN', 0, 0, ''),
+(95, '2016-01-26', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1000', '100', '1100', '3213', '3', '110510', '', 3, 'SI', '2016-01-26', '16:29:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(96, '2016-01-26', 'Pagado', '2016-02-01', '2016-01-26', 'PAGO DE TELEFONO DEL MES DE ENERO', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '3213213', '12', '110505', '', 3, 'SI', '2016-01-26', '16:29:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(97, '2016-01-27', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '321321', '321', '321642', '321321', '3', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(98, '2016-01-27', 'Contado', '2016-01-27', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '32132', '3213', '35345', '2121', '1', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(99, '2016-01-27', 'Contado', '2016-01-27', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '3213', '32213', '35426', '3213', '3', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(100, '2016-01-27', 'Contado', '2016-01-27', '', 'dhkjhsdjsw', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '100000', '12000', '112000', '2121', '11', '110510', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(101, '2016-03-14', 'Contado', '2016-03-14', '', 'dsadsa', 'Mantenimiento y Reparaciones', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '212121', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(102, '2016-03-14', 'Contado', '2016-03-14', '', 'dsadsa', 'Mantenimiento y Reparaciones', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '212121', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(103, '2016-03-14', 'Programado', '2016-03-14', '', 'dsadsa', 'Arrendamientos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '120000', '18000', '138000', 'ds3232', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(104, '2016-03-14', 'Programado', '2016-03-14', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', '321321dsd', '71', '11100501', '', 3, '', '', '', '', 1, 1, ''),
+(105, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadsa', 'Diversos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '12000', '112000', '321321', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(106, '2016-03-15', 'Contado', '2016-03-15', '', 'dsad', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(107, '2016-03-15', 'Contado', '2016-03-15', '', 'dsad', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '3221', '0', '3221', 'dsadsa', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(108, '2016-03-15', 'Contado', '2016-03-15', '', 'sas', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '12321', '0', '15855', 'wqq', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(109, '2016-03-15', 'Contado', '2016-03-15', '', 'dsdsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '2121', '0', '2121', '32321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(110, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '2211', '0', '2211', '323', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(111, '2016-03-15', 'Contado', '2016-03-15', '', 'dede', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '2344', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(112, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdfs', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '1000', '0', '1000', '3321312', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(113, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdfs', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '1000', '0', '1000', '3321312', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(114, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(115, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(116, '2016-03-15', 'Programado', '2016-03-15', '', 'dsds', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321', '0', '32321', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(117, '2016-03-15', 'Contado', '2016-03-15', '', 'dsdasdas', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '21', '0', '254', '323321321', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(118, '2016-03-15', 'Programado', '2016-03-15', '', 'dasdsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32312', '0', '32312', '2121', '71', '110510', '../SoportesEgresos/', 3, '', '', '', '', 1, 1, ''),
+(119, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321', '0', '32321', '21213', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(120, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32312321', '0', '32312321', '3232', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(121, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321321312321', '0', '32321321312321', '2121321', '71', '110505', '../SoportesEgresos/', 3, '', '', '', '', 1, 1, ''),
+(122, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '312321321', '0', '312321321', '321321', '71', '110505', '../SoportesEgresos/HOJA DE VIDA JULIAN ALVARAN.pdf', 3, '', '', '', '', 1, 1, ''),
+(123, '2016-03-15', 'Programado', '2016-03-15', '', 'dsda', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '321321321', '0', '321321321', '321321', '71', '110505', '../SoportesEgresos/Carta a inmobiliaria.docx', 3, '', '', '', '', 1, 1, ''),
+(124, '2016-03-15', 'Programado', '2016-03-15', '', 'sasa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '3213213', '0', '3213213', '231423', '71', '110505', '../SoportesEgresos/Carta_a_inmobiliaria_2.docx', 3, '', '', '', '', 1, 1, ''),
+(125, '2016-03-15', 'Contado', '2016-03-15', '', 'fafasfa', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '321321', '0', '324855', '321321', '71', '110505', '../SoportesEgresos/Foto_E-M_Hoja_de_Vida.jpg', 3, '', '', '', '', 1, 1, ''),
+(126, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '23121', '0', '23121', '321321', '71', '110505', '../SoportesEgresos/2016-02-04_AVICOLA_SANTA_RITA_SAS_(1).pdf', 3, '', '', '', '', 1, 1, ''),
+(127, '2016-03-18', 'Contado', '2016-03-18', '', 'dsadsada', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', 'dsadsadsa', '71', '110505', '', 1, '', '', '', '', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -3704,6 +3794,27 @@ INSERT INTO `egresos_activos` (`id`, `Nombre`, `Cuentas_idCuentas`, `Visible`) V
 (2, 'Equipo Medico Cientifico', 1532, 1),
 (3, 'Equipos de Oficina', 1524, 1),
 (4, 'Equipos de Computacion y Comunicacion', 1528, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `egresos_items`
+--
+
+CREATE TABLE IF NOT EXISTS `egresos_items` (
+  `ID` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `CuentaDestino` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Tercero` int(11) NOT NULL,
+  `Debito` int(11) NOT NULL,
+  `Credito` int(11) NOT NULL,
+  `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
+  `CentroCosto` int(11) NOT NULL,
+  `TipoPago` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `FechaProgramada` date NOT NULL,
+  `NumeroComprobante` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Soporte` text COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -3852,7 +3963,7 @@ INSERT INTO `facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefijo`, 
 ('201603100828290.75158700 1457616509', 1, '02', 'A', 13, '2016-03-10', '08:28:29', '', '', 'Credito a 30 dias', '116215', '18594', '', '134809', '134809', '', 1, 1, 3, 17, '12120', '', '', '', ''),
 ('201603100829090.67687000 1457616549', 1, '02', 'A', 14, '2016-03-10', '08:29:09', '', '', 'Credito a 30 dias', '116215', '18594', '', '134809', '134809', '', 1, 1, 3, 17, '12120', '', '', '', ''),
 ('201603100829510.69673300 1457616591', 1, '02', 'A', 15, '2016-03-10', '08:29:51', '', '', 'Credito a 30 dias', '116215', '18594', '', '134809', '134809', '', 1, 1, 3, 17, '12120', '', '', '', ''),
-('201603100836280.06322700 1457616988', 1, '02', 'A', 16, '2016-03-10', '08:36:28', '', '', 'Credito a 30 dias', '405', '65', '', '470', '470', '', 1, 1, 3, 17, '40', '', '', '', ''),
+('201603100836280.06322700 1457616988', 1, '02', 'A', 16, '2016-03-10', '08:36:28', '', '', 'Credito a 30 dias', '405', '65', '', '470', '0', '', 1, 1, 3, 17, '40', '', '', '', ''),
 ('201603100837110.41570300 1457617031', 1, '02', 'A', 17, '2016-03-10', '08:37:11', '', '', 'Contado', '405', '65', '', '470', '470', '', 1, 1, 3, 17, '40', '', '', '', ''),
 ('201603101358580.97964000 1457636338', 1, '02', 'A', 18, '2016-03-10', '13:58:58', '', '', 'Credito a 15 dias', '6458100', '21296', '', '6479396', '6479396', '', 1, 1, 3, 17, '915300', '', '', '', 'Esas misam'),
 ('201603111524200.34385300 1457727860', 1, '02', 'A', 19, '2016-03-11', '15:24:20', '3213', '321321', 'Credito a 30 dias', '54800', '8768', '', '63568', '63568', '', 1, 1, 3, 0, '39249', '', '', '', 'essa misams'),
@@ -4163,6 +4274,24 @@ INSERT INTO librodiario (Fecha, Tipo_Documento_Intero, Num_Documento_Interno, Te
 END
 //
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturas_anticipos`
+--
+
+CREATE TABLE IF NOT EXISTS `facturas_anticipos` (
+  `ID` int(16) NOT NULL AUTO_INCREMENT,
+  `Fecha` date NOT NULL,
+  `idCliente` int(11) NOT NULL,
+  `Valor` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `CentroCosto` int(11) NOT NULL,
+  `CuentaIngreso` int(11) NOT NULL,
+  `Estado` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -16616,7 +16745,7 @@ INSERT INTO `kits_relaciones` (`ID`, `TablaProducto`, `ReferenciaProducto`, `Can
 --
 
 CREATE TABLE IF NOT EXISTS `librodiario` (
-  `idLibroDiario` int(11) NOT NULL AUTO_INCREMENT,
+  `idLibroDiario` int(16) NOT NULL AUTO_INCREMENT,
   `Fecha` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Tipo_Documento_Intero` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Num_Documento_Interno` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -16644,7 +16773,7 @@ CREATE TABLE IF NOT EXISTS `librodiario` (
   `idCentroCosto` int(11) NOT NULL,
   `idEmpresa` int(11) NOT NULL,
   PRIMARY KEY (`idLibroDiario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=40 ;
 
 --
 -- Volcado de datos para la tabla `librodiario`
@@ -16667,7 +16796,29 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (14, '2016-03-27', 'ComprobanteIngreso', '38', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Pago de Factura A 35', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Pago', '205640', '0', '205640', 'NO', 'NO', 1, 1),
 (15, '2016-03-27', 'ComprobanteIngreso', '38', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Pago de Factura A 35', '135515', 'Anticipo de Impuestos Retefuente', 'Pago', '10000', '0', '10000', 'NO', 'NO', 1, 1),
 (16, '2016-03-27', 'ComprobanteIngreso', '38', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Pago de Factura A 35', '135517', 'Anticipo de Impuestos ReteIVA', 'Pago', '30000', '0', '30000', 'NO', 'NO', 1, 1),
-(17, '2016-03-27', 'ComprobanteIngreso', '38', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Pago de Factura A 35', '135518', 'Anticipo de Impuestos ReteICA', 'Pago', '20000', '0', '20000', 'NO', 'NO', 1, 1);
+(17, '2016-03-27', 'ComprobanteIngreso', '38', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Pago de Factura A 35', '135518', 'Anticipo de Impuestos ReteICA', 'Pago', '20000', '0', '20000', 'NO', 'NO', 1, 1),
+(18, '2016-04-04', 'ComprobanteIngreso', '39', '', '700147288', '', '', '', '', '', 'CARMELO PALERMO', '', '', '', '', 'Prestamo de Carmelo', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Ingresos', '0', '200000', '-200000', 'NO', 'NO', 1, 1),
+(19, '2016-04-04', 'ComprobanteIngreso', '39', '', '700147288', '', '', '', '', '', 'CARMELO PALERMO', '', '', '', '', 'Prestamo de Carmelo', '2205700147288', 'Proveedores Nacionales: CARMELO PALERMO NIT 700147288', 'Ingresos', '200000', '0', '200000', 'NO', 'NO', 1, 1),
+(20, '2016-03-07', 'ComprobanteIngreso', '40', '', '900704258', '', '', '', '', '', 'Meca Distribuciones SAS', '', '', '', '', 'Ese Mismo', '110510', 'CAJA MENOR', 'Ingresos', '1000000', '0', '1000000', 'NO', 'NO', 1, 1),
+(21, '2016-03-07', 'ComprobanteIngreso', '40', '', '900704258', '', '', '', '', '', 'Meca Distribuciones SAS', '', '', '', '', 'Ese Mismo', '2205900704258', 'Proveedores Nacionales: Meca Distribuciones SAS NIT 900704258', 'Ingresos', '0', '1000000', '-1000000', 'NO', 'NO', 1, 1),
+(22, '2015-04-04', 'ComprobanteIngreso', '41', '', '900833180', '', '', '', '', '', 'TECHNO SOLUCIONES SAS', '', '', '', '', 'Prestamo', '110505', 'CAJA GENERAL', 'Ingresos', '230000', '0', '230000', 'NO', 'NO', 1, 1),
+(23, '2015-04-04', 'ComprobanteIngreso', '41', '', '900833180', '', '', '', '', '', 'TECHNO SOLUCIONES SAS', '', '', '', '', 'Prestamo', '2205900833180', 'Proveedores Nacionales: TECHNO SOLUCIONES SAS NIT 900833180', 'Ingresos', '0', '230000', '-230000', 'NO', 'NO', 1, 1),
+(24, '2016-04-04', 'ComprobanteIngreso', '42', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'dsadsadas', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Ingresos', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(25, '2016-04-04', 'ComprobanteIngreso', '42', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'dsadsadas', '2205900704258', 'Proveedores Nacionales: Meca Distribuciones SAS NIT 900704258', 'Ingresos', '0', '321321', '-321321', 'NO', 'NO', 1, 1),
+(26, '2016-04-04', 'ComprobanteIngreso', '43', '31', '14882682', '8', 'CRUZ', 'RAMIREZ', 'HOLMER', '', 'HOLMER CRUZ RAMIREZ', 'CRA 10 No 14A 22', '76', '834', '169', 'dasdsa', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Ingresos', '123445', '0', '123445', 'NO', 'NO', 1, 1),
+(27, '2016-04-04', 'ComprobanteIngreso', '43', '31', '14882682', '8', 'CRUZ', 'RAMIREZ', 'HOLMER', '', 'HOLMER CRUZ RAMIREZ', 'CRA 10 No 14A 22', '76', '834', '169', 'dasdsa', '220514882682', 'Proveedores Nacionales: HOLMER CRUZ RAMIREZ NIT 14882682', 'Ingresos', '0', '123445', '-123445', 'NO', 'NO', 1, 1),
+(28, '2016-04-04', 'ComprobanteIngreso', '44', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'asasas', '110510', 'CAJA MENOR', 'Ingresos', '21212', '0', '21212', 'NO', 'NO', 1, 1),
+(29, '2016-04-04', 'ComprobanteIngreso', '44', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'asasas', '2205900704258', 'Proveedores Nacionales: Meca Distribuciones SAS NIT 900704258', 'Ingresos', '0', '21212', '-21212', 'NO', 'NO', 1, 1),
+(30, '2016-04-04', 'ComprobanteIngreso', '45', '31', '94471845', '9', '', '', '', '', 'Taller Industrial Servi Torno', 'Carrera 18 No. 9-38', '76', '111', '169', 'assa', '110510', 'CAJA MENOR', 'Ingresos', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(31, '2016-04-04', 'ComprobanteIngreso', '45', '31', '94471845', '9', '', '', '', '', 'Taller Industrial Servi Torno', 'Carrera 18 No. 9-38', '76', '111', '169', 'assa', '23802094471845', 'Anticipos recibidos Cliente: Taller Industrial Servi Torno NIT 94471845', 'Ingresos', '0', '321321', '-321321', 'NO', 'NO', 1, 1),
+(32, '2016-04-05', 'ComprobanteIngreso', '46', '31', '38870975', '6', 'MARTINEZ', '', 'LUZ ', 'MARINA ', 'DISTRIMATERIALES DEL VALLE', 'Carrera 8 No. 13-21', '76', '111', '169', 'dsadsa', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Ingresos', '45000', '0', '45000', 'NO', 'NO', 1, 1),
+(33, '2016-04-05', 'ComprobanteIngreso', '46', '31', '38870975', '6', 'MARTINEZ', '', 'LUZ ', 'MARINA ', 'DISTRIMATERIALES DEL VALLE', 'Carrera 8 No. 13-21', '76', '111', '169', 'dsadsa', '23802038870975', 'Anticipos recibidos Cliente: DISTRIMATERIALES DEL VALLE NIT 38870975', 'Ingresos', '0', '45000', '-45000', 'NO', 'NO', 1, 1),
+(34, '2016-04-05', 'ComprobanteIngreso', '47', '22', '700147288', '5', 'PALERMO', '', 'CARMELO', '', 'CARMELO PALERMO', 'CL 11 7 82', '76', '111', '169', 'dsadsa', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Ingresos', '560000', '0', '560000', 'NO', 'NO', 1, 1),
+(35, '2016-04-05', 'ComprobanteIngreso', '47', '22', '700147288', '5', 'PALERMO', '', 'CARMELO', '', 'CARMELO PALERMO', 'CL 11 7 82', '76', '111', '169', 'dsadsa', '2205700147288', 'Proveedores Nacionales: CARMELO PALERMO NIT 700147288', 'Ingresos', '0', '560000', '-560000', 'NO', 'NO', 1, 1),
+(36, '2016-04-07', 'ComprobanteIngreso', '48', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Pago de Factura A 16', '130505890312749', 'Clientes Nacionales SEGURIDAD ATLAS LTDA 890312749', 'Pago', '0', '470', '-470', 'NO', 'NO', 1, 1),
+(37, '2016-04-07', 'ComprobanteIngreso', '48', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Pago de Factura A 16', '110505', 'CAJA GENERAL', 'Pago', '470', '0', '470', 'NO', 'NO', 1, 1),
+(38, '2016-04-10', 'NotaContable', '19', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdfsdf', '510506', 'Sueldos', 'egresos', '10', '0', '10', 'NO', 'NO', 1, 1),
+(39, '2016-04-10', 'NotaContable', '19', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdfsdf', '2205900833180', 'Proveedores Nacionales TECHNO SOLUCIONES SAS 900833180', 'egresos', '0', '10', '-10', 'NO', 'NO', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -16706,7 +16857,7 @@ CREATE TABLE IF NOT EXISTS `notascontables` (
   `CentroCostos` int(11) NOT NULL,
   `EmpresaPro` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `notascontables`
@@ -16730,7 +16881,8 @@ INSERT INTO `notascontables` (`ID`, `Fecha`, `FechaProgramada`, `Detalle`, `idPr
 (15, '2016-03-20', '2016-03-20', 'dsadsa', 71, 900000, 0, 900000, '', '21212121', 1, 1, 1),
 (16, '2016-03-20', '2016-03-20', 'dadsa', 71, 3000000, 460000, 3460000, '', '321321321', 1, 1, 1),
 (17, '2016-03-21', '2016-03-21', 'dsadsa', 71, 132, 0, 132, '', '321321', 3, 1, 1),
-(18, '2016-03-21', '2016-03-21', 'dsadsa', 71, 32132, 0, 32132, '../SoportesEgresos/Koala.jpg', '322312', 3, 1, 1);
+(18, '2016-03-21', '2016-03-21', 'dsadsa', 71, 32132, 0, 32132, '../SoportesEgresos/Koala.jpg', '322312', 3, 1, 1),
+(19, '2016-04-10', '2016-04-10', 'fdfsdf', 71, 10, 0, 10, '', '3213', 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -23315,7 +23467,7 @@ CREATE TABLE IF NOT EXISTS `proveedores` (
   `Direccion` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Cod_Dpto` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `Cod_Mcipio` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `Pais_Domicilio` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `Pais_Domicilio` varchar(10) COLLATE utf8_spanish_ci NOT NULL DEFAULT '169',
   `Telefono` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Ciudad` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `Contacto` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
@@ -23323,7 +23475,7 @@ CREATE TABLE IF NOT EXISTS `proveedores` (
   `Email` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `CIUU` int(11) NOT NULL,
   PRIMARY KEY (`idProveedores`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=76 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=77 ;
 
 --
 -- Volcado de datos para la tabla `proveedores`
@@ -23404,7 +23556,8 @@ INSERT INTO `proveedores` (`idProveedores`, `Tipo_Documento`, `Num_Identificacio
 (72, 13, '1115072489', 0, 'VALERO', 'MENA', 'LEYDI', 'VIVIANA', 'LEYDI VIVIANA VALERO MENA', 'CALLE 25C 7B-52', '76', '111', '169', '3177800016', 'BUGA', '', '', '', 0),
 (73, 31, '900654654', 5, '', '', '', '', 'PRUEBA', 'CALLE 5 NO 8.38', '5', '834', '169', '3127839222', 'TULUA', 'PEPITO PEREZ', '3127839222', 'ands@gmsld.com', 0),
 (74, 31, '29284348', 1, 'ALVARAN', 'VALENCIA', 'ERIKA', 'LICETH', 'ERIKA LICETH ALVARAN VALENCIA', 'CALLE 6 A SUR 13-24', '76', '113', '169', '3177740609', 'BUGA', '', '', 'jalvaran@gmail.com', 0),
-(75, 13, '432432432', 0, 'VERGARA', 'LICETH', 'ANTONIA', 'MERCEDEZ', 'ANTONIA MERCEDEZ VERGARA LICETH', 'CADSAD', '76', '109', '169', '4434232432', 'BUGA', '', '', 'NO', 0);
+(75, 13, '432432432', 0, 'VERGARA', 'LICETH', 'ANTONIA', 'MERCEDEZ', 'ANTONIA MERCEDEZ VERGARA LICETH', 'CADSAD', '76', '109', '169', '4434232432', 'BUGA', '', '', 'NO', 0),
+(76, 31, '900833180', 1, '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CARRERA 17 7-18', '76', '111', '169', '31321321', 'BUGA', 'PEPITO', '321321', 'jalvaran@gmail.com', 21212);
 
 -- --------------------------------------------------------
 
