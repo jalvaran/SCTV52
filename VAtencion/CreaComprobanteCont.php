@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once("../modelo/php_conexion.php");
+include_once("../modelo/php_tablas.php");
 include_once("css_construct.php");
 if (!isset($_SESSION['username']))
 {
@@ -21,6 +21,7 @@ $css =  new CssIni("Egresos");
 print("</head>");
 print("<body>");
     $obVenta = new ProcesoVenta($idUser);
+    $obTabla = new Tabla($db);
     include_once("procesadores/ProcesaComprobanteContable.php");
     $myPage="CreaComprobanteCont.php";
     $css->CabeceraIni("Comprobantes de Contabilidad"); //Inicia la cabecera de la pagina
@@ -87,6 +88,7 @@ print("<body>");
     $css->CierraFilaTabla();
     $css->CerrarTabla();
     $css->CerrarForm();
+    
     $css->CrearForm2("FrmAgregaItemE", $myPage, "post", "_self");
     $Visible=0;
     if($idComprobante>0){
@@ -142,14 +144,6 @@ print("<body>");
             $VarSelect["PlaceHolder"]="Seleccione la cuenta destino";
             $css->CrearSelectChosen("CmbCuentaDestino", $VarSelect);
             $css->CrearOptionSelect("", "Seleccione la cuenta destino" , 0);
-            $sql="SELECT * FROM subcuentas";
-            $Consulta=$obVenta->Query($sql);
-            
-               while($DatosProveedores=$obVenta->FetchArray($Consulta)){
-                   $Sel=0;
-                   
-                   $css->CrearOptionSelect($DatosProveedores["PUC"], "$DatosProveedores[PUC] $DatosProveedores[Nombre]" , $Sel);
-               }
             
             //Solo para cuando el PUC no está todo en subcuentas
             $sql="SELECT * FROM cuentas";
@@ -160,6 +154,17 @@ print("<body>");
                    
                    $css->CrearOptionSelect($DatosProveedores["idPUC"], "$DatosProveedores[idPUC] $DatosProveedores[Nombre]" , $Sel);
                }
+            
+            //En subcuentas se debera cargar todo el PUC
+            $sql="SELECT * FROM subcuentas";
+            $Consulta=$obVenta->Query($sql);
+            
+               while($DatosProveedores=$obVenta->FetchArray($Consulta)){
+                   $Sel=0;
+                   
+                   $css->CrearOptionSelect($DatosProveedores["PUC"], "$DatosProveedores[PUC] $DatosProveedores[Nombre]" , $Sel);
+               }
+            
             $css->CerrarSelect();
         print("</td>");
         $css->CierraFilaTabla();
@@ -194,6 +199,55 @@ print("<body>");
     
     $css->CerrarTabla();
     $css->CerrarForm();
+    ////Se dibujan los items del movimiento
+    $css->CrearSelect("CmbMostrarItems", "MuestraOculta('DivItems')");
+        $css->CrearOptionSelect("SI", "Mostrar Movimientos", 0);
+        $css->CrearOptionSelect("NO", "Ocultar Movimientos", 0);
+    $css->CerrarSelect();
+    $css->CrearDiv("DivItems", "", "center", 1, 1);
+    $Vector["Tabla"]="comprobantes_contabilidad_items";
+    $Columnas=$obTabla->ColumnasInfo($Vector);
+    $css->CrearTabla();
+    $css->FilaTabla(12);
+    
+    $i=0;
+    $ColNames[]="";
+    foreach($Columnas["Field"] as $NombresCol ){
+        $css->ColTabla("<strong>$NombresCol</strong>", 1);
+        $ColNames[$i]=$NombresCol;
+        $i++;
+    }
+    $NumCols=$i-1;
+    $css->CierraFilaTabla();
+    
+    $i=0;
+    $sql="SELECT * FROM comprobantes_contabilidad_items WHERE idComprobante='$idComprobante'";
+    $consulta=$obVenta->Query($sql);
+    
+    while($DatosItems=$obVenta->FetchArray($consulta)){
+        
+        $css->FilaTabla(12);
+        for($z=0;$z<=$NumCols;$z++){
+            $NombreCol=$ColNames[$z];
+            print("<td>");
+            if($NombreCol=="Soporte"){
+                $link=$DatosItems[$NombreCol];
+                if($link<>""){
+                    $css->CrearLink($link, "_blank", "Ver");
+                }
+            }else{
+                print($DatosItems[$NombreCol]);
+            }
+            
+            print("</td>");
+        }
+        $i=0;
+        $css->CierraFilaTabla();
+        
+    }
+    
+    $css->CerrarTabla();
+    $css->CerrarDiv();//Cerramos Div con los items agregados
     $css->CerrarDiv();//Cerramos Div con los datos de los preitems
     $css->CerrarDiv();//Cerramos contenedor Secundario
     $css->CerrarDiv();//Cerramos contenedor Principal
