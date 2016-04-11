@@ -1,4 +1,4 @@
-var idEgreso=0;
+var idComprobanteC=0;
 
 function EnviaFormSC() {
 
@@ -241,7 +241,7 @@ function CalculeTotalPagoIngreso() {
 function MuestreDesdeCombo(idCombo,idElement,idCarga){
     
     estado=document.getElementsByName(idCombo)[0].value;
-    idEgreso=estado;
+    idComprobanteC=estado;
     if(estado==""){
         document.getElementById(idElement).style.display="none";
     }else{
@@ -253,7 +253,7 @@ function MuestreDesdeCombo(idCombo,idElement,idCarga){
 // esta funcion permite mostrar u ocultar un elemento
 function CargueIdEgreso(){
     
-    document.getElementById('TxtidEgreso').value=idEgreso;
+    document.getElementById('TxtIdCC').value=idComprobanteC;
     
 }
 

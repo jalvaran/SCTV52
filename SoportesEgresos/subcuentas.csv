@@ -1,0 +1,1571 @@
+PUC;Nombre;Valor;Cuentas_idPUC
+1435;Mercancias no fabricadas por la empresa;0;1435
+4135;COMERCIO AL POR MAYOR Y AL POR MENOR;0;4135
+110505; Caja general;0;1105
+110510; Cajas menores;0;1105
+110515; Moneda extranjera;0;1105
+111005; Moneda nacional;0;1110
+111010; Moneda extranjera;0;1110
+111505; Moneda nacional;0;1115
+111510; Moneda extranjera;0;1115
+112005; Bancos;0;1120
+112010; Corporaciones de ahorro y vivienda;0;1120
+112015; Organismos cooperativos financieros;0;1120
+112505; Rotatorios moneda nacional;0;1125
+112510; Rotatorios moneda extranjera;0;1125
+112515; Especiales moneda nacional;0;1125
+112520; Especiales moneda extranjera;0;1125
+135515;Retencion en la Fuente;0;1355
+135517;Impuesto a las Ventas Retenido;0;1355
+135518;Impuesto de Industria y Comercio Retenido;0;1355
+135595;Otros Autorretencion CREE;0;1355
+152001;HERRAMIENTA DE DOTACION;0;1520
+152405;Muebles y Enseres;0;1524
+152410;Equipos;0;1524
+152495;Otros;0;1524
+152805;equipos de procesamiento de datos;0;1528
+152810;equipos de telecomunicaciones;0;1528
+152815;equipos de radio;0;1528
+152820;satelites y antenas;0;1528
+152825;lineas telefonicas;0;1528
+152895;otros;0;1528
+153205;medico;0;1532
+153210;odontologico;0;1532
+153215;laboratorio;0;1532
+153220;�instrumental;0;1532
+153295;otros;0;1532
+210505; Sobregiros;0;2105
+210510; Pagares;0;2105
+210515; Cartas de credito;0;2105
+210520; Aceptaciones bancarias;0;2105
+211005; Sobregiros;0;2110
+211010; Pagares;0;2110
+211015; Cartas de credito;0;2110
+211020; Aceptaciones bancarias;0;2110
+211505; Pagares;0;2115
+211510; Aceptaciones financieras;0;2115
+211515; Cartas de credito;0;2115
+211520; Contratos de arrendamiento financiero (leasi;0;2115
+212005; Pagares;0;2105
+212010; Aceptaciones financieras;0;2110
+212020; Contratos de arrendamiento financiero (leasi;0;2120
+212505; Sobregiros;0;2125
+212510; Pagares;0;2125
+212515; Hipotecarias;0;2125
+213505; Acciones;0;2135
+213510; Cuotas o partes de interes social;0;2135
+213515; Bonos;0;2135
+213520; Cedulas;0;2135
+213525; Certificados;0;2135
+213530; Papeles comerciales;0;2135
+213535; Titulos;0;2135
+213540; Aceptaciones bancarias o financieras;0;2135
+213595; Otros;0;2135
+214505; Gobierno Nacional;0;2145
+214510; Entidades oficiales;0;2145
+219505; Particulares;0;2195
+219510; Compañias vinculadas;0;2195
+219515; Casa matriz;0;2195
+219520; Socios o accionistas;0;2195
+219525; Fondos y cooperativas;0;2195
+219530; Directores;0;2195
+219595; Otras;0;2195
+233505; Gastos financieros;0;2335
+233510; Gastos legales;0;2335
+233515; Libros suscripciones periodicos y revistas;0;2335
+233520; Comisiones;0;2335
+233525; Honorarios;0;2335
+233530; Servicios tecnicos;0;2335
+233535; Servicios de mantenimiento;0;2335
+233540; Arrendamientos;0;2335
+233545; Transportes fletes y acarreos;0;2335
+233550; Servicios públicos;0;2335
+233555; Seguros;0;2335
+233560; Gastos de viaje;0;2335
+233565; Gastos de representacion y relaciones públic;0;2335
+233570; Servicios aduaneros;0;2335
+233595; Otros;0;2335
+235505; Accionistas;0;2355
+235510; Socios;0;2355
+236005; Dividendos;0;2360
+236010; Participaciones;0;2360
+236505; Salarios y pagos laborales;0;2365
+236510; Dividendos y/o participaciones;0;2365
+236515; Honorarios;0;2365
+236520; Comisiones;0;2365
+236525; Servicios;0;2365
+236530; Arrendamientos;0;2365
+236535; Rendimientos financieros;0;2365
+236540; Compras;0;2365
+236545; Loterias rifas apuestas y similares;0;2365
+236550; Por pagos al exterior;0;2365
+236555; Por ingresos obtenidos en el exterior;0;2365
+236560; Enajenacion propiedades planta y equipo pers;0;2365
+236565; Por impuesto de timbre;0;2365
+236570; Otras retenciones y patrimonio (CREE);0;2365
+236575; Autorretenciones;0;2365
+237005; Aportes a entidades promotoras de salud EPS;0;2370
+237006; Aportes a administradoras de riesgos profesi;0;2370
+237010; Aportes al ICBF SENA y cajas de compensacion;0;2370
+237015; Aportes al FIC;0;2370
+237025; Embargos judiciales;0;2370
+237030; Libranzas;0;2370
+237035; Sindicatos;0;2370
+237040; Cooperativas;0;2370
+237045; Fondos;0;2370
+237095; Otros;0;2370
+238005; Depositarios;0;2380
+238010; Comisionistas de bolsas;0;2380
+238015; Sociedad administradora-Fondos de inversion;0;2380
+238020; Reintegros por pagar;0;2380
+238025; Fondo de perseverancia;0;2380
+238030; Fondos de cesantias y/o pensiones;0;2380
+238035; Donaciones asignadas por pagar;0;2380
+238095; Otros;0;2380
+240405; Vigencia fiscal corriente;0;2404
+240410; Vigencias fiscales anteriores;0;2404
+241205; Vigencia fiscal corriente;0;2412
+241210; Vigencias fiscales anteriores;0;2412
+242405; Vigencia fiscal corriente;0;2424
+242410; Vigencias fiscales anteriores;0;2424
+243605; Vigencia fiscal corriente;0;2436
+243610; Vigencias fiscales anteriores;0;2436
+244405; De hidrocarburos;0;2444
+244410; De minas;0;2444
+246405; De licores;0;2464
+246410; De cervezas;0;2464
+246415; De cigarrillos;0;2464
+251005; Ley laboral anterior;0;2510
+251010; Ley 50 de 1990 y normas posteriores;0;2510
+253005; Primas;0;2530
+253010; Auxilios;0;2530
+253015; Dotacion y suministro a trabajadores;0;2530
+253020; Bonificaciones;0;2530
+253025; Seguros;0;2530
+253095; Otras;0;2530
+260505; Intereses;0;2605
+260510; Comisiones;0;2605
+260515; Honorarios;0;2605
+260520; Servicios tecnicos;0;2605
+260525; Transportes fletes y acarreos;0;2605
+260530; Gastos de viaje;0;2605
+260535; Servicios públicos;0;2605
+260540; Regalias;0;2605
+260545; Garantias;0;2605
+260550; Materiales y repuestos;0;2605
+260595; Otros;0;2605
+261010; Intereses sobre cesantias;0;2610
+261015; Vacaciones;0;2610
+261020; Prima de servicios;0;2610
+261025; Prestaciones extralegales;0;2610
+261030; Viáticos;0;2610
+261095; Otras;0;2610
+261505; De renta y complementarios;0;2615
+261510; De industria y comercio;0;2615
+261515; Tasa por utilizacion de puertos;0;2615
+261520; De vehiculos;0;2615
+261525; De hidrocarburos y minas;0;2615
+261595; Otros;0;2615
+262005; Cálculo actuarial pensiones de jubilacion;0;2620
+262010; Pensiones de jubilacion por amortizar (DB);0;2620
+262505; Acueducto y alcantarillado;0;2625
+262510; Energia electrica;0;2625
+262515; Telefonos;0;2625
+262595; Otros;0;2625
+263005; Terrenos;0;2630
+263010; Construcciones y edificaciones;0;2630
+263015; Maquinaria y equipo;0;2630
+263020; Equipo de oficina;0;2630
+263025; Equipo de computacion y comunicacion;0;2630
+263030; Equipo medico-cientifico;0;2630
+263035; Equipo de hoteles y restaurantes;0;2630
+263040; Flota y equipo de transporte;0;2630
+263045; Flota y equipo fluvial y/o maritimo;0;2630
+263050; Flota y equipo aereo;0;2630
+263055; Flota y equipo ferreo;0;2630
+263060; Acueductos plantas y redes;0;2630
+263065; Armamento de vigilancia;0;2630
+263070; Envases y empaques;0;2630
+263075; Plantaciones agricolas y forestales;0;2630
+263080; Vias de comunicacion;0;2630
+263085; Pozos artesianos;0;2630
+263095; Otros;0;2630
+263505; Multas y sanciones autoridades administrativ;0;2635
+263510; Intereses por multas y sanciones;0;2635
+263515; Reclamos;0;2635
+263520; Laborales;0;2635
+263525; Civiles;0;2635
+263530; Penales;0;2635
+263535; Administrativos;0;2635
+263540; Comerciales;0;2635
+263595; Otras;0;2635
+269505; Para beneficencia;0;2695
+269510; Para comunicaciones;0;2695
+269515; Para perdida en transporte;0;2695
+269520; Para operacion;0;2695
+269525; Para proteccion de bienes agotables;0;2695
+269530; Para ajustes en redencion de unidades;0;2695
+269535; Autoseguro;0;2695
+269540; Planes y programas de reforestacion y electr;0;2695
+269595; Otras;0;2695
+270505; Intereses;0;2705
+270510; Comisiones;0;2705
+270515; Arrendamientos;0;2705
+270520; Honorarios;0;2705
+270525; Servicios tecnicos;0;2705
+270530; De suscriptores;0;2705
+270535; Transportes fletes y acarreos;0;2705
+270540; Mercancia en tránsito ya vendida;0;2705
+270545; Matriculas y pensiones;0;2705
+270550; Cuotas de administracion;0;2705
+270595; Otros;0;2705
+271005; Reajuste del sistema;0;2710
+272505; Por depreciacion flexible;0;2725
+272595; Diversos;0;2725
+272599; Ajustes por inflacion;0;2725
+280505; De clientes;0;2805
+280510; Sobre contratos;0;2805
+280515; Para obras en proceso;0;2805
+280595; Otros;0;2805
+281005; Para futura suscripcion de acciones;0;2810
+281010; Para futuro pago de cuotas o derechos social;0;2810
+281015; Para garantia en la prestacion de servicios;0;2810
+281020; Para garantia de contratos;0;2810
+281025; De licitaciones;0;2810
+281030; De manejo de bienes;0;2810
+281035; Fondo de reserva;0;2810
+281095; Otros;0;2810
+281505; Valores recibidos para terceros;0;2815
+281510; Venta por cuenta de terceros;0;2815
+282505; Cumplimiento obligaciones laborales;0;2825
+282510; Para estabilidad de obra;0;2825
+282515; Garantia cumplimiento de contratos;0;2825
+283005; Indemnizaciones;0;2830
+283010; Depositos judiciales;0;2830
+283505; Cuotas netas;0;2835
+283510; Grupos en formacion;0;2835
+289505; Prestamos de productos;0;2895
+289510; Reembolso de costos exploratorios;0;2895
+289515; Programa de extension agropecuaria;0;2895
+292005; Valor bonos pensionales;0;2920
+292010; Bonos pensionales por amortizar (DB);0;2920
+292015; Intereses causados sobre bonos pensionales;0;2920
+292505; Valor titulos pensionales;0;2925
+292510; Titulos pensionales por amortizar (DB);0;2925
+292515; Intereses causados sobre titulos pensionales;0;2925
+310505;Capital autorizado;0;3105
+310510;Capital por suscribir (DB);0;3105
+310515;Capital suscrito por cobrar (DB);0;3105
+311505;Cuotas o partes de inter?s social;0;3115
+311510;Aportes de socios-fondo mutuo de inversi;0;3115
+311515;Contribuci?n de la empresa-fondo mutuo de inv;0;3115
+311520;Suscripciones del p?blico;0;3115
+320505;Prima en colocaci?n de acciones;0;3205
+320510;Prima en colocaci?n de acciones por cobrar (D;0;3205
+320515;Prima en colocaci?n de cuotas o partes de int;0;3205
+321005;En dinero;0;3210
+321010;En valores mobiliarios;0;3210
+321015;En bienes muebles;0;3210
+321020;En bienes inmuebles;0;3210
+321025;En intangibles;0;3210
+322505;De acciones;0;3225
+322510;De cuotas o partes de inter?s social;0;3225
+330505;Reserva legal;0;3305
+330510;Reservas por disposiciones fiscales;0;3305
+330515;Reserva para readquisici?n de acciones;0;3305
+330516;Acciones propias readquiridas (DB);0;3305
+330517;Reserva para readquisici?n de cuotas o partes;0;3305
+330518;Cuotas o partes de inter?s social propias rea;0;3305
+330520;Reserva para extensi?n agropecuaria;0;3305
+330525;Reserva Ley 7? de 1990;0;3305
+330530;Reserva para reposici?n de semovientes;0;3305
+330535;Reserva Ley 4? de 1980;0;3305
+330595;Otras;0;3305
+331005;Para futuras capitalizaciones;0;3310
+331010;Para reposici?n de activos;0;3310
+331015;Para futuros ensanches;0;3310
+331095;Otras;0;3310
+331505;Para beneficencia y civismo;0;3315
+331510;Para futuras capitalizaciones;0;3315
+331515;Para futuros ensanches;0;3315
+331520;Para adquisici?n o reposici?n de propiedades,;0;3315
+331525;Para investigaciones y desarrollo;0;3315
+331530;Para fomento econ?mico;0;3315
+331535;Para capital de trabajo;0;3315
+331540;Para estabilizaci?n de rendimientos;0;3315
+331545;A disposici?n del m?ximo ?rgano social;0;3315
+331595;Otras;0;3315
+340505;De capital social;0;3405
+340510;De super?vit de capital;0;3405
+340515;De reservas;0;3405
+340520;De resultados de ejercicios anteriores;0;3405
+340525;De activos en per?odo improductivo;0;3405
+340530;De saneamiento fiscal;0;3405
+340535;De ajustes Decreto 3019 de 1989;0;3405
+340540;De dividendos y participaciones decretadas en;0;3405
+340545;Super?vit m?todo de participaci;0;3405
+380505;Acciones;0;3805
+380510;Cuotas o partes de inter?s social;0;3805
+380515;Derechos fiduciarios;0;3805
+381004;Terrenos;0;3810
+381006;Materiales proyectos petroleros;0;3810
+381008;Construcciones y edificaciones;0;3810
+381012;Maquinaria y equipo;0;3810
+381016;Equipo de oficina;0;3810
+381020;Equipo de computaci?n y comunicaci;0;3810
+381024;Equipo m?dico-cient?fico;0;3810
+381028;Equipo de hoteles y restaurantes;0;3810
+381032;Flota y equipo de transporte;0;3810
+381036;Flota y equipo fluvial y/o mar?timo;0;3810
+381040;Flota y equipo a?reo;0;3810
+381044;Flota y equipo f?rreo;0;3810
+381048;Acueductos, plantas y redes;0;3810
+381052;Armamento de vigilancia;0;3810
+381056;Envases y empaques;0;3810
+381060;Plantaciones agr?colas y forestales;0;3810
+381064;V?as de comunicaci;0;3810
+381068;Minas y canteras;0;3810
+381072;Pozos artesianos;0;3810
+381076;Yacimientos;0;3810
+381080;Semovientes;0;3810
+389505;Bienes de arte y cultura;0;3895
+389510;Bienes entregados en comodato;0;3895
+389515;Bienes recibidos en pago;0;3895
+389520;Inventario de semovientes;0;3895
+410505;Cultivo de cereales;0;4105
+410510;Cultivos de hortalizas, legumbres y plantas o;0;4105
+410515;Cultivos de frutas, nueces y plantas arom?tic;0;4105
+410520;Cultivo de caf;0;4105
+410525;Cultivo de flores;0;4105
+410530;Cultivo de ca?a de az?car;0;4105
+410535;Cultivo de algod?n y plantas para material te;0;4105
+410540;Cultivo de banano;0;4105
+410545;Otros cultivos agr?colas;0;4105
+410550;Cr?a de ovejas, cabras, asnos, mulas y burd?g;0;4105
+410555;Cr?a de ganado caballar y vacuno;0;4105
+410560;Producci?n av?cola;0;4105
+410565;Cr?a de otros animales;0;4105
+410570;Servicios agr?colas y ganaderos;0;4105
+410575;Actividad de caza;0;4105
+410580;Actividad de silvicultura;0;4105
+410595;Actividades conexas;0;4105
+410599;Ajustes por inflaci;0;4105
+411005;Actividad de pesca;0;4110
+411010;Explotaci?n de criaderos de peces;0;4110
+411095;Actividades conexas;0;4110
+411099;Ajustes por inflaci;0;4110
+411505;Carb;0;4115
+411510;Petr?leo crudo;0;4115
+411512;Gas natural;0;4115
+411514;Servicios relacionados con extracci?n de petr;0;4115
+411515;Minerales de hierro;0;4115
+411520;Minerales metal?feros no ferrosos;0;4115
+411525;Piedra, arena y arcilla;0;4115
+411527;Piedras preciosas;0;4115
+411528;Oro;0;4115
+411530;Otras minas y canteras;0;4115
+411532;Prestaci?n de servicios sector minero;0;4115
+411595;Actividades conexas;0;4115
+411599;Ajustes por inflaci;0;4115
+412001;Producci?n y procesamiento de carnes y produc;0;4120
+412002;Productos de pescado;0;4120
+412003;Productos de frutas, legumbres y hortalizas;0;4120
+412004;Elaboraci?n de aceites y grasas;0;4120
+412005;Elaboraci?n de productos l?cteos;0;4120
+412006;Elaboraci?n de productos de moliner;0;4120
+412007;Elaboraci?n de almidones y derivados;0;4120
+412008;Elaboraci?n de alimentos para animales;0;4120
+412009;Elaboraci?n de productos para panader;0;4120
+412010;Elaboraci?n de az?car y melazas;0;4120
+412011;Elaboraci?n de cacao, chocolate y confiter;0;4120
+412012;Elaboraci?n de pastas y productos farin?ceos;0;4120
+412013;Elaboraci?n de productos de caf;0;4120
+412014;Elaboraci?n de otros productos alimenticios;0;4120
+412015;Elaboraci?n de bebidas alcoh?licas y alcohol ;0;4120
+412016;Elaboraci?n de vinos;0;4120
+412017;Elaboraci?n de bebidas malteadas y de malta;0;4120
+412018;Elaboraci?n de bebidas no alcoh?licas;0;4120
+412019;Elaboraci?n de productos de tabaco;0;4120
+412020;Preparaci?n e hilatura de fibras textiles y t;0;4120
+412021;Acabado de productos textiles;0;4120
+412022;Elaboraci?n de art?culos de materiales textil;0;4120
+412023;Elaboraci?n de tapices y alfombras;0;4120
+412024;Elaboraci?n de cuerdas, cordeles, bramantes y;0;4120
+412025;Elaboraci?n de otros productos textiles;0;4120
+412026;Elaboraci?n de tejidos;0;4120
+412027;Elaboraci?n de prendas de vestir;0;4120
+412028;Preparaci?n, adobo y te?ido de pieles;0;4120
+412029;Curtido, adobo o preparaci?n de cuero;0;4120
+412030;Elaboraci?n de maletas, bolsos y similares;0;4120
+412031;Elaboraci?n de calzado;0;4120
+412032;Producci?n de madera, art?culos de madera y c;0;4120
+412033;Elaboraci?n de pasta y productos de madera, p;0;4120
+412034;Ediciones y publicaciones;0;4120
+412035;Impresi;0;4120
+412036;Servicios relacionados con la edici?n y la im;0;4120
+412037;Reproducci?n de grabaciones;0;4120
+412038;Elaboraci?n de productos de horno de coque;0;4120
+412039;Elaboraci?n de productos de la refinaci?n de ;0;4120
+412040;Elaboraci?n de sustancias qu?micas b?sicas;0;4120
+412041;Elaboraci?n de abonos y compuestos de nitr?ge;0;4120
+412042;Elaboraci?n de pl?stico y caucho sint?tico;0;4120
+412043;Elaboraci?n de productos qu?micos de uso agro;0;4120
+412044;Elaboraci?n de pinturas, tintas y masillas;0;4120
+412045;Elaboraci?n de productos farmac?uticos y bot?;0;4120
+412046;Elaboraci?n de jabones, detergentes y prepara;0;4120
+412047;Elaboraci?n de otros productos qu?micos;0;4120
+412048;Elaboraci?n de fibras;0;4120
+412049;Elaboraci?n de otros productos de caucho;0;4120
+412050;Elaboraci?n de productos de pl?stico;0;4120
+412051;Elaboraci?n de vidrio y productos de vidrio;0;4120
+412052;Elaboraci?n de productos de cer?mica, loza, p;0;4120
+412053;Elaboraci?n de cemento, cal y yeso;0;4120
+412054;Elaboraci?n de art?culos de hormig?n, cemento;0;4120
+412055;Corte, tallado y acabado de la piedra;0;4120
+412056;Elaboraci?n de otros productos minerales no m;0;4120
+412057;Industrias b?sicas y fundici?n de hierro y ac;0;4120
+412058;Productos primarios de metales preciosos y de;0;4120
+412059;Fundici?n de metales no ferrosos;0;4120
+412060;Fabricaci?n de productos met?licos para uso e;0;4120
+412061;Forja, prensado, estampado, laminado de metal;0;4120
+412062;Revestimiento de metales y obras de ingenier?;0;4120
+412063;Fabricaci?n de art?culos de ferreter;0;4120
+412064;Elaboraci?n de otros productos de metal;0;4120
+412065;Fabricaci?n de maquinaria y equipo;0;4120
+412066;Fabricaci?n de equipos de elevaci?n y manipul;0;4120
+412067;Elaboraci?n de aparatos de uso dom?stico;0;4120
+412068;Elaboraci?n de equipo de oficina;0;4120
+412069;Elaboraci?n de pilas y bater?as primarias;0;4120
+412070;Elaboraci?n de equipo de iluminaci;0;4120
+412071;Elaboraci?n de otros tipos de equipo el?ctric;0;4120
+412072;Fabricaci?n de equipos de radio, televisi?n y;0;4120
+412073;Fabricaci?n de aparatos e instrumentos m?dico;0;4120
+412074;Fabricaci?n de instrumentos de medici?n y con;0;4120
+412075;Fabricaci?n de instrumentos de ?ptica y equip;0;4120
+412076;Fabricaci?n de relojes;0;4120
+412077;Fabricaci?n de veh?culos automotores;0;4120
+412078;Fabricaci?n de carrocer?as para automotores;0;4120
+412079;Fabricaci?n de partes piezas y accesorios par;0;4120
+412080;Fabricaci?n y reparaci?n de buques y otras em;0;4120
+412081;Fabricaci?n de locomotoras y material rodante;0;4120
+412082;Fabricaci?n de aeronaves;0;4120
+412083;Fabricaci?n de motocicletas;0;4120
+412084;Fabricaci?n de bicicletas y sillas de ruedas;0;4120
+412085;Fabricaci?n de otros tipos de transporte;0;4120
+412086;Fabricaci?n de muebles;0;4120
+412087;Fabricaci?n de joyas y art?culos conexos;0;4120
+412088;Fabricaci?n de instrumentos de m?sica;0;4120
+412089;Fabricaci?n de art?culos y equipo para deport;0;4120
+412090;Fabricaci?n de juegos y juguetes;0;4120
+412091;Reciclamiento de desperdicios;0;4120
+412095;Productos de otras industrias manufactureras;0;4120
+412099;Ajustes por inflaci;0;4120
+412505;Generaci?n, captaci?n y distribuci?n de energ;0;4125
+412510;Fabricaci?n de gas y distribuci?n de combusti;0;4125
+412515;Captaci?n, depuraci?n y distribuci?n de agua;0;4125
+412595;Actividades conexas;0;4125
+412599;Ajustes por inflaci;0;4125
+413005;Preparaci?n de terrenos;0;4130
+413010;Construcci?n de edificios y obras de ingenier;0;4130
+413015;Acondicionamiento de edificios;0;4130
+413020;Terminaci?n de edificaciones;0;4130
+413025;Alquiler de equipo con operarios;0;4130
+413095;Actividades conexas;0;4130
+413099;Ajustes por inflaci;0;4130
+413502;Venta de veh?culos automotores;0;4135
+413504;Mantenimiento, reparaci?n y lavado de veh?cul;0;4135
+413506;Venta de partes, piezas y accesorios de veh?c;0;4135
+413508;Venta de combustibles s?lidos, l?quidos, gase;0;4135
+413510;Venta de lubricantes, aditivos, llantas y luj;0;4135
+413512;Venta a cambio de retribuci?n o por contrata;0;4135
+413514;Venta de insumos, materias primas agropecuari;0;4135
+413516;Venta de otros insumos y materias primas no a;0;4135
+413518;Venta de animales vivos y cueros;0;4135
+413520;Venta de productos en almacenes no especializ;0;4135
+413522;Venta de productos agropecuarios;0;4135
+413524;Venta de productos textiles, de vestir, de cu;0;4135
+413526;Venta de papel y cart;0;4135
+413528;Venta de libros, revistas, elementos de papel;0;4135
+413530;Venta de juegos, juguetes y art?culos deporti;0;4135
+413532;Venta de instrumentos quir?rgicos y ortop?dic;0;4135
+413534;Venta de art?culos en relojer?as y joyer?as;0;4135
+413536;Venta de electrodom?sticos y muebles;0;4135
+413538;Venta de productos de aseo, farmac?uticos, me;0;4135
+413540;Venta de cubiertos, vajillas, cristaler?a, po;0;4135
+413542;Venta de materiales de construcci?n, fontaner;0;4135
+413544;Venta de pinturas y lacas;0;4135
+413546;Venta de productos de vidrios y marqueter;0;4135
+413548;Venta de herramientas y art?culos de ferreter;0;4135
+413550;Venta de qu?micos;0;4135
+413552;Venta de productos intermedios, desperdicios ;0;4135
+413554;Venta de maquinaria, equipo de oficina y prog;0;4135
+413556;Venta de art?culos en cacharrer?as y miscel?n;0;4135
+413558;Venta de instrumentos musicales;0;4135
+413560;Venta de art?culos en casas de empe?o y prend;0;4135
+413562;Venta de equipo fotogr?fico;0;4135
+413564;Venta de equipo ?ptico y de precisi;0;4135
+413566;Venta de empaques;0;4135
+413568;Venta de equipo profesional y cient?fico;0;4135
+413570;Venta de loter?as, rifas, chance, apuestas y ;0;4135
+413572;Reparaci?n de efectos personales y electrodom;0;4135
+413595;Venta de otros productos;0;4135
+413599;Ajustes por inflaci;0;4135
+414005;Hoteler;0;4140
+414010;Campamento y otros tipos de hospedaje;0;4140
+414015;Restaurantes;0;4140
+414020;Bares y cantinas;0;4140
+414095;Actividades conexas;0;4140
+414099;Ajustes por inflaci;0;4140
+414505;Servicio de transporte por carretera;0;4145
+414510;Servicio de transporte por v?a f?rrea;0;4145
+414515;Servicio de transporte por v?a acu?tica;0;4145
+414520;Servicio de transporte por v?a a?rea;0;4145
+414525;Servicio de transporte por tuber?as;0;4145
+414530;Manipulaci?n de carga;0;4145
+414535;Almacenamiento y dep?sito;0;4145
+414540;Servicios complementarios para el transporte;0;4145
+414545;Agencias de viaje;0;4145
+414550;Otras agencias de transporte;0;4145
+414555;Servicio postal y de correo;0;4145
+414560;Servicio telef?nico;0;4145
+414565;Servicio de tel?grafo;0;4145
+414570;Servicio de transmisi?n de datos;0;4145
+414575;Servicio de radio y televisi?n por cable;0;4145
+414580;Transmisi?n de sonido e im?genes por contrato;0;4145
+414595;Actividades conexas;0;4145
+414599;Ajustes por inflaci;0;4145
+415005;Venta de inversiones;0;4150
+415010;Dividendos de sociedades an?nimas y/o asimila;0;4150
+415015;Participaciones de sociedades limitadas y/o a;0;4150
+415020;Intereses;0;4150
+415025;Reajuste monetario-UPAC (hoy UVR);0;4150
+415030;Comisiones;0;4150
+415035;Operaciones de descuento;0;4150
+415040;Cuotas de inscripci?n-consorcios;0;4150
+415045;Cuotas de administraci?n-consorcios;0;4150
+415050;Reajuste del sistema-consorcios;0;4150
+415055;Eliminaci?n de suscriptores-consorcios;0;4150
+415060;Cuotas de ingreso o retiro-sociedad administr;0;4150
+415065;Servicios a comisionistas;0;4150
+415070;Inscripciones y cuotas;0;4150
+415075;Recuperaci?n de garant?as;0;4150
+415080;Ingresos m?todo de participaci;0;4150
+415095;Actividades conexas;0;4150
+415099;Ajustes por inflaci;0;4150
+415505;Arrendamientos de bienes inmuebles;0;4155
+415510;Inmobiliarias por retribuci?n o contrata;0;4155
+415515;Alquiler equipo de transporte;0;4155
+415520;Alquiler maquinaria y equipo;0;4155
+415525;Alquiler de efectos personales y enseres dom?;0;4155
+415530;Consultor?a en equipo y programas de inform?t;0;4155
+415535;Procesamiento de datos;0;4155
+415540;Mantenimiento y reparaci?n de maquinaria de o;0;4155
+415545;Investigaciones cient?ficas y de desarrollo;0;4155
+415550;Actividades empresariales de consultor;0;4155
+415555;Publicidad;0;4155
+415560;Dotaci?n de personal;0;4155
+415565;Investigaci?n y seguridad;0;4155
+415570;Limpieza de inmuebles;0;4155
+415575;Fotograf;0;4155
+415580;Envase y empaque;0;4155
+415585;Fotocopiado;0;4155
+415590;Mantenimiento y reparaci?n de maquinaria y eq;0;4155
+415595;Actividades conexas;0;4155
+415599;Ajustes por inflaci;0;4155
+416005;Actividades relacionadas con la educaci;0;4160
+416095;Actividades conexas;0;4160
+416099;Ajustes por inflaci;0;4160
+416505;Servicio hospitalario;0;4165
+416510;Servicio medico;0;4165
+416515;Servicio odontol?gico;0;4165
+416520;Servicio de laboratorio;0;4165
+416525;Actividades veterinarias;0;4165
+416530;Actividades de servicios sociales;0;4165
+416595;Actividades conexas;0;4165
+416599;Ajustes por inflaci;0;4165
+417005;Eliminaci?n de desperdicios y aguas residuale;0;4170
+417010;Actividades de asociaci;0;4170
+417015;Producci?n y distribuci?n de filmes y videoci;0;4170
+417020;Exhibici?n de filmes y videocintas;0;4170
+417025;Actividad de radio y televisi;0;4170
+417030;Actividad teatral, musical y art?stica;0;4170
+417035;Grabaci?n y producci?n de discos;0;4170
+417040;Entretenimiento y esparcimiento;0;4170
+417045;Agencias de noticias;0;4170
+417050;Lavander?as y similares;0;4170
+417055;Peluquer?as y similares;0;4170
+417060;Servicios funerarios;0;4170
+417065;Zonas francas;0;4170
+417095;Actividades conexas;0;4170
+417099;Ajustes por inflaci;0;4170
+417599;Ajustes por inflaci;0;4175
+420505;Materia prima;0;4205
+420510;Material de desecho;0;4205
+420515;Materiales varios;0;4205
+420520;Productos de diversificaci;0;4205
+420525;Excedentes de exportaci;0;4205
+420530;Envases y empaques;0;4205
+420535;Productos agr?colas;0;4205
+420540;De propaganda;0;4205
+420545;Productos en remate;0;4205
+420550;Combustibles y lubricantes;0;4205
+420599;Ajustes por inflaci;0;4205
+421005;Intereses;0;4210
+421010;Reajuste monetario-UPAC (hoy UVR);0;4210
+421015;Descuentos amortizados;0;4210
+421020;Diferencia en cambio;0;4210
+421025;Financiaci?n veh?culos;0;4210
+421030;Financiaci?n sistemas de viajes;0;4210
+421035;Aceptaciones bancarias;0;4210
+421040;Descuentos comerciales condicionados;0;4210
+421045;Descuentos bancarios;0;4210
+421050;Comisiones cheques de otras plazas;0;4210
+421055;Multas y recargos;0;4210
+421060;Sanciones cheques devueltos;0;4210
+421095;Otros;0;4210
+421099;Ajustes por inflaci;0;4210
+421505;De sociedades an?nimas y/o asimiladas;0;4215
+421510;De sociedades limitadas y/o asimiladas;0;4215
+421599;Ajustes por inflaci;0;4215
+421805;De sociedades an?nimas y/o asimiladas;0;4218
+421810;De sociedades limitadas y/o asimiladas;0;4218
+422005;Terrenos;0;4220
+422010;Construcciones y edificios;0;4220
+422015;Maquinaria y equipo;0;4220
+422020;Equipo de oficina;0;4220
+422025;Equipo de computaci?n y comunicaci;0;4220
+422030;Equipo m?dico-cient?fico;0;4220
+422035;Equipo de hoteles y restaurantes;0;4220
+422040;Flota y equipo de transporte;0;4220
+422045;Flota y equipo fluvial y/o mar?timo;0;4220
+422050;Flota y equipo a?reo;0;4220
+422055;Flota y equipo f?rreo;0;4220
+422060;Acueductos, plantas y redes;0;4220
+422062;Envases y empaques;0;4220
+422065;Plantaciones agr?colas y forestales;0;4220
+422070;Aer?dromos;0;4220
+422075;Semovientes;0;4220
+422099;Ajustes por inflaci;0;4220
+422505;Sobre inversiones;0;4225
+422510;De concesionarios;0;4225
+422515;De actividades financieras;0;4225
+422520;Por venta de servicios de taller;0;4225
+422525;Por venta de seguros;0;4225
+422530;Por ingresos para terceros;0;4225
+422535;Por distribuci?n de pel?culas;0;4225
+422540;Derechos de autor;0;4225
+422545;Derechos de programaci;0;4225
+422599;Ajustes por inflaci;0;4225
+423005;Asesor?as;0;4230
+423010;Asistencia t?cnica;0;4230
+423015;Administraci?n de vinculadas;0;4230
+423099;Ajustes por inflaci;0;4230
+423505;De b?scula;0;4235
+423510;De transporte;0;4235
+423515;De prensa;0;4235
+423520;Administrativos;0;4235
+423525;T?cnicos;0;4235
+423530;De computaci;0;4235
+423535;De telefax;0;4235
+423540;Taller de veh?culos;0;4235
+423545;De recepci?n de aeronaves;0;4235
+423550;De transporte programa gas natural;0;4235
+423555;Por contratos;0;4235
+423560;De trilla;0;4235
+423565;De mantenimiento;0;4235
+423570;Al personal;0;4235
+423575;De casino;0;4235
+423580;Fletes;0;4235
+423585;Entre compa??as;0;4235
+423595;Otros;0;4235
+423599;Ajustes por inflaci;0;4235
+424005;Acciones;0;4240
+424010;Cuotas o partes de inter?s social;0;4240
+424015;Bonos;0;4240
+424020;C?dulas;0;4240
+424025;Certificados;0;4240
+424030;Papeles comerciales;0;4240
+424035;T?tulos;0;4240
+424045;Derechos fiduciarios;0;4240
+424050;Obligatorias;0;4240
+424095;Otras;0;4240
+424099;Ajustes por inflaci;0;4240
+424504;Terrenos;0;4245
+424506;Materiales industria petrolera;0;4245
+424508;Construcciones en curso;0;4245
+424512;Maquinaria en montaje;0;4245
+424516;Construcciones y edificaciones;0;4245
+424520;Maquinaria y equipo;0;4245
+424524;Equipo de oficina;0;4245
+424528;Equipo de computaci?n y comunicaci;0;4245
+424532;Equipo m?dico-cient?fico;0;4245
+424536;Equipo de hoteles y restaurantes;0;4245
+424540;Flota y equipo de transporte;0;4245
+424544;Flota y equipo fluvial y/o mar?timo;0;4245
+424548;Flota y equipo a?reo;0;4245
+424552;Flota y equipo f?rreo;0;4245
+424556;Acueductos, plantas y redes;0;4245
+424560;Armamento de vigilancia;0;4245
+424562;Envases y empaques;0;4245
+424564;Plantaciones agr?colas y forestales;0;4245
+424568;V?as de comunicaci;0;4245
+424572;Minas y Canteras;0;4245
+424580;Pozos artesianos;0;4245
+424584;Yacimientos;0;4245
+424588;Semovientes;0;4245
+424599;Ajustes por inflaci;0;4245
+424805;Intangibles;0;4248
+424810;Otros activos;0;4248
+424899;Ajustes por inflaci;0;4248
+425005;Deudas malas;0;4250
+425010;Seguros;0;4250
+425015;Reclamos;0;4250
+425020;Reintegro por personal en comisi;0;4250
+425025;Reintegro garant?as;0;4250
+425030;Descuentos concedidos;0;4250
+425035;De provisiones;0;4250
+425040;Gastos bancarios;0;4250
+425045;De depreciaci;0;4250
+425050;Reintegro de otros costos y gastos;0;4250
+425099;Ajustes por inflaci;0;4250
+425505;Por siniestro;0;4255
+425510;Por suministros;0;4255
+425515;Lucro cesante compa??as de seguros;0;4255
+425520;Da?o emergente compa??as de seguros;0;4255
+425525;Por p?rdida de mercanc;0;4255
+425530;Por incumplimiento de contratos;0;4255
+425535;De terceros;0;4255
+425540;Por incapacidades ISS;0;4255
+425595;Otras;0;4255
+425599;Ajustes por inflaci;0;4255
+426099;Ajustes por inflaci;0;4260
+426599;Ajustes por inflaci;0;4265
+427599;Ajustes por inflaci;0;4275
+429503;CERT;0;4295
+429505;Aprovechamientos;0;4295
+429507;Auxilios;0;4295
+429509;Subvenciones;0;4295
+429511;Ingresos por investigaci?n y desarrollo;0;4295
+429513;Por trabajos ejecutados;0;4295
+429515;Regal?as;0;4295
+429517;Derivados de las exportaciones;0;4295
+429519;Otros ingresos de explotaci;0;4295
+429521;De la actividad ganadera;0;4295
+429525;Derechos y licitaciones;0;4295
+429530;Ingresos por elementos perdidos;0;4295
+429533;Multas y recargos;0;4295
+429535;Preavisos descontados;0;4295
+429537;Reclamos;0;4295
+429540;Recobro de da;0;4295
+429543;Premios;0;4295
+429545;Bonificaciones;0;4295
+429547;Productos descontados;0;4295
+429549;Reconocimientos ISS;0;4295
+429551;Excedentes;0;4295
+429553;Sobrantes de caja;0;4295
+429555;Sobrantes en liquidaci?n fletes;0;4295
+429557;Subsidios estatales;0;4295
+429559;Capacitaci?n distribuidores;0;4295
+429561;De escrituraci;0;4295
+429563;Registro promesas de venta;0;4295
+429567;?tiles, papeler?a y fotocopias;0;4295
+429571;Resultados, matr?culas y traspasos;0;4295
+429573;Decoraciones;0;4295
+429575;Manejo de carga;0;4295
+429579;Historia cl?nica;0;4295
+429581;Ajuste al peso;0;4295
+429583;Llamadas telef?nicas;0;4295
+429595;Otros;0;4295
+429599;Ajustes por inflaci;0;4295
+470505;Inversiones (CR);0;4705
+470510;Inventarios (CR);0;4705
+470515;Propiedades, planta y equipo (CR);0;4705
+470520;Intangibles (CR);0;4705
+470525;Activos diferidos;0;4705
+470530;Otros activos (CR);0;4705
+470535;Pasivos sujetos de ajuste;0;4705
+470540;Patrimonio;0;4705
+470545;Depreciaci?n acumulada (DB);0;4705
+470550;Depreciaci?n diferida (CR);0;4705
+470555;Agotamiento acumulado (DB);0;4705
+470560;Amortizaci?n acumulada (DB);0;4705
+470565;Ingresos operacionales (DB);0;4705
+470568;Devoluciones en ventas (CR);0;4705
+470570;Ingresos no operacionales (DB);0;4705
+470575;Gastos operacionales de administraci?n (CR);0;4705
+470580;Gastos operacionales de ventas (CR);0;4705
+470585;Gastos no operacionales (CR);0;4705
+470590;Compras (CR);0;4705
+470591;Devoluciones en compras (DB);0;4705
+470592;Costo de ventas (CR);0;4705
+470594;Costos de producci?n o de operaci?n (CR);0;4705
+510503;Salario integral;0;5105
+510506;Sueldos;0;5105
+510512;Jornales;0;5105
+510515;Horas extras y recargos;0;5105
+510518;Comisiones;0;5105
+510521;Vi?ticos;0;5105
+510524;Incapacidades;0;5105
+510527;Auxilio de transporte;0;5105
+510530;Cesant?as;0;5105
+510533;Intereses sobre cesant?as;0;5105
+510536;Prima de servicios;0;5105
+510539;Vacaciones;0;5105
+510542;Primas extralegales;0;5105
+510545;Auxilios;0;5105
+510548;Bonificaciones;0;5105
+510551;Dotaci?n y suministro a trabajadores;0;5105
+510554;Seguros;0;5105
+510557;Cuotas partes pensiones de jubilaci;0;5105
+510558;Amortizaci?n c?lculo actuarial pensiones de j;0;5105
+510559;Pensiones de jubilaci;0;5105
+510560;Indemnizaciones laborales;0;5105
+510561;Amortizaci?n bonos pensionales;0;5105
+510562;Amortizaci?n t?tulos pensionales;0;5105
+510563;Capacitaci?n al personal;0;5105
+510566;Gastos deportivos y de recreaci;0;5105
+510568;Aportes a administradoras de riesgos profesio;0;5105
+510569;Aportes a entidades promotoras de salud, EPS;0;5105
+510570;Aportes a fondos de pensiones y/o cesant?as;0;5105
+510572;Aportes cajas de compensaci?n familiar;0;5105
+510575;Aportes ICBF;0;5105
+510578;SENA;0;5105
+510581;Aportes sindicales;0;5105
+510584;Gastos m?dicos y drogas;0;5105
+510595;Otros;0;5105
+510599;Ajustes por inflaci;0;5105
+511005;Junta directiva;0;5110
+511010;Revisor?a fiscal;0;5110
+511015;Auditor?a externa;0;5110
+511020;Aval?os;0;5110
+511025;Asesor?a jur?dica;0;5110
+511030;Asesor?a financiera;0;5110
+511035;Asesor?a t?cnica;0;5110
+511095;Otros;0;5110
+511099;Ajustes por inflaci;0;5110
+511505;Industria y comercio;0;5115
+511510;De timbres;0;5115
+511515;A la propiedad ra;0;5115
+511520;Derechos sobre instrumentos p?blicos;0;5115
+511525;De valorizaci;0;5115
+511530;De turismo;0;5115
+511535;Tasa por utilizaci?n de puertos;0;5115
+511540;De veh?culos;0;5115
+511545;De espect?culos p?blicos;0;5115
+511550;Cuotas de fomento;0;5115
+511570;IVA descontable;0;5115
+511595;Otros;0;5115
+511599;Ajustes por inflaci;0;5115
+512005;Terrenos;0;5120
+512010;Construcciones y edificaciones;0;5120
+512015;Maquinaria y equipo;0;5120
+512020;Equipo de oficina;0;5120
+512025;Equipo de computaci?n y comunicaci;0;5120
+512030;Equipo m?dico-cient?fico;0;5120
+512035;Equipo de hoteles y restaurantes;0;5120
+512040;Flota y equipo de transporte;0;5120
+512045;Flota y equipo fluvial y/o mar?timo;0;5120
+512050;Flota y equipo a?reo;0;5120
+512055;Flota y equipo f?rreo;0;5120
+512060;Acueductos, plantas y redes;0;5120
+512065;Aer?dromos;0;5120
+512070;Semovientes;0;5120
+512095;Otros;0;5120
+512099;Ajustes por inflaci;0;5120
+512505;Contribuciones;0;5125
+512510;Afiliaciones y sostenimiento;0;5125
+512599;Ajustes por inflaci;0;5125
+513005;Manejo;0;5130
+513010;Cumplimiento;0;5130
+513015;Corriente d?bil;0;5130
+513020;Vida colectiva;0;5130
+513025;Incendio;0;5130
+513030;Terremoto;0;5130
+513035;Sustracci?n y hurto;0;5130
+513040;Flota y equipo de transporte;0;5130
+513045;Flota y equipo fluvial y/o mar?timo;0;5130
+513050;Flota y equipo a?reo;0;5130
+513055;Flota y equipo f?rreo;0;5130
+513060;Responsabilidad civil y extracontractual;0;5130
+513065;Vuelo;0;5130
+513070;Rotura de maquinaria;0;5130
+513075;Obligatorio accidente de tr?nsito;0;5130
+513080;Lucro cesante;0;5130
+513085;Transporte de mercanc;0;5130
+513095;Otros;0;5130
+513099;Ajustes por inflaci;0;5130
+513505;Aseo y vigilancia;0;5135
+513510;Temporales;0;5135
+513515;Asistencia t?cnica;0;5135
+513520;Procesamiento electr?nico de datos;0;5135
+513525;Acueducto y alcantarillado;0;5135
+513530;Energ?a el?ctrica;0;5135
+513535;Tel?fono;0;5135
+513540;Correo, portes y telegramas;0;5135
+513545;Fax y t?lex;0;5135
+513550;Transporte, fletes y acarreos;0;5135
+513555;Gas;0;5135
+513595;Otros;0;5135
+513599;Ajustes por inflaci;0;5135
+514005;Notariales;0;5140
+514010;Registro mercantil;0;5140
+514015;Tr?mites y licencias;0;5140
+514020;Aduaneros;0;5140
+514025;Consulares;0;5140
+514095;Otros;0;5140
+514099;Ajustes por inflaci;0;5140
+514505;Terrenos;0;5145
+514510;Construcciones y edificaciones;0;5145
+514515;Maquinaria y equipo;0;5145
+514520;Equipo de oficina;0;5145
+514525;Equipo de computaci?n y comunicaci;0;5145
+514530;Equipo m?dico-cient?fico;0;5145
+514535;Equipo de hoteles y restaurantes;0;5145
+514540;Flota y equipo de transporte;0;5145
+514545;Flota y equipo fluvial y/o mar?timo;0;5145
+514550;Flota y equipo a?reo;0;5145
+514555;Flota y equipo f?rreo;0;5145
+514560;Acueductos, plantas y redes;0;5145
+514565;Armamento de vigilancia;0;5145
+514570;V?as de comunicaci;0;5145
+514599;Ajustes por inflaci;0;5145
+515005;Instalaciones el?ctricas;0;5150
+515010;Arreglos ornamentales;0;5150
+515015;Reparaciones locativas;0;5150
+515095;Otros;0;5150
+515099;Ajustes por inflaci;0;5150
+515505;Alojamiento y manutenci;0;5155
+515510;Pasajes fluviales y/o mar?timos;0;5155
+515515;Pasajes a?reos;0;5155
+515520;Pasajes terrestres;0;5155
+515525;Pasajes f?rreos;0;5155
+515595;Otros;0;5155
+515599;Ajustes por inflaci;0;5155
+516005;Construcciones y edificaciones;0;5160
+516010;Maquinaria y equipo;0;5160
+516015;Equipo de oficina;0;5160
+516020;Equipo de computaci?n y comunicaci;0;5160
+516025;Equipo m?dico-cient?fico;0;5160
+516030;Equipo de hoteles y restaurantes;0;5160
+516035;Flota y equipo de transporte;0;5160
+516040;Flota y equipo fluvial y/o mar?timo;0;5160
+516045;Flota y equipo a?reo;0;5160
+516050;Flota y equipo f?rreo;0;5160
+516055;Acueductos, plantas y redes;0;5160
+516060;Armamento de vigilancia;0;5160
+516099;Ajustes por inflaci;0;5160
+516505;V?as de comunicaci;0;5165
+516510;Intangibles;0;5165
+516515;Cargos diferidos;0;5165
+516595;Otras;0;5165
+516599;Ajustes por inflaci;0;5165
+519505;Comisiones;0;5195
+519510;Libros, suscripciones, peri?dicos y revistas;0;5195
+519515;M?sica ambiental;0;5195
+519520;Gastos de representaci?n y relaciones p?blica;0;5195
+519525;Elementos de aseo y cafeter;0;5195
+519530;?tiles, papeler?a y fotocopias;0;5195
+519535;Combustibles y lubricantes;0;5195
+519540;Envases y empaques;0;5195
+519545;Taxis y buses;0;5195
+519550;Estampillas;0;5195
+519555;Microfilmaci;0;5195
+519560;Casino y restaurante;0;5195
+519565;Parqueaderos;0;5195
+519570;Indemnizaci?n por da?os a terceros;0;5195
+519575;P?lvora y similares;0;5195
+519595;Otros;0;5195
+519599;Ajustes por inflaci;0;5195
+519905;Inversiones;0;5199
+519910;Deudores;0;5199
+519915;Propiedades, planta y equipo;0;5199
+519995;Otros activos;0;5199
+519999;Ajustes por inflaci;0;5199
+520503;Salario integral;0;5205
+520506;Sueldos;0;5205
+520512;Jornales;0;5205
+520515;Horas extras y recargos;0;5205
+520518;Comisiones;0;5205
+520521;Vi?ticos;0;5205
+520524;Incapacidades;0;5205
+520527;Auxilio de transporte;0;5205
+520530;Cesant?as;0;5205
+520533;Intereses sobre cesant?as;0;5205
+520536;Prima de servicios;0;5205
+520539;Vacaciones;0;5205
+520542;Primas extralegales;0;5205
+520545;Auxilios;0;5205
+520548;Bonificaciones;0;5205
+520551;Dotaci?n y suministro a trabajadores;0;5205
+520554;Seguros;0;5205
+520557;Cuotas partes pensiones de jubilaci;0;5205
+520558;Amortizaci?n c?lculo actuarial pensiones de j;0;5205
+520559;Pensiones de jubilaci;0;5205
+520560;Indemnizaciones laborales;0;5205
+520561;Amortizaci?n bonos pensionales;0;5205
+520562;Amortizaci?n t?tulos pensionales;0;5205
+520563;Capacitaci?n al personal;0;5205
+520566;Gastos deportivos y de recreaci;0;5205
+520568;Aportes a administradoras de riesgos profesio;0;5205
+520569;Aportes a entidades promotoras de salud, EPS;0;5205
+520570;Aportes a fondos de pensiones y/o cesant?as;0;5205
+520572;Aportes cajas de compensaci?n familiar;0;5205
+520575;Aportes ICBF;0;5205
+520578;SENA;0;5205
+520581;Aportes sindicales;0;5205
+520584;Gastos m?dicos y drogas;0;5205
+520595;Otros;0;5205
+520599;Ajustes por inflaci;0;5205
+521005;Junta directiva;0;5210
+521010;Revisor?a fiscal;0;5210
+521015;Auditor?a externa;0;5210
+521020;Aval?os;0;5210
+521025;Asesor?a jur?dica;0;5210
+521030;Asesor?a financiera;0;5210
+521035;Asesor?a t?cnica;0;5210
+521095;Otros;0;5210
+521099;Ajustes por inflaci;0;5210
+521505;Industria y comercio;0;5215
+521510;De timbres;0;5215
+521515;A la propiedad ra;0;5215
+521520;Derechos sobre instrumentos p?blicos;0;5215
+521525;De valorizaci;0;5215
+521530;De turismo;0;5215
+521535;Tasa por utilizaci?n de puertos;0;5215
+521540;De veh?culos;0;5215
+521545;De espect?culos p?blicos;0;5215
+521550;Cuotas de fomento;0;5215
+521555;Licores;0;5215
+521560;Cervezas;0;5215
+521565;Cigarrillos;0;5215
+521570;IVA descontable;0;5215
+521595;Otros;0;5215
+521599;Ajustes por inflaci;0;5215
+522005;Terrenos;0;5220
+522010;Construcciones y edificaciones;0;5220
+522015;Maquinaria y equipo;0;5220
+522020;Equipo de oficina;0;5220
+522025;Equipo de computaci?n y comunicaci;0;5220
+522030;Equipo m?dico-cient?fico;0;5220
+522035;Equipo de hoteles y restaurantes;0;5220
+522040;Flota y equipo de transporte;0;5220
+522045;Flota y equipo fluvial y/o mar?timo;0;5220
+522050;Flota y equipo a?reo;0;5220
+522055;Flota y equipo f?rreo;0;5220
+522060;Acueductos, plantas y redes;0;5220
+522065;Aer?dromos;0;5220
+522070;Semovientes;0;5220
+522095;Otros;0;5220
+522099;Ajustes por inflaci;0;5220
+522505;Contribuciones;0;5225
+522510;Afiliaciones y sostenimiento;0;5225
+522599;Ajustes por inflaci;0;5225
+523005;Manejo;0;5230
+523010;Cumplimiento;0;5230
+523015;Corriente d?bil;0;5230
+523020;Vida colectiva;0;5230
+523025;Incendio;0;5230
+523030;Terremoto;0;5230
+523035;Sustracci?n y hurto;0;5230
+523040;Flota y equipo de transporte;0;5230
+523045;Flota y equipo fluvial y/o mar?timo;0;5230
+523050;Flota y equipo a?reo;0;5230
+523055;Flota y equipo f?rreo;0;5230
+523060;Responsabilidad civil y extracontractual;0;5230
+523065;Vuelo;0;5230
+523070;Rotura de maquinaria;0;5230
+523075;Obligatorio accidente de tr?nsito;0;5230
+523080;Lucro cesante;0;5230
+523095;Otros;0;5230
+523099;Ajustes por inflaci;0;5230
+523505;Aseo y vigilancia;0;5235
+523510;Temporales;0;5235
+523515;Asistencia t?cnica;0;5235
+523520;Procesamiento electr?nico de datos;0;5235
+523525;Acueducto y alcantarillado;0;5235
+523530;Energ?a el?ctrica;0;5235
+523535;Tel?fono;0;5235
+523540;Correo, portes y telegramas;0;5235
+523545;Fax y t?lex;0;5235
+523550;Transporte, fletes y acarreos;0;5235
+523555;Gas;0;5235
+523560;Publicidad, propaganda y promoci;0;5235
+523595;Otros;0;5235
+523599;Ajustes por inflaci;0;5235
+524005;Notariales;0;5240
+524010;Registro mercantil;0;5240
+524015;Tr?mites y licencias;0;5240
+524020;Aduaneros;0;5240
+524025;Consulares;0;5240
+524095;Otros;0;5240
+524099;Ajustes por inflaci;0;5240
+524505;Terrenos;0;5245
+524510;Construcciones y edificaciones;0;5245
+524515;Maquinaria y equipo;0;5245
+524520;Equipo de oficina;0;5245
+524525;Equipo de computaci?n y comunicaci;0;5245
+524530;Equipo m?dico-cient?fico;0;5245
+524535;Equipo de hoteles y restaurantes;0;5245
+524540;Flota y equipo de transporte;0;5245
+524545;Flota y equipo fluvial y/o mar?timo;0;5245
+524550;Flota y equipo a?reo;0;5245
+524555;Flota y equipo f?rreo;0;5245
+524560;Acueductos, plantas y redes;0;5245
+524565;Armamento de vigilancia;0;5245
+524570;V?as de comunicaci;0;5245
+524599;Ajustes por inflaci;0;5245
+525005;Instalaciones el?ctricas;0;5250
+525010;Arreglos ornamentales;0;5250
+525015;Reparaciones locativas;0;5250
+525095;Otros;0;5250
+525099;Ajustes por inflaci;0;5250
+525505;Alojamiento y manutenci;0;5255
+525510;Pasajes fluviales y/o mar?timos;0;5255
+525515;Pasajes a?reos;0;5255
+525520;Pasajes terrestres;0;5255
+525525;Pasajes f?rreos;0;5255
+525595;Otros;0;5255
+525599;Ajustes por inflaci;0;5255
+526005;Construcciones y edificaciones;0;5260
+526010;Maquinaria y equipo;0;5260
+526015;Equipo de oficina;0;5260
+526020;Equipo de computaci?n y comunicaci;0;5260
+526025;Equipo m?dico-cient?fico;0;5260
+526030;Equipo de hoteles y restaurantes;0;5260
+526035;Flota y equipo de transporte;0;5260
+526040;Flota y equipo fluvial y/o mar?timo;0;5260
+526045;Flota y equipo a?reo;0;5260
+526050;Flota y equipo f?rreo;0;5260
+526055;Acueductos, plantas y redes;0;5260
+526060;Armamento de vigilancia;0;5260
+526065;Envases y empaques;0;5260
+526099;Ajustes por inflaci;0;5260
+526505;V?as de comunicaci;0;5265
+526510;Intangibles;0;5265
+526515;Cargos diferidos;0;5265
+526595;Otras;0;5265
+526599;Ajustes por inflaci;0;5265
+527099;Ajustes por inflaci;0;5270
+527505;De sociedades an?nimas y/o asimiladas;0;5275
+527510;De sociedades limitadas y/o asimiladas;0;5275
+529505;Comisiones;0;5295
+529510;Libros, suscripciones, peri?dicos y revistas;0;5295
+529515;M?sica ambiental;0;5295
+529520;Gastos de representaci?n y relaciones p?blica;0;5295
+529525;Elementos de aseo y cafeter;0;5295
+529530;?tiles, papeler?a y fotocopias;0;5295
+529535;Combustibles y lubricantes;0;5295
+529540;Envases y empaques;0;5295
+529545;Taxis y buses;0;5295
+529550;Estampillas;0;5295
+529555;Microfilmaci;0;5295
+529560;Casino y restaurante;0;5295
+529565;Parqueaderos;0;5295
+529570;Indemnizaci?n por da?os a terceros;0;5295
+529575;P?lvora y similares;0;5295
+529595;Otros;0;5295
+529599;Ajustes por inflaci;0;5295
+529905;Inversiones;0;5299
+529910;Deudores;0;5299
+529915;Inventarios;0;5299
+529920;Propiedades, planta y equipo;0;5299
+529995;Otros activos;0;5299
+529999;Ajustes por inflaci;0;5299
+530505;Gastos bancarios;0;5305
+530510;Reajuste monetario-UPAC (hoy UVR);0;5305
+530515;Comisiones;0;5305
+530520;Intereses;0;5305
+530525;Diferencia en cambio;0;5305
+530530;Gastos en negociaci?n certificados de cambio;0;5305
+530535;Descuentos comerciales condicionados;0;5305
+530540;Gastos manejo y emisi?n de bonos;0;5305
+530545;Prima amortizada;0;5305
+530595;Otros;0;5305
+530599;Ajustes por inflaci;0;5305
+531005;Venta de inversiones;0;5310
+531010;Venta de cartera;0;5310
+531015;Venta de propiedades, planta y equipo;0;5310
+531020;Venta de intangibles;0;5310
+531025;Venta de otros activos;0;5310
+531030;Retiro de propiedades, planta y equipo;0;5310
+531035;Retiro de otros activos;0;5310
+531040;P?rdidas por siniestros;0;5310
+531095;Otros;0;5310
+531099;Ajustes por inflaci;0;5310
+531305;De sociedades an?nimas y/o asimiladas;0;5313
+531310;De sociedades limitadas y/o asimiladas;0;5313
+531505;Costas y procesos judiciales;0;5315
+531510;Actividades culturales y c?vicas;0;5315
+531515;Costos y gastos de ejercicios anteriores;0;5315
+531520;Impuestos asumidos;0;5315
+531595;Otros;0;5315
+531599;Ajustes por inflaci;0;5315
+539505;Demandas laborales;0;5395
+539510;Demandas por incumplimiento de contratos;0;5395
+539515;Indemnizaciones;0;5395
+539520;Multas, sanciones y litigios;0;5395
+539525;Donaciones;0;5395
+539530;Constituci?n de garant?as;0;5395
+539535;Amortizaci?n de bienes entregados en comodato;0;5395
+539595;Otros;0;5395
+539599;Ajustes por inflaci;0;5395
+540505;Impuesto de renta y complementarios;0;5405
+590505;Ganancias y p?rdidas;0;5905
+610505;Cultivo de cereales;0;6105
+610510;Cultivos de hortalizas, legumbres y plantas o;0;6105
+610515;Cultivos de frutas, nueces y plantas arom?tic;0;6105
+610520;Cultivo de caf;0;6105
+610525;Cultivo de flores;0;6105
+610530;Cultivo de ca?a de az?car;0;6105
+610535;Cultivo de algod?n y plantas para material te;0;6105
+610540;Cultivo de banano;0;6105
+610545;Otros cultivos agr?colas;0;6105
+610550;Cr?a de ovejas, cabras, asnos, mulas y burd?g;0;6105
+610555;Cr?a de ganado caballar y vacuno;0;6105
+610560;Producci?n av?cola;0;6105
+610565;Cr?a de otros animales;0;6105
+610570;Servicios agr?colas y ganaderos;0;6105
+610575;Actividad de caza;0;6105
+610580;Actividad de silvicultura;0;6105
+610595;Actividades conexas;0;6105
+610599;Ajustes por inflaci;0;6105
+611005;Actividad de pesca;0;6110
+611010;Explotaci?n de criaderos de peces;0;6110
+611095;Actividades conexas;0;6110
+611099;Ajustes por inflaci;0;6110
+611505;Carb;0;6115
+611510;Petr?leo crudo;0;6115
+611512;Gas natural;0;6115
+611514;Servicios relacionados con extracci?n de petr;0;6115
+611515;Minerales de hierro;0;6115
+611520;Minerales metal?feros no ferrosos;0;6115
+611525;Piedra, arena y arcilla;0;6115
+611527;Piedras preciosas;0;6115
+611528;Oro;0;6115
+611530;Otras minas y canteras;0;6115
+611532;Prestaci?n de servicios sector minero;0;6115
+611595;Actividades conexas;0;6115
+611599;Ajustes por inflaci;0;6115
+612001;Producci?n y procesamiento de carnes y produc;0;6120
+612002;Productos de pescado;0;6120
+612003;Productos de frutas, legumbres y hortalizas;0;6120
+612004;Elaboraci?n de aceites y grasas;0;6120
+612005;Elaboraci?n de productos l?cteos;0;6120
+612006;Elaboraci?n de productos de moliner;0;6120
+612007;Elaboraci?n de almidones y derivados;0;6120
+612008;Elaboraci?n de alimentos para animales;0;6120
+612009;Elaboraci?n de productos para panader;0;6120
+612010;Elaboraci?n de az?car y melazas;0;6120
+612011;Elaboraci?n de cacao, chocolate y confiter;0;6120
+612012;Elaboraci?n de pastas y productos farin?ceos;0;6120
+612013;Elaboraci?n de productos de caf;0;6120
+612014;Elaboraci?n de otros productos alimenticios;0;6120
+612015;Elaboraci?n de bebidas alcoh?licas y alcohol ;0;6120
+612016;Elaboraci?n de vinos;0;6120
+612017;Elaboraci?n de bebidas malteadas y de malta;0;6120
+612018;Elaboraci?n de bebidas no alcoh?licas;0;6120
+612019;Elaboraci?n de productos de tabaco;0;6120
+612020;Preparaci?n e hilatura de fibras textiles y t;0;6120
+612021;Acabado de productos textiles;0;6120
+612022;Elaboraci?n de art?culos de materiales textil;0;6120
+612023;Elaboraci?n de tapices y alfombras;0;6120
+612024;Elaboraci?n de cuerdas, cordeles, bramantes y;0;6120
+612025;Elaboraci?n de otros productos textiles;0;6120
+612026;Elaboraci?n de tejidos;0;6120
+612027;Elaboraci?n de prendas de vestir;0;6120
+612028;Preparaci?n, adobo y te?ido de pieles;0;6120
+612029;Curtido, adobo o preparaci?n de cuero;0;6120
+612030;Elaboraci?n de maletas, bolsos y similares;0;6120
+612031;Elaboraci?n de calzado;0;6120
+612032;Producci?n de madera, art?culos de madera y c;0;6120
+612033;Elaboraci?n de pasta y productos de madera, p;0;6120
+612034;Ediciones y publicaciones;0;6120
+612035;Impresi;0;6120
+612036;Servicios relacionados con la edici?n y la im;0;6120
+612037;Reproducci?n de grabaciones;0;6120
+612038;Elaboraci?n de productos de horno de coque;0;6120
+612039;Elaboraci?n de productos de la refinaci?n de ;0;6120
+612040;Elaboraci?n de sustancias qu?micas b?sicas;0;6120
+612041;Elaboraci?n de abonos y compuestos de nitr?ge;0;6120
+612042;Elaboraci?n de pl?stico y caucho sint?tico;0;6120
+612043;Elaboraci?n de productos qu?micos de uso agro;0;6120
+612044;Elaboraci?n de pinturas, tintas y masillas;0;6120
+612045;Elaboraci?n de productos farmac?uticos y bot?;0;6120
+612046;Elaboraci?n de jabones, detergentes y prepara;0;6120
+612047;Elaboraci?n de otros productos qu?micos;0;6120
+612048;Elaboraci?n de fibras;0;6120
+612049;Elaboraci?n de otros productos de caucho;0;6120
+612050;Elaboraci?n de productos de pl?stico;0;6120
+612051;Elaboraci?n de vidrio y productos de vidrio;0;6120
+612052;Elaboraci?n de productos de cer?mica, loza, p;0;6120
+612053;Elaboraci?n de cemento, cal y yeso;0;6120
+612054;Elaboraci?n de art?culos de hormig?n, cemento;0;6120
+612055;Corte, tallado y acabado de la piedra;0;6120
+612056;Elaboraci?n de otros productos minerales no m;0;6120
+612057;Industrias b?sicas y fundici?n de hierro y ac;0;6120
+612058;Productos primarios de metales preciosos y de;0;6120
+612059;Fundici?n de metales no ferrosos;0;6120
+612060;Fabricaci?n de productos met?licos para uso e;0;6120
+612061;Forja, prensado, estampado, laminado de metal;0;6120
+612062;Revestimiento de metales y obras de ingenier?;0;6120
+612063;Fabricaci?n de art?culos de ferreter;0;6120
+612064;Elaboraci?n de otros productos de metal;0;6120
+612065;Fabricaci?n de maquinaria y equipo;0;6120
+612066;Fabricaci?n de equipos de elevaci?n y manipul;0;6120
+612067;Elaboraci?n de aparatos de uso dom?stico;0;6120
+612068;Elaboraci?n de equipo de oficina;0;6120
+612069;Elaboraci?n de pilas y bater?as primarias;0;6120
+612070;Elaboraci?n de equipo de iluminaci;0;6120
+612071;Elaboraci?n de otros tipos de equipo el?ctric;0;6120
+612072;Fabricaci?n de equipos de radio, televisi?n y;0;6120
+612073;Fabricaci?n de aparatos e instrumentos m?dico;0;6120
+612074;Fabricaci?n de instrumentos de medici?n y con;0;6120
+612075;Fabricaci?n de instrumentos de ?ptica y equip;0;6120
+612076;Fabricaci?n de relojes;0;6120
+612077;Fabricaci?n de veh?culos automotores;0;6120
+612078;Fabricaci?n de carrocer?as para automotores;0;6120
+612079;Fabricaci?n de partes, piezas y accesorios pa;0;6120
+612080;Fabricaci?n y reparaci?n de buques y otras em;0;6120
+612081;Fabricaci?n de locomotoras y material rodante;0;6120
+612082;Fabricaci?n de aeronaves;0;6120
+612083;Fabricaci?n de motocicletas;0;6120
+612084;Fabricaci?n de bicicletas y sillas de ruedas;0;6120
+612085;Fabricaci?n de otros tipos de transporte;0;6120
+612086;Fabricaci?n de muebles;0;6120
+612087;Fabricaci?n de joyas y art?culos conexos;0;6120
+612088;Fabricaci?n de instrumentos de m?sica;0;6120
+612089;Fabricaci?n de art?culos y equipo para deport;0;6120
+612090;Fabricaci?n de juegos y juguetes;0;6120
+612091;Reciclamiento de desperdicios;0;6120
+612095;Productos de otras industrias manufactureras;0;6120
+612099;Ajustes por inflaci;0;6120
+612505;Generaci?n, captaci?n y distribuci?n de energ;0;6125
+612510;Fabricaci?n de gas y distribuci?n de combusti;0;6125
+612515;Captaci?n, depuraci?n y distribuci?n de agua;0;6125
+612595;Actividades conexas;0;6125
+612599;Ajustes por inflaci;0;6125
+613005;Preparaci?n de terrenos;0;6130
+613010;Construcci?n de edificios y obras de ingenier;0;6130
+613015;Acondicionamiento de edificios;0;6130
+613020;Terminaci?n de edificaciones;0;6130
+613025;Alquiler de equipo con operario;0;6130
+613095;Actividades conexas;0;6130
+613099;Ajustes por inflaci;0;6130
+613502;Venta de veh?culos automotores;0;6135
+613504;Mantenimiento, reparaci?n y lavado de veh?cul;0;6135
+613506;Venta de partes, piezas y accesorios de veh?c;0;6135
+613508;Venta de combustibles s?lidos, l?quidos, gase;0;6135
+613510;Venta de lubricantes, aditivos, llantas y luj;0;6135
+613512;Venta a cambio de retribuci?n o por contrata;0;6135
+613514;Venta de insumos, materias primas agropecuari;0;6135
+613516;Venta de otros insumos y materias primas no a;0;6135
+613518;Venta de animales vivos y cueros;0;6135
+613520;Venta de productos en almacenes no especializ;0;6135
+613522;Venta de productos agropecuarios;0;6135
+613524;Venta de productos textiles, de vestir, de cu;0;6135
+613526;Venta de papel y cart;0;6135
+613528;Venta de libros, revistas, elementos de papel;0;6135
+613530;Venta de juegos, juguetes y art?culos deporti;0;6135
+613532;Venta de instrumentos quir?rgicos y ortop?dic;0;6135
+613534;Venta de art?culos en relojer?as y joyer?as;0;6135
+613536;Venta de electrodom?sticos y muebles;0;6135
+613538;Venta de productos de aseo, farmac?uticos, me;0;6135
+613540;Venta de cubiertos, vajillas, cristaler?a, po;0;6135
+613542;Venta de materiales de construcci?n, fontaner;0;6135
+613544;Venta de pinturas y lacas;0;6135
+613546;Venta de productos de vidrios y marqueter;0;6135
+613548;Venta de herramientas y art?culos de ferreter;0;6135
+613550;Venta de qu?micos;0;6135
+613552;Venta de productos intermedios, desperdicios ;0;6135
+613554;Venta de maquinaria, equipo de oficina y prog;0;6135
+613556;Venta de art?culos en cacharrer?as y miscel?n;0;6135
+613558;Venta de instrumentos musicales;0;6135
+613560;Venta de art?culos en casas de empe?o y prend;0;6135
+613562;Venta de equipo fotogr?fico;0;6135
+613564;Venta de equipo ?ptico y de precisi;0;6135
+613566;Venta de empaques;0;6135
+613568;Venta de equipo profesional y cient?fico;0;6135
+613570;Venta de loter?as, rifas, chance, apuestas y ;0;6135
+613572;Reparaci?n de efectos personales y electrodom;0;6135
+613595;Venta de otros productos;0;6135
+613599;Ajustes por inflaci;0;6135
+614005;Hoteler;0;6140
+614010;Campamento y otros tipos de hospedaje;0;6140
+614015;Restaurantes;0;6140
+614020;Bares y cantinas;0;6140
+614095;Actividades conexas;0;6140
+614099;Ajustes por inflaci;0;6140
+614505;Servicio de transporte por carretera;0;6145
+614510;Servicio de transporte por v?a f?rrea;0;6145
+614515;Servicio de transporte por v?a acu?tica;0;6145
+614520;Servicio de transporte por v?a a?rea;0;6145
+614525;Servicio de transporte por tuber?as;0;6145
+614530;Manipulaci?n de carga;0;6145
+614535;Almacenamiento y dep?sito;0;6145
+614540;Servicios complementarios para el transporte;0;6145
+614545;Agencias de viaje;0;6145
+614550;Otras agencias de transporte;0;6145
+614555;Servicio postal y de correo;0;6145
+614560;Servicio telef?nico;0;6145
+614565;Servicio de tel?grafo;0;6145
+614570;Servicio de transmisi?n de datos;0;6145
+614575;Servicio de radio y televisi?n por cable;0;6145
+614580;Transmisi?n de sonido e im?genes por contrato;0;6145
+614595;Actividades conexas;0;6145
+614599;Ajustes por inflaci;0;6145
+615005;De inversiones;0;6150
+615010;De servicio de bolsa;0;6150
+615099;Ajustes por inflaci;0;6150
+615505;Arrendamientos de bienes inmuebles;0;6155
+615510;Inmobiliarias por retribuci?n o contrata;0;6155
+615515;Alquiler equipo de transporte;0;6155
+615520;Alquiler maquinaria y equipo;0;6155
+615525;Alquiler de efectos personales y enseres dom?;0;6155
+615530;Consultor?a en equipo y programas de inform?t;0;6155
+615535;Procesamiento de datos;0;6155
+615540;Mantenimiento y reparaci?n de maquinaria de o;0;6155
+615545;Investigaciones cient?ficas y de desarrollo;0;6155
+615550;Actividades empresariales de consultor;0;6155
+615555;Publicidad;0;6155
+615560;Dotaci?n de personal;0;6155
+615565;Investigaci?n y seguridad;0;6155
+615570;Limpieza de inmuebles;0;6155
+615575;Fotograf;0;6155
+615580;Envase y empaque;0;6155
+615585;Fotocopiado;0;6155
+615590;Mantenimiento y reparaci?n de maquinaria y eq;0;6155
+615595;Actividades conexas;0;6155
+615599;Ajustes por inflaci;0;6155
+616005;Actividades relacionadas con la educaci;0;6160
+616095;Actividades conexas;0;6160
+616099;Ajustes por inflaci;0;6160
+616505;Servicio hospitalario;0;6165
+616510;Servicio m?dico;0;6165
+616515;Servicio odontol?gico;0;6165
+616520;Servicio de laboratorio;0;6165
+616525;Actividades veterinarias;0;6165
+616530;Actividades de servicios sociales;0;6165
+616595;Actividades conexas;0;6165
+616599;Ajustes por inflaci;0;6165
+617005;Eliminaci?n de desperdicios y aguas residuale;0;6170
+617010;Actividades de asociaci;0;6170
+617015;Producci?n y distribuci?n de filmes y videoci;0;6170
+617020;Exhibici?n de filmes y videocintas;0;6170
+617025;Actividad de radio y televisi;0;6170
+617030;Actividad teatral, musical y art?stica;0;6170
+617035;Grabaci?n y producci?n de discos;0;6170
+617040;Entretenimiento y esparcimiento;0;6170
+617045;Agencias de noticias;0;6170
+617050;Lavander?as y similares;0;6170
+617055;Peluquer?as y similares;0;6170
+617060;Servicios funerarios;0;6170
+617065;Zonas francas;0;6170
+617095;Actividades conexas;0;6170
+617099;Ajustes por inflaci;0;6170
+620599;Ajustes por inflaci;0;6205
+621099;Ajustes por inflaci;0;6210
+621599;Ajustes por inflaci;0;6215
+622099;Ajustes por inflaci;0;6220
+622599;Ajustes por inflaci;0;6225
+810505;Valores mobiliarios;0;8105
+810510;Bienes muebles;0;8105
+810599;Ajustes por inflaci;0;8105
+811005;Valores mobiliarios;0;8110
+811010;Bienes muebles;0;8110
+811015;Bienes inmuebles;0;8110
+811020;Contratos de ganado en participaci;0;8110
+811099;Ajustes por inflaci;0;8110
+811505;En arrendamiento;0;8115
+811510;En pr?stamo;0;8115
+811515;En dep?sito;0;8115
+811520;En consignaci;0;8115
+811599;Ajustes por inflaci;0;8115
+812005;Ejecutivos;0;8120
+812010;Incumplimiento de contratos;0;8120
+819505;Valores adquiridos por recibir;0;8195
+819595;Otras;0;8195
+819599;Ajustes por inflaci;0;8195
+830505;Bienes muebles;0;8305
+830510;Bienes inmuebles;0;8305
+830599;Ajustes por inflaci;0;8305
+831005;Acciones;0;8310
+831010;Bonos;0;8310
+831095;Otros;0;8310
+831506;Materiales proyectos petroleros;0;8315
+831516;Construcciones y edificaciones;0;8315
+831520;Maquinaria y equipo;0;8315
+831524;Equipo de oficina;0;8315
+831528;Equipo de computaci?n y comunicaci;0;8315
+831532;Equipo m?dico-cient?fico;0;8315
+831536;Equipo de hoteles y restaurantes;0;8315
+831540;Flota y equipo de transporte;0;8315
+831544;Flota y equipo fluvial y/o mar?timo;0;8315
+831548;Flota y equipo a?reo;0;8315
+831552;Flota y equipo f?rreo;0;8315
+831556;Acueductos, plantas y redes;0;8315
+831560;Armamento de vigilancia;0;8315
+831562;Envases y empaques;0;8315
+831564;Plantaciones agr?colas y forestales;0;8315
+831568;V?as de comunicaci;0;8315
+831572;Minas y canteras;0;8315
+831576;Pozos artesianos;0;8315
+831580;Yacimientos;0;8315
+831584;Semovientes;0;8315
+831599;Ajustes por inflaci;0;8315
+832005;Pa;0;8320
+832010;Exterior;0;8320
+832505;Inversiones;0;8325
+832510;Deudores;0;8325
+832595;Otros activos;0;8325
+833005;Bonos;0;8330
+833095;Otros;0;8330
+839505;Cheques posfechados;0;8395
+839510;Certificados de dep?sito a t?rmino;0;8395
+839515;Cheques devueltos;0;8395
+839520;Bienes y valores en fideicomiso;0;8395
+839525;Intereses sobre deudas vencidas;0;8395
+839595;Diversas;0;8395
+839599;Ajustes por inflaci;0;8395
+839905;Inversiones;0;8399
+839910;Inventarios;0;8399
+839915;Propiedades, planta y equipo;0;8399
+839920;Intangibles;0;8399
+839925;Cargos diferidos;0;8399
+839995;Otros activos;0;8399
+910505;Valores mobiliarios;0;9105
+910510;Bienes muebles;0;9105
+910599;Ajustes por inflaci;0;9105
+911005;Valores mobiliarios;0;9110
+911010;Bienes muebles;0;9110
+911015;Bienes inmuebles;0;9110
+911020;Contratos de ganado en participaci;0;9110
+911099;Ajustes por inflaci;0;9110
+911505;En arrendamiento;0;9115
+911510;En pr?stamo;0;9115
+911515;En dep?sito;0;9115
+911520;En consignaci;0;9115
+911525;En comodato;0;9115
+911599;Ajustes por inflaci;0;9115
+912005;Laborales;0;9120
+912010;Civiles;0;9120
+912015;Administrativos o arbitrales;0;9120
+912020;Tributarios;0;9120
+930505;Bienes muebles;0;9305
+930510;Bienes inmuebles;0;9305
+939505;Documentos por cobrar descontados;0;9395
+939510;Convenios de pago;0;9395
+939515;Contratos de construcciones e instalaciones p;0;9395
+939525;Adjudicaciones pendientes de legalizar;0;9395
+939530;Reserva art?culo 3? Ley 4? de 1980;0;9395
+939535;Reserva costo reposici?n semovientes;0;9395
+939595;Diversas;0;9395
+939599;Ajustes por inflaci;0;9395
+939905;Capital social;0;9399
+939910;Super?vit de capital;0;9399
+939915;Reservas;0;9399
+939925;Dividendos o participaciones decretadas en ac;0;9399
+939930;Resultados de ejercicios anteriores;0;9399
+11100501;CUENTA DE AHORROS DAVIVIENDA;0;1110
+13050517;CLIENTES NACIONALES SEGURIDAD ATLAS LTDA;0;1305
+23657502;Autorretenciones (CREE);0;2365
+51950101;Peajes;0;5195

@@ -7,6 +7,10 @@ if (!isset($_SESSION['username']))
   exit("No se ha iniciado una sesion <a href='../index.php' >Iniciar Sesion </a>");
   
 }
+$idComprobante=0;
+if(isset($_REQUEST["idComprobante"])){
+    $idComprobante=$_REQUEST["idComprobante"];
+}
 $NombreUser=$_SESSION['nombre'];
 $idUser=$_SESSION['idUser'];	
 
@@ -17,90 +21,83 @@ $css =  new CssIni("Egresos");
 print("</head>");
 print("<body>");
     $obVenta = new ProcesoVenta($idUser);
-    include_once("procesadores/ProcesaEgresosItems.php");
-    $myPage="EgresosItems.php";
-    $css->CabeceraIni("Egresos"); //Inicia la cabecera de la pagina
-      
+    include_once("procesadores/ProcesaComprobanteContable.php");
+    $myPage="CreaComprobanteCont.php";
+    $css->CabeceraIni("Comprobantes de Contabilidad"); //Inicia la cabecera de la pagina
+    $css->CreaBotonDesplegable("CrearComprobante","Nuevo");  
     $css->CabeceraFin(); 
     ///////////////Creamos el contenedor
     /////
     /////
     $css->CrearDiv("principal", "container", "center",1,1);
-    print("<br>");
+    
     
     
     ///////////////Se crea el DIV que servirá de contenedor secundario
     /////
     /////
     $css->CrearDiv("Secundario", "container", "center",1,1);
-    $css->CrearNotificacionAzul("Crear un Egreso", 18);
-    $css->CrearForm2("FrmCreaPreEgreso", $myPage, "post", "_self");
-    $css->CrearTabla();
+     /////////////////Cuadro de dialogo de Clientes create
+    $css->CrearCuadroDeDialogo("CrearComprobante","Crear un Comprobante"); 
+        $css->CrearForm2("FrmCreaPreMovimiento", $myPage, "post", "_self");
+        $css->CrearTabla();
         $css->FilaTabla(16);
             $css->ColTabla("<strong>Fecha</strong>", 1);
-            $css->ColTabla("<strong>Cuenta Origen</strong>", 1);
-            $css->ColTabla("<strong>Tercero</strong>", 1);
             $css->ColTabla("<strong>Detalle</strong>", 1);
+            $css->ColTabla("<strong>Crear</strong>", 1);
         $css->CierraFilaTabla();
         $css->FilaTabla(16);
-            print("<td>");
-            $css->CrearInputText("TxtFecha", "date", "", date("Y-m-d"), "Fecha", "black", "", "", 100, 30, 0, 1);
-            print("</td>");        
-            print("<td>");
-            $css->CrearSelect("CmbCuentaOrigen"," Cuenta Origen:<br>","black","",1);
-            $css->CrearOptionSelect("","Seleccionar Cuenta Origen",0);
-            $DatosCuentaOrigen = $obVenta->ConsultarTabla("cuentasfrecuentes","WHERE ClaseCuenta = 'ACTIVOS'");
-            while($CuentaOrigen=mysql_fetch_array($DatosCuentaOrigen)){
-                            $css->CrearOptionSelect($CuentaOrigen['CuentaPUC'],$CuentaOrigen['Nombre'],0);							
-            }
-            $css->CerrarSelect();
-            print("</td>");
-            print("<td>");
-            $VarSelect["Ancho"]="200";
-            $VarSelect["PlaceHolder"]="Seleccione el tercero";
-            $css->CrearSelectChosen("TxtTercero", $VarSelect);
-            $css->CrearOptionSelect("", "Seleccione un tercero" , 0);
-            $sql="SELECT * FROM proveedores";
-            $Consulta=$obVenta->Query($sql);
+        print("<td>");
+        $css->CrearInputText("TxtFecha", "date", "", date("Y-m-d"), "Fecha", "black", "", "", 100, 30, 0, 1);
+        print("</td>");        
             
-               while($DatosProveedores=$obVenta->FetchArray($Consulta)){
-                   $Sel=0;
-                   
-                   $css->CrearOptionSelect($DatosProveedores["idProveedores"], "$DatosProveedores[RazonSocial] $DatosProveedores[Num_Identificacion]" , $Sel);
-               }
-            $css->CerrarSelect();
+        print("<td>");
+        $css->CrearTextArea("TxtConceptoComprobante","","","Escriba el detalle","black","","",300,100,0,1);
         print("</td>");
         print("<td>");
-        $css->CrearTextArea("TxtConceptoEgreso","","","Escriba el detalle del Egreso","black","","",300,100,0,1);
-        print("</td>");
+        $css->CrearBotonConfirmado("BtnCrearComC", "Crear");
+        print("</td>");   
         $css->CierraFilaTabla();
     $css->CerrarTabla();
-   
-    $css->CrearNotificacionRoja("Agregar Conceptos a Un Egreso", 18);
+    $css->CerrarCuadroDeDialogo(); 
+    $css->CrearNotificacionAzul("Agregar Conceptos al Comprobante", 18);
     $css->CerrarForm();
-    $css->CrearForm2("FrmAgregaItemE", "pre_egreso.php", "post", "FramePreEgreso");
+    $css->CrearForm2("FrmSeleccionaCom", $myPage, "post", "_self");
     $css->CrearTabla();
     $css->FilaTabla(16);
     print("<td style='text-align:center'>");
     
-        $css->CrearSelect("CmbEgresoPre", "MuestreDesdeCombo('CmbEgresoPre','DivDatosItemEgreso');CargueIdEgreso()");
+        $css->CrearSelect("CmbComprobante", "EnviaForm('FrmSeleccionaCom')");
         
-            $css->CrearOptionSelect("","Seleccionar Un Egreso",0);
+            $css->CrearOptionSelect("","Seleccionar un Movimiento",0);
             
-            $consulta = $obVenta->ConsultarTabla("egresos_pre","");
+            $consulta = $obVenta->ConsultarTabla("comprobantes_pre","");
             while($DatosPreEgreso=mysql_fetch_array($consulta)){
-                $css->CrearOptionSelect($DatosPreEgreso['idEgreso'],$DatosPreEgreso['idEgreso']." ".$DatosPreEgreso['Concepto'],0);							
+                if($idComprobante==$DatosPreEgreso['idComprobanteContabilidad']){
+                    $Sel=1;
+                    
+                }else{
+                    
+                    $Sel=0;
+                }
+                $css->CrearOptionSelect($DatosPreEgreso['idComprobanteContabilidad'],$DatosPreEgreso['idComprobanteContabilidad']." ".$DatosPreEgreso['Concepto'],$Sel);							
             }
         $css->CerrarSelect();
     print("</td>");
     $css->CierraFilaTabla();
     $css->CerrarTabla();
-    $css->CrearDiv("DivDatosItemEgreso", "", "center", 0, 1);
+    $css->CerrarForm();
+    $css->CrearForm2("FrmAgregaItemE", $myPage, "post", "_self");
+    $Visible=0;
+    if($idComprobante>0){
+        $Visible=1;
+    }
+    $css->CrearDiv("DivDatosItemEgreso", "", "center", $Visible, 1);
     $css->CrearTabla();
     $css->FilaTabla(16);
-    $css->ColTabla("<strong>Egreso:</strong>", 1);
+    $css->ColTabla("<strong>Comprobante:</strong>", 1);
     print("<td>");
-            $css->CrearInputText("TxtidEgreso", "text", "", "", "idEgreso", "black", "", "", 100, 30, 1, 1);
+       $css->CrearInputText("TxtIdCC", "text", "", $idComprobante, "idEgreso", "black", "", "", 100, 30, 1, 1);
     print("</td>");  
     $css->CierraFilaTabla();   
     $css->FilaTabla(16);
@@ -136,7 +133,7 @@ print("<body>");
                while($DatosProveedores=$obVenta->FetchArray($Consulta)){
                    $Sel=0;
                    
-                   $css->CrearOptionSelect($DatosProveedores["idProveedores"], "$DatosProveedores[RazonSocial] $DatosProveedores[Num_Identificacion]" , $Sel);
+                   $css->CrearOptionSelect($DatosProveedores["Num_Identificacion"], "$DatosProveedores[RazonSocial] $DatosProveedores[Num_Identificacion]" , $Sel);
                }
             $css->CerrarSelect();
         print("</td>");
@@ -179,13 +176,16 @@ print("<body>");
     
        
         print("<td>");
-        $css->CrearTextArea("TxtConceptoEgreso","<strong>Concepto:</strong><br>","","Escriba el detalle del Egreso","black","","",300,100,0,1);
+        $css->CrearTextArea("TxtConceptoEgreso","<strong>Concepto:</strong><br>","","Escriba el Concepto","black","","",300,100,0,1);
         print("</td>");
         print("<td>");
-        $css->CrearInputText("TxtNumFactura","text",'Numero de Comprobante:<br>',"","Numero de Comprobante","black","","",300,30,0,1);
+        $css->CrearInputText("TxtNumFactura","text",'Numero del Documento soporte:<br>',"","Numero del documento","black","","",300,30,0,1);
         echo"<br>";
         $css->CrearUpload("foto");
+        echo"<br>";
+        echo"<br>";
         
+        $css->CrearBotonConfirmado("BtnAgregarItemMov", "Agregar Concepto");
         print("</td>");
         
     $css->CierraFilaTabla();
