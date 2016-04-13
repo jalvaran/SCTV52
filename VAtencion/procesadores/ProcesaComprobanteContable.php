@@ -1,5 +1,13 @@
 <?php 
-		
+if(!empty($_REQUEST['del'])){
+    $id=$_REQUEST['del'];
+    $Tabla=$_REQUEST['TxtTabla'];
+    $IdTabla=$_REQUEST['TxtIdTabla'];
+    $IdPre=$_REQUEST['TxtIdPre'];
+    mysql_query("DELETE FROM $Tabla WHERE $IdTabla='$id'") or die(mysql_error());
+    header("location:CreaComprobanteCont.php?idComprobante=$IdPre");
+}
+
 if(!empty($_REQUEST["BtnCrearComC"])){
     
     $obVenta=new ProcesoVenta($idUser);
@@ -98,6 +106,15 @@ if(!empty($_REQUEST["CmbComprobante"])){
     
     $idComprobante=$_REQUEST["CmbComprobante"];
     header("location:$myPage?idComprobante=$idComprobante");
+}
+
+// si se requiere guardar y cerrar
+if(!empty($_REQUEST["BtnGuardarMovimiento"])){
+    
+    $idComprobante=$_REQUEST["TxtIdComprobanteContable"];    
+    $obVenta->RegistreComprobanteContable($idComprobante);    
+    header("location:$myPage?idComprobante=$idComprobante");
+    
 }
 ///////////////fin
 ?>

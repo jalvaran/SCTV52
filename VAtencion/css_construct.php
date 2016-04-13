@@ -526,6 +526,18 @@ class CssIni{
 		
 	}
         
+        /////////////////////Crea un Boton Submit con evento
+	
+	function CrearBotonConfirmado2($nombre,$value,$enabled,$VectorBoton){
+            if($enabled==1){
+                print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" onclick="Confirmar(); return false" class="btn btn-danger">');
+            }else{
+                print('<input type="submit" id="'.$nombre.'"  name="'.$nombre.'" value="'.$value.'" disabled="true" onclick="Confirmar(); return false" class="btn btn-danger">');
+            }
+		
+		
+	}
+        
         /////////////////////Crea un Boton Editar Green
 	
 	function CrearBotonVerde($nombre,$value){

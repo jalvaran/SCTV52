@@ -7,12 +7,20 @@ if (!isset($_SESSION['username']))
   exit("No se ha iniciado una sesion <a href='../index.php' >Iniciar Sesion </a>");
   
 }
+$NombreUser=$_SESSION['nombre'];
+$idUser=$_SESSION['idUser'];
+$obVenta = new ProcesoVenta($idUser);
+$obTabla = new Tabla($db);
 $idComprobante=0;
 if(isset($_REQUEST["idComprobante"])){
     $idComprobante=$_REQUEST["idComprobante"];
+    $DatosComprobante=$obVenta->DevuelveValores("comprobantes_contabilidad", "ID", $idComprobante);
+    if($DatosComprobante["Estado"]=="C"){
+        $ImprimeCC=$idComprobante;
+        $idComprobante=0;
+    }
 }
-$NombreUser=$_SESSION['nombre'];
-$idUser=$_SESSION['idUser'];	
+	
 
 print("<html>");
 print("<head>");
@@ -20,8 +28,7 @@ $css =  new CssIni("Egresos");
 
 print("</head>");
 print("<body>");
-    $obVenta = new ProcesoVenta($idUser);
-    $obTabla = new Tabla($db);
+    
     include_once("procesadores/ProcesaComprobanteContable.php");
     $myPage="CreaComprobanteCont.php";
     $css->CabeceraIni("Comprobantes de Contabilidad"); //Inicia la cabecera de la pagina
@@ -72,7 +79,7 @@ print("<body>");
         
             $css->CrearOptionSelect("","Seleccionar un Movimiento",0);
             
-            $consulta = $obVenta->ConsultarTabla("comprobantes_pre","");
+            $consulta = $obVenta->ConsultarTabla("comprobantes_pre","WHERE Estado<>'C'");
             while($DatosPreEgreso=mysql_fetch_array($consulta)){
                 if($idComprobante==$DatosPreEgreso['idComprobanteContabilidad']){
                     $Sel=1;
@@ -190,7 +197,7 @@ print("<body>");
         echo"<br>";
         echo"<br>";
         
-        $css->CrearBotonConfirmado("BtnAgregarItemMov", "Agregar Concepto");
+        $css->CrearBotonVerde("BtnAgregarItemMov", "Agregar Concepto");
         print("</td>");
         
     $css->CierraFilaTabla();
@@ -198,6 +205,26 @@ print("<body>");
     
     
     $css->CerrarTabla();
+    $css->CerrarForm();
+    $sql="SELECT SUM(Debito) as Debito, SUM(Credito) as Credito FROM comprobantes_contabilidad_items WHERE idComprobante='$idComprobante'";
+    $consulta=$obVenta->Query($sql);
+    $DatosSumas=$obVenta->FetchArray($consulta);    
+    $Debitos=$DatosSumas["Debito"];
+    $Credito=$DatosSumas["Credito"];
+    $Neto=$Debitos-$Credito;
+    if($Neto<>0){
+        $css->CrearNotificacionRoja("Debitos = $Debitos, Creditos = $Credito, existe una diferencia de $Neto, no podrá guardar hasta que no sean iguales", 14);
+        $H=0;
+        
+    }else{
+        $css->CrearNotificacionVerde("Debitos = $Debitos, Creditos = $Credito, Pulse el boton si desea cerrar el comprobante", 14);
+        $H=1;
+    }
+    $css->CrearForm2("FrmCerrarCompC", $myPage, "post", "_self");
+    $css->CrearInputText("TxtIdComprobanteContable","hidden",'',$idComprobante,'',"","","",300,30,0,0);
+    $css->CrearBotonConfirmado2("BtnGuardarMovimiento", "Guardar y Cerrar Comprobante",$H,"");
+    
+    print("<br><br><br>");
     $css->CerrarForm();
     ////Se dibujan los items del movimiento
     $css->CrearSelect("CmbMostrarItems", "MuestraOculta('DivItems')");
@@ -212,11 +239,13 @@ print("<body>");
     
     $i=0;
     $ColNames[]="";
+    $css->ColTabla("<strong>Borrar</strong>", 1);
     foreach($Columnas["Field"] as $NombresCol ){
         $css->ColTabla("<strong>$NombresCol</strong>", 1);
         $ColNames[$i]=$NombresCol;
         $i++;
     }
+    
     $NumCols=$i-1;
     $css->CierraFilaTabla();
     
@@ -227,6 +256,7 @@ print("<body>");
     while($DatosItems=$obVenta->FetchArray($consulta)){
         
         $css->FilaTabla(12);
+        $css->ColTablaDel($myPage,"comprobantes_contabilidad_items","ID",$DatosItems['ID'],$idComprobante);
         for($z=0;$z<=$NumCols;$z++){
             $NombreCol=$ColNames[$z];
             print("<td>");
@@ -240,7 +270,9 @@ print("<body>");
             }
             
             print("</td>");
+            
         }
+        
         $i=0;
         $css->CierraFilaTabla();
         
