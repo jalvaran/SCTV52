@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2016 a las 00:22:55
+-- Tiempo de generación: 13-04-2016 a las 01:17:01
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -2810,6 +2810,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_contabilidad` (
   `Hora` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
+  `Estado` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=11 ;
 
@@ -2817,11 +2818,11 @@ CREATE TABLE IF NOT EXISTS `comprobantes_contabilidad` (
 -- Volcado de datos para la tabla `comprobantes_contabilidad`
 --
 
-INSERT INTO `comprobantes_contabilidad` (`ID`, `Fecha`, `Hora`, `Concepto`, `Usuarios_idUsuarios`) VALUES
-(7, '2016-04-10', 'Prueba', 'Prueba', 3),
-(8, '2016-04-10', '21:58', 'proese', 3),
-(9, '2016-04-10', '22:02', 'dsada', 3),
-(10, '2016-04-10', '23:19', 'dasdsa', 3);
+INSERT INTO `comprobantes_contabilidad` (`ID`, `Fecha`, `Hora`, `Concepto`, `Usuarios_idUsuarios`, `Estado`) VALUES
+(7, '2016-04-10', 'Prueba', 'Prueba', 3, 'A'),
+(8, '2016-04-10', '21:58', 'proese', 3, 'C'),
+(9, '2016-04-10', '22:02', 'dsada', 3, 'C'),
+(10, '2016-04-10', '23:19', 'dasdsa', 3, 'C');
 
 -- --------------------------------------------------------
 
@@ -2836,26 +2837,49 @@ CREATE TABLE IF NOT EXISTS `comprobantes_contabilidad_items` (
   `CentroCostos` int(11) NOT NULL,
   `Tercero` int(11) NOT NULL,
   `CuentaPUC` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `NombreCuenta` text COLLATE utf8_spanish2_ci NOT NULL,
   `Debito` int(16) NOT NULL,
   `Credito` int(16) NOT NULL,
   `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
   `NumDocSoporte` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Soporte` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=35 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_contabilidad_items`
 --
 
-INSERT INTO `comprobantes_contabilidad_items` (`ID`, `idComprobante`, `Fecha`, `CentroCostos`, `Tercero`, `CuentaPUC`, `Debito`, `Credito`, `Concepto`, `NumDocSoporte`, `Soporte`) VALUES
-(1, 8, '2016-04-10', 1, 900298074, '1435', 321321, 0, 'dsadsa', '321321', '../SoportesEgresos/factura_venta_9309.pdf'),
-(2, 9, '2016-04-10', 1, 900704258, '110505', 0, 30000, 'peurere', '3213213', '../SoportesEgresos/subcuentas.csv'),
-(3, 9, '2016-04-10', 1, 900704258, '110505', 0, 45000, 'dsadsad', '421432', '../SoportesEgresos/imv.csv'),
-(4, 10, '2016-04-10', 1, 900298074, '1110', 0, 4321423, 'dsadsadsa', '21432432', '../SoportesEgresos/Desert.jpg'),
-(5, 9, '2016-04-10', 1, 900298074, '1110', 0, 321321, 'dsadsadsa', '21Âº21Âº2', '../SoportesEgresos/Hydrangeas.jpg'),
-(6, 9, '2016-04-10', 1, 900298074, '1105', 321321, 0, 'dssadsad', '3213213', ''),
-(7, 9, '2016-04-10', 1, 900605785, '1105', 321321, 0, 'dsadsada', '321321', '../SoportesEgresos/Penguins.jpg');
+INSERT INTO `comprobantes_contabilidad_items` (`ID`, `idComprobante`, `Fecha`, `CentroCostos`, `Tercero`, `CuentaPUC`, `NombreCuenta`, `Debito`, `Credito`, `Concepto`, `NumDocSoporte`, `Soporte`) VALUES
+(2, 9, '2016-04-10', 1, 900704258, '110505', '', 0, 30000, 'peurere', '3213213', '../SoportesEgresos/subcuentas.csv'),
+(3, 9, '2016-04-10', 1, 900704258, '110505', '', 0, 45000, 'dsadsad', '421432', '../SoportesEgresos/imv.csv'),
+(5, 9, '2016-04-10', 1, 900298074, '1110', '', 0, 321321, 'dsadsadsa', '21Âº21Âº2', '../SoportesEgresos/Hydrangeas.jpg'),
+(6, 9, '2016-04-10', 1, 900298074, '1105', '', 321321, 0, 'dssadsad', '3213213', ''),
+(7, 9, '2016-04-10', 1, 900605785, '1105', '', 321321, 0, 'dsadsada', '321321', '../SoportesEgresos/Penguins.jpg'),
+(9, 8, '2016-04-10', 1, 900298074, '1110', '', 2121, 0, 'dsadsa', '321321', ''),
+(10, 8, '2016-04-10', 1, 900298074, '1110', '', 0, 2121, 'dsadsa', '32321321', ''),
+(11, 8, '2016-04-10', 1, 900833180, '1105', '', 0, 100000, 'dsadsa', '321321', '../SoportesEgresos/Jellyfish.jpg'),
+(12, 8, '2016-04-10', 1, 700147288, '1105', '', 100000, 0, 'pago', '321321', ''),
+(13, 8, '2016-04-10', 1, 900298074, '1110', '', 32321, 0, 'dsadsa', '321321', ''),
+(14, 8, '2016-04-10', 1, 900298074, '1115', '', 0, 32321, 'dsa', 'dsadsa', ''),
+(15, 9, '2016-04-10', 1, 900298074, '1105', '', 0, 246321, 'sadsadsa', '321321', ''),
+(17, 10, '2016-04-10', 1, 900298074, '1105', 'Prueba', 3213, 0, 'dsadsa', '321321', ''),
+(18, 10, '2016-04-10', 1, 900298074, '1115', 'Remesas', 0, 3213, 'dsa', '321321', ''),
+(20, 10, '2016-04-10', 1, 900298074, '11100501', 'CUENTA', 0, 3213, 'dsadsa', '321321', ''),
+(21, 10, '2016-04-10', 1, 900298074, '11100501', 'CUENTA', 0, 3213, 'dsadsa', '321321', ''),
+(22, 10, '2016-04-10', 1, 900298074, '11100501', 'CUENTA', 0, 321321, '3321', '321321', ''),
+(23, 10, '2016-04-10', 1, 900298074, '112510', '', 0, 2121, 'dsadsa', '321321', ''),
+(24, 10, '2016-04-10', 1, 900298074, '1110', 'Bancos', 321, 0, 'dsadas', '321321', ''),
+(25, 10, '2016-04-10', 1, 900298074, '', '', 32132, 0, 'ddasdsa', '3213213', ''),
+(26, 10, '2016-04-10', 1, 900298074, '', '', 2131, 0, 'dsadsa', '3213213', ''),
+(27, 10, '2016-04-10', 1, 900704258, '11100501', 'CUENTA', 321321, 0, 'ddsadsa', '321321', ''),
+(28, 10, '2016-04-10', 1, 900298074, '1120', 'Cuentas', 321321, 0, 'easdsada', '3321321', ''),
+(29, 10, '2016-04-10', 1, 900298074, '1115', '', 321, 0, 'dsad', '321321', ''),
+(30, 10, '2016-04-10', 1, 900298074, '11100501', 'CUENTA', 0, 12121, 'dasdsa', '321321231', ''),
+(31, 10, '2016-04-10', 1, 900298074, '1210', 'Cuotas_o_partes_de_inter?s_social', 321321, 0, 'ddsadsa', '3213', ''),
+(32, 10, '2016-04-10', 1, 900298074, '11100501', 'CUENTA_DE_AHORROS_DAVIVIENDA', 321321, 0, 'dsadsad', '321321321', ''),
+(33, 10, '2016-04-10', 1, 900298074, '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 321321, 0, 'dsadsa', '321321', ''),
+(34, 10, '2016-04-10', 1, 900298074, '1115', 'Remesas en tr?nsito', 0, 1299521, 'Ese Mismo', '321321', '../SoportesEgresos/Penguins.jpg');
 
 -- --------------------------------------------------------
 
@@ -2873,7 +2897,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_ingreso` (
   `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=50 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_ingreso`
@@ -2927,7 +2951,8 @@ INSERT INTO `comprobantes_ingreso` (`ID`, `Fecha`, `Clientes_idClientes`, `Terce
 (45, '2016-04-04', 14, 0, '321321', 'EFECTIVO', 'assa', 3),
 (46, '2016-04-05', 22, 0, '45000', 'EFECTIVO', 'dsadsa', 3),
 (47, '2016-04-05', 0, 4, '560000', 'EFECTIVO', 'dsadsa', 3),
-(48, '2016-04-07', 17, 0, '470', 'EFECTIVO', 'Pago de Factura A 16', 3);
+(48, '2016-04-07', 17, 0, '470', 'EFECTIVO', 'Pago de Factura A 16', 3),
+(49, '2016-04-12', 0, 2, '321321', 'EFECTIVO', 'fdfds', 3);
 
 -- --------------------------------------------------------
 
@@ -2940,6 +2965,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_pre` (
   `Fecha` date NOT NULL,
   `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
   `idComprobanteContabilidad` int(16) NOT NULL,
+  `Estado` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=8 ;
 
@@ -2947,10 +2973,10 @@ CREATE TABLE IF NOT EXISTS `comprobantes_pre` (
 -- Volcado de datos para la tabla `comprobantes_pre`
 --
 
-INSERT INTO `comprobantes_pre` (`ID`, `Fecha`, `Concepto`, `idComprobanteContabilidad`) VALUES
-(5, '2016-04-10', 'proese', 8),
-(6, '2016-04-10', 'dsada', 9),
-(7, '2016-04-10', 'dasdsa', 10);
+INSERT INTO `comprobantes_pre` (`ID`, `Fecha`, `Concepto`, `idComprobanteContabilidad`, `Estado`) VALUES
+(5, '2016-04-10', 'proese', 8, 'C'),
+(6, '2016-04-10', 'dsada', 9, 'C'),
+(7, '2016-04-10', 'dasdsa', 10, 'C');
 
 -- --------------------------------------------------------
 
@@ -16773,7 +16799,7 @@ CREATE TABLE IF NOT EXISTS `librodiario` (
   `idCentroCosto` int(11) NOT NULL,
   `idEmpresa` int(11) NOT NULL,
   PRIMARY KEY (`idLibroDiario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=97 ;
 
 --
 -- Volcado de datos para la tabla `librodiario`
@@ -16818,7 +16844,64 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (36, '2016-04-07', 'ComprobanteIngreso', '48', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Pago de Factura A 16', '130505890312749', 'Clientes Nacionales SEGURIDAD ATLAS LTDA 890312749', 'Pago', '0', '470', '-470', 'NO', 'NO', 1, 1),
 (37, '2016-04-07', 'ComprobanteIngreso', '48', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Pago de Factura A 16', '110505', 'CAJA GENERAL', 'Pago', '470', '0', '470', 'NO', 'NO', 1, 1),
 (38, '2016-04-10', 'NotaContable', '19', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdfsdf', '510506', 'Sueldos', 'egresos', '10', '0', '10', 'NO', 'NO', 1, 1),
-(39, '2016-04-10', 'NotaContable', '19', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdfsdf', '2205900833180', 'Proveedores Nacionales TECHNO SOLUCIONES SAS 900833180', 'egresos', '0', '10', '-10', 'NO', 'NO', 1, 1);
+(39, '2016-04-10', 'NotaContable', '19', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdfsdf', '2205900833180', 'Proveedores Nacionales TECHNO SOLUCIONES SAS 900833180', 'egresos', '0', '10', '-10', 'NO', 'NO', 1, 1),
+(40, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '2121', '0', '2121', 'NO', 'NO', 1, 1),
+(41, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '0', '2121', '-2121', 'NO', 'NO', 1, 1),
+(42, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsa', '1105', '', 'proese', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(43, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '22', '700147288', '5', 'PALERMO', '', 'CARMELO', '', 'CARMELO PALERMO', 'CL 11 7 82', '76', '111', '169', 'pago', '1105', '', 'proese', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(44, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '32321', '0', '32321', 'NO', 'NO', 1, 1),
+(45, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsa', '1115', '', 'proese', '0', '32321', '-32321', 'NO', 'NO', 1, 1),
+(46, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '2121', '0', '2121', 'NO', 'NO', 1, 1),
+(47, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '0', '2121', '-2121', 'NO', 'NO', 1, 1),
+(48, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsa', '1105', '', 'proese', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(49, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '22', '700147288', '5', 'PALERMO', '', 'CARMELO', '', 'CARMELO PALERMO', 'CL 11 7 82', '76', '111', '169', 'pago', '1105', '', 'proese', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(50, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '32321', '0', '32321', 'NO', 'NO', 1, 1),
+(51, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsa', '1115', '', 'proese', '0', '32321', '-32321', 'NO', 'NO', 1, 1),
+(52, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '2121', '0', '2121', 'NO', 'NO', 1, 1),
+(53, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '0', '2121', '-2121', 'NO', 'NO', 1, 1),
+(54, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsa', '1105', '', 'proese', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(55, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '22', '700147288', '5', 'PALERMO', '', 'CARMELO', '', 'CARMELO PALERMO', 'CL 11 7 82', '76', '111', '169', 'pago', '1105', '', 'proese', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(56, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '32321', '0', '32321', 'NO', 'NO', 1, 1),
+(57, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsa', '1115', '', 'proese', '0', '32321', '-32321', 'NO', 'NO', 1, 1),
+(58, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '2121', '0', '2121', 'NO', 'NO', 1, 1),
+(59, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '0', '2121', '-2121', 'NO', 'NO', 1, 1),
+(60, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsa', '1105', '', 'proese', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(61, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '22', '700147288', '5', 'PALERMO', '', 'CARMELO', '', 'CARMELO PALERMO', 'CL 11 7 82', '76', '111', '169', 'pago', '1105', '', 'proese', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(62, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '32321', '0', '32321', 'NO', 'NO', 1, 1),
+(63, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsa', '1115', '', 'proese', '0', '32321', '-32321', 'NO', 'NO', 1, 1),
+(64, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '2121', '0', '2121', 'NO', 'NO', 1, 1),
+(65, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '0', '2121', '-2121', 'NO', 'NO', 1, 1),
+(66, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsa', '1105', '', 'proese', '0', '100000', '-100000', 'NO', 'NO', 1, 1),
+(67, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '22', '700147288', '5', 'PALERMO', '', 'CARMELO', '', 'CARMELO PALERMO', 'CL 11 7 82', '76', '111', '169', 'pago', '1105', '', 'proese', '100000', '0', '100000', 'NO', 'NO', 1, 1),
+(68, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1110', '', 'proese', '32321', '0', '32321', 'NO', 'NO', 1, 1),
+(69, '2016-04-10', 'COMPROBANTE CONTABLE', '8', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsa', '1115', '', 'proese', '0', '32321', '-32321', 'NO', 'NO', 1, 1),
+(70, '2016-04-10', 'COMPROBANTE CONTABLE', '9', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'peurere', '110505', '', 'dsada', '0', '30000', '-30000', 'NO', 'NO', 1, 1),
+(71, '2016-04-10', 'COMPROBANTE CONTABLE', '9', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'dsadsad', '110505', '', 'dsada', '0', '45000', '-45000', 'NO', 'NO', 1, 1),
+(72, '2016-04-10', 'COMPROBANTE CONTABLE', '9', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsadsa', '1110', '', 'dsada', '0', '321321', '-321321', 'NO', 'NO', 1, 1),
+(73, '2016-04-10', 'COMPROBANTE CONTABLE', '9', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dssadsad', '1105', '', 'dsada', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(74, '2016-04-10', 'COMPROBANTE CONTABLE', '9', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA SAS', 'CARRERA 10 No. 8-11', '76', '111', '169', 'dsadsada', '1105', '', 'dsada', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(75, '2016-04-10', 'COMPROBANTE CONTABLE', '9', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'sadsadsa', '1105', '', 'dsada', '0', '246321', '-246321', 'NO', 'NO', 1, 1),
+(76, '2016-04-12', 'ComprobanteIngreso', '49', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'fdfds', '110510', 'CAJA MENOR', 'Ingresos', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(77, '2016-04-12', 'ComprobanteIngreso', '49', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'fdfds', '2205900704258', 'Proveedores Nacionales: Meca Distribuciones SAS NIT 900704258', 'Ingresos', '0', '321321', '-321321', 'NO', 'NO', 1, 1),
+(78, '2016-04-12', 'NotaContable', '20', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsad', '511005', 'Junta directiva', 'egresos', '10000', '0', '10000', 'NO', 'NO', 1, 1),
+(79, '2016-04-12', 'NotaContable', '20', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsad', '2205900833180', 'Proveedores Nacionales TECHNO SOLUCIONES SAS 900833180', 'egresos', '0', '10000', '-10000', 'NO', 'NO', 1, 1),
+(80, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '1105', 'Prueba', 'dasdsa', '3213', '0', '3213', 'NO', 'NO', 1, 1),
+(81, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsa', '1115', 'Remesas', 'dasdsa', '0', '3213', '-3213', 'NO', 'NO', 1, 1),
+(82, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '11100501', 'CUENTA', 'dasdsa', '0', '3213', '-3213', 'NO', 'NO', 1, 1),
+(83, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '11100501', 'CUENTA', 'dasdsa', '0', '3213', '-3213', 'NO', 'NO', 1, 1),
+(84, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', '3321', '11100501', 'CUENTA', 'dasdsa', '0', '321321', '-321321', 'NO', 'NO', 1, 1),
+(85, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '112510', '', 'dasdsa', '0', '2121', '-2121', 'NO', 'NO', 1, 1),
+(86, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadas', '1110', 'Bancos', 'dasdsa', '321', '0', '321', 'NO', 'NO', 1, 1),
+(87, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'ddasdsa', '', '', 'dasdsa', '32132', '0', '32132', 'NO', 'NO', 1, 1),
+(88, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '', '', 'dasdsa', '2131', '0', '2131', 'NO', 'NO', 1, 1),
+(89, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'ddsadsa', '11100501', 'CUENTA', 'dasdsa', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(90, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'easdsada', '1120', 'Cuentas', 'dasdsa', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(91, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsad', '1115', '', 'dasdsa', '321', '0', '321', 'NO', 'NO', 1, 1),
+(92, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dasdsa', '11100501', 'CUENTA', 'dasdsa', '0', '12121', '-12121', 'NO', 'NO', 1, 1),
+(93, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'ddsadsa', '1210', 'Cuotas_o_partes_de_inter?s_social', 'dasdsa', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(94, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsad', '11100501', 'CUENTA_DE_AHORROS_DAVIVIENDA', 'dasdsa', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(95, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadsa', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'dasdsa', '321321', '0', '321321', 'NO', 'NO', 1, 1),
+(96, '2016-04-10', 'COMPROBANTE CONTABLE', '10', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'Ese Mismo', '1115', 'Remesas en tr?nsito', 'dasdsa', '0', '1299521', '-1299521', 'NO', 'NO', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -16857,7 +16940,7 @@ CREATE TABLE IF NOT EXISTS `notascontables` (
   `CentroCostos` int(11) NOT NULL,
   `EmpresaPro` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=21 ;
 
 --
 -- Volcado de datos para la tabla `notascontables`
@@ -16882,7 +16965,8 @@ INSERT INTO `notascontables` (`ID`, `Fecha`, `FechaProgramada`, `Detalle`, `idPr
 (16, '2016-03-20', '2016-03-20', 'dadsa', 71, 3000000, 460000, 3460000, '', '321321321', 1, 1, 1),
 (17, '2016-03-21', '2016-03-21', 'dsadsa', 71, 132, 0, 132, '', '321321', 3, 1, 1),
 (18, '2016-03-21', '2016-03-21', 'dsadsa', 71, 32132, 0, 32132, '../SoportesEgresos/Koala.jpg', '322312', 3, 1, 1),
-(19, '2016-04-10', '2016-04-10', 'fdfsdf', 71, 10, 0, 10, '', '3213', 3, 1, 1);
+(19, '2016-04-10', '2016-04-10', 'fdfsdf', 71, 10, 0, 10, '', '3213', 3, 1, 1),
+(20, '2016-04-12', '2016-04-12', 'dsad', 71, 10000, 0, 10000, '', '321321', 3, 1, 1);
 
 -- --------------------------------------------------------
 
