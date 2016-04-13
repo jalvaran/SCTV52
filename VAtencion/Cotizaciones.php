@@ -112,7 +112,6 @@ include_once("procesaCoti.php");
 	 
 	 $css->CreaMenuBasico("Menu"); 
 	 $css->CreaSubMenuBasico("Historial de Cotizaciones","cot_itemscotizaciones.php"); 
-	 
 	 $css->CierraMenuBasico(); 
 	 ?>
 	

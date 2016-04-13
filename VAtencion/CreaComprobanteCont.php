@@ -36,11 +36,22 @@ print("<body>");
     $css->CabeceraIni("Comprobantes de Contabilidad"); //Inicia la cabecera de la pagina
     $css->CreaBotonDesplegable("CrearComprobante","Nuevo");  
     $css->CabeceraFin(); 
+    
+    $css->CreaMenuBasico("Menu"); 
+        $css->CreaSubMenuBasico("Historial de Comprobantes","comprobantes_contabilidad_items.php"); 
+    $css->CierraMenuBasico(); 
+    
     ///////////////Creamos el contenedor
     /////
     /////
+     print("<br><br><br>");
+     
     $css->CrearDiv("principal", "container", "center",1,1);
+    ////Menu de historial
     
+    
+         
+         
     if($ImprimeCC>0){
         $RutaPrintCot="../tcpdf/examples/comprobantecontable.php?idComprobante=$ImprimeCC";			
        
