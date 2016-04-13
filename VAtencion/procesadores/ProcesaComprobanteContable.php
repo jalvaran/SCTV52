@@ -69,7 +69,11 @@ if(!empty($_REQUEST["BtnAgregarItemMov"])){
     $Concepto=$_REQUEST["TxtConceptoEgreso"];
     $CentroCosto=$_REQUEST["CmbCentroCosto"];
     $Tercero=$_REQUEST["CmbTerceroItem"];
-    $CuentaPUC=$_REQUEST["CmbCuentaDestino"];
+    $DatosCuentaDestino=$_REQUEST["CmbCuentaDestino"];
+    $DatosCuentaDestino=explode(";",$DatosCuentaDestino);
+    $CuentaPUC=$DatosCuentaDestino[0];
+    $NombreCuenta=$NombreCuenta=str_replace("_"," ",$DatosCuentaDestino[1]);
+    
     $Valor=$_REQUEST["TxtValorItem"];
     $DC=$_REQUEST["CmbDebitoCredito"];
     $NumDocSoporte=$_REQUEST["TxtNumFactura"];
@@ -85,7 +89,7 @@ if(!empty($_REQUEST["BtnAgregarItemMov"])){
     ////
     
     $tab="comprobantes_contabilidad_items";
-    $NumRegistros=10;
+    $NumRegistros=11;
 
     $Columnas[0]="Fecha";			$Valores[0]=$fecha;
     $Columnas[1]="CentroCostos";		$Valores[1]=$CentroCosto;
@@ -97,9 +101,10 @@ if(!empty($_REQUEST["BtnAgregarItemMov"])){
     $Columnas[7]="NumDocSoporte";		$Valores[7]=$NumDocSoporte;
     $Columnas[8]="Soporte";			$Valores[8]=$destino;
     $Columnas[9]="idComprobante";		$Valores[9]=$idComprobante;
+    $Columnas[10]="NombreCuenta";		$Valores[10]=$NombreCuenta;
 
     $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
-    header("location:$myPage?idComprobante=$idComprobante");
+    //header("location:$myPage?idComprobante=$idComprobante");
 }
 
 if(!empty($_REQUEST["CmbComprobante"])){
@@ -113,7 +118,7 @@ if(!empty($_REQUEST["BtnGuardarMovimiento"])){
     
     $idComprobante=$_REQUEST["TxtIdComprobanteContable"];    
     $obVenta->RegistreComprobanteContable($idComprobante);    
-    header("location:$myPage?idComprobante=$idComprobante");
+    header("location:$myPage?ImprimeCC=$idComprobante");
     
 }
 ///////////////fin

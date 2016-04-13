@@ -12,19 +12,21 @@ $idUser=$_SESSION['idUser'];
 $obVenta = new ProcesoVenta($idUser);
 $obTabla = new Tabla($db);
 $idComprobante=0;
+$ImprimeCC=0;
 if(isset($_REQUEST["idComprobante"])){
     $idComprobante=$_REQUEST["idComprobante"];
-    $DatosComprobante=$obVenta->DevuelveValores("comprobantes_contabilidad", "ID", $idComprobante);
-    if($DatosComprobante["Estado"]=="C"){
-        $ImprimeCC=$idComprobante;
-        $idComprobante=0;
-    }
+    
+}
+
+if(isset($_REQUEST["ImprimeCC"])){
+    $ImprimeCC=$_REQUEST["ImprimeCC"];
+    $idComprobante=0;
 }
 	
 
 print("<html>");
 print("<head>");
-$css =  new CssIni("Egresos");
+$css =  new CssIni("Comprobantes contabilidad");
 
 print("</head>");
 print("<body>");
@@ -39,7 +41,12 @@ print("<body>");
     /////
     $css->CrearDiv("principal", "container", "center",1,1);
     
-    
+    if($ImprimeCC>0){
+        $RutaPrintCot="../tcpdf/examples/comprobantecontable.php?idComprobante=$ImprimeCC";			
+       
+        $css->CrearNotificacionNaranja("Comprobante Creado, <a href='$RutaPrintCot' target='_blank'>Imprimir Comprobante No. $ImprimeCC</a>",16);
+        
+    }
     
     ///////////////Se crea el DIV que servirá de contenedor secundario
     /////
@@ -77,7 +84,7 @@ print("<body>");
     
         $css->CrearSelect("CmbComprobante", "EnviaForm('FrmSeleccionaCom')");
         
-            $css->CrearOptionSelect("","Seleccionar un Movimiento",0);
+            $css->CrearOptionSelect("","Selecciona un Comprobante",0);
             
             $consulta = $obVenta->ConsultarTabla("comprobantes_pre","WHERE Estado<>'C'");
             while($DatosPreEgreso=mysql_fetch_array($consulta)){
@@ -158,8 +165,8 @@ print("<body>");
             
                while($DatosProveedores=$obVenta->FetchArray($Consulta)){
                    $Sel=0;
-                   
-                   $css->CrearOptionSelect($DatosProveedores["idPUC"], "$DatosProveedores[idPUC] $DatosProveedores[Nombre]" , $Sel);
+                   $NombreCuenta=str_replace(" ","_",$DatosProveedores['Nombre']);
+                   $css->CrearOptionSelect($DatosProveedores['idPUC'].';'.$NombreCuenta, "$DatosProveedores[idPUC] $DatosProveedores[Nombre]" , $Sel);
                }
             
             //En subcuentas se debera cargar todo el PUC
@@ -168,8 +175,8 @@ print("<body>");
             
                while($DatosProveedores=$obVenta->FetchArray($Consulta)){
                    $Sel=0;
-                   
-                   $css->CrearOptionSelect($DatosProveedores["PUC"], "$DatosProveedores[PUC] $DatosProveedores[Nombre]" , $Sel);
+                   $NombreCuenta=str_replace(" ","_",$DatosProveedores['Nombre']);
+                   $css->CrearOptionSelect($DatosProveedores['PUC'].';'.$NombreCuenta, "$DatosProveedores[PUC] $DatosProveedores[Nombre]" , $Sel);
                }
             
             $css->CerrarSelect();
