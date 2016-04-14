@@ -95,13 +95,13 @@ class CssIni{
 		
 		<link rel='apple-touch-icon-precomposed' sizes='144x144' href='ico/apple-touch-icon-144-precomposed.png'>
 		<link rel='apple-touch-icon-precomposed' sizes='114x114' href='ico/apple-touch-icon-114-precomposed.png'>
-		  <link rel='apple-touch-icon-precomposed' sizes='72x72' href='ico/apple-touch-icon-72-precomposed.png'>
-						<link rel='apple-touch-icon-precomposed' href='ico/apple-touch-icon-57-precomposed.png'>
-									   <link rel='shortcut icon' href='../images/technoIco.ico'>
+		<link rel='apple-touch-icon-precomposed' sizes='72x72' href='ico/apple-touch-icon-72-precomposed.png'>
+                <link rel='apple-touch-icon-precomposed' href='ico/apple-touch-icon-57-precomposed.png'>
+                                           <link rel='shortcut icon' href='../images/technoIco.ico'>
 		<link rel='stylesheet' href='chousen/docsupport/style.css'>
                 <link rel='stylesheet' href='chousen/docsupport/prism.css'>
                 <link rel='stylesheet' href='chousen/source/chosen.css'>
-		
+                
 		");
 		
 	}
@@ -573,29 +573,7 @@ class CssIni{
             <script src="chousen/source/chosen.jquery.js" type="text/javascript"></script>
             <script src="chousen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
             
-            <script>
-                $.datepicker.regional["es"] = {
-                closeText: "Cerrar",
-                prevText: "<Ant",
-                nextText: "Sig>",
-                currentText: "Hoy",
-                monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-                monthNamesShort: ["Ene","Feb","Mar","Abr", "May","Jun","Jul","Ago","Sep", "Oct","Nov","Dic"],
-                dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-                dayNamesShort: ["Dom","Lun","Mar","Mié","Juv","Vie","Sáb"],
-                dayNamesMin: ["Do","Lu","Ma","Mi","Ju","Vi","Sá"],
-                weekHeader: "Sm",
-                dateFormat: "yy-mm-dd",
-                firstDay: 0,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ""
-                };
-                $.datepicker.setDefaults($.datepicker.regional["es"]);
-               $(function () {
-               $("#fecha").datepicker();
-               });
-               </script>
+            
              ');
             
             ?>
@@ -612,6 +590,7 @@ class CssIni{
               $(selector).chosen(config[selector]);
             }
           </script>
+          
 		<?php
 	}
         
@@ -719,7 +698,7 @@ function Footer(){
 	} 
         
         
-	//////////////////////////////////FIN
+        //////////////////////////////////FIN
 }
 	
 	

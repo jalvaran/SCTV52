@@ -1,7 +1,7 @@
 <?php
 
 require_once('tcpdf_include.php');
-include("conexion.php");
+include("../../modelo/php_conexion.php");
 ////////////////////////////////////////////
 /////////////Verifico que haya una sesion activa
 ////////////////////////////////////////////
@@ -14,20 +14,33 @@ if(!isset($_SESSION["username"]))
 ////////////////////////////////////////////
 
 $fecha=date("Y-m-d");
-$FechaIni = substr("$_POST[TxtFechaIni]", 6, 7)."-".substr("$_POST[TxtFechaIni]", 3, 2)."-".substr("$_POST[TxtFechaIni]", 0, 2);;
-$FechaFinal = substr("$_POST[TxtFechaFinal]", 6, 7)."-".substr("$_POST[TxtFechaFinal]", 3, 2)."-".substr("$_POST[TxtFechaFinal]", 0, 2);;
+$FechaIni = $_POST["TxtFechaIni"];
+$FechaFinal = $_POST["TxtFechaFinal"];
+$CentroCostos=$_POST["CmbCentroCostos"];
+$EmpresaPro=$_POST["CmbEmpresaPro"];
+$TipoReporte=$_POST["CmbTipoReporte"];
 
-////////////////////////////////////////////
-/////////////Me conecto a la db
-////////////////////////////////////////////
 
-$con=mysql_connect($host,$user,$pw) or die("problemas con el servidor");
-mysql_select_db($db,$con) or die("la base de datos no abre");
+$Condicion=" WHERE ";
+
+if($TipoReporte=="Corte"){
+    $Condicion.=" Fecha <= '$FechaFinal' ";
+    
+}else{
+    $Condicion.=" Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' "; 
+}
+if($CentroCostos<>"ALL"){
+	$Condicion.="  AND idCentroCosto='$CentroCostos' ";
+}
+	
+if($EmpresaPro<>"ALL"){
+	$Condicion.="  AND idEmpresa='$EmpresaPro' ";
+}
 
 
 		 
 		  
-		  $nombre_file=$fecha."_Balance";
+		  $nombre_file=$fecha."_BalanceComprobacion";
 		   
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
@@ -56,9 +69,9 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Julian Andres Alvaran Valencia');
-$pdf->SetTitle('Cotizacion TS');
-$pdf->SetSubject('Cotizacion');
-$pdf->SetKeywords('Techno Soluciones, PDF, cotizacion, CCTV, Alarmas, Computadores');
+$pdf->SetTitle('Balace de Comprobacion TS');
+$pdf->SetSubject('Balance');
+$pdf->SetKeywords('Techno Soluciones, PDF, Balance, CCTV, Alarmas, Computadores');
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -81,8 +94,8 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-	require_once(dirname(__FILE__).'/lang/eng.php');
+if (@file_exists(dirname(__FILE__).'/lang/spa.php')) {
+	require_once(dirname(__FILE__).'/lang/spa.php');
 	$pdf->setLanguageArray($l);
 }
 
@@ -145,7 +158,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 $TotalDebitos=0;
 $TotalCreditos=0;
 
-$sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario WHERE Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' 
+$sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario $Condicion 
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -273,7 +286,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 4)
+$Condicion AND  (substring(CuentaPUC,1,1) = 4) 
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -359,7 +372,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 6)
+$Condicion  AND  (substring(CuentaPUC,1,1) = 6) 
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -459,7 +472,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 5)
+$Condicion AND  (substring(CuentaPUC,1,1) = 5) 
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -593,7 +606,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 1)
+$Condicion  AND  (substring(CuentaPUC,1,1) = 1) 
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -670,7 +683,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 2)
+$Condicion AND  (substring(CuentaPUC,1,1) = 2) 
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -749,7 +762,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 3)
+$Condicion AND  (substring(CuentaPUC,1,1) = 3) 
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){

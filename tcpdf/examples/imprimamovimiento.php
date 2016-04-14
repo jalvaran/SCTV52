@@ -16,6 +16,12 @@ if(!isset($_SESSION["username"]))
 $fecha=date("Y-m-d");
 $FechaIni = substr("$_POST[TxtFechaIni]", 6, 7)."-".substr("$_POST[TxtFechaIni]", 3, 2)."-".substr("$_POST[TxtFechaIni]", 0, 2);;
 $FechaFinal = substr("$_POST[TxtFechaFinal]", 6, 7)."-".substr("$_POST[TxtFechaFinal]", 3, 2)."-".substr("$_POST[TxtFechaFinal]", 0, 2);;
+$CentroCostos=$_POST["CmbCentroCostos"];
+
+if($CentroCostos=="ALL")
+	$Condicion="";
+else
+	$Condicion="AND servicio_id='$CentroCostos'";
 
 ////////////////////////////////////////////
 /////////////Me conecto a la db
@@ -146,7 +152,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 $TotalDebitos=0;
 $TotalCreditos=0;
 
-$sel1=mysql_query("SELECT CuentaPUC as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario WHERE Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' 
+$sel1=mysql_query("SELECT CuentaPUC as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito, NombreCuenta as NombreCuenta FROM librodiario WHERE Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' $Condicion 
 GROUP BY CuentaPUC",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -177,14 +183,15 @@ if(mysql_num_rows($sel1)){
 		$Creditos=number_format($DatosLibro["SumCredito"]);
 		$Diferencia=number_format($DatosLibro["SumDebito"]-$DatosLibro["SumCredito"]);
 		$Cuenta=$DatosLibro["Cuenta"];
-		$reg=mysql_query("SELECT Nombre FROM subcuentas WHERE PUC = '$Cuenta'")	or die("problemas con la consulta".mysql_error());
-		$DatosCuentas=mysql_fetch_array($reg);
+		$NombreCuenta=$DatosLibro["NombreCuenta"];
+		//$reg=mysql_query("SELECT Nombre FROM subcuentas WHERE PUC = '$Cuenta'")	or die("problemas con la consulta".mysql_error());
+		//$DatosCuentas=mysql_fetch_array($reg);
 		
 		$tbl = <<<EOD
 
 <table border="1" cellpadding="3" cellspacing="5" align="center">
  <tr style= "background-color:$back;">
-  <td>$DatosLibro[Cuenta]</td><td>$DatosCuentas[Nombre]</td>
+  <td>$DatosLibro[Cuenta]</td><td>$NombreCuenta</td>
   <td>$Debitos</td><td>$Creditos</td><td>$Diferencia</td>
  </tr>
  </table>
@@ -196,7 +203,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 	
 }	
 
-$sel1=mysql_query("SELECT SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario WHERE Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' ",$con) 
+$sel1=mysql_query("SELECT SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario WHERE Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' $Condicion",$con) 
 or die("problemas con la consulta".mysql_error());
 
 //$sel1=mysql_query("SELECT SUM(Neto) as Neto FROM librodiario WHERE Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' 
@@ -275,7 +282,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 4)
+WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 4) $Condicion
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -361,7 +368,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 6)
+WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 6) $Condicion
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -461,7 +468,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 5)
+WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 5) $Condicion
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -595,7 +602,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 1)
+WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 1) $Condicion
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -672,7 +679,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 2)
+WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 2) $Condicion
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
@@ -751,7 +758,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 $sel1=mysql_query("SELECT substring(CuentaPUC,1,4) as Cuenta, SUM(Debito) as SumDebito, SUM(Credito) as SumCredito FROM librodiario 
-WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 3)
+WHERE (Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal') AND (Mayor='NO') AND  (substring(CuentaPUC,1,1) = 3) $Condicion
 GROUP BY substring(CuentaPUC,1,4)",$con) or die("problemas con la consulta".mysql_error());
 
 if(mysql_num_rows($sel1)){
