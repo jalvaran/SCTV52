@@ -132,5 +132,6 @@ print("<body>");
     $css->CerrarDiv();//Cerramos contenedor Principal
     $css->AgregaJS(); //Agregamos javascripts
     $css->AgregaSubir();
+    $css->Footer();
     print("</body></html>");
 ?>
