@@ -42,7 +42,7 @@ print("<body>");
     ///////////////Creamos la imagen representativa de la pagina
     /////
     /////	
-    $css->CrearImageLink("../VMenu/MnuVentas.php", "../images/cotizacion.png", "_self",200,200);
+    $css->CrearImageLink("FactCoti.php", "../images/cotizacion.png", "_self",200,200);
     
     ///////////////Si se crea una devolucion o una factura
     /////

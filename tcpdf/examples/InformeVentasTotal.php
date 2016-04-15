@@ -1,10 +1,11 @@
 <?php
-
 require_once('tcpdf_include.php');
-include("conexion.php");
+include("../../modelo/php_conexion.php");
+
 ////////////////////////////////////////////
 /////////////Verifico que haya una sesion activa
 ////////////////////////////////////////////
+
 session_start();
 if(!isset($_SESSION["username"]))
    header("Location: index.php");
@@ -12,23 +13,37 @@ if(!isset($_SESSION["username"]))
 ////////////////////////////////////////////
 /////////////Obtengo el rango de fechas
 ////////////////////////////////////////////
-
+$VerFacturas=0;
+$obVenta = new ProcesoVenta(1);
 $fecha=date("Y-m-d");
-$FechaIni = substr("$_POST[TxtFechaIniFact]", 6, 7)."-".substr("$_POST[TxtFechaIniFact]", 3, 2)."-".substr("$_POST[TxtFechaIniFact]", 0, 2);;
-$FechaFinal = substr("$_POST[TxtFechaFinalFact]", 6, 7)."-".substr("$_POST[TxtFechaFinalFact]", 3, 2)."-".substr("$_POST[TxtFechaFinalFact]", 0, 2);;
+$FechaIni = $_POST["TxtFechaIni"];
+$FechaFinal = $_POST["TxtFechaFinal"];
+$CentroCostos=$_POST["CmbCentroCostos"];
+$EmpresaPro=$_POST["CmbEmpresaPro"];
+$TipoReporte=$_POST["CmbTipoReporte"];
 
+$Condicion=" ori_facturas_items WHERE ";
+$Condicion2="ori_facturas WHERE ";
+if($TipoReporte=="Corte"){
+    $CondicionFecha1=" FechaFactura <= '$FechaFinal' ";
+    $CondicionFecha2=" Fecha <= '$FechaFinal' ";
+}else{
+    $CondicionFecha1=" FechaFactura >= '$FechaIni' AND FechaFactura <= '$FechaFinal' ";
+    $CondicionFecha2=" Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' ";
+}
 
-////////////////////////////////////////////
-/////////////Me conecto a la db
-////////////////////////////////////////////
-
-$con=mysql_connect($host,$user,$pw) or die("problemas con el servidor");
-mysql_select_db($db,$con) or die("la base de datos no abre");
-
-
-		 
-		  
-		  $nombre_file=$fecha."_Reporte_Administracion";
+$CondicionItems=$Condicion.$CondicionFecha1;
+$CondicionFacturas=$Condicion2.$CondicionFecha2;
+/*
+if($CentroCostos<>"ALL"){
+	$Condicion.="  AND idCentroCosto='$CentroCostos' ";
+}
+	
+if($EmpresaPro<>"ALL"){
+	$Condicion.="  AND idEmpresa='$EmpresaPro' ";
+}
+*/		  
+$nombre_file=$fecha."_Reporte_Administracion";
 		   
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
@@ -82,8 +97,8 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-	require_once(dirname(__FILE__).'/lang/eng.php');
+if (@file_exists(dirname(__FILE__).'/lang/spa.php')) {
+	require_once(dirname(__FILE__).'/lang/spa.php');
 	$pdf->setLanguageArray($l);
 }
 
@@ -151,41 +166,35 @@ EOD;
 
 $pdf->writeHTML($tbl, false, false, false, false, '');
 
+$sql="SELECT Departamento as idDepartamento, SUM(SubtotalItem) as Subtotal, SUM(IVAItem) as IVA, SUM(TotalItem) as Total, SUM(Cantidad) as Items"
+        . "  FROM $CondicionItems GROUP BY Departamento";
+
+$Datos=$obVenta->Query($sql);
+
+$Subtotal=0;
+$TotalIVA=0;
+$TotalVentas=0;
+$TotalItems=0;
+$flagQuery=0;   //para indicar si hay resultados
+$i=0;
+
+while($DatosVentas=$obVenta->FetchArray($Datos)){
+        $flagQuery=1;	
+        $SubtotalUser=number_format($DatosVentas["Subtotal"]);
+        $IVA=number_format($DatosVentas["IVA"]);
+        $Total=number_format($DatosVentas["Total"]);
+        $Items=number_format($DatosVentas["Items"]);
+        $DatosDepartamento=$obVenta->DevuelveValores("prod_departamentos", "idDepartamentos", $DatosVentas["idDepartamento"]);
+        $NombreDep=$DatosDepartamento["Nombre"];
+
+        $Subtotal=$Subtotal+$DatosVentas["Subtotal"];
+        $TotalIVA=$TotalIVA+$DatosVentas["IVA"];
+        $TotalVentas=$TotalVentas+$DatosVentas["Total"];
+        $TotalItems=$TotalItems+$DatosVentas["Items"];
+        $idDepartamentos=$DatosVentas["idDepartamento"];
 
 
-	$sel1=mysql_query("SELECT dpt.idDepartamentos as idDepartamento, dpt.Nombre as NombreDep, SUM(c.Subtotal) as Subtotal, SUM(c.IVA) as IVA, 
-SUM(c.Total) as Total,SUM(c.Descuento) as Descuentos, SUM(c.Cantidad) as Items 
-FROM facturas f INNER JOIN cotizaciones c ON f.Cotizaciones_idCotizaciones=c.NumCotizacion 
-INNER JOIN productosventa pr ON c.Referencia = pr.Referencia 
-INNER JOIN prod_departamentos dpt ON dpt.idDepartamentos = pr.Departamento
-WHERE f.Fecha >= '$FechaIni' AND f.Fecha <= '$FechaFinal' 
-GROUP BY dpt.idDepartamentos",$con) or die("problemas con la consulta a join facturas ".mysql_error());
-
-
-
-if(mysql_num_rows($sel1)){
-	$Subtotal=0;
-	$TotalIVA=0;
-	$TotalVentas=0;
-	$TotalItems=0;
-	
-	$i=0;
-	while($DatosVentas=mysql_fetch_array($sel1)){
-			
-		$SubtotalUser=number_format($DatosVentas["Subtotal"]);
-		$IVA=number_format($DatosVentas["IVA"]);
-		$Total=number_format($DatosVentas["Total"]);
-		$Items=number_format($DatosVentas["Items"]);
-		$NombreDep=$DatosVentas["NombreDep"];
-		
-		$Subtotal=$Subtotal+$DatosVentas["Subtotal"];
-		$TotalIVA=$TotalIVA+$DatosVentas["IVA"];
-		$TotalVentas=$TotalVentas+$DatosVentas["Total"];
-		$TotalItems=$TotalItems+$DatosVentas["Items"];
-		$idDepartamentos=$DatosVentas["idDepartamento"];
-		
-		
-		$tbl = <<<EOD
+        $tbl = <<<EOD
 
 <table border="1" cellpadding="2"  align="center">
  <tr>
@@ -200,13 +209,15 @@ if(mysql_num_rows($sel1)){
 EOD;
 
 $pdf->writeHTML($tbl, false, false, false, false, '');
-	}
+
+}
 	
-	$TotalItems=number_format($TotalItems);
-	$Subtotal=number_format($Subtotal);
-	$TotalIVA=number_format($TotalIVA);
-	$TotalVentas=number_format($TotalVentas);
-	$tbl = <<<EOD
+if($flagQuery==1){
+$TotalItems=number_format($TotalItems);
+$Subtotal=number_format($Subtotal);
+$TotalIVA=number_format($TotalIVA);
+$TotalVentas=number_format($TotalVentas);
+$tbl = <<<EOD
 
 <table border="1" cellspacing="2" align="center">
  <tr>
@@ -222,7 +233,7 @@ EOD;
 
 $pdf->writeHTML($tbl, false, false, false, false, '');
 	
-}
+        }
 
 
 ///////////////////////////////////////////////////////
@@ -241,7 +252,7 @@ $tbl = <<<EOD
   <tr> 
     <th><h3>Usuario</h3></th>
 	<th><h3>TipoVenta</h3></th>
-	<th><h3>Total Items</h3></th>
+	<th><h3>Total Costos</h3></th>
     <th><h3>SubTotal</h3></th>
 	<th><h3>IVA</h3></th>
 	<th><h3>Total</h3></th>
@@ -255,7 +266,13 @@ EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
+$sql="SELECT Usuarios_idUsuarios as IdUsuarios, FormaPago as  TipoVenta, SUM(Subtotal) as Subtotal, SUM(IVA) as IVA, 
+SUM(Total) as Total, SUM(TotalCostos) as TotalCostos"
+        . "  FROM $CondicionFacturas GROUP BY Usuarios_idUsuarios, FormaPago";
 
+$Datos=$obVenta->Query($sql);
+
+/*
 	$sel1=mysql_query("SELECT f.Usuarios_idUsuarios as IdUsuarios, f.FormaPago as  TipoVenta, SUM(c.Subtotal) as Subtotal, SUM(c.IVA) as IVA, 
 SUM(c.Total) as Total,SUM(c.Descuento) as Descuentos, SUM(c.Cantidad) as Items 
 FROM facturas f INNER JOIN cotizaciones c ON f.Cotizaciones_idCotizaciones=c.NumCotizacion 
@@ -265,68 +282,70 @@ WHERE f.Fecha >= '$FechaIni' AND f.Fecha <= '$FechaFinal'
 	GROUP BY f.Usuarios_idUsuarios, f.FormaPago",$con) or die("problemas con la consulta a join ventas ".mysql_error());
 
 
+*/
 
-if(mysql_num_rows($sel1)){
-	$Subtotal=0;
-	$TotalIVA=0;
-	$TotalVentas=0;
-	$TotalItems=0;
-	
-	$i=0;
-	while($DatosVentas=mysql_fetch_array($sel1)){
-			
-		$SubtotalUser=number_format($DatosVentas["Subtotal"]);
-		$IVA=number_format($DatosVentas["IVA"]);
-		$Total=number_format($DatosVentas["Total"]);
-		$Items=number_format($DatosVentas["Items"]);
-		$TipoVenta=$DatosVentas["TipoVenta"];
-		
-		$Subtotal=$Subtotal+$DatosVentas["Subtotal"];
-		$TotalIVA=$TotalIVA+$DatosVentas["IVA"];
-		$TotalVentas=$TotalVentas+$DatosVentas["Total"];
-		$TotalItems=$TotalItems+$DatosVentas["Items"];
-		$idUser=$DatosVentas["IdUsuarios"];
-		
-		
-		$tbl = <<<EOD
+
+$Subtotal=0;
+$TotalIVA=0;
+$TotalVentas=0;
+$TotalCostos=0;
+$flagQuery=0;
+$i=0;
+while($DatosVentas=$obVenta->FetchArray($Datos)){
+        $flagQuery=1;
+        $SubtotalUser=number_format($DatosVentas["Subtotal"]);
+        $IVA=number_format($DatosVentas["IVA"]);
+        $Total=number_format($DatosVentas["Total"]);
+        $Costos=number_format($DatosVentas["TotalCostos"]);
+        $TipoVenta=$DatosVentas["TipoVenta"];
+
+        $Subtotal=$Subtotal+$DatosVentas["Subtotal"];
+        $TotalIVA=$TotalIVA+$DatosVentas["IVA"];
+        $TotalVentas=$TotalVentas+$DatosVentas["Total"];
+        $TotalCostos=$TotalCostos+$DatosVentas["TotalCostos"];
+        $idUser=$DatosVentas["IdUsuarios"];
+
+
+        $tbl = <<<EOD
 
 <table border="1" cellpadding="2"  align="center">
- <tr>
-  <td>$idUser</td>
-  <td>$TipoVenta</td>
-  <td>$Items</td>
-  <td>$SubtotalUser</td>
-  <td>$IVA</td>
-  <td>$Total</td>
- </tr>
- </table>
+<tr>
+<td>$idUser</td>
+<td>$TipoVenta</td>
+<td>$Costos</td>
+<td>$SubtotalUser</td>
+<td>$IVA</td>
+<td>$Total</td>
+</tr>
+</table>
 EOD;
 
 $pdf->writeHTML($tbl, false, false, false, false, '');
-	}
-	
-	$TotalItems=number_format($TotalItems);
-	$Subtotal=number_format($Subtotal);
-	$TotalIVA=number_format($TotalIVA);
-	$TotalVentas=number_format($TotalVentas);
-	$tbl = <<<EOD
+    }
+
+if($flagQuery==1){
+    $TotalCostos=number_format($TotalCostos);
+    $Subtotal=number_format($Subtotal);
+    $TotalIVA=number_format($TotalIVA);
+    $TotalVentas=number_format($TotalVentas);
+    $tbl = <<<EOD
 
 <table border="1" cellspacing="2" align="center">
- <tr>
-  <td align="RIGHT"><h3>SUMATORIA</h3></td>
-  <td><h3>NA</h3></td>
-  <td><h3>$TotalItems</h3></td>
-  <td><h3>$Subtotal</h3></td>
-  <td><h3>$TotalIVA</h3></td>
-  <td><h3>$TotalVentas</h3></td>
- </tr>
- </table>
+<tr>
+<td align="RIGHT"><h3>SUMATORIA</h3></td>
+<td><h3>NA</h3></td>
+<td><h3>$TotalCostos</h3></td>
+<td><h3>$Subtotal</h3></td>
+<td><h3>$TotalIVA</h3></td>
+<td><h3>$TotalVentas</h3></td>
+</tr>
+</table>
 EOD;
 
 $pdf->writeHTML($tbl, false, false, false, false, '');
-	
-}
 
+
+}
 
 
 ///////////////////////////////////////////////////////
@@ -425,7 +444,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
 ///////////////////////////////////////////////////////
-//////////////tabla con los datos DE Los egresps//////////////////
+//////////////tabla con los datos DE Los egresos//////////////////
 ////////////////////////////////////////////////////////
 
 
@@ -633,7 +652,13 @@ EOD;
 
 $pdf->writeHTML($tbl, false, false, false, false, '');
 
+$sql="SELECT Usuarios_idUsuarios as IdUsuarios, Fecha as Fecha, FormaPago as  TipoVenta, SUM(Subtotal) as Subtotal, SUM(IVA) as IVA, 
+SUM(Total) as Total, SUM(TotalCostos) as TotalCostos"
+        . "  FROM $CondicionFacturas GROUP BY Usuarios_idUsuarios";
 
+$Datos=$obVenta->Query($sql);
+
+/*
 
 	$sel1=mysql_query("SELECT f.Fecha as Fecha,f.Usuarios_idUsuarios as IdUsuarios, f.FormaPago as  TipoVenta, SUM(c.Subtotal) as Subtotal, SUM(c.IVA) as IVA, 
 SUM(c.Total) as Total,SUM(c.Descuento) as Descuentos, SUM(c.Cantidad) as Items 
@@ -644,17 +669,19 @@ WHERE f.Fecha >= '$FechaIni' AND f.Fecha <= '$FechaFinal'
 	GROUP BY f.Usuarios_idUsuarios",$con) or die("problemas con la consulta a join facturas ".mysql_error());
 
 
+*/
 
-if(mysql_num_rows($sel1)){
-	
+
+
+	$flagQuery=0;
 	$TotalVentas=0;
 	$TotalAbonos=0;
 	$TotalDevoluciones=0;
 	$TotalEgresos=0;
 	$TotalEntrega=0;
 	
-	while($DatosVentas=mysql_fetch_array($sel1)){
-			
+	while($DatosVentas=$obVenta->FetchArray($Datos)){
+		$flagQuery=1;	
 		$TotalUser=number_format($DatosVentas["Total"]);
 		$FechaU=$DatosVentas["Fecha"];
 		$idUser=$DatosVentas["IdUsuarios"];
@@ -709,7 +736,7 @@ EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');
 	}
 	
-	
+if($flagQuery==1){
 	$TotalVentas=number_format($TotalVentas);
 	$TotalAbonos=number_format($TotalAbonos);
 	$TotalDevoluciones=number_format($TotalDevoluciones);
@@ -738,6 +765,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 	
 }
 
+if($VerFacturas==1){
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////FACTURAS NUMERACION////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -845,6 +873,7 @@ EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');
 	
 }
+} 
  
 //$pdf->writeHTML($tab, false, false, false, false, '');
 //Close and output PDF document

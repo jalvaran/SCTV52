@@ -68,8 +68,8 @@ session_start();
 	$css->IniciaTabs();
 	
 		$css->NuevaTabs(1);
-			$css->SubTabs("../VAtencion/BalanceComprobacion.php","_blank","../images/balance.png","Balance Comprobacion");
-                        $css->SubTabs("../VAtencion/BalanceGeneral.php","_blank","../images/resultados.png","Balance General y Estado de Resultados");
+			$css->SubTabs("../VAtencion/BalanceComprobacion.php","_blank","../images/resultados.png","Balance General y Estado de Resultados");
+                        //$css->SubTabs("../VAtencion/BalanceGeneral.php","_blank","../images/resultados.png","Balance General y Estado de Resultados");
 		$css->FinTabs();
 		$css->NuevaTabs(2);
 			$css->SubTabs("../VAtencion/InformeVentas.php","_blank","../images/infventas.png","Informe de Ventas");
