@@ -14,6 +14,14 @@ $VarInsert[$TablaConfig]["ImagenesProductos_idImagenesProductos"]["Excluir"]=1;
 $VarInsert[$TablaConfig]["Kit"]["Excluir"]=1;
 $VarInsert[$TablaConfig]["Especial"]["Excluir"]=1;
 
+
+/*
+ * Tabla SERVICIOS
+ * Columnas excluidas
+ */
+$TablaConfig="servicios";
+$VarInsert[$TablaConfig]["Kit"]["Excluir"]=1;
+
 /*
  * Tabla Usuarios
  * Tipo de Texto

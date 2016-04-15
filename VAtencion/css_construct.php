@@ -651,7 +651,7 @@ function Footer(){
     <div>
        <a href="../VMenu/Menu.php" class="f_logo"><img src="../images/header-logo.png" alt=""></a>
       <div class="copy">
-      &copy; 2016 | <a href="#">Privacy Policy</a> <br> Software  designed by <a href="http://technosoluciones.com/" rel="nofollow" target="_blank">Techno Soluciones SAS</a>
+      &copy; 2016 | <a href="#">Privacy Policy</a> <br> Software  designed by <a href="http://technosoluciones.com.co/" rel="nofollow" target="_blank">Techno Soluciones SAS</a>
       </div>
     </div>
   </div>
@@ -665,9 +665,14 @@ function Footer(){
 	function CrearSelectChosen($Nombre, $VarSelect){
            $Ancho=$VarSelect["Ancho"];
            $PlaceHolder=$VarSelect["PlaceHolder"];
+           if(isset($VarSelect["Enabled"])){
+               $Required="required=1";
+           }else{
+               $Required="";
+           }
            //print("<br><br><br>");
            
-           echo '<select id="'.$Nombre.'" data-placeholder="'.$PlaceHolder.'" class="chosen-select"  tabindex="2" name="'.$Nombre.'" style="width:200px;" required=1>';
+           echo '<select id="'.$Nombre.'" data-placeholder="'.$PlaceHolder.'" class="chosen-select"  tabindex="2" name="'.$Nombre.'" style="width:200px;" $Required>';
            
        	
 	}   
