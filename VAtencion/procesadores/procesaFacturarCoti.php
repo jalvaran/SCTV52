@@ -67,6 +67,7 @@ if(!empty($_REQUEST["BtnGenerarFactura"])){
         $OrdenSalida=$_REQUEST["TxtOrdenSalida"];
         $ObservacionesFactura=$_REQUEST["TxtObservacionesFactura"];
         $FechaFactura=$_REQUEST["TxtFechaFactura"];
+        $NumeroForzado=$_REQUEST["TxtNumeroFactura"];
         $Consulta=$obVenta->DevuelveValores("centrocosto", "ID", $CentroCostos);
         $EmpresaPro=$Consulta["EmpresaPro"];
         if($TipoPago=="Contado"){
@@ -100,6 +101,20 @@ if(!empty($_REQUEST["BtnGenerarFactura"])){
                 $Consulta=$obVenta->FetchArray($Consulta);
                 $FacturaActual=$Consulta["FacturaActual"];
                 $idFactura=$FacturaActual+1;
+                if($NumeroForzado>0){
+                    $sql="SELECT NumeroFactura FROM facturas WHERE Prefijo='$DatosResolucion[Prefijo]' "
+                        . "AND TipoFactura='$DatosResolucion[Tipo]' AND idResolucion='$ResolucionDian'";
+                    $Consulta=$obVenta->Query($sql);
+                    $Consulta=$obVenta->FetchArray($Consulta);
+                    $Existe=$Consulta["NumeroFactura"];
+                    if($Existe==$NumeroForzado){
+                        //libero la resolucion
+                        $obVenta->ActualizaRegistro("empresapro_resoluciones_facturacion", "Estado", "", "ID", $ResolucionDian);
+                        exit("<a href='FacturaCotizacion.php'>La factura $NumeroForzado ya existe, no se puede crear, Volver</a>");
+                    }else{
+                        $idFactura=$NumeroForzado;
+                    }
+                }
                 //Verificamos si ya se completó el numero de la resolucion y si es así se cambia su estado
                 if($DatosResolucion["Hasta"]==$idFactura){ 
                     $obVenta->ActualizaRegistro("empresapro_resoluciones_facturacion", "Completada", "SI", "ID", $ResolucionDian);

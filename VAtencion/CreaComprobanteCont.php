@@ -1,4 +1,5 @@
 <?php 
+ob_start();
 session_start();
 include_once("../modelo/php_tablas.php");
 include_once("css_construct.php");
@@ -306,4 +307,5 @@ print("<body>");
     $css->AnchoElemento("CmbTerceroItem_chosen", 200);
     $css->AnchoElemento("CmbCuentaDestino_chosen", 200);
     print("</body></html>");
+    ob_end_flush();
 ?>

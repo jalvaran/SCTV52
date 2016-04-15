@@ -217,7 +217,8 @@ print("<body>");
         print("<br>Fecha de la Factura: <br>");
         $css->CrearInputText("TxtFechaFactura","text","",date("Y-m-d"),"FechaFactura","black","","",130,30,0,1);
         print("<br>");
-        
+        $css->CrearInputText("TxtNumeroFactura","number","",0,"","black","","",130,30,0,1,0,$DatosResolucion["Hasta"]);
+        print("<br>");
         $css->CrearInputText("TxtOrdenCompra","text","","","Orden de Compra","black","","",150,30,0,0);
         $css->CrearInputText("TxtOrdenSalida","text","","","Orden de Salida","black","","",150,30,0,0);
         print("<br>");
