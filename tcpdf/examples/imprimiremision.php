@@ -170,11 +170,11 @@ $Total=0;
         
 while($registros2=mysql_fetch_array($Consulta)){
 		 
-$Subtotal=$Subtotal+($registros2["Subtotal"]*$DatosRemision["Dias"]);
-$IVA=$IVA+($registros2["IVA"]*$DatosRemision["Dias"]);
-$Total=$Total+($registros2["Total"]*$DatosRemision["Dias"]);
+$Subtotal=$Subtotal+($registros2["Subtotal"]);
+$IVA=$IVA+($registros2["IVA"]);
+$Total=$Total+($registros2["Total"]);
 $registros2["Total"]=number_format($registros2["Total"]);
-$registros2["Subtotal"]=number_format(round($registros2["Subtotal"]*$DatosRemision["Dias"]));	
+$registros2["Subtotal"]=number_format(round($registros2["Subtotal"]));	
 $registros2["ValorUnitario"]=number_format(round($registros2["ValorUnitario"]));	
 			
 			
@@ -185,7 +185,7 @@ $tbl = <<<EOD
   <td colspan="2">$registros2[Descripcion]</td>
   <td>$$registros2[ValorUnitario]</td>
   <td>$registros2[Cantidad]</td>
-  <td>$DatosRemision[Dias]</td>
+  <td>$registros2[Multiplicador]</td>
   <td>$$registros2[Subtotal]</td>
     <td> </td>
     <td> </td>

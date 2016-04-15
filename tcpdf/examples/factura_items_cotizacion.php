@@ -18,21 +18,24 @@ $tbl = <<<EOD
          
 EOD;
 
-$sql="SELECT fi.Referencia, fi.Nombre, fi.ValorUnitarioItem, fi.Cantidad, fi.SubtotalItem"
+$sql="SELECT fi.Dias, fi.Referencia, fi.Nombre, fi.ValorUnitarioItem, fi.Cantidad, fi.SubtotalItem"
         . " FROM facturas_items fi WHERE fi.idFactura='$idFactura'";
 $Consulta=$obVenta->Query($sql);
    
 while($DatosItemFactura=mysql_fetch_array($Consulta)){
     $ValorUnitario=  number_format($DatosItemFactura["ValorUnitarioItem"]);
     $SubTotalItem=  number_format($DatosItemFactura["SubtotalItem"]);
-      
+    $Multiplicador=$DatosItemFactura["Dias"];
+    if($DatosItemFactura["Dias"]>1){
+        $Multiplicador="$DatosItemFactura[Cantidad] X $DatosItemFactura[Dias]";
+    }
     $tbl .= <<<EOD
     
     <tr>
         <td align="left" >$DatosItemFactura[Referencia]</td>
         <td align="left" colspan="3">$DatosItemFactura[Nombre]</td>
         <td align="right" >$ValorUnitario</td>
-        <td align="center" >$DatosItemFactura[Cantidad]</td>
+        <td align="center" >$Multiplicador</td>
         <td align="right" >$SubTotalItem</td>
     </tr>
     

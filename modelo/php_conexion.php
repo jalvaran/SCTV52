@@ -1572,7 +1572,7 @@ public function CalculePesoRemision($idCotizacion)
             $Columnas[10]="SubGrupo5";          $Valores[10]=$DatosProducto['Sub5'];
             $Columnas[11]="ValorUnitarioItem";	$Valores[11]=$DatosCotizacion['ValorUnitario'];
             $Columnas[12]="Cantidad";		$Valores[12]=$DatosCotizacion['Cantidad'];
-            $Columnas[13]="Dias";		$Valores[13]=0;
+            $Columnas[13]="Dias";		$Valores[13]=$DatosCotizacion['Multiplicador'];
             $Columnas[14]="SubtotalItem";       $Valores[14]=$SubtotalItem;
             $Columnas[15]="IVAItem";		$Valores[15]=$IVAItem;
             $Columnas[16]="TotalItem";		$Valores[16]=$TotalItem;

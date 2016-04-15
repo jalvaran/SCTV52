@@ -128,11 +128,13 @@
 		$idClientes=$_REQUEST['TxtIdCliente'];
 		$Tabla=$_REQUEST['TxtTabla'];
 		$Cantidad=$_REQUEST['TxtEditar'];
+                $Multiplicador=$_REQUEST['TxtMultiplicador'];
 		$ValorAcordado=$_REQUEST['TxtValorUnitario'];
+                $flagMult=0;
 		
 		$obVenta=new ProcesoVenta($idUser);
 		$DatosPreventa=$obVenta->DevuelveValores('precotizacion',"ID",$idItem);
-		$Subtotal=$ValorAcordado*$Cantidad;
+		$Subtotal=$ValorAcordado*$Cantidad*$Multiplicador;
 		$DatosProductos=$obVenta->DevuelveValores($Tabla,"Referencia",$DatosPreventa["Referencia"]);
 		$IVA=$Subtotal*$DatosProductos["IVA"];
 		$SubtotalCosto=$DatosProductos["CostoUnitario"]*$Cantidad;
@@ -145,6 +147,8 @@
 		$obVenta->ActualizaRegistro("precotizacion","Total", $Total, $filtro, $idItem);
 		$obVenta->ActualizaRegistro("precotizacion","ValorUnitario", $ValorAcordado, $filtro, $idItem);
 		$obVenta->ActualizaRegistro("precotizacion","Cantidad", $Cantidad, $filtro, $idItem);
+                
+                $obVenta->ActualizaRegistro("precotizacion","Multiplicador", $Multiplicador, $filtro, $idItem);
 		
 		header("location:Cotizaciones.php?TxtAsociarCliente=$idClientes");
 			
@@ -198,7 +202,7 @@
 		
 			
 			$tab="cot_itemscotizaciones";
-			$NumRegistros=14;  
+			$NumRegistros=15;  
 								
 			$Columnas[0]="NumCotizacion";				$Valores[0]=$NumCotizacion;
 			$Columnas[1]="Descripcion";					$Valores[1]=$DatosPrecoti["Descripcion"];
@@ -214,6 +218,8 @@
 			$Columnas[11]="TipoItem";					$Valores[11]=$DatosPrecoti["TipoItem"];
 			$Columnas[12]="CuentaPUC";					$Valores[12]=$DatosPrecoti["CuentaPUC"];
 			$Columnas[13]="idCliente";					$Valores[13]=$idCliente;
+                        $Columnas[14]="Multiplicador";					$Valores[14]=$DatosPrecoti["Multiplicador"];
+                        
 			$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);	
 		
 		}

@@ -206,15 +206,18 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 		    
 			$registros2["Total"]=number_format($registros2["Total"]);
 			$registros2["Subtotal"]=number_format(round($registros2["Subtotal"]));	
-			$registros2["ValorUnitario"]=number_format(round($registros2["ValorUnitario"]));	
-			
+			$registros2["ValorUnitario"]=number_format(round($registros2["ValorUnitario"]));
+                        $Cantidad=$registros2["Cantidad"];
+			if($registros2["Multiplicador"]>1){
+                            $Cantidad="$registros2[Cantidad] X $registros2[Multiplicador]";
+                        }
 			
 $tbl = <<<EOD
 
 <table border="1" cellpadding="2" cellspacing="2" align="center">
  <tr nobr="true">
   <td>$registros2[Referencia]</td><td colspan="3">$registros2[Descripcion]</td>
-  <td>$$registros2[ValorUnitario]</td><td>$registros2[Cantidad]</td><td>$$registros2[Subtotal]</td>
+  <td>$$registros2[ValorUnitario]</td><td>$Cantidad</td><td>$$registros2[Subtotal]</td>
  </tr>
  </table>
 EOD;

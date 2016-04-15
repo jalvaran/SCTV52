@@ -184,7 +184,7 @@ print("<body>");
 
                 $css->CrearInputNumber("TxtSubtotalUnitario","number","Valor: ",$DatosItems["ValorUnitario"],"Valor Unitario","black","","",80,30,0,1,'','',"any");
                 $css->CrearInputNumber("TxtCantidadDevolucion","number"," Cantidad: ",$PendienteDevolver,"Devuelve","black","","",70,30,0,1,1,$PendienteDevolver,"any");
-                $css->CrearInputNumber("TxtDias","number"," Dias: ",$DatosRemision["Dias"],"Dias","black","","",70,30,0,1,1,1000,"any");
+                $css->CrearInputNumber("TxtDias","number"," Dias: ",$DatosItems["Multiplicador"],"Dias","black","","",70,30,0,1,1,1000,"any");
                 $css->CrearBotonVerde("BtnEditar","+");
                 $css->CerrarForm();
                 print("</td>");

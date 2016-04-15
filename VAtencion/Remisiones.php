@@ -229,6 +229,7 @@ include_once("procesaRemision.php");
 			$css->ColTabla('REFERENCIA',1);
 			$css->ColTabla('DESCRIPCION',1);
 			$css->ColTabla('CANTIDAD',1);
+                        $css->ColTabla('MULTIPLICADOR',1);
 			$css->ColTabla('VALOR',1);
 			$css->CierraFilaTabla();
 			
@@ -246,6 +247,7 @@ include_once("procesaRemision.php");
 				$css->ColTabla($DatosItems["Referencia"],1);
 				$css->ColTabla($DatosItems["Descripcion"],1);
 				$css->ColTabla($DatosItems["Cantidad"],1);
+                                $css->ColTabla($DatosItems["Multiplicador"],1);
 				$css->ColTabla(number_format($DatosItems["Subtotal"]),1);
 				$css->CierraFilaTabla();
 				
@@ -254,13 +256,13 @@ include_once("procesaRemision.php");
 			
 			$css->FilaTabla(16);
 			
-			$css->ColTabla('DIAS',3);
-			print("<td>");
+			//$css->ColTabla('AGREGAR UNIDADES AL MULTIPLICADOR',3);
+			//print("<td>");
 			$css->CrearInputText("TxtSubtotalH","hidden","",$Subtotal,"","","","",300,30,0,1);
 			$css->CrearInputText("TxtIVAH","hidden","",$IVA,"","","","",300,30,0,1);
 			$css->CrearInputText("TxtTotalH","hidden","",$Total,"","","","",300,30,0,1);
-			$css->CrearInputNumber("TxtDias","number","",1,"Dias","black","onchange","calculetotaldias()",80,30,0,1,1,1000,"any");
-			print("</td>");
+			$css->CrearInputNumber("TxtDias","hidden","",1,"Dias","black","onchange","calculetotaldias()",80,30,0,1,1,1000,"any");
+			//print("</td>");
 			
 			$css->CierraFilaTabla();
 			
