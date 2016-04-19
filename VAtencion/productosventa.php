@@ -9,8 +9,8 @@ if (!isset($_SESSION['username']))
 ////////// Paginacion
 $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 
-    	$limit = 10;
-    	$startpoint = ($page * $limit) - $limit;
+	$limit = 10;
+	$startpoint = ($page * $limit) - $limit;
 		
 /////////
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2016 a las 23:41:22
+-- Tiempo de generación: 19-04-2016 a las 11:23:40
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -2813,7 +2813,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_contabilidad` (
   `Usuarios_idUsuarios` int(11) NOT NULL,
   `Estado` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_contabilidad`
@@ -2823,7 +2823,8 @@ INSERT INTO `comprobantes_contabilidad` (`ID`, `Fecha`, `Hora`, `Concepto`, `Usu
 (7, '2016-04-10', 'Prueba', 'Prueba', 3, 'A'),
 (8, '2016-04-10', '21:58', 'proese', 3, 'C'),
 (9, '2016-04-10', '22:02', 'dsada', 3, 'C'),
-(10, '2016-04-10', '23:19', 'dasdsa', 3, 'C');
+(10, '2016-04-10', '23:19', 'dasdsa', 3, 'C'),
+(11, '2016-04-16', '16:07', 'u6u6u', 3, '');
 
 -- --------------------------------------------------------
 
@@ -2968,7 +2969,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_pre` (
   `idComprobanteContabilidad` int(16) NOT NULL,
   `Estado` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_pre`
@@ -2977,7 +2978,8 @@ CREATE TABLE IF NOT EXISTS `comprobantes_pre` (
 INSERT INTO `comprobantes_pre` (`ID`, `Fecha`, `Concepto`, `idComprobanteContabilidad`, `Estado`) VALUES
 (5, '2016-04-10', 'proese', 8, 'C'),
 (6, '2016-04-10', 'dsada', 9, 'C'),
-(7, '2016-04-10', 'dasdsa', 10, 'C');
+(7, '2016-04-10', 'dasdsa', 10, 'C'),
+(8, '2016-04-16', 'u6u6u', 11, '');
 
 -- --------------------------------------------------------
 
@@ -3058,7 +3060,7 @@ CREATE TABLE IF NOT EXISTS `cotizacionesv5` (
   `NumSolicitud` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `NumOrden` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=40 ;
 
 --
 -- Volcado de datos para la tabla `cotizacionesv5`
@@ -3098,7 +3100,12 @@ INSERT INTO `cotizacionesv5` (`ID`, `Fecha`, `Clientes_idClientes`, `Usuarios_id
 (31, '2016-03-27', 17, 3, '', '', ''),
 (32, '2016-03-27', 18, 3, '', '', ''),
 (33, '2016-04-14', 17, 3, '', '', ''),
-(34, '2016-04-14', 2, 3, '', '', '');
+(34, '2016-04-14', 2, 3, '', '', ''),
+(35, '2016-04-15', 17, 3, '', '', ''),
+(36, '2016-04-15', 17, 3, '', '', ''),
+(37, '2016-04-15', 17, 3, '', '', ''),
+(38, '2016-04-15', 17, 3, '', '', ''),
+(39, '2016-04-16', 22, 3, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -3115,6 +3122,7 @@ CREATE TABLE IF NOT EXISTS `cot_itemscotizaciones` (
   `TablaOrigen` varchar(45) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `ValorUnitario` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `Cantidad` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `Multiplicador` int(11) NOT NULL,
   `Subtotal` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `IVA` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `Total` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -3126,121 +3134,129 @@ CREATE TABLE IF NOT EXISTS `cot_itemscotizaciones` (
   `Devuelto` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `CuentaPUC` varchar(45) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=111 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=119 ;
 
 --
 -- Volcado de datos para la tabla `cot_itemscotizaciones`
 --
 
-INSERT INTO `cot_itemscotizaciones` (`ID`, `idCliente`, `NumCotizacion`, `Descripcion`, `Referencia`, `TablaOrigen`, `ValorUnitario`, `Cantidad`, `Subtotal`, `IVA`, `Total`, `Descuento`, `ValorDescuento`, `PrecioCosto`, `SubtotalCosto`, `TipoItem`, `Devuelto`, `CuentaPUC`) VALUES
-(1, 0, 2, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', '14900', '0', '14900', '', '', 'SANDALIA XIRELLA JOHANA TACON ', 'SANDALIA XIRELLA JOHANA TACON ', 'PR', '', '416510'),
-(2, 0, 2, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', '23000', '3680', '26680', '', '', 'Perfil lipidico', 'Perfil lipidico', 'MO', '', '416510'),
-(3, 0, 2, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', '23900', '0', '23900', '', '', 'MALETIN ESCOLAR MEDIANO', 'MALETIN ESCOLAR MEDIANO', 'PR', '', '416510'),
-(4, 0, 2, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', 'productosventa', '9900', '1', '9900', '0', '9900', '', '', 'BOXER FE&RO LICRA RAYAS T/L', 'BOXER FE&RO LICRA RAYAS T/L', 'PR', '', '416510'),
-(5, 0, 2, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', '8900', '0', '8900', '', '', 'BOXER FE&RO ALGODON RAYAS T/L', 'BOXER FE&RO ALGODON RAYAS T/L', 'PR', '', '416510'),
-(6, 0, 2, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', '16000', '2560', '18560', '', '', 'Salud Ocupacional (Examen de Ingreso, Periodi', 'Salud Ocupacional (Examen de Ingreso, Periodi', 'MO', '', '416510'),
-(7, 0, 2, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '1', '13900', '0', '13900', '', '', 'SANDALIA XIRELLA JULIANA', 'SANDALIA XIRELLA JULIANA', 'PR', '', '416510'),
-(8, 0, 3, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', '14900', '0', '14900', '', '', '10500', '10500', 'PR', '', '416510'),
-(9, 0, 3, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
-(10, 0, 3, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', '23900', '0', '23900', '', '', '17000', '17000', 'PR', '', '416510'),
-(11, 0, 3, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', 'productosventa', '9900', '1', '9900', '0', '9900', '', '', '6500', '6500', 'PR', '', '416510'),
-(12, 0, 3, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', '8900', '0', '8900', '', '', '6200', '6200', 'PR', '', '416510'),
-(13, 0, 3, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', '16000', '2560', '18560', '', '', '7000', '7000', 'MO', '', '416510'),
-(14, 0, 3, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '1', '13900', '0', '13900', '', '', '10300', '10300', 'PR', '', '416510'),
-(15, 0, 4, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', '14900', '0', '14900', '', '', '10500', '10500', 'PR', '', '416510'),
-(16, 0, 4, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
-(17, 0, 4, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', '23900', '0', '23900', '', '', '17000', '17000', 'PR', '', '416510'),
-(18, 0, 4, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', 'productosventa', '9900', '1', '9900', '0', '9900', '', '', '6500', '6500', 'PR', '', '416510'),
-(19, 0, 4, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', '8900', '0', '8900', '', '', '6200', '6200', 'PR', '', '416510'),
-(20, 0, 4, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', '16000', '2560', '18560', '', '', '7000', '7000', 'MO', '', '416510'),
-(21, 0, 4, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '6', '83400', '0', '83400', '', '', '10300', '61800', 'PR', '', '416510'),
-(22, 0, 5, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '5', '74500', '0', '74500', '', '', '10500', '52500', 'PR', '', '416510'),
-(23, 0, 5, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
-(24, 0, 5, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', '23900', '0', '23900', '', '', '17000', '17000', 'PR', '', '416510'),
-(25, 0, 5, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', 'productosventa', '9900', '1', '9900', '0', '9900', '', '', '6500', '6500', 'PR', '', '416510'),
-(26, 0, 5, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', '8900', '0', '8900', '', '', '6200', '6200', 'PR', '', '416510'),
-(27, 0, 5, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', '16000', '2560', '18560', '', '', '7000', '7000', 'MO', '', '416510'),
-(28, 0, 5, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '6', '83400', '0', '83400', '', '', '10300', '61800', 'PR', '', '416510'),
-(29, 0, 6, 'CHANCLA EVACOL  LUJO HOMBRE', 'EVA856-10', 'productosventa', '16900', '1', '16900', '0', '16900', '', '', '11500', '11500', 'PR', '', '416510'),
-(30, 0, 6, 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', 'PAELTA', 'servicios', '60000', '1', '60000', '9600', '69600', '', '', '50000', '50000', 'MO', '', '416510'),
-(31, 0, 6, 'Audiometria clinica', 'VEAC', 'servicios', '50000', '1', '50000', '8000', '58000', '', '', '12500', '12500', 'MO', '', '416510'),
-(32, 0, 7, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', '14900', '0', '14900', '', '', '10500', '10500', 'PR', '', '416510'),
-(33, 0, 8, 'MALETIN ESCOLAR GRANDE', 'REF515', 'productosventa', '50000', '1', '50000', '0', '50000', '', '', '19000', '19000', 'PR', '', '416510'),
-(34, 0, 9, 'BABERO VAQUIRIN ALEGRE', 'VAQ253', 'productosventa', '11500', '1', '11500', '0', '11500', '', '', '8400', '8400', 'PR', '', '416510'),
-(35, 0, 9, 'Audiometrias Tamiz ', 'EAAT', 'servicios', '15000', '1', '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
-(36, 0, 9, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '3', '71700', '0', '71700', '', '', '17000', '51000', 'PR', '', '416510'),
-(37, 0, 9, 'BOXER FE&RO ALGODON SOLO FONDO T/4', 'FE&88014', 'productosventa', '4900', '1', '4900', '0', '4900', '', '', '3500', '3500', 'PR', '', '416510'),
-(38, 0, 9, 'CHANCLA EVACOL S.A.S HOMBRE', 'EVA856-08', 'productosventa', '16500', '1', '16500', '0', '16500', '', '', '11500', '11500', 'PR', '', '416510'),
-(39, 0, 9, 'Prueba de embarazo', 'ELPE', 'servicios', '14000', '1', '14000', '2240', '16240', '', '', '6000', '6000', 'MO', '', '416510'),
-(40, 0, 10, 'PLATAFORMA XIRELLA LAURA BOCA DE PESCADO', 'XIR070', 'productosventa', '19900', '1', '19900', '0', '19900', '', '', '13790', '13790', 'PR', '', '416510'),
-(41, 0, 11, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '100', '1000', '100000', '16000', '116000', '', '', '40', '40000', 'AQ', '', '416510'),
-(42, 0, 11, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '20', '4000', '640', '4640', '', '', '100', '2000', 'AQ', '', '416510'),
-(43, 0, 12, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
-(44, 0, 12, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '100', '12', '1200', '192', '1392', '', '', '100', '1200', 'AQ', '', '416510'),
-(45, 0, 12, 'Audiometrias Tamiz ', 'EAAT', 'servicios', '15000', '1', '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
-(46, 0, 13, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
-(47, 0, 13, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '1', '200', '32', '232', '', '', '100', '100', 'AQ', '', '416510'),
-(48, 0, 14, 'TOALLA VAQUIRIN BB BAN FELIZ', 'VAQ328', 'productosventa', '16500', '1', '16500', '0', '16500', '', '', '12000', '12000', 'PR', '', '416510'),
-(49, 0, 14, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
-(50, 0, 14, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
-(51, 0, 15, 'SANDALIA GOCH DAMA', 'REF189', 'productosventa', '8500', '1', '8500', '0', '8500', '', '', '5800', '5800', 'PR', '', '416510'),
-(52, 0, 15, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
-(53, 0, 16, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '19500', '1', '19500', '0', '19500', '', '', '14250', '14250', 'PR', '', '416510'),
-(54, 0, 17, 'GORRA HOMBRE', 'REF293', 'productosventa', '8500', '1', '8500', '0', '8500', '', '', '6000', '6000', 'PR', '', '416510'),
-(55, 0, 17, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '10', '810', '129.6', '939.6', '', '', '40', '400', 'AQ', '', '416510'),
-(56, 0, 18, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '500', '40500', '6480', '46980', '', '', '40', '20000', 'AQ', '', '416510'),
-(57, 0, 18, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '200', '40000', '6400', '46400', '', '', '100', '20000', 'AQ', '', '416510'),
-(58, 0, 18, 'Protectores auditivos', 'VEPA', 'servicios', '22000', '25', '550000', '88000', '638000', '', '', '10000', '250000', 'MO', '', '416510'),
-(59, 0, 18, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '45', '1035000', '165600', '1200600', '', '', '12000', '540000', 'MO', '', '416510'),
-(60, 0, 19, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '200', '16200', '2592', '18792', '', '', '40', '8000', 'AQ', '', '416510'),
-(61, 0, 19, 'BLUSA AMOR BENDITO ENCAJE ESPALDA', 'AMOBD674', 'productosventa', '27900', '500', '13950000', '0', '13950000', '', '', '19900', '9950000', 'PR', '', '416510'),
-(62, 0, 19, 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 'NJF3992', 'productosventa', '21900', '1', '21900', '0', '21900', '', '', '15999', '15999', 'PR', '', '416510'),
-(63, 0, 19, 'BLUSA MAGENTA TIRAS', 'MAG2087', 'productosventa', '20900', '1', '20900', '0', '20900', '', '', '15400', '15400', 'PR', '', '416510'),
-(64, 0, 19, 'BLUSA KEBONITA CAMPESINA', 'KEBM-0153', 'productosventa', '21900', '1', '21900', '0', '21900', '', '', '16000', '16000', 'PR', '', '416510'),
-(65, 0, 19, 'BLUSA NJ FASHION GALLETA TULL\n', 'NJF4001', 'productosventa', '18900', '1', '18900', '0', '18900', '', '', '13700', '13700', 'PR', '', '416510'),
-(66, 0, 19, 'Audiometrias Tamiz ', 'EAAT', 'servicios', '15000', '1', '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
-(67, 0, 19, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '1', '200', '32', '232', '', '', '100', '100', 'AQ', '', '416510'),
-(68, 0, 19, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
-(69, 0, 19, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', '14900', '0', '14900', '', '', '10500', '10500', 'PR', '', '416510'),
-(70, 0, 19, 'SANDALIA GOCH DAMA', 'REF189', 'productosventa', '8500', '1', '8500', '0', '8500', '', '', '5800', '5800', 'PR', '', '416510'),
-(71, 0, 19, 'SANDALIA XIRELLA DIANA ETNICA', 'XIR069', 'productosventa', '9500', '1', '9500', '0', '9500', '', '', '6500', '6500', 'PR', '', '416510'),
-(72, 0, 19, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', '23900', '0', '23900', '', '', '17000', '17000', 'PR', '', '416510'),
-(73, 0, 19, 'MALETIN ESCOLAR GRANDE', 'REF515', 'productosventa', '25900', '1', '25900', '0', '25900', '', '', '19000', '19000', 'PR', '', '416510'),
-(74, 0, 19, 'MALENTIN ESCOLAR MUNECOS PEQUENO', 'REF517', 'productosventa', '30900', '1', '30900', '0', '30900', '', '', '22000', '22000', 'PR', '', '416510'),
-(75, 0, 19, 'Tamiz audiometrias', 'VETA', 'servicios', '15000', '1', '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
-(76, 0, 19, 'Audiometria clinica', 'VEAC', 'servicios', '25000', '1', '25000', '4000', '29000', '', '', '12500', '12500', 'MO', '', '416510'),
-(77, 0, 19, 'Protectores auditivos', 'VEPA', 'servicios', '22000', '1', '22000', '3520', '25520', '', '', '10000', '10000', 'MO', '', '416510'),
-(78, 0, 20, 'BLUSA MAGENTA TIRAS', 'MAG2087', 'productosventa', '20900', '90', '1881000', '0', '1881000', '', '', '15400', '1386000', 'PR', '', '416510'),
-(79, 0, 20, 'BLUSA KEBONITA CAMPESINA', 'KEBM-0153', 'productosventa', '21900', '60', '1314000', '0', '1314000', '', '', '16000', '960000', 'PR', '', '416510'),
-(80, 0, 20, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '500', '40500', '6480', '46980', '', '', '40', '20000', 'AQ', '', '416510'),
-(81, 0, 20, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '100', '20000', '3200', '23200', '', '', '100', '10000', 'AQ', '', '416510'),
-(82, 0, 21, 'BLUSA MAGENTA TIRAS', 'MAG2087', 'productosventa', '20900', '1', '20900', '0', '20900', '', '', '15400', '15400', 'PR', '', '4135'),
-(83, 17, 22, 'BLUSA MAGENTA ESTRAPLE GALLETA', 'MAG2076', 'productosventa', '23500', '1', '23500', '0', '23500', '', '', '17200', '17200', 'PR', '', '4135'),
-(84, 17, 22, 'BLUSA NJ FASHION GALLETA TULL TIRAS', 'NJF4003', 'productosventa', '23900', '1', '23900', '0', '23900', '', '', '18200', '18200', 'PR', '', '4135'),
-(85, 17, 22, 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 'NJF3992', 'productosventa', '23000', '1', '23000', '3680', '26680', '', '', '15999', '15999', 'PR', '', '4135'),
-(86, 17, 22, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
-(87, 2, 23, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '20000', '3', '60000', '0', '60000', '', '', '14250', '42750', 'PR', '', '4135'),
-(88, 2, 23, 'BLUSA NJ FASHION GALLETA TULL TIRAS', 'NJF4003', 'productosventa', '50000', '1', '50000', '0', '50000', '', '', '18200', '18200', 'PR', '', '4135'),
-(89, 17, 24, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '20000', '5', '100000', '0', '100000', '', '', '14250', '71250', 'PR', '', '4135'),
-(90, 17, 24, 'BLUSA NJ FASHION GALLETA TULL TIRAS', 'NJF4003', 'productosventa', '23900', '1', '23900', '0', '23900', '', '', '18200', '18200', 'PR', '', '4135'),
-(93, 2, 25, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '20000', '1', '20000', '3200', '23200', '', '', '14250', '14250', 'PR', '', '4135'),
-(94, 2, 25, 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 'NJF3992', 'productosventa', '21900', '1', '21900', '3504', '25404', '', '', '15999', '15999', 'PR', '', '4135'),
-(95, 2, 25, 'SANDALIA 2GOOD DAMA', 'REF189', 'productosventa', '12900', '1', '12900', '2064', '14964', '', '', '9000', '9000', 'PR', '', '4135'),
-(96, 17, 26, 'FALDA ESCOLAR T/6', 'FALDA6', 'productosventa', '21000', '1', '21000', '3360', '24360', '', '', '14500', '14500', 'PR', '', '4135'),
-(97, 17, 26, 'BLUSA KEBONITA CHIFON RAYAS', 'KEBM0132', 'productosventa', '20000', '4', '80000', '12800', '92800', '', '', '18000', '72000', 'PR', '', '4135'),
-(98, 17, 27, 'PANTALONCILLOS', 'REF2915', 'productosventa', '300', '3', '900', '144', '1044', '', '', '200', '600', 'PR', '', '4135'),
-(99, 17, 28, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '19500', '1', '19500', '3120', '22620', '', '', '14250', '14250', 'PR', '', '4135'),
-(100, 17, 28, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
-(101, 17, 28, 'Frotis de Garganta', 'ELFG', 'servicios', '12500', '1', '12500', '2000', '14500', '', '', '6000', '6000', 'MO', '', '416520'),
-(102, 17, 29, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
-(103, 17, 29, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '1', '13900', '2224', '16124', '', '', '9000', '9000', 'PR', '', '4135'),
-(104, 17, 30, 'CHANCLA EVACOL S.A.S HOMBRE', 'EVA856-08', 'productosventa', '16500', '1', '16500', '2640', '19140', '', '', '12000', '12000', 'PR', '', '4135'),
-(105, 17, 31, 'PLATAFORMA XIRELLA LAURA BOCA DE PESCADO', 'XIR070', 'productosventa', '19900', '1', '19900', '3184', '23084', '', '', '13790', '13790', 'PR', '', '4135'),
-(106, 18, 32, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '200', '16200', '2592', '18792', '', '', '40', '8000', 'AQ', '', '4135'),
-(107, 18, 32, 'DIAGONAL DE 2.5 MTS X 1.5MTS', 'PA003', 'productosalquiler', '296', '100', '29600', '4736', '34336', '', '', '100', '10000', 'AQ', '', '4135'),
-(108, 17, 33, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '25000', '1', '25000', '4000', '29000', '', '', '15000', '15000', 'PR', '', '4135'),
-(109, 17, 33, 'BLUSA MAGENTA ESTRAPLE GALLETA', 'MAG2076', 'productosventa', '23500', '1', '23500', '3760', '27260', '', '', '17200', '17200', 'PR', '', '4135'),
-(110, 2, 34, 'PERDOMO', 'REF2916', 'productosventa', '15000', '1', '15000', '2400', '17400', '', '', '30000', '30000', 'PR', '', '4135');
+INSERT INTO `cot_itemscotizaciones` (`ID`, `idCliente`, `NumCotizacion`, `Descripcion`, `Referencia`, `TablaOrigen`, `ValorUnitario`, `Cantidad`, `Multiplicador`, `Subtotal`, `IVA`, `Total`, `Descuento`, `ValorDescuento`, `PrecioCosto`, `SubtotalCosto`, `TipoItem`, `Devuelto`, `CuentaPUC`) VALUES
+(1, 0, 2, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', 0, '14900', '0', '14900', '', '', 'SANDALIA XIRELLA JOHANA TACON ', 'SANDALIA XIRELLA JOHANA TACON ', 'PR', '', '416510'),
+(2, 0, 2, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', 0, '23000', '3680', '26680', '', '', 'Perfil lipidico', 'Perfil lipidico', 'MO', '', '416510'),
+(3, 0, 2, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', 0, '23900', '0', '23900', '', '', 'MALETIN ESCOLAR MEDIANO', 'MALETIN ESCOLAR MEDIANO', 'PR', '', '416510'),
+(4, 0, 2, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', 'productosventa', '9900', '1', 0, '9900', '0', '9900', '', '', 'BOXER FE&RO LICRA RAYAS T/L', 'BOXER FE&RO LICRA RAYAS T/L', 'PR', '', '416510'),
+(5, 0, 2, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', 0, '8900', '0', '8900', '', '', 'BOXER FE&RO ALGODON RAYAS T/L', 'BOXER FE&RO ALGODON RAYAS T/L', 'PR', '', '416510'),
+(6, 0, 2, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', 0, '16000', '2560', '18560', '', '', 'Salud Ocupacional (Examen de Ingreso, Periodi', 'Salud Ocupacional (Examen de Ingreso, Periodi', 'MO', '', '416510'),
+(7, 0, 2, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '1', 0, '13900', '0', '13900', '', '', 'SANDALIA XIRELLA JULIANA', 'SANDALIA XIRELLA JULIANA', 'PR', '', '416510'),
+(8, 0, 3, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', 0, '14900', '0', '14900', '', '', '10500', '10500', 'PR', '', '416510'),
+(9, 0, 3, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', 0, '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
+(10, 0, 3, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', 0, '23900', '0', '23900', '', '', '17000', '17000', 'PR', '', '416510'),
+(11, 0, 3, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', 'productosventa', '9900', '1', 0, '9900', '0', '9900', '', '', '6500', '6500', 'PR', '', '416510'),
+(12, 0, 3, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', 0, '8900', '0', '8900', '', '', '6200', '6200', 'PR', '', '416510'),
+(13, 0, 3, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', 0, '16000', '2560', '18560', '', '', '7000', '7000', 'MO', '', '416510'),
+(14, 0, 3, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '1', 0, '13900', '0', '13900', '', '', '10300', '10300', 'PR', '', '416510'),
+(15, 0, 4, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', 0, '14900', '0', '14900', '', '', '10500', '10500', 'PR', '', '416510'),
+(16, 0, 4, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', 0, '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
+(17, 0, 4, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', 0, '23900', '0', '23900', '', '', '17000', '17000', 'PR', '', '416510'),
+(18, 0, 4, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', 'productosventa', '9900', '1', 0, '9900', '0', '9900', '', '', '6500', '6500', 'PR', '', '416510'),
+(19, 0, 4, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', 0, '8900', '0', '8900', '', '', '6200', '6200', 'PR', '', '416510'),
+(20, 0, 4, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', 0, '16000', '2560', '18560', '', '', '7000', '7000', 'MO', '', '416510'),
+(21, 0, 4, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '6', 0, '83400', '0', '83400', '', '', '10300', '61800', 'PR', '', '416510'),
+(22, 0, 5, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '5', 0, '74500', '0', '74500', '', '', '10500', '52500', 'PR', '', '416510'),
+(23, 0, 5, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', 0, '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
+(24, 0, 5, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', 0, '23900', '0', '23900', '', '', '17000', '17000', 'PR', '', '416510'),
+(25, 0, 5, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', 'productosventa', '9900', '1', 0, '9900', '0', '9900', '', '', '6500', '6500', 'PR', '', '416510'),
+(26, 0, 5, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', 0, '8900', '0', '8900', '', '', '6200', '6200', 'PR', '', '416510'),
+(27, 0, 5, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', 0, '16000', '2560', '18560', '', '', '7000', '7000', 'MO', '', '416510'),
+(28, 0, 5, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '6', 0, '83400', '0', '83400', '', '', '10300', '61800', 'PR', '', '416510'),
+(29, 0, 6, 'CHANCLA EVACOL  LUJO HOMBRE', 'EVA856-10', 'productosventa', '16900', '1', 0, '16900', '0', '16900', '', '', '11500', '11500', 'PR', '', '416510'),
+(30, 0, 6, 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', 'PAELTA', 'servicios', '60000', '1', 0, '60000', '9600', '69600', '', '', '50000', '50000', 'MO', '', '416510'),
+(31, 0, 6, 'Audiometria clinica', 'VEAC', 'servicios', '50000', '1', 0, '50000', '8000', '58000', '', '', '12500', '12500', 'MO', '', '416510'),
+(32, 0, 7, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', 0, '14900', '0', '14900', '', '', '10500', '10500', 'PR', '', '416510'),
+(33, 0, 8, 'MALETIN ESCOLAR GRANDE', 'REF515', 'productosventa', '50000', '1', 0, '50000', '0', '50000', '', '', '19000', '19000', 'PR', '', '416510'),
+(34, 0, 9, 'BABERO VAQUIRIN ALEGRE', 'VAQ253', 'productosventa', '11500', '1', 0, '11500', '0', '11500', '', '', '8400', '8400', 'PR', '', '416510'),
+(35, 0, 9, 'Audiometrias Tamiz ', 'EAAT', 'servicios', '15000', '1', 0, '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
+(36, 0, 9, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '3', 0, '71700', '0', '71700', '', '', '17000', '51000', 'PR', '', '416510'),
+(37, 0, 9, 'BOXER FE&RO ALGODON SOLO FONDO T/4', 'FE&88014', 'productosventa', '4900', '1', 0, '4900', '0', '4900', '', '', '3500', '3500', 'PR', '', '416510'),
+(38, 0, 9, 'CHANCLA EVACOL S.A.S HOMBRE', 'EVA856-08', 'productosventa', '16500', '1', 0, '16500', '0', '16500', '', '', '11500', '11500', 'PR', '', '416510'),
+(39, 0, 9, 'Prueba de embarazo', 'ELPE', 'servicios', '14000', '1', 0, '14000', '2240', '16240', '', '', '6000', '6000', 'MO', '', '416510'),
+(40, 0, 10, 'PLATAFORMA XIRELLA LAURA BOCA DE PESCADO', 'XIR070', 'productosventa', '19900', '1', 0, '19900', '0', '19900', '', '', '13790', '13790', 'PR', '', '416510'),
+(41, 0, 11, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '100', '1000', 0, '100000', '16000', '116000', '', '', '40', '40000', 'AQ', '', '416510'),
+(42, 0, 11, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '20', 0, '4000', '640', '4640', '', '', '100', '2000', 'AQ', '', '416510'),
+(43, 0, 12, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', 0, '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
+(44, 0, 12, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '100', '12', 0, '1200', '192', '1392', '', '', '100', '1200', 'AQ', '', '416510'),
+(45, 0, 12, 'Audiometrias Tamiz ', 'EAAT', 'servicios', '15000', '1', 0, '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
+(46, 0, 13, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', 0, '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
+(47, 0, 13, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '1', 0, '200', '32', '232', '', '', '100', '100', 'AQ', '', '416510'),
+(48, 0, 14, 'TOALLA VAQUIRIN BB BAN FELIZ', 'VAQ328', 'productosventa', '16500', '1', 0, '16500', '0', '16500', '', '', '12000', '12000', 'PR', '', '416510'),
+(49, 0, 14, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', 0, '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
+(50, 0, 14, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', 0, '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
+(51, 0, 15, 'SANDALIA GOCH DAMA', 'REF189', 'productosventa', '8500', '1', 0, '8500', '0', '8500', '', '', '5800', '5800', 'PR', '', '416510'),
+(52, 0, 15, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', 0, '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '416510'),
+(53, 0, 16, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '19500', '1', 0, '19500', '0', '19500', '', '', '14250', '14250', 'PR', '', '416510'),
+(54, 0, 17, 'GORRA HOMBRE', 'REF293', 'productosventa', '8500', '1', 0, '8500', '0', '8500', '', '', '6000', '6000', 'PR', '', '416510'),
+(55, 0, 17, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '10', 0, '810', '129.6', '939.6', '', '', '40', '400', 'AQ', '', '416510'),
+(56, 0, 18, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '500', 0, '40500', '6480', '46980', '', '', '40', '20000', 'AQ', '', '416510'),
+(57, 0, 18, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '200', 0, '40000', '6400', '46400', '', '', '100', '20000', 'AQ', '', '416510'),
+(58, 0, 18, 'Protectores auditivos', 'VEPA', 'servicios', '22000', '25', 0, '550000', '88000', '638000', '', '', '10000', '250000', 'MO', '', '416510'),
+(59, 0, 18, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '45', 0, '1035000', '165600', '1200600', '', '', '12000', '540000', 'MO', '', '416510'),
+(60, 0, 19, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '200', 0, '16200', '2592', '18792', '', '', '40', '8000', 'AQ', '', '416510'),
+(61, 0, 19, 'BLUSA AMOR BENDITO ENCAJE ESPALDA', 'AMOBD674', 'productosventa', '27900', '500', 0, '13950000', '0', '13950000', '', '', '19900', '9950000', 'PR', '', '416510'),
+(62, 0, 19, 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 'NJF3992', 'productosventa', '21900', '1', 0, '21900', '0', '21900', '', '', '15999', '15999', 'PR', '', '416510'),
+(63, 0, 19, 'BLUSA MAGENTA TIRAS', 'MAG2087', 'productosventa', '20900', '1', 0, '20900', '0', '20900', '', '', '15400', '15400', 'PR', '', '416510'),
+(64, 0, 19, 'BLUSA KEBONITA CAMPESINA', 'KEBM-0153', 'productosventa', '21900', '1', 0, '21900', '0', '21900', '', '', '16000', '16000', 'PR', '', '416510'),
+(65, 0, 19, 'BLUSA NJ FASHION GALLETA TULL\n', 'NJF4001', 'productosventa', '18900', '1', 0, '18900', '0', '18900', '', '', '13700', '13700', 'PR', '', '416510'),
+(66, 0, 19, 'Audiometrias Tamiz ', 'EAAT', 'servicios', '15000', '1', 0, '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
+(67, 0, 19, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '1', 0, '200', '32', '232', '', '', '100', '100', 'AQ', '', '416510'),
+(68, 0, 19, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', 0, '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
+(69, 0, 19, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', 0, '14900', '0', '14900', '', '', '10500', '10500', 'PR', '', '416510'),
+(70, 0, 19, 'SANDALIA GOCH DAMA', 'REF189', 'productosventa', '8500', '1', 0, '8500', '0', '8500', '', '', '5800', '5800', 'PR', '', '416510'),
+(71, 0, 19, 'SANDALIA XIRELLA DIANA ETNICA', 'XIR069', 'productosventa', '9500', '1', 0, '9500', '0', '9500', '', '', '6500', '6500', 'PR', '', '416510'),
+(72, 0, 19, 'MALETIN ESCOLAR MEDIANO', 'REF514', 'productosventa', '23900', '1', 0, '23900', '0', '23900', '', '', '17000', '17000', 'PR', '', '416510'),
+(73, 0, 19, 'MALETIN ESCOLAR GRANDE', 'REF515', 'productosventa', '25900', '1', 0, '25900', '0', '25900', '', '', '19000', '19000', 'PR', '', '416510'),
+(74, 0, 19, 'MALENTIN ESCOLAR MUNECOS PEQUENO', 'REF517', 'productosventa', '30900', '1', 0, '30900', '0', '30900', '', '', '22000', '22000', 'PR', '', '416510'),
+(75, 0, 19, 'Tamiz audiometrias', 'VETA', 'servicios', '15000', '1', 0, '15000', '2400', '17400', '', '', '7000', '7000', 'MO', '', '416510'),
+(76, 0, 19, 'Audiometria clinica', 'VEAC', 'servicios', '25000', '1', 0, '25000', '4000', '29000', '', '', '12500', '12500', 'MO', '', '416510'),
+(77, 0, 19, 'Protectores auditivos', 'VEPA', 'servicios', '22000', '1', 0, '22000', '3520', '25520', '', '', '10000', '10000', 'MO', '', '416510'),
+(78, 0, 20, 'BLUSA MAGENTA TIRAS', 'MAG2087', 'productosventa', '20900', '90', 0, '1881000', '0', '1881000', '', '', '15400', '1386000', 'PR', '', '416510'),
+(79, 0, 20, 'BLUSA KEBONITA CAMPESINA', 'KEBM-0153', 'productosventa', '21900', '60', 0, '1314000', '0', '1314000', '', '', '16000', '960000', 'PR', '', '416510'),
+(80, 0, 20, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '500', 0, '40500', '6480', '46980', '', '', '40', '20000', 'AQ', '', '416510'),
+(81, 0, 20, 'BASE TORNILLO NIVELADOR', 'AC002', 'productosalquiler', '200', '100', 0, '20000', '3200', '23200', '', '', '100', '10000', 'AQ', '', '416510'),
+(82, 0, 21, 'BLUSA MAGENTA TIRAS', 'MAG2087', 'productosventa', '20900', '1', 0, '20900', '0', '20900', '', '', '15400', '15400', 'PR', '', '4135'),
+(83, 17, 22, 'BLUSA MAGENTA ESTRAPLE GALLETA', 'MAG2076', 'productosventa', '23500', '1', 0, '23500', '0', '23500', '', '', '17200', '17200', 'PR', '', '4135'),
+(84, 17, 22, 'BLUSA NJ FASHION GALLETA TULL TIRAS', 'NJF4003', 'productosventa', '23900', '1', 0, '23900', '0', '23900', '', '', '18200', '18200', 'PR', '', '4135'),
+(85, 17, 22, 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 'NJF3992', 'productosventa', '23000', '1', 0, '23000', '3680', '26680', '', '', '15999', '15999', 'PR', '', '4135'),
+(86, 17, 22, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', 0, '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
+(87, 2, 23, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '20000', '3', 0, '60000', '0', '60000', '', '', '14250', '42750', 'PR', '', '4135'),
+(88, 2, 23, 'BLUSA NJ FASHION GALLETA TULL TIRAS', 'NJF4003', 'productosventa', '50000', '1', 0, '50000', '0', '50000', '', '', '18200', '18200', 'PR', '', '4135'),
+(89, 17, 24, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '20000', '5', 0, '100000', '0', '100000', '', '', '14250', '71250', 'PR', '', '4135'),
+(90, 17, 24, 'BLUSA NJ FASHION GALLETA TULL TIRAS', 'NJF4003', 'productosventa', '23900', '1', 0, '23900', '0', '23900', '', '', '18200', '18200', 'PR', '', '4135'),
+(93, 2, 25, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '20000', '1', 0, '20000', '3200', '23200', '', '', '14250', '14250', 'PR', '', '4135'),
+(94, 2, 25, 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 'NJF3992', 'productosventa', '21900', '1', 0, '21900', '3504', '25404', '', '', '15999', '15999', 'PR', '', '4135'),
+(95, 2, 25, 'SANDALIA 2GOOD DAMA', 'REF189', 'productosventa', '12900', '1', 0, '12900', '2064', '14964', '', '', '9000', '9000', 'PR', '', '4135'),
+(96, 17, 26, 'FALDA ESCOLAR T/6', 'FALDA6', 'productosventa', '21000', '1', 0, '21000', '3360', '24360', '', '', '14500', '14500', 'PR', '', '4135'),
+(97, 17, 26, 'BLUSA KEBONITA CHIFON RAYAS', 'KEBM0132', 'productosventa', '20000', '4', 0, '80000', '12800', '92800', '', '', '18000', '72000', 'PR', '', '4135'),
+(98, 17, 27, 'PANTALONCILLOS', 'REF2915', 'productosventa', '300', '3', 0, '900', '144', '1044', '', '', '200', '600', 'PR', '', '4135'),
+(99, 17, 28, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '19500', '1', 0, '19500', '3120', '22620', '', '', '14250', '14250', 'PR', '', '4135'),
+(100, 17, 28, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', 0, '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
+(101, 17, 28, 'Frotis de Garganta', 'ELFG', 'servicios', '12500', '1', 0, '12500', '2000', '14500', '', '', '6000', '6000', 'MO', '', '416520'),
+(102, 17, 29, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '1', 0, '81', '12.96', '93.96', '', '', '40', '40', 'AQ', '', '4135'),
+(103, 17, 29, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '1', 0, '13900', '2224', '16124', '', '', '9000', '9000', 'PR', '', '4135'),
+(104, 17, 30, 'CHANCLA EVACOL S.A.S HOMBRE', 'EVA856-08', 'productosventa', '16500', '1', 0, '16500', '2640', '19140', '', '', '12000', '12000', 'PR', '', '4135'),
+(105, 17, 31, 'PLATAFORMA XIRELLA LAURA BOCA DE PESCADO', 'XIR070', 'productosventa', '19900', '1', 0, '19900', '3184', '23084', '', '', '13790', '13790', 'PR', '', '4135'),
+(106, 18, 32, 'BASE COLLAR GALVANIZADA', 'AC001', 'productosalquiler', '81', '200', 0, '16200', '2592', '18792', '', '', '40', '8000', 'AQ', '', '4135'),
+(107, 18, 32, 'DIAGONAL DE 2.5 MTS X 1.5MTS', 'PA003', 'productosalquiler', '296', '100', 0, '29600', '4736', '34336', '', '', '100', '10000', 'AQ', '', '4135'),
+(108, 17, 33, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '25000', '1', 0, '25000', '4000', '29000', '', '', '15000', '15000', 'PR', '', '4135'),
+(109, 17, 33, 'BLUSA MAGENTA ESTRAPLE GALLETA', 'MAG2076', 'productosventa', '23500', '1', 0, '23500', '3760', '27260', '', '', '17200', '17200', 'PR', '', '4135'),
+(110, 2, 34, 'PERDOMO', 'REF2916', 'productosventa', '15000', '1', 0, '15000', '2400', '17400', '', '', '30000', '30000', 'PR', '', '4135'),
+(111, 17, 35, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '25000', '4', 0, '200000', '32000', '232000', '', '', '15000', '60000', 'PR', '', '4135'),
+(112, 17, 35, 'BLUSA MAGENTA TIRAS', 'MAG2087', 'productosventa', '20900', '2', 0, '41800', '6688', '48488', '', '', '15400', '30800', 'PR', '', '4135'),
+(113, 17, 36, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '20000', '1', 3, '60000', '9600', '69600', '', '', '15000', '15000', 'PR', '', '4135'),
+(114, 17, 36, 'BLUSA MAGENTA ESTRAPLE GALLETA', 'MAG2076', 'productosventa', '23500', '1', 0, '23500', '3760', '27260', '', '', '17200', '17200', 'PR', '', '4135'),
+(115, 17, 37, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '25000', '1', 2, '50000', '8000', '58000', '', '', '15000', '15000', 'PR', '', '4135'),
+(116, 17, 37, 'BLUSA NJ FASHION GALLETA TULL\n', 'NJF4001', 'productosventa', '18900', '1', 1, '18900', '3024', '21924', '', '', '13700', '13700', 'PR', '', '4135'),
+(117, 17, 38, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '25000', '1', 1, '25000', '4000', '29000', '', '', '15000', '15000', 'PR', '', '4135'),
+(118, 22, 39, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '25000', '1', 1, '25000', '4000', '29000', '', '', '15000', '15000', 'PR', '', '4135');
 
 -- --------------------------------------------------------
 
@@ -3939,7 +3955,7 @@ CREATE TABLE IF NOT EXISTS `empresapro_resoluciones_facturacion` (
 --
 
 INSERT INTO `empresapro_resoluciones_facturacion` (`ID`, `NumResolucion`, `Fecha`, `NumSolicitud`, `Tipo`, `Factura`, `Prefijo`, `Desde`, `Hasta`, `FechaVencimiento`, `idEmpresaPro`, `Estado`, `Completada`) VALUES
-(1, '150000055430', '2015-03-26', '242', '02', 'Computador', 'A', 1, 1000, '2017-03-26', 1, '', 'NO');
+(1, '150000055430', '2015-03-26', '242', '02', 'Computador', 'A', 103, 1000, '2017-03-26', 1, '', 'NO');
 
 -- --------------------------------------------------------
 
@@ -3984,7 +4000,16 @@ INSERT INTO `facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefijo`, 
 ('201604142305220.65142100 1460693122', 1, '02', 'A', 1, '2016-04-14', '23:05:22', '', '', 'Contado', '48500', '7760', '', '56260', '56260', '', 1, 1, 3, 17, '32200', '', '', '', ''),
 ('201604142309080.50133900 1460693348', 1, '02', 'A', 2, '2016-04-14', '23:09:08', '', '', 'Contado', '48500', '7760', '', '56260', '56260', '', 1, 1, 3, 17, '32200', '', '', '', ''),
 ('201604142309470.90159300 1460693387', 1, '02', 'A', 3, '2016-04-14', '23:09:47', '', '', 'Contado', '45800', '7328', '', '53128', '53128', '', 1, 1, 3, 18, '18000', '', '', '', ''),
-('201604142329080.86199600 1460694548', 1, '02', 'A', 4, '2016-04-14', '23:29:08', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', '');
+('201604142329080.86199600 1460694548', 1, '02', 'A', 4, '2016-04-14', '23:29:08', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', ''),
+('201604150934240.73289200 1460730864', 1, '02', 'A', 5, '2016-04-15', '09:34:24', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', ''),
+('201604151031510.52018300 1460734311', 1, '02', 'A', 6, '2016-04-15', '10:31:51', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', ''),
+('201604151032100.21625200 1460734330', 1, '02', 'A', 10, '2016-04-15', '10:32:10', '', '', 'Contado', '48500', '7760', '', '56260', '56260', '', 1, 1, 3, 17, '32200', '', '', '', ''),
+('201604151032260.47418200 1460734346', 1, '02', 'A', 11, '2016-04-15', '10:32:26', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', ''),
+('201604151410250.10309700 1460747425', 1, '02', 'A', 12, '2016-04-15', '14:10:25', '', '', 'Contado', '68900', '11024', '', '79924', '79924', '', 1, 1, 3, 17, '28700', '', '', '', 'dsa'),
+('201604151411500.95200800 1460747510', 1, '02', 'A', 13, '2016-04-15', '14:11:50', '', '', 'Contado', '25000', '4000', '', '29000', '29000', '', 1, 1, 3, 17, '15000', '', '', '', ''),
+('201604151413040.52521600 1460747584', 1, '02', 'A', 14, '2016-04-15', '14:13:04', '', '', 'Contado', '68900', '11024', '', '79924', '79924', '', 1, 1, 3, 17, '28700', '', '', '', ''),
+('201604151424010.09577000 1460748241', 1, '02', 'A', 15, '2016-04-15', '14:24:01', '', '', 'Contado', '25000', '4000', '', '29000', '29000', '', 1, 1, 3, 17, '15000', '', '', '', ''),
+('201604151424190.79383900 1460748259', 1, '02', 'A', 16, '2016-04-15', '14:24:19', '', '', 'Contado', '68900', '11024', '', '79924', '79924', '', 1, 1, 3, 17, '28700', '', '', '', '');
 
 --
 -- Disparadores `facturas`
@@ -4362,7 +4387,20 @@ INSERT INTO `facturas_items` (`ID`, `FechaFactura`, `idFactura`, `TablaItems`, `
 ('201604142309080.65934800 1460693348', '2016-04-14', '201604142309080.50133900 1460693348', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '1', '0', '23500', '3760', '27260', '16%', '17200', '17200', 'PR', 4135, 'cotizacionesv5', '33'),
 ('201604142309470.95559600 1460693387', '2016-04-14', '201604142309470.90159300 1460693387', 'productosalquiler', 'AC001', 'BASE COLLAR GALVANIZADA', 13, 0, 0, 0, 0, 0, '81', '200', '0', '16200', '2592', '18792', '16%', '40', '8000', 'AQ', 4135, 'cotizacionesv5', '32'),
 ('201604142309470.97259700 1460693387', '2016-04-14', '201604142309470.90159300 1460693387', 'productosalquiler', 'PA003', 'DIAGONAL DE 2.5 MTS X 1.5MTS', 13, 0, 0, 0, 0, 0, '296', '100', '0', '29600', '4736', '34336', '16%', '100', '10000', 'AQ', 4135, 'cotizacionesv5', '32'),
-('201604142329080.89599800 1460694548', '2016-04-14', '201604142329080.86199600 1460694548', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34');
+('201604142329080.89599800 1460694548', '2016-04-14', '201604142329080.86199600 1460694548', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
+('201604150934240.75589400 1460730864', '2016-04-15', '201604150934240.73289200 1460730864', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
+('201604151031510.55518500 1460734311', '2016-04-15', '201604151031510.52018300 1460734311', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
+('201604151032100.24225400 1460734330', '2016-04-15', '201604151032100.21625200 1460734330', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '33'),
+('201604151032100.25325400 1460734330', '2016-04-15', '201604151032100.21625200 1460734330', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '1', '0', '23500', '3760', '27260', '16%', '17200', '17200', 'PR', 4135, 'cotizacionesv5', '33'),
+('201604151032260.49718400 1460734346', '2016-04-15', '201604151032260.47418200 1460734346', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
+('201604151410250.12209900 1460747425', '2016-04-15', '201604151410250.10309700 1460747425', '', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '2', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'rem_devoluciones', '24'),
+('201604151410250.18310200 1460747425', '2016-04-15', '201604151410250.10309700 1460747425', '', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '1', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'rem_devoluciones', '24'),
+('201604151411500.98801000 1460747510', '2016-04-15', '201604151411500.95200800 1460747510', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '38'),
+('201604151413040.53821700 1460747584', '2016-04-15', '201604151413040.52521600 1460747584', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '37'),
+('201604151413040.59022000 1460747584', '2016-04-15', '201604151413040.52521600 1460747584', 'productosventa', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '0', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'cotizacionesv5', '37'),
+('201604151424010.13977200 1460748241', '2016-04-15', '201604151424010.09577000 1460748241', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '38'),
+('201604151424190.80984000 1460748259', '2016-04-15', '201604151424190.79383900 1460748259', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '2', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '37'),
+('201604151424190.84984200 1460748259', '2016-04-15', '201604151424190.79383900 1460748259', 'productosventa', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '1', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'cotizacionesv5', '37');
 
 --
 -- Disparadores `facturas_items`
@@ -4637,7 +4675,7 @@ CREATE TABLE IF NOT EXISTS `kardexmercancias` (
   `ValorTotal` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ProductosVenta_idProductosVenta` int(11) NOT NULL,
   PRIMARY KEY (`idKardexMercancias`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11955 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11977 ;
 
 --
 -- Volcado de datos para la tabla `kardexmercancias`
@@ -16610,7 +16648,29 @@ INSERT INTO `kardexmercancias` (`idKardexMercancias`, `Fecha`, `Movimiento`, `De
 (11951, '2016-04-14', 'ENTRADA', 'INICIO', '', '0', '30000', NULL, 2916),
 (11952, '2016-04-14', 'SALDOS', 'INICIO', '', '0', '30000', NULL, 2916),
 (11953, '2016-04-14', 'SALIDA', 'Factura', '201604142329080.86199600 1460694548', '1', '30000', '30000', 2916),
-(11954, '2016-04-14', 'SALDOS', 'Factura', '201604142329080.86199600 1460694548', '-1', '30000', '-30000', 2916);
+(11954, '2016-04-14', 'SALDOS', 'Factura', '201604142329080.86199600 1460694548', '-1', '30000', '-30000', 2916),
+(11955, '2016-04-15', 'SALIDA', 'Factura', '201604150934240.73289200 1460730864', '1', '30000', '30000', 2916),
+(11956, '2016-04-15', 'SALDOS', 'Factura', '201604150934240.73289200 1460730864', '-2', '30000', '-60000', 2916),
+(11957, '2016-04-15', 'SALIDA', 'Factura', '201604151031510.52018300 1460734311', '1', '30000', '30000', 2916),
+(11958, '2016-04-15', 'SALDOS', 'Factura', '201604151031510.52018300 1460734311', '-3', '30000', '-90000', 2916),
+(11959, '2016-04-15', 'SALIDA', 'Factura', '201604151032100.21625200 1460734330', '1', '15000', '15000', 1),
+(11960, '2016-04-15', 'SALDOS', 'Factura', '201604151032100.21625200 1460734330', '97', '15000', '1455000', 1),
+(11961, '2016-04-15', 'SALIDA', 'Factura', '201604151032100.21625200 1460734330', '1', '17200', '17200', 3),
+(11962, '2016-04-15', 'SALDOS', 'Factura', '201604151032100.21625200 1460734330', '-7', '17200', '-120400', 3),
+(11963, '2016-04-15', 'SALIDA', 'Factura', '201604151032260.47418200 1460734346', '1', '30000', '30000', 2916),
+(11964, '2016-04-15', 'SALDOS', 'Factura', '201604151032260.47418200 1460734346', '-4', '30000', '-120000', 2916),
+(11965, '2016-04-15', 'SALIDA', 'Factura', '201604151411500.95200800 1460747510', '1', '15000', '15000', 1),
+(11966, '2016-04-15', 'SALDOS', 'Factura', '201604151411500.95200800 1460747510', '96', '15000', '1440000', 1),
+(11967, '2016-04-15', 'SALIDA', 'Factura', '201604151413040.52521600 1460747584', '1', '15000', '15000', 1),
+(11968, '2016-04-15', 'SALDOS', 'Factura', '201604151413040.52521600 1460747584', '95', '15000', '1425000', 1),
+(11969, '2016-04-15', 'SALIDA', 'Factura', '201604151413040.52521600 1460747584', '1', '13700', '13700', 6),
+(11970, '2016-04-15', 'SALDOS', 'Factura', '201604151413040.52521600 1460747584', '3', '13700', '41100', 6),
+(11971, '2016-04-15', 'SALIDA', 'Factura', '201604151424010.09577000 1460748241', '1', '15000', '15000', 1),
+(11972, '2016-04-15', 'SALDOS', 'Factura', '201604151424010.09577000 1460748241', '94', '15000', '1410000', 1),
+(11973, '2016-04-15', 'SALIDA', 'Factura', '201604151424190.79383900 1460748259', '1', '15000', '15000', 1),
+(11974, '2016-04-15', 'SALDOS', 'Factura', '201604151424190.79383900 1460748259', '93', '15000', '1395000', 1),
+(11975, '2016-04-15', 'SALIDA', 'Factura', '201604151424190.79383900 1460748259', '1', '13700', '13700', 6),
+(11976, '2016-04-15', 'SALDOS', 'Factura', '201604151424190.79383900 1460748259', '2', '13700', '27400', 6);
 
 -- --------------------------------------------------------
 
@@ -16695,7 +16755,7 @@ CREATE TABLE IF NOT EXISTS `librodiario` (
   `idCentroCosto` int(11) NOT NULL,
   `idEmpresa` int(11) NOT NULL,
   PRIMARY KEY (`idLibroDiario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=188 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=279 ;
 
 --
 -- Volcado de datos para la tabla `librodiario`
@@ -16888,7 +16948,99 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (184, '2016-04-14', 'FACTURA', '201604142329080.86199600 1460694548', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '120', '0', '120', 'NO', 'NO', 1, 1),
 (185, '2016-04-14', 'FACTURA', '201604142329080.86199600 1460694548', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '120', '-120', 'NO', 'NO', 1, 1),
 (186, '2016-04-14', 'FACTURA', '201604142329080.86199600 1460694548', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '30000', '0', '30000', 'NO', 'NO', 1, 1),
-(187, '2016-04-14', 'FACTURA', '201604142329080.86199600 1460694548', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '30000', '-30000', 'NO', 'NO', 1, 1);
+(187, '2016-04-14', 'FACTURA', '201604142329080.86199600 1460694548', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '30000', '-30000', 'NO', 'NO', 1, 1),
+(188, '2016-04-15', 'FACTURA', '201604150934240.73289200 1460730864', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '17400', '0', '17400', 'NO', 'NO', 1, 1),
+(189, '2016-04-15', 'FACTURA', '201604150934240.73289200 1460730864', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(190, '2016-04-15', 'FACTURA', '201604150934240.73289200 1460730864', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2400', '-2400', 'NO', 'NO', 1, 1);
+INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `Num_Documento_Interno`, `Tercero_Tipo_Documento`, `Tercero_Identificacion`, `Tercero_DV`, `Tercero_Primer_Apellido`, `Tercero_Segundo_Apellido`, `Tercero_Primer_Nombre`, `Tercero_Otros_Nombres`, `Tercero_Razon_Social`, `Tercero_Direccion`, `Tercero_Cod_Dpto`, `Tercero_Cod_Mcipio`, `Tercero_Pais_Domicilio`, `Concepto`, `CuentaPUC`, `NombreCuenta`, `Detalle`, `Debito`, `Credito`, `Neto`, `Mayor`, `Esp`, `idCentroCosto`, `idEmpresa`) VALUES
+(191, '2016-04-15', 'FACTURA', '201604150934240.73289200 1460730864', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '120', '0', '120', 'NO', 'NO', 1, 1),
+(192, '2016-04-15', 'FACTURA', '201604150934240.73289200 1460730864', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '120', '-120', 'NO', 'NO', 1, 1),
+(193, '2016-04-15', 'FACTURA', '201604150934240.73289200 1460730864', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '30000', '0', '30000', 'NO', 'NO', 1, 1),
+(194, '2016-04-15', 'FACTURA', '201604150934240.73289200 1460730864', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '30000', '-30000', 'NO', 'NO', 1, 1),
+(195, '2016-04-15', 'FACTURA', '201604151031510.52018300 1460734311', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '17400', '0', '17400', 'NO', 'NO', 1, 1),
+(196, '2016-04-15', 'FACTURA', '201604151031510.52018300 1460734311', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(197, '2016-04-15', 'FACTURA', '201604151031510.52018300 1460734311', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2400', '-2400', 'NO', 'NO', 1, 1),
+(198, '2016-04-15', 'FACTURA', '201604151031510.52018300 1460734311', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '120', '0', '120', 'NO', 'NO', 1, 1),
+(199, '2016-04-15', 'FACTURA', '201604151031510.52018300 1460734311', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '120', '-120', 'NO', 'NO', 1, 1),
+(200, '2016-04-15', 'FACTURA', '201604151031510.52018300 1460734311', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '30000', '0', '30000', 'NO', 'NO', 1, 1),
+(201, '2016-04-15', 'FACTURA', '201604151031510.52018300 1460734311', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '30000', '-30000', 'NO', 'NO', 1, 1),
+(202, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '29000', '0', '29000', 'NO', 'NO', 1, 1),
+(203, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '25000', '-25000', 'NO', 'NO', 1, 1),
+(204, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4000', '-4000', 'NO', 'NO', 1, 1),
+(205, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '200', '0', '200', 'NO', 'NO', 1, 1),
+(206, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '200', '-200', 'NO', 'NO', 1, 1),
+(207, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1),
+(208, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(209, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '27260', '0', '27260', 'NO', 'NO', 1, 1),
+(210, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '23500', '-23500', 'NO', 'NO', 1, 1),
+(211, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3760', '-3760', 'NO', 'NO', 1, 1),
+(212, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '188', '0', '188', 'NO', 'NO', 1, 1),
+(213, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '188', '-188', 'NO', 'NO', 1, 1),
+(214, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '17200', '0', '17200', 'NO', 'NO', 1, 1),
+(215, '2016-04-15', 'FACTURA', '201604151032100.21625200 1460734330', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '17200', '-17200', 'NO', 'NO', 1, 1),
+(216, '2016-04-15', 'FACTURA', '201604151032260.47418200 1460734346', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '17400', '0', '17400', 'NO', 'NO', 1, 1),
+(217, '2016-04-15', 'FACTURA', '201604151032260.47418200 1460734346', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(218, '2016-04-15', 'FACTURA', '201604151032260.47418200 1460734346', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2400', '-2400', 'NO', 'NO', 1, 1),
+(219, '2016-04-15', 'FACTURA', '201604151032260.47418200 1460734346', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '120', '0', '120', 'NO', 'NO', 1, 1),
+(220, '2016-04-15', 'FACTURA', '201604151032260.47418200 1460734346', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '120', '-120', 'NO', 'NO', 1, 1),
+(221, '2016-04-15', 'FACTURA', '201604151032260.47418200 1460734346', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '30000', '0', '30000', 'NO', 'NO', 1, 1),
+(222, '2016-04-15', 'FACTURA', '201604151032260.47418200 1460734346', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '30000', '-30000', 'NO', 'NO', 1, 1),
+(223, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '58000', '0', '58000', 'NO', 'NO', 1, 1),
+(224, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '50000', '-50000', 'NO', 'NO', 1, 1),
+(225, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '8000', '-8000', 'NO', 'NO', 1, 1),
+(226, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '400', '0', '400', 'NO', 'NO', 1, 1),
+(227, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '400', '-400', 'NO', 'NO', 1, 1),
+(228, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1),
+(229, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(230, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '21924', '0', '21924', 'NO', 'NO', 1, 1),
+(231, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '18900', '-18900', 'NO', 'NO', 1, 1),
+(232, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3024', '-3024', 'NO', 'NO', 1, 1),
+(233, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '151', '0', '151', 'NO', 'NO', 1, 1),
+(234, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '151', '-151', 'NO', 'NO', 1, 1),
+(235, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '13700', '0', '13700', 'NO', 'NO', 1, 1),
+(236, '2016-04-15', 'FACTURA', '201604151410250.10309700 1460747425', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '13700', '-13700', 'NO', 'NO', 1, 1),
+(237, '2016-04-15', 'FACTURA', '201604151411500.95200800 1460747510', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '29000', '0', '29000', 'NO', 'NO', 1, 1),
+(238, '2016-04-15', 'FACTURA', '201604151411500.95200800 1460747510', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '25000', '-25000', 'NO', 'NO', 1, 1),
+(239, '2016-04-15', 'FACTURA', '201604151411500.95200800 1460747510', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4000', '-4000', 'NO', 'NO', 1, 1),
+(240, '2016-04-15', 'FACTURA', '201604151411500.95200800 1460747510', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '200', '0', '200', 'NO', 'NO', 1, 1),
+(241, '2016-04-15', 'FACTURA', '201604151411500.95200800 1460747510', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '200', '-200', 'NO', 'NO', 1, 1),
+(242, '2016-04-15', 'FACTURA', '201604151411500.95200800 1460747510', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1),
+(243, '2016-04-15', 'FACTURA', '201604151411500.95200800 1460747510', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(244, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '58000', '0', '58000', 'NO', 'NO', 1, 1),
+(245, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '50000', '-50000', 'NO', 'NO', 1, 1),
+(246, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '8000', '-8000', 'NO', 'NO', 1, 1),
+(247, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '400', '0', '400', 'NO', 'NO', 1, 1),
+(248, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '400', '-400', 'NO', 'NO', 1, 1),
+(249, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1),
+(250, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(251, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '21924', '0', '21924', 'NO', 'NO', 1, 1),
+(252, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '18900', '-18900', 'NO', 'NO', 1, 1),
+(253, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3024', '-3024', 'NO', 'NO', 1, 1),
+(254, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '151', '0', '151', 'NO', 'NO', 1, 1),
+(255, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '151', '-151', 'NO', 'NO', 1, 1),
+(256, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '13700', '0', '13700', 'NO', 'NO', 1, 1),
+(257, '2016-04-15', 'FACTURA', '201604151413040.52521600 1460747584', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '13700', '-13700', 'NO', 'NO', 1, 1),
+(258, '2016-04-15', 'FACTURA', '201604151424010.09577000 1460748241', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '29000', '0', '29000', 'NO', 'NO', 1, 1),
+(259, '2016-04-15', 'FACTURA', '201604151424010.09577000 1460748241', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '25000', '-25000', 'NO', 'NO', 1, 1),
+(260, '2016-04-15', 'FACTURA', '201604151424010.09577000 1460748241', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4000', '-4000', 'NO', 'NO', 1, 1),
+(261, '2016-04-15', 'FACTURA', '201604151424010.09577000 1460748241', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '200', '0', '200', 'NO', 'NO', 1, 1),
+(262, '2016-04-15', 'FACTURA', '201604151424010.09577000 1460748241', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '200', '-200', 'NO', 'NO', 1, 1),
+(263, '2016-04-15', 'FACTURA', '201604151424010.09577000 1460748241', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1),
+(264, '2016-04-15', 'FACTURA', '201604151424010.09577000 1460748241', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(265, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '58000', '0', '58000', 'NO', 'NO', 1, 1),
+(266, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '50000', '-50000', 'NO', 'NO', 1, 1),
+(267, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '8000', '-8000', 'NO', 'NO', 1, 1),
+(268, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '400', '0', '400', 'NO', 'NO', 1, 1),
+(269, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '400', '-400', 'NO', 'NO', 1, 1),
+(270, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1),
+(271, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1),
+(272, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '21924', '0', '21924', 'NO', 'NO', 1, 1),
+(273, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '18900', '-18900', 'NO', 'NO', 1, 1),
+(274, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3024', '-3024', 'NO', 'NO', 1, 1),
+(275, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '151', '0', '151', 'NO', 'NO', 1, 1),
+(276, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '151', '-151', 'NO', 'NO', 1, 1),
+(277, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '13700', '0', '13700', 'NO', 'NO', 1, 1),
+(278, '2016-04-15', 'FACTURA', '201604151424190.79383900 1460748259', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '13700', '-13700', 'NO', 'NO', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -17050,7 +17202,16 @@ INSERT INTO `ori_facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefij
 ('201604142305220.65142100 1460693122', 1, '02', 'A', 1, '2016-04-14', '23:05:22', '', '', 'Contado', '48500', '7760', '', '56260', '56260', '', 1, 1, 3, 17, '32200', '', '', '', ''),
 ('201604142309080.50133900 1460693348', 1, '02', 'A', 2, '2016-04-14', '23:09:08', '', '', 'Contado', '48500', '7760', '', '56260', '56260', '', 1, 1, 3, 17, '32200', '', '', '', ''),
 ('201604142309470.90159300 1460693387', 1, '02', 'A', 3, '2016-04-14', '23:09:47', '', '', 'Contado', '45800', '7328', '', '53128', '53128', '', 1, 1, 3, 18, '18000', '', '', '', ''),
-('201604142329080.86199600 1460694548', 1, '02', 'A', 4, '2016-04-14', '23:29:08', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', '');
+('201604142329080.86199600 1460694548', 1, '02', 'A', 4, '2016-04-14', '23:29:08', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', ''),
+('201604150934240.73289200 1460730864', 1, '02', 'A', 5, '2016-04-15', '09:34:24', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', ''),
+('201604151031510.52018300 1460734311', 1, '02', 'A', 6, '2016-04-15', '10:31:51', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', ''),
+('201604151032100.21625200 1460734330', 1, '02', 'A', 10, '2016-04-15', '10:32:10', '', '', 'Contado', '48500', '7760', '', '56260', '56260', '', 1, 1, 3, 17, '32200', '', '', '', ''),
+('201604151032260.47418200 1460734346', 1, '02', 'A', 11, '2016-04-15', '10:32:26', '', '', 'Contado', '15000', '2400', '', '17400', '17400', '', 1, 1, 3, 2, '30000', '', '', '', ''),
+('201604151410250.10309700 1460747425', 1, '02', 'A', 12, '2016-04-15', '14:10:25', '', '', 'Contado', '68900', '11024', '', '79924', '79924', '', 1, 1, 3, 17, '28700', '', '', '', 'dsa'),
+('201604151411500.95200800 1460747510', 1, '02', 'A', 13, '2016-04-15', '14:11:50', '', '', 'Contado', '25000', '4000', '', '29000', '29000', '', 1, 1, 3, 17, '15000', '', '', '', ''),
+('201604151413040.52521600 1460747584', 1, '02', 'A', 14, '2016-04-15', '14:13:04', '', '', 'Contado', '68900', '11024', '', '79924', '79924', '', 1, 1, 3, 17, '28700', '', '', '', ''),
+('201604151424010.09577000 1460748241', 1, '02', 'A', 15, '2016-04-15', '14:24:01', '', '', 'Contado', '25000', '4000', '', '29000', '29000', '', 1, 1, 3, 17, '15000', '', '', '', ''),
+('201604151424190.79383900 1460748259', 1, '02', 'A', 16, '2016-04-15', '14:24:19', '', '', 'Contado', '68900', '11024', '', '79924', '79924', '', 1, 1, 3, 17, '28700', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -17097,7 +17258,20 @@ INSERT INTO `ori_facturas_items` (`ID`, `FechaFactura`, `idFactura`, `TablaItems
 ('201604142309080.65934800 1460693348', '2016-04-14', '201604142309080.50133900 1460693348', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '1', '0', '23500', '3760', '27260', '16%', '17200', '17200', 'PR', 4135, 'cotizacionesv5', '33'),
 ('201604142309470.95559600 1460693387', '2016-04-14', '201604142309470.90159300 1460693387', 'productosalquiler', 'AC001', 'BASE COLLAR GALVANIZADA', 13, 0, 0, 0, 0, 0, '81', '200', '0', '16200', '2592', '18792', '16%', '40', '8000', 'AQ', 4135, 'cotizacionesv5', '32'),
 ('201604142309470.97259700 1460693387', '2016-04-14', '201604142309470.90159300 1460693387', 'productosalquiler', 'PA003', 'DIAGONAL DE 2.5 MTS X 1.5MTS', 13, 0, 0, 0, 0, 0, '296', '100', '0', '29600', '4736', '34336', '16%', '100', '10000', 'AQ', 4135, 'cotizacionesv5', '32'),
-('201604142329080.89599800 1460694548', '2016-04-14', '201604142329080.86199600 1460694548', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34');
+('201604142329080.89599800 1460694548', '2016-04-14', '201604142329080.86199600 1460694548', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
+('201604150934240.75589400 1460730864', '2016-04-15', '201604150934240.73289200 1460730864', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
+('201604151031510.55518500 1460734311', '2016-04-15', '201604151031510.52018300 1460734311', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
+('201604151032100.24225400 1460734330', '2016-04-15', '201604151032100.21625200 1460734330', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '33'),
+('201604151032100.25325400 1460734330', '2016-04-15', '201604151032100.21625200 1460734330', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '1', '0', '23500', '3760', '27260', '16%', '17200', '17200', 'PR', 4135, 'cotizacionesv5', '33'),
+('201604151032260.49718400 1460734346', '2016-04-15', '201604151032260.47418200 1460734346', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
+('201604151410250.12209900 1460747425', '2016-04-15', '201604151410250.10309700 1460747425', '', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '2', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'rem_devoluciones', '24'),
+('201604151410250.18310200 1460747425', '2016-04-15', '201604151410250.10309700 1460747425', '', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '1', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'rem_devoluciones', '24'),
+('201604151411500.98801000 1460747510', '2016-04-15', '201604151411500.95200800 1460747510', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '38'),
+('201604151413040.53821700 1460747584', '2016-04-15', '201604151413040.52521600 1460747584', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '37'),
+('201604151413040.59022000 1460747584', '2016-04-15', '201604151413040.52521600 1460747584', 'productosventa', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '0', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'cotizacionesv5', '37'),
+('201604151424010.13977200 1460748241', '2016-04-15', '201604151424010.09577000 1460748241', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '38'),
+('201604151424190.80984000 1460748259', '2016-04-15', '201604151424190.79383900 1460748259', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '2', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '37'),
+('201604151424190.84984200 1460748259', '2016-04-15', '201604151424190.79383900 1460748259', 'productosventa', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '1', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'cotizacionesv5', '37');
 
 -- --------------------------------------------------------
 
@@ -17133,6 +17307,7 @@ CREATE TABLE IF NOT EXISTS `precotizacion` (
   `ID` int(10) NOT NULL AUTO_INCREMENT,
   `NumSolicitud` varchar(45) NOT NULL,
   `Cantidad` float NOT NULL,
+  `Multiplicador` int(11) NOT NULL DEFAULT '1',
   `Referencia` varchar(45) NOT NULL,
   `ValorUnitario` float NOT NULL,
   `SubTotal` float NOT NULL,
@@ -17148,7 +17323,7 @@ CREATE TABLE IF NOT EXISTS `precotizacion` (
   `CuentaPUC` varchar(45) NOT NULL,
   `Tabla` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -17259,12 +17434,12 @@ CREATE TABLE IF NOT EXISTS `productosventa` (
 --
 
 INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, `Nombre`, `Existencias`, `PrecioVenta`, `PrecioMayorista`, `CostoUnitario`, `CostoTotal`, `IVA`, `Bodega_idBodega`, `Departamento`, `Sub1`, `Sub2`, `Sub3`, `Sub4`, `Sub5`, `Kit`, `ImagenesProductos_idImagenesProductos`, `Especial`, `CuentaPUC`) VALUES
-(1, '1', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 98, 25000, '19500', '15000', '1470000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(1, '1', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 93, 25000, '19500', '15000', '1395000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (2, '2', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 2, 19900, '19900', '14000', '28000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
-(3, '3', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', -6, 23500, '23500', '17200', '-103200', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(3, '3', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', -7, 23500, '23500', '17200', '-120400', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (4, '4', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', -1, 21900, '21900', '15999', '-15999', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (5, '5', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 20900, '20900', '15400', '15400', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
-(6, '6', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 4, 18900, '18900', '13700', '54800', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(6, '6', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 2, 18900, '18900', '13700', '27400', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (7, '7', 'NJF4003', 'BLUSA NJ FASHION GALLETA TULL TIRAS', 0, 23900, '23900', '18200', '0', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (8, '8', 'KEBM-0153', 'BLUSA KEBONITA CAMPESINA', 0, 21900, '21900', '16000', '0', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (9, '9', 'POTS0861', 'BLUSA POTASIO ENCAJE CORTA', 2, 24900, '24900', '18000', '36000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
@@ -20135,7 +20310,7 @@ INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, 
 (2913, '2913', 'pechugaje', 'VERGONIO', 5, 12321321, '', '100000', '500000', '0.16', 1, '2', '5', '5', '6', '', '', 0, 0, NULL, '4135'),
 (2914, '2914', 'dsad', 'dsa', 0, 0, '', 'dsa', 'dsa', '0.16', 1, '4', '', '', '', '', '', 0, 0, NULL, '4135'),
 (2915, '2915', 'REF2915', 'PANTALONCILLOS', -1, 300, '', '200', '-200', '0.16', 1, '1', '13', '5', '13', '', '', 0, 0, NULL, '4135'),
-(2916, '2916', 'REF2916', 'PERDOMO', -1, 15000, '15000', '30000', '-30000', '0.16', 1, '2', '2', '27', '8', '', '', 0, 0, NULL, '4135');
+(2916, '2916', 'REF2916', 'PERDOMO', -4, 15000, '15000', '30000', '-120000', '0.16', 1, '2', '2', '27', '8', '', '', 0, 0, NULL, '4135');
 
 --
 -- Disparadores `productosventa`
@@ -23697,7 +23872,7 @@ CREATE TABLE IF NOT EXISTS `remisiones` (
   `CentroCosto` int(11) NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=45 ;
 
 --
 -- Volcado de datos para la tabla `remisiones`
@@ -23746,7 +23921,8 @@ INSERT INTO `remisiones` (`ID`, `Fecha`, `Clientes_idClientes`, `Cotizaciones_id
 (40, '2016-03-14', 17, '12', 'dsad', 'dsa', 'dsa', 'dsa', 'das', '2016-03-14', '13:10:44', '', '10000', '1', 'A', 1, 3),
 (41, '2016-03-14', 17, '28', 'TECHNO', 'CRA 17 7-18', 'BUGA', '323213', 'JULIAN', '2016-03-14', '18:44:20', 'NINGUNA', '100000', '5', 'A', 1, 3),
 (42, '2016-03-18', 17, '28', 'dsad', 'dsa', 'das', 'das', 'das', '2016-03-18', '11:18:38', 'das', '10000', '1', 'A', 1, 1),
-(43, '2016-03-27', 18, '32', 'techno', 'carrera 17 7-18', 'buga', '321321', 'julian', '2016-03-27', '14:19:55', 'ninguna', '100000', '5', 'A', 1, 3);
+(43, '2016-03-27', 18, '32', 'techno', 'carrera 17 7-18', 'buga', '321321', 'julian', '2016-03-27', '14:19:55', 'ninguna', '100000', '5', 'A', 1, 3),
+(44, '2016-04-15', 17, '37', 'sdsad', 'dasd', 'dsa', 'dsa', 'das', '2016-04-15', '13:52:44', 'das', '0', '', 'A', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -23768,7 +23944,7 @@ CREATE TABLE IF NOT EXISTS `rem_devoluciones` (
   `HoraDevolucion` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=61 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=63 ;
 
 --
 -- Volcado de datos para la tabla `rem_devoluciones`
@@ -23834,7 +24010,9 @@ INSERT INTO `rem_devoluciones` (`ID`, `idRemision`, `idItemCotizacion`, `Cantida
 (57, 38, 80, 497, '81', '40257', '2', '80514', 22, '2016-03-14', '18:46:24', 3),
 (58, 38, 81, 94, '200', '18800', '5', '94000', 22, '2016-03-14', '18:46:24', 3),
 (59, 43, 106, 200, '81', '16200', '5', '81000', 23, '2016-03-27', '14:22:24', 3),
-(60, 43, 107, 100, '296', '29600', '5', '148000', 23, '2016-03-27', '14:22:24', 3);
+(60, 43, 107, 100, '296', '29600', '5', '148000', 23, '2016-03-27', '14:22:24', 3),
+(61, 44, 115, 1, '25000', '25000', '2', '50000', 24, '2016-04-15', '14:09:43', 3),
+(62, 44, 116, 1, '18900', '18900', '1', '18900', 24, '2016-04-15', '14:09:43', 3);
 
 -- --------------------------------------------------------
 
@@ -23853,7 +24031,7 @@ CREATE TABLE IF NOT EXISTS `rem_devoluciones_totalizadas` (
   `Clientes_idClientes` int(16) NOT NULL,
   `Facturas_idFacturas` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=25 ;
 
 --
 -- Volcado de datos para la tabla `rem_devoluciones_totalizadas`
@@ -23882,7 +24060,8 @@ INSERT INTO `rem_devoluciones_totalizadas` (`ID`, `FechaDevolucion`, `HoraDevolu
 (20, '2016-03-14', '18:46:24', 38, '15184014', 'NADA', 3, 18, ''),
 (21, '2016-03-14', '18:46:24', 38, '15184014', 'NADA', 3, 18, ''),
 (22, '2016-03-14', '18:46:24', 38, '15184014', 'NADA', 3, 18, '201603141851470.82725600 1457999507'),
-(23, '2016-03-27', '14:22:24', 43, '229000', '', 3, 18, '201603271423000.63380800 1459106580');
+(23, '2016-03-27', '14:22:24', 43, '229000', '', 3, 18, '201603271423000.63380800 1459106580'),
+(24, '2016-04-15', '14:09:43', 44, '68900', 'dsadsa', 3, 17, '201604151410250.10309700 1460747425');
 
 -- --------------------------------------------------------
 
@@ -23922,65 +24101,68 @@ CREATE TABLE IF NOT EXISTS `rem_relaciones` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `FechaEntrega` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `CantidadEntregada` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Multiplicador` int(11) NOT NULL,
   `idItemCotizacion` int(11) NOT NULL,
   `idRemision` int(11) NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=51 ;
 
 --
 -- Volcado de datos para la tabla `rem_relaciones`
 --
 
-INSERT INTO `rem_relaciones` (`ID`, `FechaEntrega`, `CantidadEntregada`, `idItemCotizacion`, `idRemision`, `Usuarios_idUsuarios`) VALUES
-(1, '2016-02-23', '1', 43, 33, 3),
-(2, '2016-02-23', '12', 44, 33, 3),
-(3, '2016-02-23', '1', 45, 33, 3),
-(4, '2016-02-23', '1', 48, 34, 3),
-(5, '2016-02-23', '1', 49, 34, 3),
-(6, '2016-02-23', '1', 50, 34, 3),
-(7, '2016-03-04', '500', 56, 35, 3),
-(8, '2016-03-04', '200', 57, 35, 3),
-(9, '2016-03-04', '25', 58, 35, 3),
-(10, '2016-03-04', '45', 59, 35, 3),
-(11, '2016-03-04', '500', 56, 36, 3),
-(12, '2016-03-04', '200', 57, 36, 3),
-(13, '2016-03-04', '25', 58, 36, 3),
-(14, '2016-03-04', '45', 59, 36, 3),
-(15, '2016-03-06', '200', 60, 37, 3),
-(16, '2016-03-06', '500', 61, 37, 3),
-(17, '2016-03-06', '1', 62, 37, 3),
-(18, '2016-03-06', '1', 63, 37, 3),
-(19, '2016-03-06', '1', 64, 37, 3),
-(20, '2016-03-06', '1', 65, 37, 3),
-(21, '2016-03-06', '1', 66, 37, 3),
-(22, '2016-03-06', '1', 67, 37, 3),
-(23, '2016-03-06', '1', 68, 37, 3),
-(24, '2016-03-06', '1', 69, 37, 3),
-(25, '2016-03-06', '1', 70, 37, 3),
-(26, '2016-03-06', '1', 71, 37, 3),
-(27, '2016-03-06', '1', 72, 37, 3),
-(28, '2016-03-06', '1', 73, 37, 3),
-(29, '2016-03-06', '1', 74, 37, 3),
-(30, '2016-03-06', '1', 75, 37, 3),
-(31, '2016-03-06', '1', 76, 37, 3),
-(32, '2016-03-06', '1', 77, 37, 3),
-(33, '2016-03-09', '90', 78, 38, 3),
-(34, '2016-03-09', '60', 79, 38, 3),
-(35, '2016-03-09', '500', 80, 38, 3),
-(36, '2016-03-09', '100', 81, 38, 3),
-(37, '2016-03-10', '1', 40, 39, 3),
-(38, '2016-03-14', '1', 43, 40, 3),
-(39, '2016-03-14', '12', 44, 40, 3),
-(40, '2016-03-14', '1', 45, 40, 3),
-(41, '2016-03-14', '1', 99, 41, 3),
-(42, '2016-03-14', '1', 100, 41, 3),
-(43, '2016-03-14', '1', 101, 41, 3),
-(44, '2016-03-18', '1', 99, 42, 1),
-(45, '2016-03-18', '1', 100, 42, 1),
-(46, '2016-03-18', '1', 101, 42, 1),
-(47, '2016-03-27', '200', 106, 43, 3),
-(48, '2016-03-27', '100', 107, 43, 3);
+INSERT INTO `rem_relaciones` (`ID`, `FechaEntrega`, `CantidadEntregada`, `Multiplicador`, `idItemCotizacion`, `idRemision`, `Usuarios_idUsuarios`) VALUES
+(1, '2016-02-23', '1', 0, 43, 33, 3),
+(2, '2016-02-23', '12', 0, 44, 33, 3),
+(3, '2016-02-23', '1', 0, 45, 33, 3),
+(4, '2016-02-23', '1', 0, 48, 34, 3),
+(5, '2016-02-23', '1', 0, 49, 34, 3),
+(6, '2016-02-23', '1', 0, 50, 34, 3),
+(7, '2016-03-04', '500', 0, 56, 35, 3),
+(8, '2016-03-04', '200', 0, 57, 35, 3),
+(9, '2016-03-04', '25', 0, 58, 35, 3),
+(10, '2016-03-04', '45', 0, 59, 35, 3),
+(11, '2016-03-04', '500', 0, 56, 36, 3),
+(12, '2016-03-04', '200', 0, 57, 36, 3),
+(13, '2016-03-04', '25', 0, 58, 36, 3),
+(14, '2016-03-04', '45', 0, 59, 36, 3),
+(15, '2016-03-06', '200', 0, 60, 37, 3),
+(16, '2016-03-06', '500', 0, 61, 37, 3),
+(17, '2016-03-06', '1', 0, 62, 37, 3),
+(18, '2016-03-06', '1', 0, 63, 37, 3),
+(19, '2016-03-06', '1', 0, 64, 37, 3),
+(20, '2016-03-06', '1', 0, 65, 37, 3),
+(21, '2016-03-06', '1', 0, 66, 37, 3),
+(22, '2016-03-06', '1', 0, 67, 37, 3),
+(23, '2016-03-06', '1', 0, 68, 37, 3),
+(24, '2016-03-06', '1', 0, 69, 37, 3),
+(25, '2016-03-06', '1', 0, 70, 37, 3),
+(26, '2016-03-06', '1', 0, 71, 37, 3),
+(27, '2016-03-06', '1', 0, 72, 37, 3),
+(28, '2016-03-06', '1', 0, 73, 37, 3),
+(29, '2016-03-06', '1', 0, 74, 37, 3),
+(30, '2016-03-06', '1', 0, 75, 37, 3),
+(31, '2016-03-06', '1', 0, 76, 37, 3),
+(32, '2016-03-06', '1', 0, 77, 37, 3),
+(33, '2016-03-09', '90', 0, 78, 38, 3),
+(34, '2016-03-09', '60', 0, 79, 38, 3),
+(35, '2016-03-09', '500', 0, 80, 38, 3),
+(36, '2016-03-09', '100', 0, 81, 38, 3),
+(37, '2016-03-10', '1', 0, 40, 39, 3),
+(38, '2016-03-14', '1', 0, 43, 40, 3),
+(39, '2016-03-14', '12', 0, 44, 40, 3),
+(40, '2016-03-14', '1', 0, 45, 40, 3),
+(41, '2016-03-14', '1', 0, 99, 41, 3),
+(42, '2016-03-14', '1', 0, 100, 41, 3),
+(43, '2016-03-14', '1', 0, 101, 41, 3),
+(44, '2016-03-18', '1', 0, 99, 42, 1),
+(45, '2016-03-18', '1', 0, 100, 42, 1),
+(46, '2016-03-18', '1', 0, 101, 42, 1),
+(47, '2016-03-27', '200', 0, 106, 43, 3),
+(48, '2016-03-27', '100', 0, 107, 43, 3),
+(49, '2016-04-15', '1', 0, 115, 44, 3),
+(50, '2016-04-15', '1', 0, 116, 44, 3);
 
 -- --------------------------------------------------------
 
