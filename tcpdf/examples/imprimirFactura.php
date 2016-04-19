@@ -23,7 +23,9 @@ $Hora=$DatosFactura["Hora"];
 $observaciones=$DatosFactura["ObservacionesFact"];
 $Clientes_idClientes=$DatosFactura["Clientes_idClientes"];
 $Usuarios_idUsuarios=$DatosFactura["Usuarios_idUsuarios"];
+$idResolucion=$DatosFactura["idResolucion"];
 
+$DatosResolucion=$obVenta->DevuelveValores("empresapro_resoluciones_facturacion","ID",$idResolucion);
 ////////////////////////////////////////////
 /////////////Obtengo datos del cliente y centro de costos
 ////////////////////////////////////////////
@@ -147,7 +149,8 @@ $pdf->MultiCell(90, 25, $tbl, 0, 'L', 1, 0, '', '', true,0, true, true, 10, 'M')
 $tbl = <<<EOD
 <table cellspacing="1" cellpadding="2" border="1">
     <tr>
-        <td height="53" align="center" >$DatosEmpresaPro[ResolucionDian]</td> 
+        <td height="53" align="center" >$DatosEmpresaPro[ResolucionDian], RES DIAN: $DatosResolucion[NumResolucion] del $DatosResolucion[Fecha]
+             FACTURA AUT. $DatosResolucion[Prefijo]-$DatosResolucion[Desde] A $DatosResolucion[Prefijo]-$DatosResolucion[Hasta] Autoriza impresion en: $DatosResolucion[Factura]</td> 
     </tr>
      
 </table>
