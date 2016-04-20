@@ -160,6 +160,80 @@ public function CreeFiltro($Vector){
     }
     return($Filtro);
 }
+
+/*
+ * Funcion arme filtros
+ */
+    
+public function CreeFiltro2($Vector){
+       
+    $Columnas=$this->Columnas($Vector);
+    $Tabla=$Vector["Tabla"];
+    $Filtro=" $Tabla WHERE `CuentaPUC` like '2%' AND Estado ='' ";
+    $z=0;
+    
+    $NumCols=count($Columnas);
+    foreach($Columnas as $NombreCol){
+        $IndexFiltro="Filtro_".$NombreCol;  //Campo que trae el valor del filtro a aplicar
+        $IndexCondicion="Cond_".$NombreCol; // Condicional para aplicacion del filtro
+        $IndexTablaVinculo="TablaVinculo_".$NombreCol; // Si hay campos vinculados se encontra la tabla vinculada aqui 
+        $IndexIDTabla="IDTabla_".$NombreCol;           // Id de la tabla vinculada
+        $IndexDisplay="Display_".$NombreCol;           // Campo que se quiere ver
+        if(!empty($_REQUEST[$IndexFiltro])){
+            $Valor=$_REQUEST[$IndexFiltro];
+            if(!empty($_REQUEST[$IndexTablaVinculo])){
+                $sql="SELECT $_REQUEST[$IndexIDTabla] FROM $_REQUEST[$IndexTablaVinculo] "
+                        . "WHERE $_REQUEST[$IndexDisplay] = '$Valor'";
+                $DatosVinculados=$this->obCon->Query($sql);
+                $DatosVinculados=$this->obCon->FetchArray($DatosVinculados);
+                //print($sql);
+                $Valor=$DatosVinculados[$_REQUEST[$IndexIDTabla]];
+            }
+            
+            if($z==0){
+                $Filtro.=" AND ";
+                $z=1;
+            }
+            $Filtro.=$NombreCol;
+            switch ($_REQUEST[$IndexCondicion]){
+                case 1:
+                    $Filtro.="='$Valor'";
+                    break;
+                case 2:
+                    $Filtro.=" LIKE '%$Valor%'";
+                    break;
+                case 3:
+                    $Filtro.=">'$Valor'";
+                    break;
+                case 4:
+                    $Filtro.="<'$Valor'";
+                    break;
+                case 5:
+                    $Filtro.=">='$Valor'";
+                    break;
+                case 6:
+                    $Filtro.="<='$Valor'";
+                    break;
+                case 7:
+                    $Filtro.="<>'$Valor'";
+                    break;
+            }
+            $And=" AND ";
+            
+            
+            $Filtro.=$And;
+           
+        }
+       
+    }
+    
+    if($z>0){
+        $Filtro=substr($Filtro, 0, -4);
+    }
+    
+    //$Filtro.=" GROUP BY `CuentaPUC`, `Tercero_Identificacion`";
+    return($Filtro);
+}
 /*
  * 
  * Funcion para crear una tabla con los datos de una tabla
@@ -738,8 +812,44 @@ public function FormularioEditarRegistro($Parametros,$VarEdit)  {
     //return($sql);
 }
 
+/*
+ * 
+ * Funcion para dibujar las cuentas por pagar
+ * 
+ */
 
-
+    
+public function DibujaCuentasXPagar($VarCuentas)  {
+    $this->css=new CssIni("");
+    
+    $sql="SELECT (sum(`Debito`)-sum(`Credito`)) as Saldos, `Tercero_Identificacion` as Tercero, CuentaPUC, "
+            . "`NombreCuenta`,`Tipo_Documento_Intero`,`Num_Documento_Interno`,`idLibroDiario`  FROM `librodiario` "
+            . "WHERE `CuentaPUC` like '2%' GROUP BY `CuentaPUC`, `Tercero_Identificacion` ";
+    $Datos=$this->obCon->Query($sql);
+    
+    $this->css->CrearTabla();
+    $this->css->FilaTabla(14);
+    echo "<td><strong>CUENTA</strong></td>";
+    echo "<td><strong>NOMBRE</strong></td>";
+    echo "<td><strong>DOCUMENTO</strong></td>"; 
+    echo "<td><strong>NUMERO</strong></td>";
+    echo "<td><strong>TERCERO</strong></td>";
+    echo "<td><strong>SALDO</strong></td>";
+    echo "<td><strong>AGREGAR</strong></td>";
+    
+    while($DatosCuentas=$this->obCon->FetchArray($Datos)){
+        $this->css->FilaTabla(12);
+        echo"<td>$DatosCuentas[CuentaPUC]</td>";
+        echo"<td>$DatosCuentas[NombreCuenta]</td>";
+        echo"<td>$DatosCuentas[Tipo_Documento_Intero]</td>";
+        echo"<td>$DatosCuentas[Num_Documento_Interno]</td>";
+        echo"<td>$DatosCuentas[Tercero]</td>";
+        echo"<td>$DatosCuentas[Saldos]</td>";
+        echo"<td>$DatosCuentas[idLibroDiario]</td>";
+    }
+    
+    $this->css->CerrarTabla();
+}
 // FIN Clases	
 }
 

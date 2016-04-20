@@ -64,7 +64,7 @@ session_start();
                         $css->SubTabs("../VAtencion/CreaComprobanteCont.php","_blank","../images/egresoitems.png","Comprobantes Contables");
 			$css->SubTabs("../VAtencion/clientes.php","_blank","../images/clientes.png","Clientes");
 			$css->SubTabs("../VAtencion/proveedores.php","_blank","../images/proveedores.png","Proveedores");
-			$css->SubTabs("Admin.php","_blank","../images/cuentasxpagar.png","Cuentas Por Pagar");
+			$css->SubTabs("../VAtencion/CuentasXPagar.php","_blank","../images/cuentasxpagar.png","Cuentas Por Pagar");
 			$css->SubTabs("MnuInventarios.php","_blank","../images/inventarios.png","Inventarios");
                         $css->SubTabs("../VAtencion/ordenesdetrabajo.php","_blank","../images/ordentrabajo.png","Ordenes de trabajo");
 			$css->SubTabs("MnuInformes.php","_blank","../images/informes.png","Informes");
