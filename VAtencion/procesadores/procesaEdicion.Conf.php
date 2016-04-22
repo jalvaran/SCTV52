@@ -6,8 +6,9 @@
 $TablaConfig="productosventa";
 $VarEdit[$TablaConfig]["CodigoBarras"]["Excluir"]=1;
 $VarEdit[$TablaConfig]["Existencias"]["Excluir"]=1;
-$VarEdit[$TablaConfig]["Referencia"]["Excluir"]=1;
+//$VarEdit[$TablaConfig]["Referencia"]["Excluir"]=1;
 $VarEdit[$TablaConfig]["Especial"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["Kit"]["Excluir"]=1;
 $VarEdit[$TablaConfig]["ImagenesProductos_idImagenesProductos"]["Excluir"]=1;
 
 

@@ -1,56 +1,16 @@
 <?php 
-if(!empty($_REQUEST['del'])){
-    $id=$_REQUEST['del'];
-    $Tabla=$_REQUEST['TxtTabla'];
-    $IdTabla=$_REQUEST['TxtIdTabla'];
-    $IdPre=$_REQUEST['TxtIdPre'];
-    mysql_query("DELETE FROM $Tabla WHERE $IdTabla='$id'") or die(mysql_error());
-    header("location:CreaComprobanteCont.php?idComprobante=$IdPre");
-}
-
-if(!empty($_REQUEST["BtnCrearComC"])){
-    
-    $obVenta=new ProcesoVenta($idUser);
-    
-    $fecha=$_REQUEST["TxtFecha"];
-    $hora=date("H:i");
-    $Concepto=$_REQUEST["TxtConceptoComprobante"];
-    
-     ////////////////Creo el comprobante
-    /////
-    ////
-    
-    $tab="comprobantes_contabilidad";
-    $NumRegistros=4; 
-
-    $Columnas[0]="Fecha";                  $Valores[0]=$fecha;
-    $Columnas[1]="Concepto";                $Valores[1]=$Concepto;
-    $Columnas[2]="Hora";                $Valores[2]=$hora;
-    $Columnas[3]="Usuarios_idUsuarios"; $Valores[3]=$idUser;
-    
-    $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
-    $idComprobante=$obVenta->ObtenerMAX($tab, "ID", 1, "");
-    
-    ////////////////Creo el pre movimiento
-    /////
-    ////
-    
-    $tab="comprobantes_pre";
-    $NumRegistros=3; 
-
-    $Columnas[0]="Fecha";                       $Valores[0]=$fecha;
-    $Columnas[1]="Concepto";                    $Valores[1]=$Concepto;
-    $Columnas[2]="idComprobanteContabilidad";   $Valores[2]=$idComprobante;
-    
-    $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
-    header("location:$myPage");
-}
-
 		
-if(!empty($_REQUEST["BtnAgregarItemMov"])){
+if(!empty($_REQUEST["BtnEnviarChk"])){
     
-    $obVenta=new ProcesoVenta($idUser);
+    $obVenta=new ProcesoVenta(1);
+    //$Selecciones["ChkID"]=$_REQUEST["ChkID"];
+    //print_r($Selecciones["ChkID"]);
+    foreach($_REQUEST["ChkID"] as $ids){
+        //print($ids."<br>");
+    }
     
+    //print($_REQUEST["ChkID"][1]);
+    /*
     $destino="";
     //echo "<script>alert ('entra')</script>";
     if(!empty($_FILES['foto']['name'])){
@@ -105,6 +65,8 @@ if(!empty($_REQUEST["BtnAgregarItemMov"])){
 
     $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
     //header("location:$myPage?idComprobante=$idComprobante");
+     * 
+     */
 }
 
 if(!empty($_REQUEST["CmbComprobante"])){

@@ -24,7 +24,8 @@ include_once("Configuraciones/cuentasxpagar.ini.php");  //Clases de donde se esc
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
 
-$statement = $obTabla->CreeFiltro2($Vector);
+include_once("procesadores/ProcesaCuentasXPagar.php");
+$statement = $obTabla->CreeFiltroCuentas($Vector);
 //print($statement);
 $Vector["statement"]=$statement;   //Filtro necesario para la paginacion
 

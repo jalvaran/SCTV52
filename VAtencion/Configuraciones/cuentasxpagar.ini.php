@@ -25,7 +25,15 @@ $Vector["MyPage"]=$myPage;            //Numero de Registros a mostrar
         
 $Vector["VerRegistro"]["Deshabilitado"]=1; 
 $Vector["EditarRegistro"]["Deshabilitado"]=1; 
-$Vector["NuevoRegistro"]["Deshabilitado"]=1;   
+$Vector["NuevoRegistro"]["Deshabilitado"]=1;  
+
+$Ruta=$myPage;
+$Vector["NuevaAccionLink"][0]="ChkID";
+$Vector["NuevaAccion"]["ChkID"]["Titulo"]="Sel";
+$Vector["NuevaAccion"]["ChkID"]["Link"]=$Ruta;
+$Vector["NuevaAccion"]["ChkID"]["ColumnaLink"]="idLibroDiario";
+$Vector["NuevaAccion"]["ChkID"]["Target"]="_self";
+
 /*
  * Datos vinculados
  * 

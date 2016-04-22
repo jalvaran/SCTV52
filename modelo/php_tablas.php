@@ -165,7 +165,7 @@ public function CreeFiltro($Vector){
  * Funcion arme filtros
  */
     
-public function CreeFiltro2($Vector){
+public function CreeFiltroCuentas($Vector){
        
     $Columnas=$this->Columnas($Vector);
     $Tabla=$Vector["Tabla"];
@@ -278,6 +278,7 @@ public function DibujeTabla($Vector){
     $this->css->CrearBoton("BtnExportarExcel", "Exportar a Excel");
     print("</td>");
     $this->css->CierraFilaTabla();
+    
         $this->css->FilaTabla(14);
         $i=0;
         $this->css->ColTabla("<strong>Acciones</strong>","");
@@ -345,7 +346,8 @@ public function DibujeTabla($Vector){
         }
         
         $this->css->CierraFilaTabla();
-        
+        $this->css->CerrarForm();
+        $this->css->CrearForm2("FrmItemsTabla", $myPage, "post", "_self");
         $sql="SELECT * FROM $statement ORDER BY $Order LIMIT $VerDesde,$Limit ";
         $Consulta=  $this->obCon->Query($sql);
         $Parametros=urlencode(json_encode($Vector));
@@ -376,11 +378,16 @@ public function DibujeTabla($Vector){
                 //$NumAcciones=count($Vector["NuevaAccion"]["Titulo"]);
                 foreach($Vector["NuevaAccionLink"] as $NuevaAccion){
                     $TituloLink=$Vector["NuevaAccion"][$NuevaAccion]["Titulo"];
+                    if($NuevaAccion=="ChkID"){
+                        echo "$TituloLink: <input type='checkbox' name='ChkID[]' value=$DatosProducto[0]></input><br><br>";
+                        echo "<input type='submit' name='BtnEnviarChk' value='Agregar' class='btn btn-danger'></input>";
+                    }else{
                     $Target=$Vector["NuevaAccion"][$NuevaAccion]["Target"];
                     $Ruta=$Vector["NuevaAccion"][$NuevaAccion]["Link"];
                     $ColumnaLink=$Vector["NuevaAccion"][$NuevaAccion]["ColumnaLink"];
                     $Ruta.=$DatosProducto[$ColumnaLink];
                     $this->css->CrearLink($Ruta,$Target, " // $TituloLink // ");
+                    }
                 }
                 
                 
@@ -447,8 +454,9 @@ public function DibujeTabla($Vector){
             print("</tr>");
         }
         $this->css->CierraFilaTabla();
-    $this->css->CerrarTabla();
     $this->css->CerrarForm();
+    $this->css->CerrarTabla();
+    
     
     //return($sql);
 }
