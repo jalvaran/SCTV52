@@ -90,6 +90,7 @@ print("<body>");
     $css->CrearNotificacionAzul("Agregar Conceptos al Comprobante", 18);
     $css->CerrarForm();
     $css->CrearForm2("FrmSeleccionaCom", $myPage, "post", "_self");
+    
     $css->CrearTabla();
     $css->FilaTabla(16);
     print("<td style='text-align:center'>");

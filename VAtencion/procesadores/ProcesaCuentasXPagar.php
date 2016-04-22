@@ -1,16 +1,59 @@
 <?php 
+if(!empty($_REQUEST['del'])){
+    $obVenta=new ProcesoVenta($idUser);
+    $id=$_REQUEST['del'];
+    $Tabla=$_REQUEST['TxtTabla'];
+    $IdTabla=$_REQUEST['TxtIdTabla'];
+    $IdPre=$_REQUEST['TxtIdPre'];
+    $DatosItem=$obVenta->DevuelveValores($Tabla, $IdTabla, $id);
+    $obVenta->ActualizaRegistro("librodiario", "Estado", "", "idLibroDiario", $DatosItem["idLibroDiario"]);
+    mysql_query("DELETE FROM $Tabla WHERE $IdTabla='$id'") or die(mysql_error());
+    header("location:CuentasXPagar.php?idComprobante=$IdPre");
+}
+
+if(!empty($_REQUEST["BtnCrearComC"])){
+    
+    $obVenta=new ProcesoVenta($idUser);
+    
+    $fecha=$_REQUEST["TxtFecha"];
+    $hora=date("H:i");
+    $Concepto=$_REQUEST["TxtConceptoComprobante"];
+    
+     ////////////////Creo el comprobante
+    /////
+    ////
+    
+    $tab="comprobantes_contabilidad";
+    $NumRegistros=4; 
+
+    $Columnas[0]="Fecha";                  $Valores[0]=$fecha;
+    $Columnas[1]="Concepto";                $Valores[1]=$Concepto;
+    $Columnas[2]="Hora";                $Valores[2]=$hora;
+    $Columnas[3]="Usuarios_idUsuarios"; $Valores[3]=$idUser;
+    
+    $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+    $idComprobante=$obVenta->ObtenerMAX($tab, "ID", 1, "");
+    
+    ////////////////Creo el pre movimiento
+    /////
+    ////
+    
+    $tab="comprobantes_pre";
+    $NumRegistros=3; 
+
+    $Columnas[0]="Fecha";                       $Valores[0]=$fecha;
+    $Columnas[1]="Concepto";                    $Valores[1]=$Concepto;
+    $Columnas[2]="idComprobanteContabilidad";   $Valores[2]=$idComprobante;
+    
+    $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+    header("location:$myPage");
+}
+
 		
-if(!empty($_REQUEST["BtnEnviarChk"])){
+if(!empty($_REQUEST["BtnAgregarItemMov"])){
     
-    $obVenta=new ProcesoVenta(1);
-    //$Selecciones["ChkID"]=$_REQUEST["ChkID"];
-    //print_r($Selecciones["ChkID"]);
-    foreach($_REQUEST["ChkID"] as $ids){
-        //print($ids."<br>");
-    }
+    $obVenta=new ProcesoVenta($idUser);
     
-    //print($_REQUEST["ChkID"][1]);
-    /*
     $destino="";
     //echo "<script>alert ('entra')</script>";
     if(!empty($_FILES['foto']['name'])){
@@ -65,13 +108,15 @@ if(!empty($_REQUEST["BtnEnviarChk"])){
 
     $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
     //header("location:$myPage?idComprobante=$idComprobante");
-     * 
-     */
 }
 
 if(!empty($_REQUEST["CmbComprobante"])){
     
     $idComprobante=$_REQUEST["CmbComprobante"];
+    $DatosComprobante=$obVenta->DevuelveValores("comprobantes_contabilidad", "ID", $idComprobante);
+    $obVenta->ActualizaRegistro("comprobantes_contabilidad_items", "Fecha", $DatosComprobante["Fecha"], "idComprobante", 0);
+    $obVenta->ActualizaRegistro("comprobantes_contabilidad_items", "idComprobante", $idComprobante, "idComprobante", 0);
+    
     header("location:$myPage?idComprobante=$idComprobante");
 }
 
@@ -83,5 +128,66 @@ if(!empty($_REQUEST["BtnGuardarMovimiento"])){
     header("location:$myPage?ImprimeCC=$idComprobante");
     
 }
+
+
+/*
+ * 
+ * Agrega items desde libro diario
+ * 
+ */
+
+if(isset($_REQUEST["ChkID"])){
+    
+    $obVenta=new ProcesoVenta(1);
+    //$Selecciones["ChkID"]=$_REQUEST["ChkID"];
+    $idComprobante=$_REQUEST["idComprobante"];
+    $DatosComprobante=$obVenta->DevuelveValores("comprobantes_contabilidad", "ID", $idComprobante);
+    $fecha=$DatosComprobante["Fecha"];
+    foreach($_REQUEST["ChkID"] as $ids){
+        
+    
+    $DatosLibro=$obVenta->DevuelveValores("librodiario", "idLibroDiario", $ids);
+    
+    $Concepto=$DatosLibro["Concepto"];
+    $CentroCosto=$DatosLibro["idCentroCosto"];
+    $Tercero=$DatosLibro["Tercero_Identificacion"];
+    $CuentaPUC=$DatosLibro["CuentaPUC"];
+    $NombreCuenta=$DatosLibro["NombreCuenta"];
+    $destino="";
+    $Valor=$DatosLibro["Neto"]*(-1);
+    $DC="D";
+    $NumDocSoporte=$DatosLibro["Num_Documento_Interno"];
+    if($DC=="C"){
+        $Debito=0;
+        $Credito= $Valor;       
+    }else{
+       $Debito=$Valor;
+       $Credito=0; 
+    }
+     ////////////////Ingreso el Item
+    /////
+    ////
+    
+    $tab="comprobantes_contabilidad_items";
+    $NumRegistros=12;
+
+    $Columnas[0]="Fecha";			$Valores[0]=$fecha;
+    $Columnas[1]="CentroCostos";		$Valores[1]=$CentroCosto;
+    $Columnas[2]="Tercero";			$Valores[2]=$Tercero;
+    $Columnas[3]="CuentaPUC";			$Valores[3]=$CuentaPUC;
+    $Columnas[4]="Debito";			$Valores[4]=$Debito;
+    $Columnas[5]="Credito";                     $Valores[5]=$Credito;
+    $Columnas[6]="Concepto";			$Valores[6]=$Concepto;
+    $Columnas[7]="NumDocSoporte";		$Valores[7]=$NumDocSoporte;
+    $Columnas[8]="Soporte";			$Valores[8]=$destino;
+    $Columnas[9]="idComprobante";		$Valores[9]=$idComprobante;
+    $Columnas[10]="NombreCuenta";		$Valores[10]=$NombreCuenta;
+    $Columnas[11]="idLibroDiario";		$Valores[11]=$ids;
+
+    $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+    $obVenta->ActualizaRegistro("librodiario", "Estado", "OC", "idLibroDiario", $ids);
+    }
+}
+
 ///////////////fin
 ?>

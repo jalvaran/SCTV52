@@ -320,7 +320,7 @@ class CssIni{
 	
 	function CrearCuadroDeDialogo($id,$title){
 		
-		print('<div id="'.$id.'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		print('<div id="'.$id.'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
        
           	
             <div class="modal-header">

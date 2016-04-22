@@ -169,7 +169,7 @@ public function CreeFiltroCuentas($Vector){
        
     $Columnas=$this->Columnas($Vector);
     $Tabla=$Vector["Tabla"];
-    $Filtro=" $Tabla WHERE `CuentaPUC` like '2%' AND Estado ='' ";
+    $Filtro=" $Tabla WHERE `CuentaPUC` like '2%' AND Estado ='' AND Neto < 0";
     $z=0;
     
     $NumCols=count($Columnas);
@@ -348,6 +348,9 @@ public function DibujeTabla($Vector){
         $this->css->CierraFilaTabla();
         $this->css->CerrarForm();
         $this->css->CrearForm2("FrmItemsTabla", $myPage, "post", "_self");
+        if(isset($Vector["idComprobante"])){
+        $this->css->CrearInputText("idComprobante", "hidden", "", $Vector["idComprobante"], "", "", "", "", "", "", 0, 0);
+        }
         $sql="SELECT * FROM $statement ORDER BY $Order LIMIT $VerDesde,$Limit ";
         $Consulta=  $this->obCon->Query($sql);
         $Parametros=urlencode(json_encode($Vector));

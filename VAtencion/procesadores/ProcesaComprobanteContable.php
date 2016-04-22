@@ -4,6 +4,8 @@ if(!empty($_REQUEST['del'])){
     $Tabla=$_REQUEST['TxtTabla'];
     $IdTabla=$_REQUEST['TxtIdTabla'];
     $IdPre=$_REQUEST['TxtIdPre'];
+    $DatosItem=$obVenta->DevuelveValores($Tabla, $IdTabla, $id);
+    $obVenta->ActualizaRegistro("librodiario", "Estado", "", "idLibroDiario", $DatosItem["idLibroDiario"]);
     mysql_query("DELETE FROM $Tabla WHERE $IdTabla='$id'") or die(mysql_error());
     header("location:CreaComprobanteCont.php?idComprobante=$IdPre");
 }
