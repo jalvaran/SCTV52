@@ -136,6 +136,7 @@ $tbl = <<<EOD
         
     </tr>
 </table>
+        
 EOD;
 
 
@@ -165,7 +166,7 @@ $tbl = <<<EOD
     </tr>
      
 </table>
-        
+<br>  <br><br><br>      
 EOD;
 
 $pdf->MultiCell(90, 25, $tbl, 0, 'R', 1, 0, '', '', true,0, true, true, 10, 'M');

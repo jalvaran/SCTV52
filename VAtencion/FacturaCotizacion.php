@@ -1,4 +1,5 @@
-<?php 
+<?php
+ob_start();
 session_start();
 include_once("../modelo/php_conexion.php");
 include_once("css_construct.php");
@@ -244,4 +245,5 @@ print("<body>");
     $css->AgregaJS(); //Agregamos javascripts
     $css->AgregaSubir();
     print("</body></html>");
+    ob_end_flush();
 ?>

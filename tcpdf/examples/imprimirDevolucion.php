@@ -152,9 +152,9 @@ $tbl = <<<EOD
   <th colspan="3"><h3>Descripción</h3></th>
   <th><h3>Cantidad</h3></th>
   <th><h3>Valor Unitario</h3></th>
-  <th><h3>Subtotal</h3></th>
+ <!-- <th><h3>Subtotal</h3></th>
   <th><h3>Dias</h3></th>
-  <th><h3>Total</h3></th>
+  <th><h3>Total</h3></th> -->
  </tr>
  </table>
 EOD;
@@ -183,9 +183,9 @@ $tbl = <<<EOD
   <th colspan="3">$registros2[Descripcion]</th>
   <th>$registros2[Cantidad]</th>
   <th>$$registros2[ValorUnitario]</th>
-  <th>$$registros2[Subtotal]</th>
+  <!-- <th>$$registros2[Subtotal]</th>
   <th>$registros2[Dias]</th>
-  <th>$$registros2[Total]</th>
+  <th>$$registros2[Total]</th> -->
  </tr>
  </table>
 EOD;
@@ -204,11 +204,11 @@ $tbl = <<<EOD
  <tr nobr="true">
   <td colspan="5" align="center"><h3>Observaciones</h3></td></tr>
   <tr nobr="true">
-  <td colspan="5" align="left">Valores Sin IVA, $observaciones</td></tr>
-  <tr nobr="true">
-  <td colspan="4" align="rigth"><h3>Esta Devolucion: </h3></td><td>$$GranTotal</td>
+  <td colspan="5" align="left">$observaciones</td></tr>
+  <!-- <tr nobr="true">
+  <td colspan="4" align="rigth"><h3>Esta Devolucion: </h3></td><td>$$GranTotal</td> 
   
- </tr>
+ </tr> -->
  </table>
 EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');		

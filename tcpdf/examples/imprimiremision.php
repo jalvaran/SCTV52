@@ -153,8 +153,8 @@ $tbl = <<<EOD
   <th colspan="2"><h3>Descripción</h3></th>
   <th><h3>Valor Unitario</h3></th>
   <th><h3>Cantidad</h3></th>
-  <th><h3>Dias</h3></th>
-  <th><h3>Total</h3></th>
+  <!-- <th><h3>Dias</h3></th>
+  <th><h3>Total</h3></th> -->
   <th><h3>F. Dev.</h3></th>
   <th><h3>C. Dev.</h3></th>      
  </tr>
@@ -185,8 +185,8 @@ $tbl = <<<EOD
   <td colspan="2">$registros2[Descripcion]</td>
   <td>$$registros2[ValorUnitario]</td>
   <td>$registros2[Cantidad]</td>
-  <td>$registros2[Multiplicador]</td>
-  <td>$$registros2[Subtotal]</td>
+  <!-- <td>$registros2[Multiplicador]</td>
+   <td>$$registros2[Subtotal]</td> -->
     <td> </td>
     <td> </td>
  </tr>
@@ -206,11 +206,13 @@ $tbl = <<<EOD
   <tr nobr="true">
   <td colspan="5" align="left">Cotizacion No.: $DatosRemision[Cotizaciones_idCotizaciones], Peso Total de la
       Remision: $PesoTotal Kgs, Observaciones adicionales: $observaciones</td></tr>
+	  <!--   Se elimina la totalizacion de la remision a peticion del cliente
   <tr nobr="true">
   <td colspan="4" align="rigth"><h3>SubTotal</h3></td><td>$$Subtotal</td></tr>
   <tr nobr="true"><td colspan="4" align="rigth"><h3>IVA</h3></td><td>$$IVA</td></tr>
   <tr nobr="true"><td colspan="4" align="rigth"><h3>Total</h3></td><td>$$Total</td>
  </tr>
+ -->
  </table>
 EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');		
