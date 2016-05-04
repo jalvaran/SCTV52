@@ -258,9 +258,11 @@ public function DibujeTabla($Vector){
         $myPage=$Vector["MyPage"];
     }
     $NumCols=count($Columnas);
+    $Compacto=  json_encode($Vector);
+    //$Compacto=urlencode($Compacto);
     if(!isset($Vector["NuevoRegistro"]["Deshabilitado"])){
         $this->css->CrearFormularioEvento("FrmAgregar", "InsertarRegistro.php", "post", "_self", "");
-        $this->css->CrearInputText("TxtParametros", "hidden", "", urlencode(json_encode($Vector)), "", "", "", "", "", "", "", "");
+        $this->css->CrearInputText("TxtParametros", "hidden", "", $Compacto, "", "", "", "", "", "", "", "");
         $this->css->CrearBotonNaranja("BtnAgregar", "Agregar Nuevo Registro");
         $this->css->CerrarForm();
     }

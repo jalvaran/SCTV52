@@ -46,6 +46,12 @@ $Vector["EmpresaPro_idEmpresaPro"]["TablaVinculo"]="empresapro";  //tabla de don
 $Vector["EmpresaPro_idEmpresaPro"]["IDTabla"]="idEmpresaPro"; //id de la tabla que se vincula
 $Vector["EmpresaPro_idEmpresaPro"]["Display"]="RazonSocial"; 
 $Vector["EmpresaPro_idEmpresaPro"]["Predeterminado"]=1;
+
+$Vector["Clientes_idClientes"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
+$Vector["Clientes_idClientes"]["TablaVinculo"]="clientes";  //tabla de donde se vincula
+$Vector["Clientes_idClientes"]["IDTabla"]="idClientes"; //id de la tabla que se vincula
+$Vector["Clientes_idClientes"]["Display"]="RazonSocial"; 
+$Vector["Clientes_idClientes"]["Predeterminado"]=1;
 ///Filtros y orden
 $Vector["Order"]=" $MyID DESC ";   //Orden
 ?>

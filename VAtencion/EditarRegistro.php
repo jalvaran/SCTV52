@@ -1,12 +1,14 @@
 <?php
-
+//ob_start();
 /* Desarrollado por Julian Alvaran, Techno Soluciones SAS
  * Este archivo se encargará de insertar un registro nuevo a una tabla
  * 
  */
-$Parametros = json_decode(urldecode($_GET['TxtParametros']));  //Decodifico el Vector y llega como un objeto
+$Parametros = json_decode(stripslashes($_REQUEST['TxtParametros']));  //Decodifico el Vector y llega como un objeto
 $IDEdit=$_GET['TxtIdEdit'];
 $VarEdit["ID"]=$IDEdit;
+//print("Parametros: ");
+//print_r($Parametros);
 $TablaEdit=$Parametros->Tabla;
 $myPage="EditarRegistro.php";
 $myTitulo="Editar Registro En ".$Parametros->Titulo;
@@ -58,5 +60,5 @@ $css->AgregaSubir();
 ///
 
 print("</body></html>");
-
+//ob_end_flush();
 ?>

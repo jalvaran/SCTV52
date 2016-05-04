@@ -25,7 +25,7 @@ $Consulta=$obVenta->Query($sql);
 while($DatosItemFactura=mysql_fetch_array($Consulta)){
     $ValorUnitario=  number_format($DatosItemFactura["ValorUnitarioItem"]);
     $SubTotalItem=  number_format($DatosItemFactura["SubtotalItem"]);
-    $Multiplicador=$DatosItemFactura["Dias"];
+    $Multiplicador=$DatosItemFactura["Cantidad"];
     if($DatosItemFactura["Dias"]>1){
         $Multiplicador="$DatosItemFactura[Cantidad] X $DatosItemFactura[Dias]";
     }

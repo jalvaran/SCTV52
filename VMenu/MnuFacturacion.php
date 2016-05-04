@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <script src="js/funciones.js"></script>
 <html lang="es">
@@ -8,7 +12,7 @@
 	 
 	 
 	 <?php
-	 session_start();
+	
 
 	include_once("../modelo/php_conexion.php");
 	include_once("css_construct.php");
@@ -88,3 +92,7 @@
 </body>
 
 </html>
+
+<?php
+ob_end_flush();
+?>
