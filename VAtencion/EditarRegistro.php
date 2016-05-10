@@ -4,7 +4,7 @@
  * Este archivo se encargará de insertar un registro nuevo a una tabla
  * 
  */
-$Parametros = json_decode(stripslashes($_REQUEST['TxtParametros']));  //Decodifico el Vector y llega como un objeto
+$Parametros = json_decode(urldecode($_REQUEST['TxtParametros']));  //Decodifico el Vector y llega como un objeto
 $IDEdit=$_GET['TxtIdEdit'];
 $VarEdit["ID"]=$IDEdit;
 //print("Parametros: ");

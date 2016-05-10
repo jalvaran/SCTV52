@@ -234,6 +234,80 @@ public function CreeFiltroCuentas($Vector){
     //$Filtro.=" GROUP BY `CuentaPUC`, `Tercero_Identificacion`";
     return($Filtro);
 }
+
+/*
+ * Cuentas por cobrar
+ * 
+ */
+public function CreeFiltroCobros($Vector){
+       
+    $Columnas=$this->Columnas($Vector);
+    $Tabla=$Vector["Tabla"];
+    $Filtro=" $Tabla WHERE `CuentaPUC` like '1305%' AND Estado ='' AND Neto > 0";
+    $z=0;
+    
+    $NumCols=count($Columnas);
+    foreach($Columnas as $NombreCol){
+        $IndexFiltro="Filtro_".$NombreCol;  //Campo que trae el valor del filtro a aplicar
+        $IndexCondicion="Cond_".$NombreCol; // Condicional para aplicacion del filtro
+        $IndexTablaVinculo="TablaVinculo_".$NombreCol; // Si hay campos vinculados se encontra la tabla vinculada aqui 
+        $IndexIDTabla="IDTabla_".$NombreCol;           // Id de la tabla vinculada
+        $IndexDisplay="Display_".$NombreCol;           // Campo que se quiere ver
+        if(!empty($_REQUEST[$IndexFiltro])){
+            $Valor=$_REQUEST[$IndexFiltro];
+            if(!empty($_REQUEST[$IndexTablaVinculo])){
+                $sql="SELECT $_REQUEST[$IndexIDTabla] FROM $_REQUEST[$IndexTablaVinculo] "
+                        . "WHERE $_REQUEST[$IndexDisplay] = '$Valor'";
+                $DatosVinculados=$this->obCon->Query($sql);
+                $DatosVinculados=$this->obCon->FetchArray($DatosVinculados);
+                //print($sql);
+                $Valor=$DatosVinculados[$_REQUEST[$IndexIDTabla]];
+            }
+            
+            if($z==0){
+                $Filtro.=" AND ";
+                $z=1;
+            }
+            $Filtro.=$NombreCol;
+            switch ($_REQUEST[$IndexCondicion]){
+                case 1:
+                    $Filtro.="='$Valor'";
+                    break;
+                case 2:
+                    $Filtro.=" LIKE '%$Valor%'";
+                    break;
+                case 3:
+                    $Filtro.=">'$Valor'";
+                    break;
+                case 4:
+                    $Filtro.="<'$Valor'";
+                    break;
+                case 5:
+                    $Filtro.=">='$Valor'";
+                    break;
+                case 6:
+                    $Filtro.="<='$Valor'";
+                    break;
+                case 7:
+                    $Filtro.="<>'$Valor'";
+                    break;
+            }
+            $And=" AND ";
+            
+            
+            $Filtro.=$And;
+           
+        }
+       
+    }
+    
+    if($z>0){
+        $Filtro=substr($Filtro, 0, -4);
+    }
+    
+    //$Filtro.=" GROUP BY `CuentaPUC`, `Tercero_Identificacion`";
+    return($Filtro);
+}
 /*
  * 
  * Funcion para crear una tabla con los datos de una tabla
@@ -258,7 +332,7 @@ public function DibujeTabla($Vector){
         $myPage=$Vector["MyPage"];
     }
     $NumCols=count($Columnas);
-    $Compacto=  json_encode($Vector);
+    $Compacto= urlencode(json_encode($Vector));
     //$Compacto=urlencode($Compacto);
     if(!isset($Vector["NuevoRegistro"]["Deshabilitado"])){
         $this->css->CrearFormularioEvento("FrmAgregar", "InsertarRegistro.php", "post", "_self", "");

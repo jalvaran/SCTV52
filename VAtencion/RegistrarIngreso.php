@@ -1,4 +1,5 @@
 <?php 
+ob_start();
 session_start();
 include_once("../modelo/php_conexion.php");
 include_once("css_construct.php");
@@ -24,7 +25,7 @@ $css =  new CssIni("Registrar Ingreso");
 print("</head>");
 print("<body>");
     $obVenta = new ProcesoVenta($idUser);
-    include_once("procesadores/ProcesaIngreso.php");
+    include_once("procesadores/procesaIngreso.php");
     $myPage="RegistrarIngreso.php";
     $css->CabeceraIni("Registrar Ingreso"); //Inicia la cabecera de la pagina
     
@@ -208,4 +209,5 @@ print("<body>");
     $css->AgregaSubir();
     $css->Footer();
     print("</body></html>");
+    ob_end_flush();
 ?>

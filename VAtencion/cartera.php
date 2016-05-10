@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 if (!isset($_SESSION['username']))
 {
@@ -81,5 +82,5 @@ $css->AgregaJS(); //Agregamos javascripts
 ////Fin HTML  
 print("</body></html>");
 
-
+ob_end_flush();
 ?>
