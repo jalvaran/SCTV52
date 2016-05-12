@@ -50,7 +50,7 @@ $tbl .= <<<EOD
         </table>
 EOD;
 
-$pdf->MultiCell(180, 170, $tbl, 0, 'C', 1, 0, '', '', true,0, true, true, 10, 'M');
+$pdf->MultiCell(180, 150, $tbl, 0, 'C', 1, 0, '', '', true,1, true, true, 10, 'M');
 $pdf->writeHTML("<br><br>", true, false, false, false, '');
 
 ?>
