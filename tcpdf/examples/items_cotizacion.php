@@ -71,7 +71,7 @@ $pdf->writeHTML("<br><br>", true, false, false, false, '');
 
 $Subtotal=number_format($SubtotalFinal);
 $IVA=number_format($IVAFinal);
-$Total=number_format($Subtotal+$IVAFinal);
+$Total=number_format($SubtotalFinal+$IVAFinal);
 //$TotalLetras=numtoletras($TotalFactura, "PESOS COLOMBIANOS");
 
 

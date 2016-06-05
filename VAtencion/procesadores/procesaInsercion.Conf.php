@@ -110,4 +110,13 @@ $VarInsert[$TablaConfig]["Telefono"]["Required"]=1;
 $VarInsert[$TablaConfig]["Ciudad"]["Required"]=1;   
 $VarInsert[$TablaConfig]["CIUU"]["Required"]=1; 
 
+
+/*
+ * Tabla ORDENES DE SERVICIO
+ * Columnas excluidas
+ */
+$TablaConfig="ordenesdetrabajo";
+$VarInsert[$TablaConfig]["Hora"]["Excluir"]=1;
+$VarInsert[$TablaConfig]["idUsuarioCreador"]["Excluir"]=1;
+$VarInsert[$TablaConfig]["TipoOrden"]["Required"]=1;
 ?>

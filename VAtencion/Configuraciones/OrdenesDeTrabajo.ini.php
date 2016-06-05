@@ -31,7 +31,9 @@ $Vector["VerRegistro"]["Link"]=$Ruta;
 $Vector["VerRegistro"]["ColumnaLink"]="ID";
 
 $Vector["Excluir"]["Estado"]=1;
-$Vector["Required"]["Hora"]=1;
+$Vector["Excluir"]["Hora"]=1;
+$Vector["Excluir"]["idUsuarioCreador"]=1;
+$Vector["Required"]["TipoOrden"]=1;
 
 //Nueva Accion
 $Ruta="AgregaItemsOT.php?idOT=";
@@ -56,6 +58,11 @@ $Vector["idUsuarioCreador"]["Vinculo"]=1;   //Indico que esta columna tendra un 
 $Vector["idUsuarioCreador"]["TablaVinculo"]="usuarios";  //tabla de donde se vincula
 $Vector["idUsuarioCreador"]["IDTabla"]="idUsuarios"; //id de la tabla que se vincula
 $Vector["idUsuarioCreador"]["Display"]="Apellido";                    //Columna que quiero mostrar
+
+$Vector["TipoOrden"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
+$Vector["TipoOrden"]["TablaVinculo"]="ordenesdetrabajo_tipo";  //tabla de donde se vincula
+$Vector["TipoOrden"]["IDTabla"]="ID"; //id de la tabla que se vincula
+$Vector["TipoOrden"]["Display"]="Tipo";                    //Columna que quiero mostrar
 
 ///Filtros y orden
 $Vector["Order"]=" $idTabla DESC ";   //Orden
