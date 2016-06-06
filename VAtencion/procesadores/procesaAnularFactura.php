@@ -22,7 +22,7 @@ $Concepto="Anulacion de Factura $DatosFactura[Prefijo] - $DatosFactura[NumeroFac
     ////
     
     $tab="notascredito";
-    $NumRegistros=5; 
+    $NumRegistros=6; 
 
     $Columnas[0]="Fecha";                   $Valores[0]=$fecha;
     $Columnas[1]="Concepto";                $Valores[1]=$Concepto;
@@ -38,7 +38,7 @@ $Concepto="Anulacion de Factura $DatosFactura[Prefijo] - $DatosFactura[NumeroFac
     while($DatosLibroDiario=$obVenta->FetchArray($Consulta)){
         
         $tab="librodiario";
-        $NumRegistros=24;
+        $NumRegistros=27;
         $CuentaPUC=$DatosLibroDiario["CuentaPUC"];
         $NombreCuenta=$DatosLibroDiario["NombreCuenta"];
         $Debito=$DatosLibroDiario["Credito"];
@@ -80,7 +80,8 @@ $Concepto="Anulacion de Factura $DatosFactura[Prefijo] - $DatosFactura[NumeroFac
     $obVenta->BorraReg("cartera", "Facturas_idFacturas",$idFactura);
     //Alimento el inventario
     $obVenta->ReingreseItemsInventario($idFactura);
-    
+    //Se actualiza para no anular la misma
+    $obVenta->ActualizaRegistro("facturas", "FormaPago", "ANULADA", "idFacturas", $idFactura);
 header("location:AnularFactura.php?TxtidComprobante=$idComprobante");
         
     }

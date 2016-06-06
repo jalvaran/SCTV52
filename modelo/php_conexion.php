@@ -1706,7 +1706,8 @@ public function CalculePesoRemision($idCotizacion)
         $Consulta=$this->ConsultarTabla("facturas_items", "WHERE idFactura='$idFactura'");
         while($DatosItems=$this->FetchArray($Consulta)){
             if($DatosItems["TipoItem"]=="PR"){
-                $DatosProducto=$this->DevuelveValores($DatosItems["TablaItems"], "Referencia", $DatosItems["Referencia"]);
+                $Referencia=$DatosItems["Referencia"];
+                $DatosProducto=$this->DevuelveValores($DatosItems["TablaItems"], "Referencia", $Referencia);
                 $DatosKardex["Cantidad"]=$DatosItems['Cantidad']*(-1);
                 $DatosKardex["idProductosVenta"]=$DatosProducto["idProductosVenta"];
                 $DatosKardex["CostoUnitario"]=$DatosItems['PrecioCostoUnitario'];

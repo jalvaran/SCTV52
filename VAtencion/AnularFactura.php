@@ -52,7 +52,7 @@ print("<body>");
     if(!empty($_REQUEST["TxtidComprobante"])){
         $RutaPrintIngreso="../tcpdf/examples/notacredito.php?idComprobante=".$_REQUEST["TxtidComprobante"];			
         $css->CrearTabla();
-        $css->CrearFilaNotificacion("Comprobante Contable Creado Correctamente <a href='$RutaPrintIngreso' target='_blank'>Imprimir Comprobante Contable No. $_REQUEST[TxtidComprobante]</a>",16);
+        $css->CrearFilaNotificacion("Nota Credito Creada Correctamente <a href='$RutaPrintIngreso' target='_blank'>Imprimir Nota Credito No. $_REQUEST[TxtidComprobante]</a>",16);
         $css->CerrarTabla();
     }
     ///////////////Se crea el DIV que servirá de contenedor secundario
