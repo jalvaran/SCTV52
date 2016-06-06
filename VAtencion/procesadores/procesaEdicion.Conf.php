@@ -112,4 +112,27 @@ $VarEdit[$TablaConfig]["idUsuarioCreador"]["Required"]=1;
 $VarEdit[$TablaConfig]["Descripcion"]["Required"]=1;
 $VarEdit[$TablaConfig]["FechaOT"]["Required"]=1;
 $VarEdit[$TablaConfig]["Estado"]["Excluir"]=1;
+
+/*
+ * Tabla cotizacionesv5
+ * 
+ * 
+ */
+$TablaConfig="cotizacionesv5";
+$VarEdit[$TablaConfig]["Seguimiento"]["Required"]=1;
+$VarEdit[$TablaConfig]["NumSolicitud"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["NumOrden"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["Usuarios_idUsuarios"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["Fecha"]["Excluir"]=1;
+
+/*
+ * Tabla ordenes de compra
+ * 
+ * 
+ */
+$TablaConfig="ordenesdecompra";
+
+$VarEdit[$TablaConfig]["Created"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["UsuarioCreador"]["Excluir"]=1;
+
 ?>
