@@ -1556,10 +1556,10 @@ public function CalculePesoRemision($idCotizacion)
             $SubtotalCosto=$DatosCotizacion['SubtotalCosto'];
             $TotalCostos=$TotalCostos+$SubtotalCosto;//se realiza la sumatoria de los costos
             
-            $ID=date("YmdHis").microtime(false);
+            //$ID=date("YmdHis").microtime(false);
             $tab="facturas_items";
             $NumRegistros=25;
-            $Columnas[0]="ID";			$Valores[0]=$ID;
+            $Columnas[0]="ID";			$Valores[0]="";
             $Columnas[1]="idFactura";           $Valores[1]=$NumFactura;
             $Columnas[2]="TablaItems";          $Valores[2]=$DatosCotizacion["TablaOrigen"];
             $Columnas[3]="Referencia";          $Valores[3]=$DatosCotizacion["Referencia"];
@@ -1700,6 +1700,25 @@ public function CalculePesoRemision($idCotizacion)
         }
         $this->ActualizaRegistro("comprobantes_contabilidad", "Estado", "C", "ID", $idComprobante);
         $this->ActualizaRegistro("comprobantes_pre", "Estado", "C", "idComprobanteContabilidad", $idComprobante);
+    }
+    
+    public function ReingreseItemsInventario($idFactura){
+        $Consulta=$this->ConsultarTabla("facturas_items", "WHERE idFactura='$idFactura'");
+        while($DatosItems=$this->FetchArray($Consulta)){
+            if($DatosItems["TipoItem"]=="PR"){
+                $DatosProducto=$this->DevuelveValores($DatosItems["TablaItems"], "Referencia", $DatosItems["Referencia"]);
+                $DatosKardex["Cantidad"]=$DatosItems['Cantidad']*(-1);
+                $DatosKardex["idProductosVenta"]=$DatosProducto["idProductosVenta"];
+                $DatosKardex["CostoUnitario"]=$DatosItems['PrecioCostoUnitario'];
+                $DatosKardex["Existencias"]=$DatosProducto['Existencias'];
+                $DatosKardex["Detalle"]="Anulacion de Factura";
+                $DatosKardex["idDocumento"]=$idFactura;
+                $DatosKardex["TotalCosto"]=$DatosKardex["CostoUnitario"]*$DatosKardex["Cantidad"];
+                $DatosKardex["Movimiento"]="SALIDA";
+                
+                $this->InserteKardex($DatosKardex);
+            }
+        }
     }
 //////////////////////////////Fin	
 }

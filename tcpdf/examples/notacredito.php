@@ -6,32 +6,32 @@ include("../../modelo/php_conexion.php");
 ////////////////////////////////////////////
 $idComprobante = $_REQUEST["idComprobante"];
 
-$idFormatoCalidad=12;
+$idFormatoCalidad=13;
 
-$Documento="<strong>COMPROBANTE DE CONTABILIDAD No. $idComprobante</strong>";
+$Documento="<strong>NOTA CREDITO No. $idComprobante</strong>";
 require_once('Encabezado.php');
 ////////////////////////////////////////////
 /////////////Obtengo valores del comprobante
 ////////////////////////////////////////////
 $CentroDeCostoComprobante=1;			
 $obVenta=new ProcesoVenta(1);
-$DatosGenerales=$obVenta->DevuelveValores("comprobantes_contabilidad","ID",$idComprobante);
-$DatosComprobante=$obVenta->DevuelveValores("comprobantes_contabilidad_items","idComprobante",$idComprobante);
+$DatosNotaCredito=$obVenta->DevuelveValores("notascredito","ID",$idComprobante);
+$DatosFactura=$obVenta->DevuelveValores("facturas","idFacturas",$DatosNotaCredito["idFactura"]);
 $DatosCentroCostos=$obVenta->DevuelveValores("centrocosto","ID",$CentroDeCostoComprobante);
 $DatosEmpresaPro=$obVenta->DevuelveValores("empresapro","idEmpresaPro",$DatosCentroCostos["EmpresaPro"]);
-$fecha=$DatosGenerales["Fecha"];
-$Concepto=$DatosGenerales["Concepto"];
-$Usuarios_idUsuarios=$DatosGenerales["Usuarios_idUsuarios"];
+$fecha=$DatosNotaCredito["Fecha"];
+$Concepto=$DatosNotaCredito["Concepto"];
+$Usuarios_idUsuarios=$DatosNotaCredito["Usuarios_idUsuarios"];
 
 		  
-$nombre_file=$idComprobante."_Comprobante_Contabilidad_".$fecha;
+$nombre_file=$idComprobante."_NotaCredito_".$fecha;
 		   
 $tbl = <<<EOD
 <table border="1" cellpadding="2" cellspacing="0" align="left" style="border-radius: 10px;">
     <tr>
         <td><strong>Ciudad:</strong> $DatosEmpresaPro[Ciudad]</td>
         <td><strong>Fecha:</strong> $fecha</td>
-        <td><strong>No.:</strong> $idComprobante</td>
+        <td><strong>Afecta a Factura.:</strong> $DatosFactura[Prefijo] - $DatosFactura[NumeroFactura]</td>
     </tr>
     <tr>
         <td colspan="3"><strong>Razon Social de la Empresa:</strong> $DatosEmpresaPro[RazonSocial] $DatosEmpresaPro[NIT]</td>
@@ -69,7 +69,7 @@ EOD;
 $pdf->writeHTML($tbl, false, false, false, false, '');
 
 
-$Consulta=$obVenta->ConsultarTabla("librodiario", "WHERE Tipo_Documento_Intero='COMPROBANTE CONTABLE' AND Num_Documento_Interno='$idComprobante'");
+$Consulta=$obVenta->ConsultarTabla("librodiario", "WHERE Tipo_Documento_Intero='NOTA CREDITO' AND Num_Documento_Interno='$idComprobante'");
 $TotalDebitos=0;
 $TotalCreditos=0;
 $h=0;

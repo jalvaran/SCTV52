@@ -34,6 +34,13 @@ $Vector["VerRegistro"]["ColumnaLink"]="idFacturas";
  * Selecciono las Columnas que tendran valores de otras tablas
  */
 
+// Nueva Accion
+$Ruta="AnularFactura.php?idFactura=";
+$Vector["NuevaAccionLink"][0]="AsociarCoti";
+$Vector["NuevaAccion"]["AsociarCoti"]["Titulo"]="Anular Factura";
+$Vector["NuevaAccion"]["AsociarCoti"]["Link"]=$Ruta;
+$Vector["NuevaAccion"]["AsociarCoti"]["ColumnaLink"]="idFacturas";
+$Vector["NuevaAccion"]["AsociarCoti"]["Target"]="_self";
 
 $Vector["CentroCosto"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
 $Vector["CentroCosto"]["TablaVinculo"]="centrocosto";  //tabla de donde se vincula
