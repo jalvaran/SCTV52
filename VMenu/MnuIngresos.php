@@ -61,6 +61,7 @@
 	$css->IniciaTabs();
 
             $css->NuevaTabs(1);
+                $css->SubTabs("../VAtencion/comprobantes_ingreso.php","_blank","../images/historial3.png","Historial Comprobantes Ingreso");
                 $css->SubTabs("../VAtencion/RegistrarIngreso.php","_blank","../images/pago.jpg","Registrar Pago");
                 $css->SubTabs("../VAtencion/ComprobantesIngreso.php","_blank","../images/ingreso.jpg","Registrar Ingreso");
                 $css->SubTabs("../VAtencion/RegistrarAnticipos.php","_blank","../images/Anticipos.png","Anticipos");    //Uso Futuro
