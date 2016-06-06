@@ -1,6 +1,6 @@
 <?php
 $pdf->AddPage();
-$pdf->writeHTML("<H3 align='center'>RELACION DE FECHAS DE ENTREGA Y DEVOLUCION DE LOS ITEMS FACTURADOS</H3><BR>", true, false, false, false, '');
+$pdf->writeHTML("<H3 align='center'>RELACION DE FECHAS DE ENTREGA Y AJUSTE DE LOS ITEMS FACTURADOS</H3><BR>", true, false, false, false, '');
 $tbl = <<<EOD
 <table cellspacing="1" cellpadding="2" border="1">
     <tr>
@@ -8,9 +8,9 @@ $tbl = <<<EOD
         <td align="center" colspan="3"><strong>Producto o Servicio</strong></td>
         <td align="center" ><strong>Fecha de Entrega</strong></td>
         <td align="center" ><strong>Cantidad Entregada</strong></td>
-        <td align="center" ><strong>Fecha de Devolucion</strong></td>
-        <td align="center" ><strong>Cantidad Devuelta</strong></td>
-        <td align="center" ><strong>Dias Facturados</strong></td>
+        <td align="center" ><strong>Fecha de Ajuste</strong></td>
+        <td align="center" ><strong>Cantidad Ajustada</strong></td>
+        <td align="center" ><strong>Multiplicador</strong></td>
         
     </tr>
     

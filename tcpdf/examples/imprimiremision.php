@@ -1,16 +1,19 @@
 <?php
-require_once('tcpdf_include.php');
+
 include("../../modelo/php_conexion.php");
 ////////////////////////////////////////////
 /////////////Verifico que haya una sesion activa
 ////////////////////////////////////////////
-session_start();
-if(!isset($_SESSION["username"]))
-   header("Location: ../../index.php");
+
 ////////////////////////////////////////////
 /////////////Obtengo el ID de la cotizacion a que se imprimirá 
 ////////////////////////////////////////////
 $idRemision = $_REQUEST["ImgPrintRemi"];
+
+$idFormatoCalidad=7;
+
+$Documento="<strong>REMISION No. $idRemision</strong>";
+require_once('Encabezado.php');
 ////////////////////////////////////////////
 /////////////Obtengo valores de la Remision
 ////////////////////////////////////////////
@@ -45,76 +48,7 @@ $CiudadEP=$registros2["Ciudad"];
 $NITEP=$registros2["NIT"];
 		  
 $nombre_file="Remision_".$fecha."_".$DatosCliente["RazonSocial"];
-		   
-// Extend the TCPDF class to create custom Header and Footer
-class MYPDF extends TCPDF {
-	//Page header
-	public function Header() {
-		// get the current page break margin
-		$bMargin = $this->getBreakMargin();
-		// get current auto-page-break mode
-		$auto_page_break = $this->AutoPageBreak;
-		// disable auto-page-break
-		$this->SetAutoPageBreak(false, 0);
-		// set bacground image
-		$img_file = K_PATH_IMAGES.'tsfondo.jpg';
-		$this->Image($img_file, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
-		// restore auto-page-break status
-		$this->SetAutoPageBreak($auto_page_break, $bMargin);
-		// set the starting point for the page content
-		$this->setPageMark();
-	}
-}
-// create new PDF document
-$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-// set document information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Julian Andres Alvaran Valencia');
-$pdf->SetTitle('Remisiones TS');
-$pdf->SetSubject('Remisiones');
-$pdf->SetKeywords('Techno Soluciones, PDF, Remisiones, CCTV, Alarmas, Computadores, Software');
-// set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-// set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-// set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetHeaderMargin(0);
-$pdf->SetFooterMargin(0);
-// remove default footer
-$pdf->setPrintFooter(false);
-// set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-// set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-// set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/spa.php')) {
-	require_once(dirname(__FILE__).'/lang/spa.php');
-	$pdf->setLanguageArray($l);
-}
-// ---------------------------------------------------------
-// set font
-//$pdf->SetFont('helvetica', 'B', 6);
-// add a page
-$pdf->AddPage();
-$pdf->SetFont('helvetica', '', 8);
-///////////////////////////////////////////////////////
-//////////////encabezado//////////////////
-////////////////////////////////////////////////////////
-$tbl = <<<EOD
-<hr id="Line1" style="margin:0;padding:0;position:absolute;left:0px;top:44px;width:625px;height:2px;z-index:1;">
-<div id="wb_Text5" style="position:absolute;left:334px;top:127px;width:335px;height:18px;z-index:7;text-align:left;">
-<span style="color:#000000;font-family:'Bookman Old Style';font-size:13px;">Buga $fecha</span></div>
-<div id="wb_Text1" style="position:absolute;left:380px;top:72px;width:150px;height:16px;text-align:rigth;z-index:2;">
-<span style="font-family:'Bookman Old Style';font-size:13px;"><strong><em>REMISION No. $idRemision
-</em></strong></span></div>
-</div>
-EOD;
-$pdf->writeHTML($tbl, false, false, false, false, '');
-/////////////////Datos de la Remision
-//
-//
-//
+		  
 $tbl = <<<EOD
 <table border="1" cellpadding="2" cellspacing="2" align="left">
     <tr nobr="true">
@@ -167,7 +101,8 @@ $Consulta=$obVenta->ConsultarTabla("cot_itemscotizaciones","WHERE NumCotizacion=
 $Subtotal=0;
 $IVA=0;
 $Total=0;
-        
+  $h=0;
+  
 while($registros2=mysql_fetch_array($Consulta)){
 		 
 $Subtotal=$Subtotal+($registros2["Subtotal"]);
@@ -176,19 +111,27 @@ $Total=$Total+($registros2["Total"]);
 $registros2["Total"]=number_format($registros2["Total"]);
 $registros2["Subtotal"]=number_format(round($registros2["Subtotal"]));	
 $registros2["ValorUnitario"]=number_format(round($registros2["ValorUnitario"]));	
-			
+
+if($h==0){
+        $Back="#f2f2f2";
+        $h=1;
+    }else{
+        $Back="white";
+        $h=0;
+    }
+    
 			
 $tbl = <<<EOD
-<table border="1" cellpadding="2" cellspacing="2" align="center">
+<table border="0" cellpadding="2" cellspacing="2" align="center">
  <tr nobr="true">
-  <td>$registros2[Referencia]</td>
-  <td colspan="2">$registros2[Descripcion]</td>
-  <td>$$registros2[ValorUnitario]</td>
-  <td>$registros2[Cantidad]</td>
-  <!-- <td>$registros2[Multiplicador]</td>
-   <td>$$registros2[Subtotal]</td> -->
-    <td> </td>
-    <td> </td>
+  <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$registros2[Referencia]</td>
+  <td colspan="2" style="border-bottom: 1px solid #ddd;background-color: $Back;">$registros2[Descripcion]</td>
+  <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$$registros2[ValorUnitario]</td>
+  <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$registros2[Cantidad]</td>
+  <!-- <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$registros2[Multiplicador]</td>
+   <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$$registros2[Subtotal]</td> -->
+    <td style="border-bottom: 1px solid #ddd;background-color: $Back;"> </td>
+    <td style="border-bottom: 1px solid #ddd;background-color: $Back;"> </td>
  </tr>
  </table>
 EOD;
@@ -224,9 +167,7 @@ $tbl = <<<EOD
 <span style="font-family:'Bookman Old Style';font-size:10px;"><strong><em>Realizado por: $DatosUsuario[Nombre] $DatosUsuario[Apellido]
 </em></strong></span></div>
 <div id="wb_Text6" style="position:absolute;left:35px;top:150px;width:242px;height:18px;z-index:8;text-align:left;">
-<span style="font-family:'Bookman Old Style';font-size:10px;">Certifico que los equipos remisionados los he recibido en buen estado y funcionamiento por lo cual me hago responsable de los daños,
-        faltantes especiales y perdidas que a su devolucion se presenten, así mismo exonero de toda responsabilidad al Sr. Oscar Jimenez G. por cualquier hecho o percance que se llegare a presentar durante el uso de los equipos.
-        El transporte corre por cuenta del cliente, los equipos deben entregarse desarmados en la puerta de la obra.
+<span style="font-family:'Bookman Old Style';font-size:10px;">$PiePagina
 </span></div><br><br>
 
 <div id="Div_Firmas" style="text-align:left;">

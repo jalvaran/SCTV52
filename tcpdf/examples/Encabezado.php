@@ -15,7 +15,7 @@ $TituloFormato=$DatosFormato["Nombre"];
 $VersionFormato=$DatosFormato["Version"];
 $CodigoFormato=$DatosFormato["Codigo"];
 $FechaFormato=$DatosFormato["Fecha"];
-
+$PiePagina=$DatosFormato["NotasPiePagina"];
 		  
 $DatosEmpresaPro=$obVenta->DevuelveValores("empresapro","idEmpresaPro",1);
 $RazonSocialEP=$DatosEmpresaPro["RazonSocial"];

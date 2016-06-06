@@ -57,6 +57,7 @@
 		$Retefuente=$_REQUEST['TxtRetefuente'];
                 $ReteIVA=$_REQUEST['TxtReteIVA'];
                 $ReteICA=$_REQUEST['TxtReteICA'];
+                $Retenciones=$Retefuente+$ReteIVA+$ReteICA;
                 $fecha=$_REQUEST['TxtFecha'];
 		$Subtotal=$_POST["TxtSubtotal"];
 		$IVA=$_POST["TxtIVA"];
@@ -81,7 +82,7 @@
                 
 		if($TipoPago=="Contado"){
                 
-                    $NumRegistros=19;
+                    $NumRegistros=20;
 
                     $Columnas[0]="Fecha";				$Valores[0]=$fecha;
                     $Columnas[1]="Beneficiario";		$Valores[1]=$RazonSocial;
@@ -102,7 +103,8 @@
                     $Columnas[16]="CentroCostos";			$Valores[16]=$idCentroCostos;	
                     $Columnas[17]="EmpresaPro";		$Valores[17]= $idEmpresa;	
                     $Columnas[18]="Soporte";		$Valores[18]= $destino;
-
+                    $Columnas[19]="Retenciones";	$Valores[19]= $Retenciones;
+                    
                     $tabla->InsertarRegistro("egresos",$NumRegistros,$Columnas,$Valores);
                     
                     $NumEgreso=$tabla->ObtenerMAX("egresos","idEgresos", 1, "");
@@ -212,7 +214,7 @@
 			$NombreCuenta=$DatosCuenta["Nombre"];
 		}
 		if($_POST["TipoPago"]=="Programado"){
-			$CuentaPUC="2205$NIT";
+			$CuentaPUC="2205";
 			$NombreCuenta="Proveedores Nacionales $RazonSocial $NIT";
 		}
 		

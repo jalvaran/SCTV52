@@ -11,7 +11,7 @@ $tbl = <<<EOD
         <td align="center" ><strong>Referencia</strong></td>
         <td align="center" colspan="3"><strong>Producto o Servicio</strong></td>
         <td align="center" ><strong>Cantidad</strong></td>
-        <td align="center" ><strong>Dias</strong></td>
+        
         <td align="center" ><strong>Precio Unitario</strong></td>
         <td align="center" ><strong>Valor Total</strong></td>
     </tr>
@@ -34,13 +34,17 @@ while($DatosItemFactura=mysql_fetch_array($Consulta)){
         $Back="white";
         $h=0;
     }
+    $Multiplicador=$DatosItemFactura["Cantidad"];
+    if($DatosItemFactura["Dias"]>1){
+        $Multiplicador=$DatosItemFactura["Cantidad"]." X ".$DatosItemFactura["Dias"];
+    }
     $tbl .= <<<EOD
     
     <tr>
         <td align="left" style="border-bottom: 1px solid #ddd;background-color: $Back;">$DatosItemFactura[Referencia]</td>
         <td align="left" colspan="3" style="border-bottom: 1px solid #ddd;background-color: $Back;">$DatosItemFactura[Nombre]</td>
-        <td align="center" style="border-bottom: 1px solid #ddd;background-color: $Back;">$DatosItemFactura[Cantidad]</td>
-        <td align="center" style="border-bottom: 1px solid #ddd;background-color: $Back;">$DatosItemFactura[Dias]</td>
+        <td align="center" style="border-bottom: 1px solid #ddd;background-color: $Back;">$Multiplicador</td>
+        
         <td align="right" style="border-bottom: 1px solid #ddd;background-color: $Back;">$ValorUnitario</td>
         <td align="right" style="border-bottom: 1px solid #ddd;background-color: $Back;">$SubTotalItem</td>
     </tr>

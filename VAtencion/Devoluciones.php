@@ -19,14 +19,14 @@ $idRemision="";
 	
 print("<html>");
 print("<head>");
-$css =  new CssIni("Devoluciones");
+$css =  new CssIni("Ajuste Remision");
 
 print("</head>");
 print("<body>");
     $obVenta = new ProcesoVenta($idUser);
     include_once("procesaDevolucion.php");
     $myPage="Devoluciones.php";
-    $css->CabeceraIni("SoftConTech Devoluciones"); //Inicia la cabecera de la pagina
+    $css->CabeceraIni("SoftConTech Ajuste a Remision"); //Inicia la cabecera de la pagina
     
     //////////Creamos el formulario de busqueda de remisiones
     /////
@@ -156,7 +156,7 @@ print("<body>");
             $css->ColTabla('<strong>CANTIDAD ENTREGADA</strong>',1);
             $css->ColTabla('<strong>AJUSTE</strong>',1);
 
-            $css->ColTabla('<strong>PENDIENTE X DEVOLVER</strong>',1);
+            $css->ColTabla('<strong>PENDIENTE X AJUSTAR</strong>',1);
 
             $css->CierraFilaTabla();
 
@@ -184,7 +184,7 @@ print("<body>");
 
                 $css->CrearInputNumber("TxtSubtotalUnitario","number","Valor: ",$DatosItems["ValorUnitario"],"Valor Unitario","black","","",80,30,0,1,'','',"any");
                 $css->CrearInputNumber("TxtCantidadDevolucion","number"," Cantidad: ",$PendienteDevolver,"Devuelve","black","","",70,30,0,1,1,$PendienteDevolver,"any");
-                $css->CrearInputNumber("TxtDias","number"," Dias: ",$DatosItems["Multiplicador"],"Dias","black","","",70,30,0,1,1,1000,"any");
+                $css->CrearInputNumber("TxtDias","number"," X: ",$DatosItems["Multiplicador"],"Dias","black","","",70,30,0,1,1,1000,"any");
                 $css->CrearBotonVerde("BtnEditar","+");
                 $css->CerrarForm();
                 print("</td>");
@@ -232,7 +232,7 @@ print("<body>");
 
 
         $css->CrearTabla();
-        $css->CrearFilaNotificacion("PRE-DEVOLUCION",18);
+        $css->CrearFilaNotificacion("PRE-AJUSTE",18);
         $css->FilaTabla(16);
         $css->ColTabla("<strong>Referencia</strong>", 1);
         $css->ColTabla("<strong>Descripcion</strong>", 1);
@@ -275,7 +275,7 @@ print("<body>");
         $css->CrearInputText("TxtFechaDevolucion","text","",date("Y-m-d"),"Fecha","black","","",150,30,0,1);
 	$css->CrearInputText("TxtHoraDevolucion","text","",date("H:i:s"),"Hora","black","","",150,30,0,1);
         print("<br>");
-        $css->CrearTextArea("TxtObservacionesDevolucion","","","Observaciones para esta Devolucion","black","","",300,100,0,0);
+        $css->CrearTextArea("TxtObservacionesDevolucion","","","Observaciones para este Ajuste","black","","",300,100,0,0);
         print("<br>Facturar: <br>");
         $css->CrearSelect("CmbFactura", "MuestraOculta('OpcionesFact')");
             $css->CrearOptionSelect("NO", "NO", 0);

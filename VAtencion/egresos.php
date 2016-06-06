@@ -50,7 +50,7 @@ $css->CrearDiv("principal", "container", "center",1,1);
 ///////////////Creamos la imagen representativa de la pagina
     /////
     /////	
-$css->CrearImageLink("../VMenu/Menu.php", "../images/usuarios.png", "_self",200,200);
+$css->CrearImageLink("../VMenu/Menu.php", "../images/historial.png", "_self",200,200);
 
 
 ////Paginacion

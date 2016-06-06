@@ -1480,10 +1480,10 @@ public function CalculePesoRemision($idCotizacion)
             $SubtotalCosto=round($DatosProducto['CostoUnitario']*$DatosDevolucion['Cantidad']);
             $TotalCostos=$TotalCostos+$SubtotalCosto;//se realiza la sumatoria de los costos
             
-            $ID=date("YmdHis").microtime(false);
+            //$ID=date("YmdHis").microtime(true);
             $tab="facturas_items";
             $NumRegistros=25;
-            $Columnas[0]="ID";			$Valores[0]=$ID;
+            $Columnas[0]="ID";			$Valores[0]="";
             $Columnas[1]="idFactura";           $Valores[1]=$NumFactura;
             $Columnas[2]="TablaItems";          $Valores[2]=$DatosDevolucion["Tabla"];
             $Columnas[3]="Referencia";          $Valores[3]=$DatosDevolucion["Referencia"];
