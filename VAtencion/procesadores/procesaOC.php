@@ -36,16 +36,16 @@ if(!empty($_REQUEST["BtnAgregarItemOT"])){
         $ValorUnitario=$_REQUEST["TxtValorUnitario"];
         $DatosProducto=$obVenta->DevuelveValores($TablaOrigen,"idProductosVenta",$idProducto);
         $DatosIVA=$obVenta->DevuelveValores("porcentajes_iva","ID",$idIVA);
-        
-        $IVA=  round($ValorUnitario*$DatosIVA["Valor"]);
-        $Total=$ValorUnitario+$IVA;
+        $Subtotal=$ValorUnitario*$Cantidad;
+        $IVA=  round($Subtotal*$DatosIVA["Valor"]);
+        $Total=$Subtotal+$IVA;
        
         ////////////////Inserto datos de ot items
        /////
        ////
        $ID=$obTabla->ObtengaID();
        $tab="ordenesdecompra_items";
-       $NumRegistros=9; 
+       $NumRegistros=10; 
 
        $Columnas[0]="ID";		    $Valores[0]=$ID;
        $Columnas[1]="NumOrden";             $Valores[1]=$idOT;
@@ -56,6 +56,7 @@ if(!empty($_REQUEST["BtnAgregarItemOT"])){
        $Columnas[6]="IVA";                  $Valores[6]=$IVA;
        $Columnas[7]="Total";                $Valores[7]=$Total;
        $Columnas[8]="TablaOrigen";          $Valores[8]=$TablaOrigen;
+       $Columnas[9]="Subtotal";             $Valores[9]=$Subtotal;
        
        $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
        header("location:AgregaItemsOC.php?idOT=$idOT");

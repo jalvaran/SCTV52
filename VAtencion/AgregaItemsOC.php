@@ -150,8 +150,9 @@ print("<body>");
         
         $css->ColTabla("<strong>Descripcion</strong>", 1);
         $css->ColTabla("<strong>Referencia</strong>", 1);
-        $css->ColTabla("<strong>Cantidad</strong>", 1);
         $css->ColTabla("<strong>ValorUnitario</strong>", 1);
+        $css->ColTabla("<strong>Cantidad</strong>", 1);
+        $css->ColTabla("<strong>Subtotal</strong>", 1);
         $css->ColTabla("<strong>IVA</strong>", 1);
         $css->ColTabla("<strong>Total</strong>", 1);
         $css->CierraFilaTabla();
@@ -161,8 +162,10 @@ print("<body>");
             $css->FilaTabla(16);
             $css->ColTabla($DatosItemsOC["Descripcion"], 1);
             $css->ColTabla($DatosItemsOC["Referencia"], 1);
-            $css->ColTabla($DatosItemsOC["Cantidad"], 1);
+            
             $css->ColTabla($DatosItemsOC["ValorUnitario"], 1);
+            $css->ColTabla($DatosItemsOC["Cantidad"], 1);
+            $css->ColTabla($DatosItemsOC["Subtotal"], 1);
             $css->ColTabla($DatosItemsOC["IVA"], 1);
             $css->ColTabla($DatosItemsOC["Total"], 1);          
             $css->ColTablaDel($myPage,"ordenesdecompra_items","ID",$DatosItemsOC['ID'],$idOT);
