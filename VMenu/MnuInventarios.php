@@ -64,7 +64,8 @@
                 $css->SubTabs("../VAtencion/productosventa.php","_blank","../images/productosventa.png","Productos para la venta");
                 $css->SubTabs("../VAtencion/productosalquiler.php","_blank","../images/alquiler.png","Productos para alquilar");
                 $css->SubTabs("../VAtencion/servicios.php","_blank","../images/servicios.png","Servicios para la venta");
-                $css->SubTabs("../VAtencion/ordenesdecompra.php","_blank","../images/ordendecompra.png","Ordenes de Compra"); 
+                $css->SubTabs("../VAtencion/ordenesdecompra.php","_blank","../images/ordendecompra.png","Ordenes de Compra");
+                $css->SubTabs("../VAtencion/kardexmercancias.php","_blank","../images/kardex.png","Kardex");
                 $css->SubTabs("../VAtencion/kits.php","_blank","../images/kits.png","Creacion de KITS");
                 $css->SubTabs("../VAtencion/CompraMercancias.php","_blank","../images/dardebaja.png","Dar de Baja");    
                 $css->SubTabs("../VAtencion/CompraEquipos.php","_blank","../images/codigobarras.png","Imprimir Codigos de Barra");

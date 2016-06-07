@@ -1,13 +1,6 @@
 <?php
 
-require_once('tcpdf_include.php');
 include("../../modelo/php_conexion.php");
-////////////////////////////////////////////
-/////////////Verifico que haya una sesion activa
-////////////////////////////////////////////
-session_start();
-if(!isset($_SESSION["username"]))
-   header("Location: index.php");
 
 ////////////////////////////////////////////
 /////////////Obtengo el rango de fechas
@@ -24,9 +17,10 @@ $Condicion=" WHERE ";
 
 if($TipoReporte=="Corte"){
     $Condicion.=" Fecha <= '$FechaFinal' ";
-    
+    $Rango="Corte a $FechaFinal";
 }else{
     $Condicion.=" Fecha >= '$FechaIni' AND Fecha <= '$FechaFinal' "; 
+    $Rango="De $FechaIni a $FechaFinal";
 }
 if($CentroCostos<>"ALL"){
 	$Condicion.="  AND idCentroCosto='$CentroCostos' ";
@@ -36,78 +30,13 @@ if($EmpresaPro<>"ALL"){
 	$Condicion.="  AND idEmpresa='$EmpresaPro' ";
 }
 
+$idFormatoCalidad=14;
 
+$Documento="<strong>Reporte de Movimientos $Rango</strong>";
+require_once('Encabezado.php');
 		  
 		  $nombre_file=$fecha."_Balance_Comprobacion";
 		   
-// Extend the TCPDF class to create custom Header and Footer
-class MYPDF extends TCPDF {
-	//Page header
-	public function Header() {
-		// get the current page break margin
-		$bMargin = $this->getBreakMargin();
-		// get current auto-page-break mode
-		$auto_page_break = $this->AutoPageBreak;
-		// disable auto-page-break
-		$this->SetAutoPageBreak(false, 0);
-		// set bacground image
-		$img_file = K_PATH_IMAGES.'tsfondo.jpg';
-		$this->Image($img_file, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
-		// restore auto-page-break status
-		$this->SetAutoPageBreak($auto_page_break, $bMargin);
-		// set the starting point for the page content
-		$this->setPageMark();
-	}
-}
-
-// create new PDF document
-$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-
-// set document information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Julian Andres Alvaran Valencia');
-$pdf->SetTitle('Cotizacion TS');
-$pdf->SetSubject('Cotizacion');
-$pdf->SetKeywords('Techno Soluciones, PDF, cotizacion, CCTV, Alarmas, Computadores');
-
-// set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-
-// set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
-// set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetHeaderMargin(0);
-$pdf->SetFooterMargin(0);
-
-// remove default footer
-$pdf->setPrintFooter(false);
-
-// set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
-// set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-// set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/spa.php')) {
-	require_once(dirname(__FILE__).'/lang/spa.php');
-	$pdf->setLanguageArray($l);
-}
-
-// ---------------------------------------------------------
-
-// set font
-//$pdf->SetFont('helvetica', 'B', 16);
-
-// add a page
-$pdf->AddPage();
-
-//$pdf->Write(0, 'Taller industrial Servi Torno tiene el agrado de cotizarle los siguientes servicios:', '', 0, 'L', true, 0, false, false, 0);
-
-$pdf->SetFont('helvetica', '', 8);
 
 ///////////////////////////////////////////////////////
 //////////////encabezado//////////////////
@@ -123,9 +52,8 @@ $tbl = <<<EOD
 
 <div id="wb_Text1" style="position:absolute;left:380px;top:72px;width:150px;height:10px;text-align:center;z-index:2;">
 <span style="color:#00008B;font-family:'Bookman Old Style';font-size:10px;"><strong><em>MOVIMIENTO DE CUENTAS
-</em></strong></span><BR>
-<span style="color:#00008B;font-family:'Bookman Old Style';font-size:10px;"><strong><em>RESULTADOS ENTRE EL $FechaIni Y EL $FechaFinal
 </em></strong></span><BR><BR>
+
 
 EOD;
 
