@@ -358,6 +358,9 @@ public function DibujeTabla($Vector){
         $this->css->FilaTabla(14);
         $i=0;
         $this->css->ColTabla("<strong>Acciones</strong>","");
+        if(isset($Vector["Abonos"])){
+            $this->css->ColTabla("<strong>Abonar</strong>","");
+        }
         foreach($Columnas as $NombreCol){
             if(isset($Vector[$NombreCol]["Link"])){
                 $Colink[$i]=1;
@@ -473,7 +476,40 @@ public function DibujeTabla($Vector){
             }
             
             print("</td>");
+            
+            if(isset($Vector["Abonos"])){
+                print("<td>");
+                $idLibro=$DatosProducto[0];
+                $AbonosActuales=$this->obCon->SumeColumna("abonos_libro", "Cantidad", "idLibroDiario", $idLibro);
+                $Procesador=$Vector["Procesador"];
+                $TablaAbono=$Vector["TablaAbono"];
+                $Saldo=$DatosProducto["Neto"]*(-1);
+                $Saldo=$Saldo-$AbonosActuales;
+                print("Saldo: $".number_format($Saldo)."<br>");
+                $idCantidad="TxtAbono".$DatosProducto[0];
+                
+                $idLink="LinkAbono".$DatosProducto[0];
+                $idSelect="CmbAbono".$DatosProducto[0];
+                $Page="CuentasXPagar.php";
+                $this->css->CrearInputNumber($idCantidad, "number", "", 0, "Cantidad", "black", "onchange", "CambiaLinkAbono('$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Procesador','$TablaAbono')", 100, 30, 0, 0, 1, $Saldo, "any");
+                
+                $this->css->CrearSelect($idSelect, "CambiaLinkAbono('$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Procesador','$TablaAbono')");
+                    $ConsultaCuentasFrecuentes=$this->obCon->ConsultarTabla("cuentasfrecuentes", "");
+                    $this->css->CrearOptionSelect(0, "Cuenta ingreso", 1);
+                    while($DatosCuenta=  $this->obCon->FetchArray($ConsultaCuentasFrecuentes)){
+                        $this->css->CrearOptionSelect($DatosCuenta["CuentaPUC"], $DatosCuenta["Nombre"], 0);
+                    }
+                $this->css->CerrarSelect();
+                
+                $VectorDatosExtra["ID"]=$idLink;
+                $VectorDatosExtra["JS"]=' onclick="ConfirmarLink('.$idLink.');return false" ';
+                $this->css->CrearLinkID($Procesador, "_self", "Abonar",$VectorDatosExtra);
+                print("</td>");
+                
+            }
+                
             for($i=0;$i<$NumCols;$i++){
+                
                 
                 if(isset($VisualizarRegistro[$i])){
                     

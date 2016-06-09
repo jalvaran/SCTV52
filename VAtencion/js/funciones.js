@@ -153,6 +153,14 @@ function Confirmar(){
     } 
 }
 
+function ConfirmarLink(id){
+	
+    if (confirm('¿Estas seguro que deseas registrar este abono?')){ 
+     
+      document.location.href= document.getElementById(id).value;
+    } 
+}
+
 // esta funcion permite mostrar u ocultar un elemento
 function MuestraOculta(id){
     
@@ -204,7 +212,7 @@ function CalculeTotalImpuestos() {
 
 }
 
-// esta funcion permite deshabilitar o habilitar un elemento
+// esta funcion permite cambiar un link
 function CambiaLinkKit(idProducto,idLink,idCantidad,idkit,page){
     
     
@@ -215,6 +223,20 @@ function CambiaLinkKit(idProducto,idLink,idCantidad,idkit,page){
     link="procesadores/ProcesadorAgregaKits.php?Tabla=productosventa&IDProducto="+idProducto+"&TxtCantidad="+Cantidad+"&idKit="+Kit+"&Page="+page;
     
     document.getElementById(idLink).href=link;
+    
+}
+
+function CambiaLinkAbono(idLibro,idLink,idCantidad,idCuenta,page,procesador,TablaAbono){
+    
+    
+        Cantidad=document.getElementById(idCantidad).value;
+
+        Cuenta=document.getElementsByName(idCuenta)[0].value;
+
+        link=procesador+"?TablaAbono="+TablaAbono+"&IDLibro="+idLibro+"&TxtCantidad="+Cantidad+"&idCuenta="+Cuenta+"&Page="+page;
+
+        document.getElementById(idLink).href=link;
+    
     
 }
 

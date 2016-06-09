@@ -156,6 +156,9 @@ $css->CrearTabla();
 $css->CrearFilaNotificacion("Saldo = $Neto", 16);
 $css->CerrarTabla();
 $Vector["idComprobante"]=$idComprobante;
+$Vector["Abonos"]="CuentasXPagar";
+$Vector["TablaAbono"]="abonos_libro";
+$Vector["Procesador"]="procesadores/ProcesaCuentasXPagar.php";
 $obTabla->DibujeTabla($Vector);
 $css->CerrarDiv();//Cerramos contenedor para agregar items
 
