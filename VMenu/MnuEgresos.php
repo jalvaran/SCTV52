@@ -9,7 +9,12 @@
 	 
 	 <?php
 	 session_start();
+         $TipoUser=$_SESSION["tipouser"];
 
+        if($TipoUser=="comercial"){
+   
+            header("Location: Menu.php");
+        }
 	include_once("../modelo/php_conexion.php");
 	include_once("css_construct.php");
 
@@ -18,11 +23,7 @@
 	  exit("No se ha iniciado una sesion <a href='../index.php' >Iniciar Sesion </a>");
 	  
 	}
-	if ($_SESSION['tipouser']<>"administrador")
-	{
-	  exit("Usted No esta autorizado para ingresar a esta parte <a href='Menu.php' >Menu </a>");
-	  
-	}
+	
 	$NombreUser=$_SESSION['nombre'];
 	$idUser=$_SESSION['idUser'];	
 	

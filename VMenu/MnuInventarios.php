@@ -66,19 +66,19 @@
                 $css->SubTabs("../VAtencion/servicios.php","_blank","../images/servicios.png","Servicios para la venta");
                 $css->SubTabs("../VAtencion/ordenesdecompra.php","_blank","../images/ordendecompra.png","Ordenes de Compra");
                 $css->SubTabs("../VAtencion/kardexmercancias.php","_blank","../images/kardex.png","Kardex");
-                $css->SubTabs("../VAtencion/kits.php","_blank","../images/kits.png","Creacion de KITS");
-                $css->SubTabs("../VAtencion/CompraMercancias.php","_blank","../images/dardebaja.png","Dar de Baja");    
-                $css->SubTabs("../VAtencion/CompraEquipos.php","_blank","../images/codigobarras.png","Imprimir Codigos de Barra");
-                $css->SubTabs("../VAtencion/CompraEquipos.php","_blank","../images/ordenessalida.png","Ordenes de salida y entrada de activos");
-                $css->SubTabs("../VAtencion/CompraEquipos.php","_blank","../images/activos.png","Activos");
+                //$css->SubTabs("../VAtencion/kits.php","_blank","../images/kits.png","Creacion de KITS");
+                //$css->SubTabs("../VAtencion/CompraMercancias.php","_blank","../images/dardebaja.png","Dar de Baja");    
+                //$css->SubTabs("../VAtencion/CompraEquipos.php","_blank","../images/codigobarras.png","Imprimir Codigos de Barra");
+                //$css->SubTabs("../VAtencion/CompraEquipos.php","_blank","../images/ordenessalida.png","Ordenes de salida y entrada de activos");
+                //$css->SubTabs("../VAtencion/CompraEquipos.php","_blank","../images/activos.png","Activos");
             $css->FinTabs();
             $css->NuevaTabs(2);    
                 $css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/departamentos.png","Crear Departamentos");
-                $css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/uno.png","Subgrupo 1");
-                $css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/dos.png","Subgrupo 2");
-                $css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/tres.png","Subgrupo 3");
-                $css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/cuatro.jpg","Subgrupo 4");
-                $css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/cinco.png","Subgrupo 5");
+                //$css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/uno.png","Subgrupo 1");
+                //$css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/dos.png","Subgrupo 2");
+                //$css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/tres.png","Subgrupo 3");
+                //$css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/cuatro.jpg","Subgrupo 4");
+                //$css->SubTabs("../VAtencion/prod_departamentos.php","_blank","../images/cinco.png","Subgrupo 5");
                 
             $css->FinTabs();
             

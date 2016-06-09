@@ -69,7 +69,7 @@ session_start();
 			$css->SubTabs("MnuInventarios.php","_blank","../images/inventarios.png","Inventarios");
                         $css->SubTabs("../VAtencion/ordenesdetrabajo.php","_blank","../images/ordentrabajo.png","Ordenes de trabajo");
 			$css->SubTabs("MnuInformes.php","_blank","../images/informes.png","Informes");
-			$css->SubTabs("Admin.php","_blank","../images/salir.png","Salir");
+			$css->SubTabs("../destruir.php","_self","../images/salir.png","Salir");
 			
 	
 	$css->FinTabs();

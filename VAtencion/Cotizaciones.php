@@ -198,7 +198,7 @@ include_once("procesaCoti.php");
 						$Key=$_REQUEST["TxtBuscarItem"];
 					else
 						$Key=" ";
-					$statement = "$DatosDepartamentos[Tabla] WHERE Departamento = '$idDepartamento' AND (Referencia LIKE '%$Key%' OR idProductosVenta = '$Key' OR Nombre LIKE '%$Key%' OR PrecioVenta = '$Key')";
+					$statement = "$DatosDepartamentos[TablaOrigen] WHERE Departamento = '$idDepartamento' AND (Referencia LIKE '%$Key%' OR idProductosVenta = '$Key' OR Nombre LIKE '%$Key%' OR PrecioVenta = '$Key')";
 					
 					$pa=mysql_query("SELECT * FROM $statement LIMIT $startpoint,$limit") or die(mysql_error());
 					if(mysql_num_rows($pa)){
@@ -218,7 +218,7 @@ include_once("procesaCoti.php");
 							$css->ColTabla($DatosProductos['Referencia'],1);
 							$css->ColTabla($DatosProductos['Nombre'],1);
 							$css->ColTabla(number_format($DatosProductos['PrecioVenta']),1);
-							$css->ColTablaVar($myPage,"TxtAgregarItemPreventa","$DatosProductos[idProductosVenta]&TxtTabla=$DatosDepartamentos[Tabla]&TxtAsociarCliente=$idClientes","","Agregar Item");
+							$css->ColTablaVar($myPage,"TxtAgregarItemPreventa","$DatosProductos[idProductosVenta]&TxtTabla=$DatosDepartamentos[TablaOrigen]&TxtAsociarCliente=$idClientes","","Agregar Item");
 							$css->CierraFilaTabla();
 					}
 			

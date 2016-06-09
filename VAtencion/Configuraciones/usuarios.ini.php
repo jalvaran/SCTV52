@@ -25,7 +25,13 @@ $Vector["VerRegistro"]["Deshabilitado"]=1;
 ///Columnas excluidas
 
 $Vector["Excluir"]["Password"]=1;   //Indico que esta columna no se mostrará
+$Vector["Excluir"]["Role"]=1;   //Indico que esta columna no se mostrará
+$Vector["Excluir"]["FechaCreacion"]=1;   //Indico que esta columna no se mostrará
 
+$Vector["TipoUser"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
+$Vector["TipoUser"]["TablaVinculo"]="usuarios_tipo";  //tabla de donde se vincula
+$Vector["TipoUser"]["IDTabla"]="Tipo"; //id de la tabla que se vincula
+$Vector["TipoUser"]["Display"]="Tipo"; 
 ///Filtros y orden
 $Vector["Order"]=" $idTabla DESC ";   //Orden
 ?>

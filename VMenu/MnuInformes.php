@@ -20,12 +20,11 @@ session_start();
 	  exit("No se ha iniciado una sesion <a href='../index.php' >Iniciar Sesion </a>");
 	  
 	}
-	
-	if ($_SESSION['tipouser']<>"administrador")
-	{
-	  exit("Usted No esta autorizado para ingresar a esta parte <a href='Menu.php' >Menu </a>");
-	  
-	}
+	$TipoUser=$_SESSION["tipouser"];
+	if($TipoUser<>"administrador"){
+   
+            header("Location: Menu.php");
+        }
 	
 
 	$NombreUser=$_SESSION['nombre'];

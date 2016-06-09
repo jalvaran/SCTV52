@@ -1,5 +1,11 @@
 <?php
 session_start();
+$TipoUser=$_SESSION["tipouser"];
+
+if($TipoUser<>"administrador"){
+   
+   header("Location: Menu.php");
+   }
 ?>
 <!DOCTYPE html>
 <script src="js/funciones.js"></script>
@@ -21,13 +27,7 @@ session_start();
 	  
 	}
 	
-	if ($_SESSION['tipouser']<>"administrador")
-	{
-	  exit("Usted No esta autorizado para ingresar a esta parte <a href='Menu.php' >Menu </a>");
-	  
-	}
 	
-
 	$NombreUser=$_SESSION['nombre'];
 	$idUser=$_SESSION['idUser'];	
 	
@@ -65,7 +65,7 @@ session_start();
 		$css->SubMenuAlfa("Colaboradores",4);
 		$css->SubMenuAlfa("Descuentos",5);
 		$css->SubMenuAlfa("Finanzas",6);
-		$css->SubMenuAlfa("Informes",7);
+		//$css->SubMenuAlfa("Informes",7);
 	$css->MenuAlfaFin();
 	
 	$css->IniciaTabs();
@@ -73,6 +73,7 @@ session_start();
 		$css->NuevaTabs(1);
 			$css->SubTabs("../VAtencion/empresapro.php","_self","../images/empresa.png","Crear/Editar");
                         $css->SubTabs("../VAtencion/empresapro_resoluciones_facturacion.php","_self","../images/resolucion.png","Resoluciones de Facturacion");
+                        $css->SubTabs("../VAtencion/formatos_calidad.php","_self","../images/notacredito.png","Formatos de Calidad");
 		$css->FinTabs();
 		$css->NuevaTabs(2);
 			$css->SubTabs("../VAtencion/usuarios.php","_self","../images/usuarios.png","Crear/Editar");
@@ -92,10 +93,10 @@ session_start();
 			$css->SubTabs("../VAtencion/subcuentas.php","_blank","../images/cuentas.png","Cuentas");
 			$css->SubTabs("../VAtencion/cuentasfrecuentes.php","_blank","../images/cuentasfrecuentes.png","Cuentas Frecuentes");
 		$css->FinTabs();
-		$css->NuevaTabs(7);
-			$css->SubTabs("../VAtencion/InformeAdministracion.php","_blank","../images/informes.png","Informes");
-			$css->SubTabs("../VAtencion/HabilitarUser.php","_blank","../images/CerrarCajas.png","Habilitar Cajas");
-		$css->FinTabs();
+		//$css->NuevaTabs(7);
+		//	$css->SubTabs("../VAtencion/InformeAdministracion.php","_blank","../images/informes.png","Informes");
+		//	$css->SubTabs("../VAtencion/HabilitarUser.php","_blank","../images/CerrarCajas.png","Habilitar Cajas");
+		//$css->FinTabs();
 	$css->FinMenu(); 
 	
 	?>

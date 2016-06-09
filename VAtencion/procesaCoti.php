@@ -90,7 +90,7 @@
 		$obVenta=new ProcesoVenta($idUser);
 		
 		$DatosProducto=$obVenta->DevuelveValores($TablaItem,"idProductosVenta",$idItem);
-		$DatosDepartamento=$obVenta->DevuelveValores("prod_departamentos","Tabla",$TablaItem);
+		$DatosDepartamento=$obVenta->DevuelveValores("prod_departamentos","TablaOrigen",$TablaItem);
 		///////////////////////////Ingresar a Precotizacion 
 		$Subtotal=$DatosProducto["PrecioVenta"]*$Cantidad;
 		$IVA=$DatosProducto["PrecioVenta"]*$DatosProducto["IVA"];

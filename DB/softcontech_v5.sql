@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2016 a las 18:10:39
+-- Tiempo de generación: 08-06-2016 a las 06:45:01
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -216,15 +216,7 @@ CREATE TABLE IF NOT EXISTS `cartera` (
   `Saldo` double NOT NULL DEFAULT '0',
   `Observaciones` text,
   PRIMARY KEY (`idCartera`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `cartera`
---
-
-INSERT INTO `cartera` (`idCartera`, `Facturas_idFacturas`, `FechaIngreso`, `FechaVencimiento`, `DiasCartera`, `idCliente`, `RazonSocial`, `Telefono`, `Contacto`, `TelContacto`, `TotalFactura`, `TotalAbonos`, `Saldo`, `Observaciones`) VALUES
-(1, '201605161607040.12390100 1463432824', '2016-05-16', '2016-06-15', 0, '2', 'Techno Soluciones', '314555666', 'Julian Alvaran', '2147483647', 23084, 0, 23084, NULL),
-(2, '201605161618060.91225000 1463433486', '2016-05-16', '2016-06-15', 0, '2', 'Techno Soluciones', '314555666', 'Julian Alvaran', '2147483647', 92336, 0, 92336, NULL);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -2766,7 +2758,7 @@ CREATE TABLE IF NOT EXISTS `compras_activas` (
   `Tipo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `TotalCompra` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idComprasActivas`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=33 ;
 
 --
 -- Volcado de datos para la tabla `compras_activas`
@@ -2785,7 +2777,10 @@ INSERT INTO `compras_activas` (`idComprasActivas`, `idProveedor`, `Usuarios_idUs
 (26, 71, 1, '321321321', 'Programado', 'TECHNO SOLUCIONES SAS', '2016-03-20', '2016-03-20', '110505', 'FACTURA', '3400000'),
 (27, 71, 3, '321321', 'Programado', 'TECHNO SOLUCIONES SAS', '2016-03-21', '2016-03-21', '110505', 'FACTURA', '132'),
 (28, 71, 3, '322312', 'Programado', 'TECHNO SOLUCIONES SAS', '2016-03-21', '2016-03-21', '110505', 'FACTURA', '32132'),
-(29, 71, 3, '421342342', 'Programado', 'TECHNO SOLUCIONES SAS', '2016-05-16', '2016-05-16', '11100501', 'FACTURA', '100727');
+(29, 71, 3, '421342342', 'Programado', 'TECHNO SOLUCIONES SAS', '2016-05-16', '2016-05-16', '11100501', 'FACTURA', '100727'),
+(30, 71, 3, '321321', 'Contado', 'TECHNO SOLUCIONES SAS', '2016-06-06', '2016-06-06', '110510', 'FACTURA', '99940'),
+(31, 71, 3, '212112', 'Contado', 'TECHNO SOLUCIONES SAS', '2016-06-06', '2016-06-06', '110505', 'FACTURA', '115994'),
+(32, 71, 3, '2121', 'Contado', 'TECHNO SOLUCIONES SAS', '2016-06-06', '2016-06-06', '11100501', 'FACTURA', '221000');
 
 -- --------------------------------------------------------
 
@@ -2829,7 +2824,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_contabilidad` (
   `Usuarios_idUsuarios` int(11) NOT NULL,
   `Estado` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=25 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_contabilidad`
@@ -2849,7 +2844,11 @@ INSERT INTO `comprobantes_contabilidad` (`ID`, `Fecha`, `Hora`, `Concepto`, `Usu
 (17, '2016-04-22', '14:36', 'Pago de aquello', 3, 'C'),
 (18, '2016-04-22', '14:45', 'Nota Contable por factura 15', 3, 'C'),
 (19, '2016-04-22', '14:53', 'BALANCE INICIAL', 3, 'C'),
-(20, '2016-05-04', '06:31', 'Prueba', 3, 'C');
+(20, '2016-05-04', '06:31', 'Prueba', 3, 'C'),
+(21, '2016-06-06', '11:17', 'dsadsada', 3, 'C'),
+(22, '2016-06-06', '11:31', 'dsdsa', 3, 'C'),
+(23, '2016-06-06', '12:33', 'Anulacion de Factura A - 93 por: porque si', 3, 'C'),
+(24, '2016-06-06', '12:35', 'Anulacion de Factura A - 93 por: dsds', 3, 'C');
 
 -- --------------------------------------------------------
 
@@ -2872,7 +2871,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_contabilidad_items` (
   `Soporte` text COLLATE utf8_spanish2_ci NOT NULL,
   `idLibroDiario` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=92 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=97 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_contabilidad_items`
@@ -2951,7 +2950,12 @@ INSERT INTO `comprobantes_contabilidad_items` (`ID`, `idComprobante`, `Fecha`, `
 (81, 19, '2016-04-22', 1, 94481747, '3115', 'Aportes sociales', 0, 4000000, 'BALACE INICIAL', '1', '', ''),
 (89, 20, '2016-05-04', 1, 38870975, '13050538870975', 'Clientes Nacionales DISTRIMATERIALES DEL VALLE NIT 38870975', 0, 29000, 'Ventas', '201604221456010.61287200 1461354961', '', '3'),
 (90, 20, '2016-05-04', 1, 38870975, '13050538870975', 'Clientes Nacionales DISTRIMATERIALES DEL VALLE NIT 38870975', 0, 87000, 'Ventas', '201604260613240.87895200 1461669204', '', '17'),
-(91, 20, '2016-05-04', 1, 900298074, '1110', 'Bancos', 116000, 0, 'pago de facturas', '3231321', '../SoportesEgresos/cinco.png', '');
+(91, 20, '2016-05-04', 1, 900298074, '1110', 'Bancos', 116000, 0, 'pago de facturas', '3231321', '../SoportesEgresos/cinco.png', ''),
+(92, 21, '2016-06-06', 1, 900298074, '1110', 'Bancos', 12122121, 0, 'sddsa', '321321', '', ''),
+(93, 21, '2016-06-06', 1, 900298074, '2330', 'Ordenes de compra por utilizar', 0, 12122121, 'rerewr', '21321321', '', ''),
+(94, 22, '2016-06-06', 1, 900833180, '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 0, 23084, 'Ventas', '201605161607040.12390100 1463432824', '', '42'),
+(95, 22, '2016-06-06', 1, 900833180, '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 0, 92336, 'Ventas', '201605161618060.91225000 1463433486', '', '51'),
+(96, 22, '2016-06-06', 1, 900298074, '1110', 'Bancos', 115420, 0, 'dsadas', '32131', '', '');
 
 -- --------------------------------------------------------
 
@@ -2969,7 +2973,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_ingreso` (
   `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=65 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_ingreso`
@@ -3032,7 +3036,14 @@ INSERT INTO `comprobantes_ingreso` (`ID`, `Fecha`, `Clientes_idClientes`, `Terce
 (54, '2016-04-27', 17, 0, '10', 'EFECTIVO', 'Anticipo por remision 45', 3),
 (55, '2016-05-09', 0, 2, '5000000', 'EFECTIVO', 'dsadsa', 3),
 (56, '2016-05-12', 0, 2, '321321', 'EFECTIVO', 'dsadsa', 3),
-(57, '2016-05-16', 2, 0, '10000', 'EFECTIVO', 'Anticipo por remision 46', 3);
+(57, '2016-05-16', 2, 0, '10000', 'EFECTIVO', 'Anticipo por remision 46', 3),
+(58, '2016-06-06', 2, 0, '20000', 'EFECTIVO', 'Anticipo por remision 47', 3),
+(59, '2016-06-06', 2, 0, '10000', 'EFECTIVO', 'Anticipo por remision 1', 3),
+(60, '2016-06-06', 2, 0, '92296', 'EFECTIVO', 'Pago de Factura A 84', 3),
+(61, '2016-06-06', 0, 2, '14333', 'EFECTIVO', 'ewqewq', 3),
+(62, '2016-06-06', 2, 0, '10000', 'EFECTIVO', 'ewewq', 3),
+(63, '2016-06-06', 0, 1, '321321', 'EFECTIVO', 'dsds', 3),
+(64, '2016-06-06', 2, 0, '23078', 'EFECTIVO', 'Pago de Factura A 83', 3);
 
 -- --------------------------------------------------------
 
@@ -3047,7 +3058,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes_pre` (
   `idComprobanteContabilidad` int(16) NOT NULL,
   `Estado` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `comprobantes_pre`
@@ -3066,7 +3077,9 @@ INSERT INTO `comprobantes_pre` (`ID`, `Fecha`, `Concepto`, `idComprobanteContabi
 (14, '2016-04-22', 'Pago de aquello', 17, 'C'),
 (15, '2016-04-22', 'Nota Contable por factura 15', 18, 'C'),
 (16, '2016-04-22', 'BALANCE INICIAL', 19, 'C'),
-(17, '2016-05-04', 'Prueba', 20, 'C');
+(17, '2016-05-04', 'Prueba', 20, 'C'),
+(18, '2016-06-06', 'dsadsada', 21, 'C'),
+(19, '2016-06-06', 'dsdsa', 22, 'C');
 
 -- --------------------------------------------------------
 
@@ -3146,56 +3159,61 @@ CREATE TABLE IF NOT EXISTS `cotizacionesv5` (
   `Observaciones` text COLLATE utf8_spanish2_ci NOT NULL,
   `NumSolicitud` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `NumOrden` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Seguimiento` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=47 ;
 
 --
 -- Volcado de datos para la tabla `cotizacionesv5`
 --
 
-INSERT INTO `cotizacionesv5` (`ID`, `Fecha`, `Clientes_idClientes`, `Usuarios_idUsuarios`, `Observaciones`, `NumSolicitud`, `NumOrden`) VALUES
-(1, '2016', 17, 3, 'sdada', '2', '1'),
-(2, '2016-02-09', 17, 3, 'prueba', '32', '2'),
-(3, '2016-02-09', 17, 3, '', '', ''),
-(4, '2016-02-09', 17, 3, '', '', ''),
-(5, '2016-02-09', 17, 3, 'dsadsadsa', 'dsa121', 'ewew323'),
-(6, '2016-02-09', 2, 3, 'dasdsadas', 'dsa323', '1232'),
-(7, '2016-02-09', 2, 3, '', '', ''),
-(8, '2016-02-09', 17, 3, 'dsadsa', '321321', '3213'),
-(9, '2016-02-09', 17, 3, '', '', ''),
-(10, '2016-02-09', 2, 3, '', '', ''),
-(11, '2016-02-10', 17, 3, 'Posible', '', ''),
-(12, '2016-02-10', 17, 3, '', '', ''),
-(13, '2016-02-10', 17, 3, '', '', ''),
-(14, '2016-02-16', 17, 3, 'dsa', '', ''),
-(15, '2016-02-16', 17, 3, '', '', ''),
-(16, '2016-02-16', 17, 3, '', '', ''),
-(17, '2016-02-23', 17, 3, '', '', ''),
-(18, '2016-03-04', 17, 3, 'proteger el detalle', '1520', '1020'),
-(19, '2016-03-06', 17, 3, '', '', ''),
-(20, '2016-03-09', 18, 3, 'Cotizacion loca', '', ''),
-(21, '2016-03-10', 2, 3, '', '', ''),
-(22, '2016-03-10', 17, 3, '', '', ''),
-(23, '2016-03-10', 2, 3, '', '', ''),
-(24, '2016-03-11', 17, 3, '', '', ''),
-(25, '2016-03-11', 2, 3, '', '', ''),
-(26, '2016-03-11', 17, 3, '', '', ''),
-(27, '2016-03-14', 17, 3, '', '', ''),
-(28, '2016-03-14', 17, 3, '', '', ''),
-(29, '2016-03-27', 17, 3, '', '', ''),
-(30, '2016-03-27', 17, 3, '', '', ''),
-(31, '2016-03-27', 17, 3, '', '', ''),
-(32, '2016-03-27', 18, 3, '', '', ''),
-(33, '2016-04-14', 17, 3, '', '', ''),
-(34, '2016-04-14', 2, 3, '', '', ''),
-(35, '2016-04-15', 17, 3, '', '', ''),
-(36, '2016-04-15', 17, 3, '', '', ''),
-(37, '2016-04-15', 17, 3, '', '', ''),
-(38, '2016-04-15', 17, 3, '', '', ''),
-(39, '2016-04-16', 22, 3, 'dsdasdsad', '', ''),
-(40, '2016-05-11', 17, 3, '', '', ''),
-(41, '2016-05-11', 17, 3, '', '', ''),
-(42, '2016-05-16', 2, 3, '', '', '');
+INSERT INTO `cotizacionesv5` (`ID`, `Fecha`, `Clientes_idClientes`, `Usuarios_idUsuarios`, `Observaciones`, `NumSolicitud`, `NumOrden`, `Seguimiento`) VALUES
+(1, '2016', 17, 3, 'sdada', '2', '1', ''),
+(2, '2016-02-09', 17, 3, 'prueba', '32', '2', ''),
+(3, '2016-02-09', 17, 3, '', '', '', ''),
+(4, '2016-02-09', 17, 3, '', '', '', ''),
+(5, '2016-02-09', 17, 3, 'dsadsadsa', 'dsa121', 'ewew323', ''),
+(6, '2016-02-09', 2, 3, 'dasdsadas', 'dsa323', '1232', ''),
+(7, '2016-02-09', 2, 3, '', '', '', ''),
+(8, '2016-02-09', 17, 3, 'dsadsa', '321321', '3213', ''),
+(9, '2016-02-09', 17, 3, '', '', '', ''),
+(10, '2016-02-09', 2, 3, '', '', '', ''),
+(11, '2016-02-10', 17, 3, 'Posible', '', '', ''),
+(12, '2016-02-10', 17, 3, '', '', '', ''),
+(13, '2016-02-10', 17, 3, '', '', '', ''),
+(14, '2016-02-16', 17, 3, 'dsa', '', '', ''),
+(15, '2016-02-16', 17, 3, '', '', '', ''),
+(16, '2016-02-16', 17, 3, '', '', '', ''),
+(17, '2016-02-23', 17, 3, '', '', '', ''),
+(18, '2016-03-04', 17, 3, 'proteger el detalle', '1520', '1020', ''),
+(19, '2016-03-06', 17, 3, '', '', '', ''),
+(20, '2016-03-09', 18, 3, 'Cotizacion loca', '', '', ''),
+(21, '2016-03-10', 2, 3, '', '', '', ''),
+(22, '2016-03-10', 17, 3, '', '', '', ''),
+(23, '2016-03-10', 2, 3, '', '', '', ''),
+(24, '2016-03-11', 17, 3, '', '', '', ''),
+(25, '2016-03-11', 2, 3, '', '', '', ''),
+(26, '2016-03-11', 17, 3, '', '', '', ''),
+(27, '2016-03-14', 17, 3, '', '', '', ''),
+(28, '2016-03-14', 17, 3, '', '', '', ''),
+(29, '2016-03-27', 17, 3, '', '', '', ''),
+(30, '2016-03-27', 17, 3, '', '', '', ''),
+(31, '2016-03-27', 17, 3, '', '', '', ''),
+(32, '2016-03-27', 18, 3, '', '', '', ''),
+(33, '2016-04-14', 17, 3, '', '', '', ''),
+(34, '2016-04-14', 2, 3, '', '', '', ''),
+(35, '2016-04-15', 17, 3, '', '', '', ''),
+(36, '2016-04-15', 17, 3, '', '', '', ''),
+(37, '2016-04-15', 17, 3, '', '', '', ''),
+(38, '2016-04-15', 17, 3, '', '', '', ''),
+(39, '2016-04-16', 22, 3, 'dsdasdsad', '', '', ''),
+(40, '2016-05-11', 17, 3, '', '', '', ''),
+(41, '2016-05-11', 17, 3, '', '', '', ''),
+(42, '2016-05-16', 2, 3, '', '', '', 'prueba'),
+(43, '2016-06-05', 17, 3, 'observacion', '', '', ''),
+(44, '2016-06-06', 2, 3, 'prueba', '', '', ''),
+(45, '2016-06-06', 17, 3, '', '', '', ''),
+(46, '2016-06-06', 2, 3, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -3224,7 +3242,7 @@ CREATE TABLE IF NOT EXISTS `cot_itemscotizaciones` (
   `Devuelto` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `CuentaPUC` varchar(45) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=192 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=207 ;
 
 --
 -- Volcado de datos para la tabla `cot_itemscotizaciones`
@@ -3419,7 +3437,22 @@ INSERT INTO `cot_itemscotizaciones` (`ID`, `idCliente`, `NumCotizacion`, `Descri
 (188, 0, 2, 'SANDALIA XIRELLA JULIANA', 'XIR083', 'productosventa', '13900', '1', 0, '13900', '0', '13900', '', '', 'SANDALIA XIRELLA JULIANA', 'SANDALIA XIRELLA JULIANA', 'PR', '', '416510'),
 (189, 0, 2, 'BOXER FE&RO ALGODON RAYAS T/L', 'FE&9906L', 'productosventa', '8900', '1', 0, '8900', '0', '8900', '', '', 'BOXER FE&RO ALGODON RAYAS T/L', 'BOXER FE&RO ALGODON RAYAS T/L', 'PR', '', '416510'),
 (190, 0, 2, 'SANDALIA XIRELLA JOHANA TACON ', 'XIR087', 'productosventa', '14900', '1', 0, '14900', '0', '14900', '', '', 'SANDALIA XIRELLA JOHANA TACON ', 'SANDALIA XIRELLA JOHANA TACON ', 'PR', '', '416510'),
-(191, 2, 42, 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 'KEBM-0120', 'productosventa', '19900', '1', 1, '19900', '3184', '23084', '', '', '14000', '14000', 'PR', '', '4135');
+(191, 2, 42, 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 'KEBM-0120', 'productosventa', '19900', '1', 1, '19900', '3184', '23084', '', '', '14000', '14000', 'PR', '', '4135'),
+(192, 17, 43, 'SANDALIA 2GOOD DAMA', 'REF189', 'productosventa', '12900', '1', 1, '12900', '2064', '14964', '', '', '9000', '9000', 'PR', '', '4135'),
+(193, 17, 43, 'CHANCLA EVACOL  LUJO HOMBRE', 'EVA856-10', 'productosventa', '16500', '1', 1, '16500', '2640', '19140', '', '', '11500', '11500', 'PR', '', '4135'),
+(194, 17, 43, 'TOALLA PROTELA VENTURA 60X120', 'PROT50206', 'productosventa', '14900', '1', 1, '14900', '2384', '17284', '', '', '11000', '11000', 'PR', '', '4135'),
+(195, 17, 43, 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 'NJF3992', 'productosventa', '21900', '1', 1, '21900', '3504', '25404', '', '', '15999', '15999', 'PR', '', '4135'),
+(196, 17, 43, 'BLUSA NJFASHION GALLETA ', 'NJF4042', 'productosventa', '25000', '1', 1, '25000', '4000', '29000', '', '', '15000', '15000', 'PR', '', '4135'),
+(197, 17, 43, 'BLUSA KEBONITA CAMPESINA', 'KEBM-0153', 'productosventa', '21900', '1', 1, '21900', '3504', '25404', '', '', '16000', '16000', 'PR', '', '4135'),
+(198, 17, 43, 'Prueba de embarazo', 'ELPE', 'servicios', '14000', '1', 1, '14000', '2240', '16240', '', '', '6000', '6000', 'MO', '', '416520'),
+(199, 2, 44, 'BLUSA MAGENTA TIRAS', 'MAG2087', 'productosventa', '20900', '1', 1, '20900', '3344', '24244', '', '', '15400', '15400', 'PR', '', '4135'),
+(200, 2, 44, 'MALETIN ESCOLAR GRANDE', 'REF515', 'productosventa', '28500', '1', 1, '28500', '4560', '33060', '', '', '21000', '21000', 'PR', '', '4135'),
+(201, 2, 44, 'TOP PROMOCION', 'REF1658', 'productosventa', '15000', '1', 1, '15000', '2400', '17400', '', '', '1', '1', 'PR', '', '4135'),
+(202, 17, 45, 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 'SOEIPE', 'servicios', '16000', '1', 1, '16000', '2560', '18560', '', '', '7000', '7000', 'MO', '', '416510'),
+(203, 17, 45, 'Perfil lipidico', 'EAPLI', 'servicios', '23000', '1', 1, '23000', '3680', '26680', '', '', '12000', '12000', 'MO', '', '416510'),
+(204, 2, 46, 'SANDALIA 2GOOD DAMA', 'REF189', 'productosventa', '12900', '1', 1, '12900', '2064', '14964', '', '', '9000', '9000', 'PR', '', '4135'),
+(205, 2, 46, 'CHANCLA EVACOL S.A.S HOMBRE', 'EVA856-08', 'productosventa', '16500', '1', 1, '16500', '2640', '19140', '', '', '12000', '12000', 'PR', '', '4135'),
+(206, 2, 46, 'Audiometria clinica', 'VEAC', 'servicios', '25000', '1', 1, '25000', '4000', '29000', '', '', '12500', '12500', 'MO', '', '416510');
 
 -- --------------------------------------------------------
 
@@ -3834,6 +3867,7 @@ CREATE TABLE IF NOT EXISTS `egresos` (
   `Subtotal` varchar(45) NOT NULL,
   `IVA` varchar(45) NOT NULL,
   `Valor` varchar(45) NOT NULL,
+  `Retenciones` varchar(45) NOT NULL,
   `NumFactura` varchar(45) NOT NULL,
   `idProveedor` varchar(45) NOT NULL,
   `Cuenta` varchar(45) NOT NULL,
@@ -3847,142 +3881,146 @@ CREATE TABLE IF NOT EXISTS `egresos` (
   `EmpresaPro` int(11) NOT NULL,
   `Items` varchar(2) NOT NULL,
   PRIMARY KEY (`idEgresos`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=130 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=134 ;
 
 --
 -- Volcado de datos para la tabla `egresos`
 --
 
-INSERT INTO `egresos` (`idEgresos`, `Fecha`, `PagoProg`, `FechaPagoPro`, `FechaPago`, `Concepto`, `TipoEgreso`, `ServicioPago`, `Beneficiario`, `NIT`, `Direccion`, `Ciudad`, `Subtotal`, `IVA`, `Valor`, `NumFactura`, `idProveedor`, `Cuenta`, `Soporte`, `Usuario_idUsuario`, `CerradoDiario`, `FechaCierreDiario`, `HoraCierreDiario`, `UsuarioCierreDiario`, `CentroCostos`, `EmpresaPro`, `Items`) VALUES
-(1, '2015-08-11', 'Contado', '2015-08-11', '', 'Compra de Mercancias', 'Compra Productos', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '5000', '800', '5800', '321321', '13', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
-(2, '2015-08-11', 'Contado', '2015-08-11', '', 'Compra de Mercancias', 'Compra Productos', '', 'SUMINISTROS ELECTRICOS LA 28', '66710063', 'CALLE 28 No 24-56 ', 'TULUA', '58500', '9360', '67860', '231321', '40', '11100501', '', 1, 'NO', '', '', '', 0, 0, ''),
-(3, '2015-08-11', 'Pagado', '2015-08-19', '2015-08-11', 'dsadas', 'PagaContratistas', '', 'CARMELO PALERMO', '700147288', 'CL 11 7 82', 'BUGA', '238', '321', '559', 'dsa344', '4', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
-(4, '2015-08-12', 'Pagado', '2015-08-12', '2015-08-12', 'dsadsa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '100', '1', '101', '32342', '11', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
-(5, '2015-08-13', 'Pagado', '2015-08-27', '2015-08-31', 'dasdas', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '231321', '321312', '552633', '321321', '11', '11100501', '', 1, 'SI', '2015-08-31', '08:27:14', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(6, '2015-08-13', 'Contado', '2015-08-13', '', 'Pago de la energia', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '21212', '20', '110505', '', 1, 'SI', '2015-08-13', '08:28:21', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(7, '2015-08-13', 'Contado', '2015-08-13', '', 'dfsadsa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '3213', '11', '110505', '', 1, 'SI', '2015-08-13', '08:31:21', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(8, '2015-08-13', 'Contado', '2015-08-13', '', 'sfdfs', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3132', '12', '110505', '', 1, 'SI', '2015-08-13', '08:32:59', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(9, '2015-08-13', 'Contado', '2015-08-13', '', 'sfdfs', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3132', '12', '110505', '', 1, 'SI', '2015-08-18', '10:24:15', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(10, '2015-08-20', 'Pagado', '2015-08-26', '2015-08-20', 'Pago del mes de mayo de internet', 'PagaServicios', '', 'UNE EPM TELECOMUNICACIONES S.A.', '900092385', 'CRA 16 No 11A SUR - 100', 'MEDELLIN', '100000', '16000', '116000', '12345', '48', '110510', '', 1, 'SI', '2015-08-31', '07:00:32', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(11, '2015-08-31', 'Pagado', '2015-08-31', '2015-08-31', 'dasdwa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '321321', '11', '110510', '', 1, 'SI', '2015-08-31', '08:27:27', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(12, '2015-08-31', 'Contado', '2015-08-31', '', 'dada', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '10000', '0', '10000', '321321', '22', '110510', '', 1, 'SI', '2015-08-31', '07:31:34', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(13, '2015-09-04', 'Contado', '2015-09-04', '', 'pago aquel', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '312321', '12', '110505', '', 1, 'SI', '2015-09-04', '12:03:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(14, '2015-09-04', 'Pagado', '2015-09-04', '2015-09-04', '321321', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '3213', '12', '110505', '', 1, 'SI', '2015-09-04', '12:03:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(15, '2015-08-20', 'Pagado', '2015-08-26', '2015-09-10', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '5750', '920', '6670', '12321', '3', '11100501', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(16, '2015-08-20', 'Pagado', '2015-08-26', '2015-09-10', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '5750', '920', '6670', '12321', '3', '11100501', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(17, '2015-09-07', 'Contado', '2015-09-07', '', 'dgsdgs', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '12456', '11', '110510', '', 1, 'SI', '2015-09-07', '08:32:52', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(18, '2015-09-07', 'Pagado', '2015-09-07', '2015-09-10', 'fasfsd', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '20000', '0', '20000', '1234', '11', '110510', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(19, '2015-09-08', 'Contado', '2015-09-08', '', 'lkkljkl', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '123', '20', '110505', '', 1, 'SI', '2015-09-08', '11:28:46', 'Techno  Soluciones', 0, 0, ''),
-(20, '2015-09-16', 'Pagado', '2015-09-24', '2015-09-16', 'pago de arriendo del mes de agosto', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '500000', '0', '500000', '', '31', '110510', '', 1, 'SI', '2015-09-17', '08:11:40', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(21, '2015-09-04', 'Pagado', '2015-09-04', '2015-09-24', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '50000', '0', '50000', '3213', '3', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(22, '2015-09-17', 'Contado', '2015-09-17', '', 'pago de factura', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '2111', '12', '110510', '', 2, 'SI', '2015-09-18', '08:03:18', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
-(23, '2015-09-17', 'Contado', '2015-09-17', '', 'dsamdklsa', 'PagaServicios', '', 'TRANSPORTES CUNCHIPA S.A', '891900849', 'NO', 'TULUA', '20000', '10', '20010', '321321', '25', '110510', '', 1, 'SI', '2015-09-18', '08:02:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(24, '2015-09-18', 'Contado', '2015-09-18', '', 'pagos', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '321321', '20', '110510', '', 1, 'SI', '2015-09-18', '08:40:53', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(25, '2015-09-18', 'Contado', '2015-09-18', '', 'fsafds', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '50000', '0', '50000', '', '31', '110510', '', 1, 'SI', '2015-09-18', '08:40:53', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(26, '2015-09-20', 'Contado', '2015-09-20', '', 'Compra de Mercancias', 'Compra Productos', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '15000', '2400', '17400', '212', '22', '110505', '', 2, 'SI', '2015-10-08', '22:43:47', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
-(27, '2015-09-21', 'Pagado', '2015-09-23', '2015-09-25', 'Pago de arriendo del mes de septiembre', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '500000', '0', '500000', '', '31', '110510', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(28, '2015-09-21', 'Contado', '2015-09-21', '', 'csaljdklaj', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '12', '10012', '1212', '20', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(29, '2015-09-21', 'Pagado', '2015-09-23', '2015-09-21', 'Compra de Mercancias', 'Compra Productos', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '56000', '8960', '64960', '21212', '22', '11100501', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(30, '2015-09-03', 'Contado', '2015-09-03', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '175000', '28000', '203000', '3213', '1', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(31, '2015-09-10', 'Contado', '2015-09-10', '', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '300000', '48000', '348000', '3213', '3', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(32, '2015-09-24', 'Contado', '2015-09-24', '', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '16000', '116000', '3232', '3', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(33, '2015-09-24', 'Contado', '2015-09-24', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '250000', '40000', '290000', '345', '1', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(34, '2015-09-25', 'Contado', '2015-09-25', '', 'lklk', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '10000', '0', '10000', '', '31', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(35, '2015-09-25', 'Contado', '2015-09-25', '', 'dvjdfbigj', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '5', '0', '5', '', '31', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(36, '2015-09-25', 'Contado', '2015-09-25', '', 'fdgfdhxdf', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '2000', '200', '2200', '1', '11', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(37, '2015-09-25', 'Contado', '2015-09-25', '', 'rhhth', 'PagaServicios', '', 'NOTARIA SEGUNDA DE BUGA', '16592215', 'CARRERA 16 6-45', 'BUGA', '1000', '100', '1100', '2', '26', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(38, '2015-09-25', 'Contado', '2015-09-25', '', 'uhkjhkjh', 'Pago Bancos', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '6000', '0', '6000', '3', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(39, '2015-09-25', 'Contado', '2015-09-25', '', 'gnfnghnh', 'CompraMercancias', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1000', '200', '1200', '2', '1', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(40, '2015-09-25', 'Contado', '2015-09-25', '', 'kjkykj', 'PagaContratistas', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1880', '200', '2080', '1234', '3', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(41, '2015-09-25', 'Contado', '2015-09-25', '', 'hnm jhmjm', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '0', '1000', '1000', '1234', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(42, '2015-09-25', 'Contado', '2015-09-25', '', 'hgjhg', 'PagaServicios', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1000', '100', '1100', '1', '3', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(43, '2015-09-25', 'Contado', '2015-09-25', '', 'ghjcfgjfg', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '0', '1200', '1200', '1', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(44, '2015-09-25', 'Contado', '2015-09-25', '', 'fdgdfh', 'PagaIVA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '3001', '0', '3001', '1', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(45, '2015-09-25', 'Contado', '2015-09-25', '', 'bncvncvn', 'PagaIVA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '1403', '0', '1403', '2', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(46, '2015-09-25', 'Contado', '2015-09-25', '', 'cghcghfg', 'PagaCree', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '6200', '0', '6200', '1', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(47, '2015-09-25', 'Contado', '2015-09-25', '', 'jvn,xcnkv,kn', 'PagaICA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '500', '0', '500', '2', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(48, '2015-09-25', 'Contado', '2015-09-25', '', 'ghdfhdfh', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '1000', '0', '1000', '', '31', '110505', '', 2, 'SI', '2015-10-08', '22:43:47', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
-(49, '2015-09-27', 'Contado', '2015-09-27', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '64120', '10259', '74379', '3232', '1', '110505', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(50, '2015-09-27', 'Pagado', '2015-09-27', '2015-09-28', 'dsdas', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '121232', '0', '121232', '', '31', '110510', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(51, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-08', 'sdsadsa', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '321321', '0', '321321', '', '31', '110505', '', 1, 'SI', '2015-10-09', '10:37:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(52, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-20', 'fdfsd', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '321321', '0', '321321', '', '31', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(53, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-07', 'dsd', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '12121', '0', '12121', '', '31', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(54, '2015-09-27', 'Contado', '2015-09-27', '', 'fdfds', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '100000', '0', '100000', '21212', '32', '11100501', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(55, '2015-09-30', 'Pagado', '2015-10-02', '2015-09-30', 'pghghjghjghjghjg', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '30000', '0', '30000', '54546476576', '20', '110510', '', 1, 'SI', '2015-10-01', '12:48:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(56, '2015-09-30', 'Contado', '2015-09-30', '', 'Compra de Mercancias', 'Compra Productos', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '50000', '0', '50000', '4654654', '13', '110505', '', 1, 'SI', '2015-10-01', '12:48:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(57, '2015-10-01', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '100000', '16000', '116000', '2121', '1', '110510', '', 1, 'SI', '2015-10-02', '12:00:45', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(58, '2015-10-01', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '100000', '15000', '115000', '4321', '2', '110510', '', 1, 'SI', '2015-10-02', '12:00:45', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(59, '2015-10-02', 'Contado', '2015-10-02', '', 'sfsdfds', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '54', '10054', '32432', '11', '110510', '', 1, 'SI', '2015-10-02', '12:39:38', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(60, '2015-10-02', 'Contado', '2015-10-02', '', 'dwqdewq', 'PagaServicios', '', 'COOPETRANS DE TULUA', '891900254', 'Calle 27  1w-176', 'TULUA', '10000', '1000', '11000', '432432', '7', '110510', '', 1, 'SI', '2015-10-05', '15:26:47', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(61, '2015-10-05', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '30000', '1300', '31300', '34545', '2', '110510', '', 1, 'SI', '2015-10-05', '15:26:47', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(62, '2015-10-05', 'Contado', '2015-10-05', '', 'jbhvjhbhjb', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '50000', '0', '50000', '', '31', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(63, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '12355', '112355', '12334', '3', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(64, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '16000', '116000', '32321', '3', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(65, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'MULTIREDES Y TECNOLOGIA', '66975081', 'AV 5 No 29 DN 68 LOCAL 166 CC LA PASARELA', 'CALI', '10000', '1600', '11600', '1234', '44', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(66, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '10000', '1600', '11600', '1234', '3', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(67, '2015-10-07', 'Contado', '2015-10-07', '', 'asdlaskdlaksd', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '1234', '12', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(68, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '12000', '1200', '13200', '213213', '3', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(69, '2015-10-08', 'Contado', '2015-10-08', '', 'fsafas', 'PagaContratistas', '', 'CARMELO PALERMO', '700147288', 'CL 11 7 82', 'BUGA', '100000', '12121', '112121', '321321', '4', '110510', '', 1, 'SI', '2015-10-09', '10:37:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(70, '2015-10-09', 'Contado', '2015-10-09', '', 'PAGO DE TELEFONO MES DE SEPTIEMBRE SE PAGA POR CAJA MENOR POR PEPITA PEREZ', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '12345', '20', '110510', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(71, '2015-10-09', 'Contado', '2015-10-09', '', 'COMPRA DE CABLE PORQUE CUALQUIER COSA', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '10000', '0', '10000', 'NO', '22', '110510', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(72, '2015-10-09', 'Contado', '2015-10-09', '', 'PAGO A JULIAN ALVARAN POR TURNO DECEMBRINO', 'PagaContratistas', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '200000', '32000', '232000', 'NO', '31', '110505', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(73, '2015-10-05', '', '', '', 'Compra de mercancias', '', '', 'SURTIVALLE SA', '900876543', 'CALLE 5 6 25', 'TULUA', '100000', '16000', '116000', '6543', '70', '110505', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(74, '2015-10-20', 'Contado', '2015-10-20', '', 'Pago de telefono mes de diciembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '32131231', '20', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(75, '2015-10-20', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '10000', '1600', '11600', '1233', '1', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(76, '2015-10-23', 'Contado', '2015-10-23', '', 'jhkjhkjh', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '87987987', '20', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(77, '2015-10-23', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '343453', '454', '343907', '66565', '3', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(78, '2015-11-20', 'Pagado', '2015-11-30', '2015-11-23', 'pago de telefono del mes de noviembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '4567', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(79, '2015-11-23', 'Contado', '2015-11-23', '', 'PAGO DE TELEFONO FIJO BODEGA PRINCIPAL MES DE NOVIEMBRE', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '4343242', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(80, '2015-11-23', 'Pagado', '2015-12-02', '2015-11-23', 'PRUEBA', 'PagaServicios', '', 'COOPETRANS DE TULUA', '891900254', 'Calle 27  1w-176', 'TULUA', '10000', '0', '10000', '7575765', '7', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(81, '2015-11-24', 'Contado', '2015-11-24', '', 'pago del mes de noviembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '232321312', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(82, '2015-11-24', '', '', '', 'Compra de mercancias', '', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '20000', '0', '20000', '23131', '13', '11100501', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(83, '2015-12-08', 'Pagado', '2015-12-18', '2016-02-07', 'PAGO DE TELEFONO DE DICIEMBRE', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '231232321', '12', '110510', '', 3, '', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(84, '2015-12-17', 'Contado', '2015-12-16', '', 'PAGO DE TELEFONO DEL MES DE DICIEMBRE', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '2131321', '20', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(85, '2015-12-16', '', '', '', 'Compra de mercancias', '', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '200000', '21000', '221000', '2321312', '13', '11100501', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(86, '2016-01-04', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '10000', '2000', '12000', '121321', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(87, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '21000', '121000', '321321', '3', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(88, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '100000', '2121', '102121', '321321', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(89, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1212122321', '32321321', '1244443642', '454543534', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(90, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '213213', '321321', '534534', '321321', '31', '110505', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(91, '2016-01-10', 'Contado', '2016-01-10', '', 'COMPRA DE PANDEBONOS PARA ATENCION A JULIAN', 'PagaServicios', '', 'LEYDI VIVIANA VALERO MENA', '1115072489', 'CALLE 25C 7B-52', 'BUGA', '15000', '0', '15000', '1234', '72', '110510', '', 1, 'SI', '2016-01-10', '10:41:23', 'TECHNO  SOLUCIONES', 0, 0, ''),
-(92, '2016-01-11', 'Pagado', '2016-01-21', '2016-01-18', 'Pago de telefono 313131 del mes de enero', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '0', '100000', '76786876', '12', '11100501', '', 1, '', '', '', '', 0, 0, ''),
-(93, '2016-01-18', 'Contado', '2016-01-18', '', 'Transporte a Tulua por transporte de fulanito', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '8000', '0', '8000', '576576576765', '22', '110510', '', 1, '', '', '', '', 0, 0, ''),
-(94, '2016-01-20', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '10000', '40000', '50000', '312321', '2', '110505', '', 3, 'SI', '2016-01-21', '16:41:24', 'JULIAN  ALVARAN', 0, 0, ''),
-(95, '2016-01-26', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1000', '100', '1100', '3213', '3', '110510', '', 3, 'SI', '2016-01-26', '16:29:47', 'JULIAN  ALVARAN', 0, 0, ''),
-(96, '2016-01-26', 'Pagado', '2016-02-01', '2016-01-26', 'PAGO DE TELEFONO DEL MES DE ENERO', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '3213213', '12', '110505', '', 3, 'SI', '2016-01-26', '16:29:47', 'JULIAN  ALVARAN', 0, 0, ''),
-(97, '2016-01-27', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '321321', '321', '321642', '321321', '3', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
-(98, '2016-01-27', 'Contado', '2016-01-27', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '32132', '3213', '35345', '2121', '1', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
-(99, '2016-01-27', 'Contado', '2016-01-27', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '3213', '32213', '35426', '3213', '3', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
-(100, '2016-01-27', 'Contado', '2016-01-27', '', 'dhkjhsdjsw', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '100000', '12000', '112000', '2121', '11', '110510', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
-(101, '2016-03-14', 'Contado', '2016-03-14', '', 'dsadsa', 'Mantenimiento y Reparaciones', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '212121', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
-(102, '2016-03-14', 'Contado', '2016-03-14', '', 'dsadsa', 'Mantenimiento y Reparaciones', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '212121', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
-(103, '2016-03-14', 'Programado', '2016-03-14', '', 'dsadsa', 'Arrendamientos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '120000', '18000', '138000', 'ds3232', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
-(104, '2016-03-14', 'Programado', '2016-03-14', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', '321321dsd', '71', '11100501', '', 3, '', '', '', '', 1, 1, ''),
-(105, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadsa', 'Diversos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '12000', '112000', '321321', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
-(106, '2016-03-15', 'Contado', '2016-03-15', '', 'dsad', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(107, '2016-03-15', 'Contado', '2016-03-15', '', 'dsad', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '3221', '0', '3221', 'dsadsa', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
-(108, '2016-03-15', 'Contado', '2016-03-15', '', 'sas', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '12321', '0', '15855', 'wqq', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
-(109, '2016-03-15', 'Contado', '2016-03-15', '', 'dsdsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '2121', '0', '2121', '32321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(110, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '2211', '0', '2211', '323', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(111, '2016-03-15', 'Contado', '2016-03-15', '', 'dede', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '2344', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(112, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdfs', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '1000', '0', '1000', '3321312', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(113, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdfs', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '1000', '0', '1000', '3321312', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(114, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(115, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(116, '2016-03-15', 'Programado', '2016-03-15', '', 'dsds', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321', '0', '32321', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(117, '2016-03-15', 'Contado', '2016-03-15', '', 'dsdasdas', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '21', '0', '254', '323321321', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
-(118, '2016-03-15', 'Programado', '2016-03-15', '', 'dasdsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32312', '0', '32312', '2121', '71', '110510', '../SoportesEgresos/', 3, '', '', '', '', 1, 1, ''),
-(119, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321', '0', '32321', '21213', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(120, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32312321', '0', '32312321', '3232', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
-(121, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321321312321', '0', '32321321312321', '2121321', '71', '110505', '../SoportesEgresos/', 3, '', '', '', '', 1, 1, ''),
-(122, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '312321321', '0', '312321321', '321321', '71', '110505', '../SoportesEgresos/HOJA DE VIDA JULIAN ALVARAN.pdf', 3, '', '', '', '', 1, 1, ''),
-(123, '2016-03-15', 'Programado', '2016-03-15', '', 'dsda', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '321321321', '0', '321321321', '321321', '71', '110505', '../SoportesEgresos/Carta a inmobiliaria.docx', 3, '', '', '', '', 1, 1, ''),
-(124, '2016-03-15', 'Programado', '2016-03-15', '', 'sasa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '3213213', '0', '3213213', '231423', '71', '110505', '../SoportesEgresos/Carta_a_inmobiliaria_2.docx', 3, '', '', '', '', 1, 1, ''),
-(125, '2016-03-15', 'Contado', '2016-03-15', '', 'fafasfa', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '321321', '0', '324855', '321321', '71', '110505', '../SoportesEgresos/Foto_E-M_Hoja_de_Vida.jpg', 3, '', '', '', '', 1, 1, ''),
-(126, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '23121', '0', '23121', '321321', '71', '110505', '../SoportesEgresos/2016-02-04_AVICOLA_SANTA_RITA_SAS_(1).pdf', 3, '', '', '', '', 1, 1, ''),
-(127, '2016-03-18', 'Contado', '2016-03-18', '', 'dsadsada', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', 'dsadsadsa', '71', '110505', '', 1, '', '', '', '', 1, 1, ''),
-(128, '2016-04-14', 'Contado', '2016-04-14', '', 'dsadsa', 'Honorarios', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '321321', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
-(129, '2016-04-22', 'Contado', '2016-04-22', '', 'PAGO DE TELEFONO', 'Servicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '29000', '0', '29000', '321321321', '11', '11100501', '', 3, '', '', '', '', 1, 1, '');
+INSERT INTO `egresos` (`idEgresos`, `Fecha`, `PagoProg`, `FechaPagoPro`, `FechaPago`, `Concepto`, `TipoEgreso`, `ServicioPago`, `Beneficiario`, `NIT`, `Direccion`, `Ciudad`, `Subtotal`, `IVA`, `Valor`, `Retenciones`, `NumFactura`, `idProveedor`, `Cuenta`, `Soporte`, `Usuario_idUsuario`, `CerradoDiario`, `FechaCierreDiario`, `HoraCierreDiario`, `UsuarioCierreDiario`, `CentroCostos`, `EmpresaPro`, `Items`) VALUES
+(1, '2015-08-11', 'Contado', '2015-08-11', '', 'Compra de Mercancias', 'Compra Productos', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '5000', '800', '5800', '', '321321', '13', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
+(2, '2015-08-11', 'Contado', '2015-08-11', '', 'Compra de Mercancias', 'Compra Productos', '', 'SUMINISTROS ELECTRICOS LA 28', '66710063', 'CALLE 28 No 24-56 ', 'TULUA', '58500', '9360', '67860', '', '231321', '40', '11100501', '', 1, 'NO', '', '', '', 0, 0, ''),
+(3, '2015-08-11', 'Pagado', '2015-08-19', '2015-08-11', 'dsadas', 'PagaContratistas', '', 'CARMELO PALERMO', '700147288', 'CL 11 7 82', 'BUGA', '238', '321', '559', '', 'dsa344', '4', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
+(4, '2015-08-12', 'Pagado', '2015-08-12', '2015-08-12', 'dsadsa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '100', '1', '101', '', '32342', '11', '110505', '', 1, 'NO', '', '', '', 0, 0, ''),
+(5, '2015-08-13', 'Pagado', '2015-08-27', '2015-08-31', 'dasdas', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '231321', '321312', '552633', '', '321321', '11', '11100501', '', 1, 'SI', '2015-08-31', '08:27:14', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(6, '2015-08-13', 'Contado', '2015-08-13', '', 'Pago de la energia', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '', '21212', '20', '110505', '', 1, 'SI', '2015-08-13', '08:28:21', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(7, '2015-08-13', 'Contado', '2015-08-13', '', 'dfsadsa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '', '3213', '11', '110505', '', 1, 'SI', '2015-08-13', '08:31:21', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(8, '2015-08-13', 'Contado', '2015-08-13', '', 'sfdfs', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '', '3132', '12', '110505', '', 1, 'SI', '2015-08-13', '08:32:59', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(9, '2015-08-13', 'Contado', '2015-08-13', '', 'sfdfs', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '', '3132', '12', '110505', '', 1, 'SI', '2015-08-18', '10:24:15', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(10, '2015-08-20', 'Pagado', '2015-08-26', '2015-08-20', 'Pago del mes de mayo de internet', 'PagaServicios', '', 'UNE EPM TELECOMUNICACIONES S.A.', '900092385', 'CRA 16 No 11A SUR - 100', 'MEDELLIN', '100000', '16000', '116000', '', '12345', '48', '110510', '', 1, 'SI', '2015-08-31', '07:00:32', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(11, '2015-08-31', 'Pagado', '2015-08-31', '2015-08-31', 'dasdwa', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '', '321321', '11', '110510', '', 1, 'SI', '2015-08-31', '08:27:27', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(12, '2015-08-31', 'Contado', '2015-08-31', '', 'dada', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '10000', '0', '10000', '', '321321', '22', '110510', '', 1, 'SI', '2015-08-31', '07:31:34', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(13, '2015-09-04', 'Contado', '2015-09-04', '', 'pago aquel', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '', '312321', '12', '110505', '', 1, 'SI', '2015-09-04', '12:03:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(14, '2015-09-04', 'Pagado', '2015-09-04', '2015-09-04', '321321', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '', '3213', '12', '110505', '', 1, 'SI', '2015-09-04', '12:03:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(15, '2015-08-20', 'Pagado', '2015-08-26', '2015-09-10', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '5750', '920', '6670', '', '12321', '3', '11100501', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(16, '2015-08-20', 'Pagado', '2015-08-26', '2015-09-10', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '5750', '920', '6670', '', '12321', '3', '11100501', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(17, '2015-09-07', 'Contado', '2015-09-07', '', 'dgsdgs', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '0', '10000', '', '12456', '11', '110510', '', 1, 'SI', '2015-09-07', '08:32:52', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(18, '2015-09-07', 'Pagado', '2015-09-07', '2015-09-10', 'fasfsd', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '20000', '0', '20000', '', '1234', '11', '110510', '', 1, 'SI', '2015-09-10', '14:06:46', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(19, '2015-09-08', 'Contado', '2015-09-08', '', 'lkkljkl', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '', '123', '20', '110505', '', 1, 'SI', '2015-09-08', '11:28:46', 'Techno  Soluciones', 0, 0, ''),
+(20, '2015-09-16', 'Pagado', '2015-09-24', '2015-09-16', 'pago de arriendo del mes de agosto', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '500000', '0', '500000', '', '', '31', '110510', '', 1, 'SI', '2015-09-17', '08:11:40', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(21, '2015-09-04', 'Pagado', '2015-09-04', '2015-09-24', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '50000', '0', '50000', '', '3213', '3', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(22, '2015-09-17', 'Contado', '2015-09-17', '', 'pago de factura', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '10000', '0', '10000', '', '2111', '12', '110510', '', 2, 'SI', '2015-09-18', '08:03:18', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
+(23, '2015-09-17', 'Contado', '2015-09-17', '', 'dsamdklsa', 'PagaServicios', '', 'TRANSPORTES CUNCHIPA S.A', '891900849', 'NO', 'TULUA', '20000', '10', '20010', '', '321321', '25', '110510', '', 1, 'SI', '2015-09-18', '08:02:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(24, '2015-09-18', 'Contado', '2015-09-18', '', 'pagos', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '0', '10000', '', '321321', '20', '110510', '', 1, 'SI', '2015-09-18', '08:40:53', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(25, '2015-09-18', 'Contado', '2015-09-18', '', 'fsafds', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '50000', '0', '50000', '', '', '31', '110510', '', 1, 'SI', '2015-09-18', '08:40:53', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(26, '2015-09-20', 'Contado', '2015-09-20', '', 'Compra de Mercancias', 'Compra Productos', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '15000', '2400', '17400', '', '212', '22', '110505', '', 2, 'SI', '2015-10-08', '22:43:47', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
+(27, '2015-09-21', 'Pagado', '2015-09-23', '2015-09-25', 'Pago de arriendo del mes de septiembre', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '500000', '0', '500000', '', '', '31', '110510', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(28, '2015-09-21', 'Contado', '2015-09-21', '', 'csaljdklaj', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '10000', '12', '10012', '', '1212', '20', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(29, '2015-09-21', 'Pagado', '2015-09-23', '2015-09-21', 'Compra de Mercancias', 'Compra Productos', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '56000', '8960', '64960', '', '21212', '22', '11100501', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(30, '2015-09-03', 'Contado', '2015-09-03', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '175000', '28000', '203000', '', '3213', '1', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(31, '2015-09-10', 'Contado', '2015-09-10', '', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '300000', '48000', '348000', '', '3213', '3', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(32, '2015-09-24', 'Contado', '2015-09-24', '', 'Compra de Mercancias', 'Compra Productos', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '16000', '116000', '', '3232', '3', '110510', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(33, '2015-09-24', 'Contado', '2015-09-24', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '250000', '40000', '290000', '', '345', '1', '110505', '', 1, 'SI', '2015-09-25', '07:44:37', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(34, '2015-09-25', 'Contado', '2015-09-25', '', 'lklk', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '10000', '0', '10000', '', '', '31', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(35, '2015-09-25', 'Contado', '2015-09-25', '', 'dvjdfbigj', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '5', '0', '5', '', '', '31', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(36, '2015-09-25', 'Contado', '2015-09-25', '', 'fdgfdhxdf', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '2000', '200', '2200', '', '1', '11', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(37, '2015-09-25', 'Contado', '2015-09-25', '', 'rhhth', 'PagaServicios', '', 'NOTARIA SEGUNDA DE BUGA', '16592215', 'CARRERA 16 6-45', 'BUGA', '1000', '100', '1100', '', '2', '26', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(38, '2015-09-25', 'Contado', '2015-09-25', '', 'uhkjhkjh', 'Pago Bancos', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '6000', '0', '6000', '', '3', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(39, '2015-09-25', 'Contado', '2015-09-25', '', 'gnfnghnh', 'CompraMercancias', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1000', '200', '1200', '', '2', '1', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(40, '2015-09-25', 'Contado', '2015-09-25', '', 'kjkykj', 'PagaContratistas', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1880', '200', '2080', '', '1234', '3', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(41, '2015-09-25', 'Contado', '2015-09-25', '', 'hnm jhmjm', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '0', '1000', '1000', '', '1234', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(42, '2015-09-25', 'Contado', '2015-09-25', '', 'hgjhg', 'PagaServicios', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1000', '100', '1100', '', '1', '3', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(43, '2015-09-25', 'Contado', '2015-09-25', '', 'ghjcfgjfg', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '0', '1200', '1200', '', '1', '32', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(44, '2015-09-25', 'Contado', '2015-09-25', '', 'fdgdfh', 'PagaIVA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '3001', '0', '3001', '', '1', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(45, '2015-09-25', 'Contado', '2015-09-25', '', 'bncvncvn', 'PagaIVA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '1403', '0', '1403', '', '2', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(46, '2015-09-25', 'Contado', '2015-09-25', '', 'cghcghfg', 'PagaCree', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '6200', '0', '6200', '', '1', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(47, '2015-09-25', 'Contado', '2015-09-25', '', 'jvn,xcnkv,kn', 'PagaICA', '', 'DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES', '800197268', 'CARRERA 14 5-53', 'BUGA', '500', '0', '500', '', '2', '27', '110505', '', 1, 'SI', '2015-09-25', '10:22:58', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(48, '2015-09-25', 'Contado', '2015-09-25', '', 'ghdfhdfh', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '1000', '0', '1000', '', '', '31', '110505', '', 2, 'SI', '2015-10-08', '22:43:47', 'ADMINISTRADOR SOFTCONTECH', 0, 0, ''),
+(49, '2015-09-27', 'Contado', '2015-09-27', '', 'Compra de Mercancias', 'Compra Productos', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '64120', '10259', '74379', '', '3232', '1', '110505', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(50, '2015-09-27', 'Pagado', '2015-09-27', '2015-09-28', 'dsdas', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '121232', '0', '121232', '', '', '31', '110510', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(51, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-08', 'sdsadsa', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '321321', '0', '321321', '', '', '31', '110505', '', 1, 'SI', '2015-10-09', '10:37:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(52, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-20', 'fdfsd', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '321321', '0', '321321', '', '', '31', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(53, '2015-09-27', 'Pagado', '2015-09-27', '2015-10-07', 'dsd', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '12121', '0', '12121', '', '', '31', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(54, '2015-09-27', 'Contado', '2015-09-27', '', 'fdfds', 'PagaConciliacion', '', 'BANCO DAVIVIENDA S.A.', '860034313', 'CENTRO COMERCIAL BUGA PLAZA LOCAL 66', 'BUGA', '100000', '0', '100000', '', '21212', '32', '11100501', '', 1, 'SI', '2015-09-30', '17:03:57', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(55, '2015-09-30', 'Pagado', '2015-10-02', '2015-09-30', 'pghghjghjghjghjg', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '30000', '0', '30000', '', '54546476576', '20', '110510', '', 1, 'SI', '2015-10-01', '12:48:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(56, '2015-09-30', 'Contado', '2015-09-30', '', 'Compra de Mercancias', 'Compra Productos', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '50000', '0', '50000', '', '4654654', '13', '110505', '', 1, 'SI', '2015-10-01', '12:48:56', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(57, '2015-10-01', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '100000', '16000', '116000', '', '2121', '1', '110510', '', 1, 'SI', '2015-10-02', '12:00:45', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(58, '2015-10-01', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '100000', '15000', '115000', '', '4321', '2', '110510', '', 1, 'SI', '2015-10-02', '12:00:45', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(59, '2015-10-02', 'Contado', '2015-10-02', '', 'sfsdfds', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '10000', '54', '10054', '', '32432', '11', '110510', '', 1, 'SI', '2015-10-02', '12:39:38', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(60, '2015-10-02', 'Contado', '2015-10-02', '', 'dwqdewq', 'PagaServicios', '', 'COOPETRANS DE TULUA', '891900254', 'Calle 27  1w-176', 'TULUA', '10000', '1000', '11000', '', '432432', '7', '110510', '', 1, 'SI', '2015-10-05', '15:26:47', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(61, '2015-10-05', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '30000', '1300', '31300', '', '34545', '2', '110510', '', 1, 'SI', '2015-10-05', '15:26:47', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(62, '2015-10-05', 'Contado', '2015-10-05', '', 'jbhvjhbhjb', 'Arriendos', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '50000', '0', '50000', '', '', '31', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(63, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '12355', '112355', '', '12334', '3', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(64, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '16000', '116000', '', '32321', '3', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(65, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'MULTIREDES Y TECNOLOGIA', '66975081', 'AV 5 No 29 DN 68 LOCAL 166 CC LA PASARELA', 'CALI', '10000', '1600', '11600', '', '1234', '44', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(66, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '10000', '1600', '11600', '', '1234', '3', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(67, '2015-10-07', 'Contado', '2015-10-07', '', 'asdlaskdlaksd', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '', '1234', '12', '110510', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(68, '2015-10-07', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '12000', '1200', '13200', '', '213213', '3', '110505', '', 1, 'SI', '2015-10-08', '22:28:12', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(69, '2015-10-08', 'Contado', '2015-10-08', '', 'fsafas', 'PagaContratistas', '', 'CARMELO PALERMO', '700147288', 'CL 11 7 82', 'BUGA', '100000', '12121', '112121', '', '321321', '4', '110510', '', 1, 'SI', '2015-10-09', '10:37:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(70, '2015-10-09', 'Contado', '2015-10-09', '', 'PAGO DE TELEFONO MES DE SEPTIEMBRE SE PAGA POR CAJA MENOR POR PEPITA PEREZ', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '', '12345', '20', '110510', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(71, '2015-10-09', 'Contado', '2015-10-09', '', 'COMPRA DE CABLE PORQUE CUALQUIER COSA', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '10000', '0', '10000', '', 'NO', '22', '110510', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(72, '2015-10-09', 'Contado', '2015-10-09', '', 'PAGO A JULIAN ALVARAN POR TURNO DECEMBRINO', 'PagaContratistas', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '200000', '32000', '232000', '', 'NO', '31', '110505', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(73, '2015-10-05', '', '', '', 'Compra de mercancias', '', '', 'SURTIVALLE SA', '900876543', 'CALLE 5 6 25', 'TULUA', '100000', '16000', '116000', '', '6543', '70', '110505', '', 1, 'SI', '2015-10-09', '17:28:28', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(74, '2015-10-20', 'Contado', '2015-10-20', '', 'Pago de telefono mes de diciembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '', '32131231', '20', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(75, '2015-10-20', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '10000', '1600', '11600', '', '1233', '1', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(76, '2015-10-23', 'Contado', '2015-10-23', '', 'jhkjhkjh', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '', '87987987', '20', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(77, '2015-10-23', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '343453', '454', '343907', '', '66565', '3', '110510', '', 1, 'SI', '2015-10-23', '15:59:00', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(78, '2015-11-20', 'Pagado', '2015-11-30', '2015-11-23', 'pago de telefono del mes de noviembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '', '4567', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(79, '2015-11-23', 'Contado', '2015-11-23', '', 'PAGO DE TELEFONO FIJO BODEGA PRINCIPAL MES DE NOVIEMBRE', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '', '4343242', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(80, '2015-11-23', 'Pagado', '2015-12-02', '2015-11-23', 'PRUEBA', 'PagaServicios', '', 'COOPETRANS DE TULUA', '891900254', 'Calle 27  1w-176', 'TULUA', '10000', '0', '10000', '', '7575765', '7', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(81, '2015-11-24', 'Contado', '2015-11-24', '', 'pago del mes de noviembre', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '', '232321312', '20', '110510', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(82, '2015-11-24', '', '', '', 'Compra de mercancias', '', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '20000', '0', '20000', '', '23131', '13', '11100501', '', 1, 'SI', '2015-11-24', '10:25:55', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(83, '2015-12-08', 'Pagado', '2015-12-18', '2016-02-07', 'PAGO DE TELEFONO DE DICIEMBRE', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '', '231232321', '12', '110510', '', 3, '', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(84, '2015-12-17', 'Contado', '2015-12-16', '', 'PAGO DE TELEFONO DEL MES DE DICIEMBRE', 'PagaServicios', '', 'CLARO CENTRO VALLE', '800153993', 'CARRERA 25 28-30', 'TULUA', '100000', '16000', '116000', '', '2131321', '20', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(85, '2015-12-16', '', '', '', 'Compra de mercancias', '', '', 'ALMACEN INDUSTRIAL', '14882183', 'CALLE 8 13-36', 'BUGA', '200000', '21000', '221000', '', '2321312', '13', '11100501', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(86, '2016-01-04', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '10000', '2000', '12000', '', '121321', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(87, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '100000', '21000', '121000', '', '321321', '3', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(88, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '100000', '2121', '102121', '', '321321', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(89, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1212122321', '32321321', '1244443642', '', '454543534', '1', '110510', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(90, '2016-01-05', '', '', '', 'Compra de mercancias', '', '', 'JULIAN ANDRES ALVARAN VALENCIA', '94481747', 'CALLE 19A No 18-26', 'BUGA', '213213', '321321', '534534', '', '321321', '31', '110505', '', 1, 'SI', '2016-01-07', '16:41:11', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(91, '2016-01-10', 'Contado', '2016-01-10', '', 'COMPRA DE PANDEBONOS PARA ATENCION A JULIAN', 'PagaServicios', '', 'LEYDI VIVIANA VALERO MENA', '1115072489', 'CALLE 25C 7B-52', 'BUGA', '15000', '0', '15000', '', '1234', '72', '110510', '', 1, 'SI', '2016-01-10', '10:41:23', 'TECHNO  SOLUCIONES', 0, 0, ''),
+(92, '2016-01-11', 'Pagado', '2016-01-21', '2016-01-18', 'Pago de telefono 313131 del mes de enero', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '0', '100000', '', '76786876', '12', '11100501', '', 1, '', '', '', '', 0, 0, ''),
+(93, '2016-01-18', 'Contado', '2016-01-18', '', 'Transporte a Tulua por transporte de fulanito', 'PagaServicios', '', 'ELECTRICOS CABLE PELAO', '38871480', 'CARRERA 8 9-30', 'BUGA', '8000', '0', '8000', '', '576576576765', '22', '110510', '', 1, '', '', '', '', 0, 0, ''),
+(94, '2016-01-20', '', '', '', 'Compra de mercancias', '', '', 'Meca Distribuciones SAS', '900704258', 'AV 4 N 25N-58', 'CALI', '10000', '40000', '50000', '', '312321', '2', '110505', '', 3, 'SI', '2016-01-21', '16:41:24', 'JULIAN  ALVARAN', 0, 0, ''),
+(95, '2016-01-26', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '1000', '100', '1100', '', '3213', '3', '110510', '', 3, 'SI', '2016-01-26', '16:29:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(96, '2016-01-26', 'Pagado', '2016-02-01', '2016-01-26', 'PAGO DE TELEFONO DEL MES DE ENERO', 'PagaServicios', '', 'MOVISTAR CENTRO VALLE', '800180706', 'NO', 'TULUA', '100000', '16000', '116000', '', '3213213', '12', '110505', '', 3, 'SI', '2016-01-26', '16:29:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(97, '2016-01-27', '', '', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '321321', '321', '321642', '', '321321', '3', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(98, '2016-01-27', 'Contado', '2016-01-27', '', 'Compra de mercancias', '', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '32132', '3213', '35345', '', '2121', '1', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(99, '2016-01-27', 'Contado', '2016-01-27', '', 'Compra de mercancias', '', '', 'AREA INFORMATICA SAS', '900605785', 'CARRERA 10 No. 8-11', 'BUGA', '3213', '32213', '35426', '', '3213', '3', '110505', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(100, '2016-01-27', 'Contado', '2016-01-27', '', 'dhkjhsdjsw', 'PagaServicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '100000', '12000', '112000', '', '2121', '11', '110510', '', 3, 'SI', '2016-01-28', '10:11:47', 'JULIAN  ALVARAN', 0, 0, ''),
+(101, '2016-03-14', 'Contado', '2016-03-14', '', 'dsadsa', 'Mantenimiento y Reparaciones', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '', '212121', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(102, '2016-03-14', 'Contado', '2016-03-14', '', 'dsadsa', 'Mantenimiento y Reparaciones', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '', '212121', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(103, '2016-03-14', 'Programado', '2016-03-14', '', 'dsadsa', 'Arrendamientos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '120000', '18000', '138000', '', 'ds3232', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(104, '2016-03-14', 'Programado', '2016-03-14', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', '', '321321dsd', '71', '11100501', '', 3, '', '', '', '', 1, 1, ''),
+(105, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadsa', 'Diversos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '12000', '112000', '', '321321', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(106, '2016-03-15', 'Contado', '2016-03-15', '', 'dsad', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '', '21321321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(107, '2016-03-15', 'Contado', '2016-03-15', '', 'dsad', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '3221', '0', '3221', '', 'dsadsa', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(108, '2016-03-15', 'Contado', '2016-03-15', '', 'sas', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '12321', '0', '15855', '', 'wqq', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(109, '2016-03-15', 'Contado', '2016-03-15', '', 'dsdsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '2121', '0', '2121', '', '32321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(110, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '2211', '0', '2211', '', '323', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(111, '2016-03-15', 'Contado', '2016-03-15', '', 'dede', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '', '2344', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(112, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdfs', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '1000', '0', '1000', '', '3321312', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(113, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdfs', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '1000', '0', '1000', '', '3321312', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(114, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(115, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(116, '2016-03-15', 'Programado', '2016-03-15', '', 'dsds', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321', '0', '32321', '', '21321', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(117, '2016-03-15', 'Contado', '2016-03-15', '', 'dsdasdas', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '21', '0', '254', '', '323321321', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(118, '2016-03-15', 'Programado', '2016-03-15', '', 'dasdsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32312', '0', '32312', '', '2121', '71', '110510', '../SoportesEgresos/', 3, '', '', '', '', 1, 1, ''),
+(119, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321', '0', '32321', '', '21213', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(120, '2016-03-15', 'Contado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32312321', '0', '32312321', '', '3232', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(121, '2016-03-15', 'Programado', '2016-03-15', '', 'dsdas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '32321321312321', '0', '32321321312321', '', '2121321', '71', '110505', '../SoportesEgresos/', 3, '', '', '', '', 1, 1, ''),
+(122, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadas', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '312321321', '0', '312321321', '', '321321', '71', '110505', '../SoportesEgresos/HOJA DE VIDA JULIAN ALVARAN.pdf', 3, '', '', '', '', 1, 1, ''),
+(123, '2016-03-15', 'Programado', '2016-03-15', '', 'dsda', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '321321321', '0', '321321321', '', '321321', '71', '110505', '../SoportesEgresos/Carta a inmobiliaria.docx', 3, '', '', '', '', 1, 1, ''),
+(124, '2016-03-15', 'Programado', '2016-03-15', '', 'sasa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '3213213', '0', '3213213', '', '231423', '71', '110505', '../SoportesEgresos/Carta_a_inmobiliaria_2.docx', 3, '', '', '', '', 1, 1, ''),
+(125, '2016-03-15', 'Contado', '2016-03-15', '', 'fafasfa', 'Impuestos', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '321321', '0', '324855', '', '321321', '71', '110505', '../SoportesEgresos/Foto_E-M_Hoja_de_Vida.jpg', 3, '', '', '', '', 1, 1, ''),
+(126, '2016-03-15', 'Programado', '2016-03-15', '', 'dsadsa', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '23121', '0', '23121', '', '321321', '71', '110505', '../SoportesEgresos/2016-02-04_AVICOLA_SANTA_RITA_SAS_(1).pdf', 3, '', '', '', '', 1, 1, ''),
+(127, '2016-03-18', 'Contado', '2016-03-18', '', 'dsadsada', 'Gastos de Personal', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', '', 'dsadsadsa', '71', '110505', '', 1, '', '', '', '', 1, 1, ''),
+(128, '2016-04-14', 'Contado', '2016-04-14', '', 'dsadsa', 'Honorarios', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '10000', '0', '10000', '', '321321', '71', '110510', '', 3, '', '', '', '', 1, 1, ''),
+(129, '2016-04-22', 'Contado', '2016-04-22', '', 'PAGO DE TELEFONO', 'Servicios', '', 'MOVISTAR SUCURSAL CAJA AGENTE BUGA', '830122586', 'NO', 'BUGA', '29000', '0', '29000', '', '321321321', '11', '11100501', '', 3, '', '', '', '', 1, 1, ''),
+(130, '2016-06-06', 'Contado', '2016-06-06', '', 'dsdsa', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '0', '100000', '', '321321', '71', '110510', '../SoportesEgresos/2016-04-25_DOCTORA_YULIANA.pdf', 3, '', '', '', '', 1, 1, ''),
+(131, '2016-06-06', 'Contado', '2016-06-06', '', 'sdasdsa', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '100000', '16000', '116000', '', '212112', '71', '110505', '', 3, '', '', '', '', 1, 1, ''),
+(132, '2016-06-06', 'Contado', '2016-06-06', '', 'dasdsa', 'Mercancias no fabricadas por la empresa', '', 'TECHNO SOLUCIONES SAS', '900833180', 'CRA 17 7 18', '4543453', '205000', '32000', '237000', '16000', '2121', '71', '11100501', '../SoportesEgresos/carmelo_2.jpg', 3, '', '', '', '', 1, 1, ''),
+(133, '2016-06-06', 'Contado', '2016-06-06', '', 'dsdasd', 'Mantenimiento y Reparaciones', '', 'GVS COLOMBIA SAS', '900298074', 'AV 4 N 23DN-50', 'CALI', '1000000', '116000', '1116000', '60000', '321312', '1', '110505', '', 3, '', '', '', '', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -4089,7 +4127,7 @@ CREATE TABLE IF NOT EXISTS `empresapro` (
 --
 
 INSERT INTO `empresapro` (`idEmpresaPro`, `RazonSocial`, `NIT`, `Direccion`, `Telefono`, `Celular`, `Ciudad`, `ResolucionDian`, `Regimen`, `Email`, `WEB`, `ObservacionesLegales`, `PuntoEquilibrio`, `DatosBancarios`) VALUES
-(1, 'TECHNO SOLUCIONES SAS', '900833180-7', 'CARRERA 17 7 18', '3177740609', '3177740609', 'BUGA', 'IVA REGIMEN COMUN\nACTIVIDAD ECONOMICA CIIU 8020\n', 'COMUN', 'info@technosoluciones.com', 'www.technosoluciones.com', 'Esta Factura de Venta se asimila en todos sus efectos a una letra de cambio (Art. 621 y siguientes del Codigo de Comercio). En caso de mora se causaran los intereses legales Vigentes. ', '5000000', 'DATOS BANCARIOS: BANCOLOMBIA CUENTA DE AHORROS 848-232213-03 A NOMBRE DE TECNOAGRO R.L. SAS NIT 900.720.183'),
+(1, 'TECHNO SOLUCIONES SAS', '900833180-7', 'CARRERA 17 7 18', '3177740609', '3177740609', 'BUGA', 'IVA REGIMEN COMUN\r\nACTIVIDAD ECONOMICA CIIU 8020\r\n', 'COMUN', 'info@technosoluciones.com', 'www.technosoluciones.com', 'Esta Factura de Venta se asimila en todos sus efectos a una letra de cambio (Art. 621 y siguientes del Codigo de Comercio). En caso de mora se causaran los intereses legales Vigentes. Cuenta', '5000000', 'DATOS BANCARIOS: BANCOLOMBIA CUENTA DE AHORROS 848-232213-03 A NOMBRE DE TECNOAGRO R.L. SAS NIT 900.720.183'),
 (2, 'PEPITO PEREZ', 'FORNICARIO', 'CARRERA 1 ', '321321', '3243252', 'BUGA', 'ESA MISMA', 'SIMPLIFICADO', 'jalvaran', 'dsadsa', 'esea de alla\r\nque no estan bien\r\nporque ', '300000', '');
 
 -- --------------------------------------------------------
@@ -4180,8 +4218,19 @@ INSERT INTO `facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefijo`, 
 ('201604221456010.61287200 1461354961', 1, '02', 'A', 80, '2016-04-22', '14:56:01', '', '', 'Credito a 30 dias', '25000', '4000', '', '29000', '0', '', 1, 1, 3, 22, '15000', '', '', '', 'PRUEBA'),
 ('201604260613240.87895200 1461669204', 1, '02', 'A', 81, '2016-04-26', '06:13:24', '', '', 'Credito a 30 dias', '75000', '12000', '', '87000', '0', '', 1, 1, 3, 22, '45000', '', '', '', ''),
 ('201604270606390.21327600 1461755199', 1, '02', 'A', 82, '2016-04-27', '06:06:39', '', '', 'Contado', '25000', '4000', '', '29000', '29000', '', 1, 1, 3, 17, '15000', '', '', '', 'dsadsa'),
-('201605161607040.12390100 1463432824', 1, '02', 'A', 83, '2016-05-16', '16:07:04', '', '', 'Credito a 30 dias', '19900', '3184', '', '23084', '23084', '', 1, 1, 3, 2, '14000', '', '', '', ''),
-('201605161618060.91225000 1463433486', 1, '02', 'A', 84, '2016-05-16', '16:18:06', '', '', 'Credito a 30 dias', '79600', '12736', '', '92336', '92336', '', 1, 1, 3, 2, '14000', '', '', '', '');
+('201605161607040.12390100 1463432824', 1, '02', 'A', 83, '2016-05-16', '16:07:04', '', '', 'Credito a 30 dias', '19900', '3184', '', '23084', '0', '', 1, 1, 3, 2, '14000', '', '', '', ''),
+('201605161618060.91225000 1463433486', 1, '02', 'A', 84, '2016-05-16', '16:18:06', '', '', 'Credito a 30 dias', '79600', '12736', '', '92336', '0', '', 1, 1, 3, 2, '14000', '', '', '', ''),
+('201606052146580.14367200 1465181218', 1, '02', 'A', 85, '2016-06-05', '21:46:58', '', '', 'Contado', '127100', '20336', '', '147436', '147436', '', 1, 1, 3, 17, '84499', '', '', '', 'observaciones de factura'),
+('201606060829230.96401800 1465219763', 1, '02', 'A', 86, '2016-06-06', '08:29:23', '', '', 'Contado', '', '', '', '', '', '', 1, 1, 3, 2, '', '', '', '', 'esas mismas'),
+('201606060829430.91645300 1465219783', 1, '02', 'A', 87, '2016-06-06', '08:29:43', '', '', 'ANULADA', '', '', '', '', '', '', 1, 1, 3, 2, '', '', '', '', 'dsadas'),
+('201606060835410.76088200 1465220141', 1, '02', 'A', 88, '2016-06-06', '08:35:41', '', '', 'Contado', '', '', '', '', '', '', 1, 1, 3, 2, '', '', '', '', 'fds'),
+('201606060837510.08510900 1465220271', 1, '02', 'A', 89, '2016-06-06', '08:37:51', '', '', 'Contado', '64400', '10304', '', '74704', '74704', '', 1, 1, 3, 2, '36401', '', '', '', 'dsdsds'),
+('201606060905020.92920100 1465221902', 1, '02', 'A', 90, '2016-06-06', '09:05:02', '', '', 'Contado', '64400', '10304', '', '74704', '74704', '', 1, 1, 3, 2, '36401', '', '', '', 'observacion de la factura'),
+('201606060907180.70396700 1465222038', 1, '02', 'A', 91, '2016-06-06', '09:07:18', '', '', 'Contado', '49400', '7904', '', '57304', '57304', '', 1, 1, 3, 2, '36400', '', '', '', 'ajuste de factura'),
+('201606061155400.71176000 1465232140', 1, '02', 'A', 92, '2016-06-06', '11:55:40', '', '', 'ANULADA', '', '', '', '', '', '', 1, 1, 3, 2, '', '', '', '', ''),
+('201606061158050.65705000 1465232285', 1, '02', 'A', 93, '2016-06-06', '11:58:05', '', '', 'ANULADA', '64400', '10304', '', '74704', '74704', '', 1, 1, 3, 2, '36401', '', '', '', ''),
+('201606061450490.09560600 1465242649', 1, '02', 'A', 94, '2016-06-06', '14:50:49', '', '', 'ANULADA', '64400', '10304', '', '74704', '74704', '', 1, 1, 3, 2, '36401', '', '', '', ''),
+('201606061631230.00982800 1465248683', 1, '02', 'A', 95, '2016-06-06', '16:31:23', '', '', 'ANULADA', '39000', '6240', '', '45240', '45240', '', 1, 1, 3, 17, '19000', '', '', '', '');
 
 --
 -- Disparadores `facturas`
@@ -4520,7 +4569,7 @@ CREATE TABLE IF NOT EXISTS `facturas_formapago` (
 --
 
 CREATE TABLE IF NOT EXISTS `facturas_items` (
-  `ID` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `FechaFactura` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `idFactura` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `TablaItems` varchar(100) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Tabla donde se encuentra el producto o servicio',
@@ -4546,39 +4595,30 @@ CREATE TABLE IF NOT EXISTS `facturas_items` (
   `GeneradoDesde` varchar(100) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Tabla que agrega el item',
   `NumeroIdentificador` varchar(45) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Identificar del que agrega el item',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=201606061155410 ;
 
 --
 -- Volcado de datos para la tabla `facturas_items`
 --
 
 INSERT INTO `facturas_items` (`ID`, `FechaFactura`, `idFactura`, `TablaItems`, `Referencia`, `Nombre`, `Departamento`, `SubGrupo1`, `SubGrupo2`, `SubGrupo3`, `SubGrupo4`, `SubGrupo5`, `ValorUnitarioItem`, `Cantidad`, `Dias`, `SubtotalItem`, `IVAItem`, `TotalItem`, `PorcentajeIVA`, `PrecioCostoUnitario`, `SubtotalCosto`, `TipoItem`, `CuentaPUC`, `GeneradoDesde`, `NumeroIdentificador`) VALUES
-('201604142305220.70242400 1460693122', '2016-04-14', '201604142305220.65142100 1460693122', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '33'),
-('201604142305220.78842900 1460693122', '2016-04-14', '201604142305220.65142100 1460693122', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '1', '0', '23500', '3760', '27260', '16%', '17200', '17200', 'PR', 4135, 'cotizacionesv5', '33'),
-('201604142309080.54034100 1460693348', '2016-04-14', '201604142309080.50133900 1460693348', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '33'),
-('201604142309080.65934800 1460693348', '2016-04-14', '201604142309080.50133900 1460693348', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '1', '0', '23500', '3760', '27260', '16%', '17200', '17200', 'PR', 4135, 'cotizacionesv5', '33'),
-('201604142309470.95559600 1460693387', '2016-04-14', '201604142309470.90159300 1460693387', 'productosalquiler', 'AC001', 'BASE COLLAR GALVANIZADA', 13, 0, 0, 0, 0, 0, '81', '200', '0', '16200', '2592', '18792', '16%', '40', '8000', 'AQ', 4135, 'cotizacionesv5', '32'),
-('201604142309470.97259700 1460693387', '2016-04-14', '201604142309470.90159300 1460693387', 'productosalquiler', 'PA003', 'DIAGONAL DE 2.5 MTS X 1.5MTS', 13, 0, 0, 0, 0, 0, '296', '100', '0', '29600', '4736', '34336', '16%', '100', '10000', 'AQ', 4135, 'cotizacionesv5', '32'),
-('201604142329080.89599800 1460694548', '2016-04-14', '201604142329080.86199600 1460694548', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
-('201604150934240.75589400 1460730864', '2016-04-15', '201604150934240.73289200 1460730864', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
-('201604151031510.55518500 1460734311', '2016-04-15', '201604151031510.52018300 1460734311', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
-('201604151032100.24225400 1460734330', '2016-04-15', '201604151032100.21625200 1460734330', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '33'),
-('201604151032100.25325400 1460734330', '2016-04-15', '201604151032100.21625200 1460734330', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '1', '0', '23500', '3760', '27260', '16%', '17200', '17200', 'PR', 4135, 'cotizacionesv5', '33'),
-('201604151032260.49718400 1460734346', '2016-04-15', '201604151032260.47418200 1460734346', 'productosventa', 'REF2916', 'PERDOMO', 2, 2, 27, 8, 0, 0, '15000', '1', '0', '15000', '2400', '17400', '16%', '30000', '30000', 'PR', 4135, 'cotizacionesv5', '34'),
-('201604151410250.12209900 1460747425', '2016-04-15', '201604151410250.10309700 1460747425', '', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '2', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'rem_devoluciones', '24'),
-('201604151410250.18310200 1460747425', '2016-04-15', '201604151410250.10309700 1460747425', '', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '1', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'rem_devoluciones', '24'),
-('201604151411500.98801000 1460747510', '2016-04-15', '201604151411500.95200800 1460747510', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '38'),
-('201604151413040.53821700 1460747584', '2016-04-15', '201604151413040.52521600 1460747584', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '0', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '37'),
-('201604151413040.59022000 1460747584', '2016-04-15', '201604151413040.52521600 1460747584', 'productosventa', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '0', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'cotizacionesv5', '37'),
-('201604151424010.13977200 1460748241', '2016-04-15', '201604151424010.09577000 1460748241', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '38'),
-('201604151424190.80984000 1460748259', '2016-04-15', '201604151424190.79383900 1460748259', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '2', '50000', '8000', '58000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '37'),
-('201604151424190.84984200 1460748259', '2016-04-15', '201604151424190.79383900 1460748259', 'productosventa', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 1, 2, 23, 0, 0, 0, '18900', '1', '1', '18900', '3024', '21924', '16%', '13700', '13700', 'PR', 4135, 'cotizacionesv5', '37'),
-('201604191149090.11537800 1461084549', '2016-04-19', '201604191149090.08437600 1461084549', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '39'),
-('201604221456010.64887400 1461354961', '2016-04-22', '201604221456010.61287200 1461354961', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '39'),
-('201604260613240.89295300 1461669204', '2016-04-26', '201604260613240.87895200 1461669204', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '3', '1', '75000', '12000', '87000', '16%', '15000', '45000', 'PR', 4135, 'cotizacionesv5', '39'),
-('201604270606390.25127800 1461755199', '2016-04-27', '201604270606390.21327600 1461755199', '', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'rem_devoluciones', '25'),
-('201605161607040.15790300 1463432824', '2016-05-16', '201605161607040.12390100 1463432824', 'productosventa', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 2, 23, 0, 0, 0, '19900', '1', '1', '19900', '3184', '23084', '16%', '14000', '14000', 'PR', 4135, 'cotizacionesv5', '42'),
-('201605161618060.93225100 1463433486', '2016-05-16', '201605161618060.91225000 1463433486', '', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 2, 23, 0, 0, 0, '19900', '1', '4', '79600', '12736', '92336', '16%', '14000', '14000', 'PR', 4135, 'rem_devoluciones', '26');
+(1, '2016-06-06', '201606060837510.08510900 1465220271', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '30'),
+(2, '2016-06-06', '201606060837510.08510900 1465220271', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '30'),
+(3, '2016-06-06', '201606060837510.08510900 1465220271', '', 'REF1658', 'TOP PROMOCION', 6, 28, 0, 0, 0, 0, '15000', '1', '1', '15000', '2400', '17400', '16%', '1', '1', 'PR', 4135, 'rem_devoluciones', '30'),
+(4, '2016-06-06', '201606060905020.92920100 1465221902', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '1'),
+(5, '2016-06-06', '201606060905020.92920100 1465221902', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '1'),
+(6, '2016-06-06', '201606060905020.92920100 1465221902', '', 'REF1658', 'TOP PROMOCION', 6, 28, 0, 0, 0, 0, '15000', '1', '1', '15000', '2400', '17400', '16%', '1', '1', 'PR', 4135, 'rem_devoluciones', '1'),
+(7, '2016-06-06', '201606060907180.70396700 1465222038', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '2'),
+(8, '2016-06-06', '201606060907180.70396700 1465222038', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '2'),
+(9, '2016-06-06', '201606061155400.71176000 1465232140', 'productosventa', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'cotizacionesv5', '44'),
+(201606061155402, '2016-06-06', '201606061158050.65705000 1465232285', 'productosventa', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'cotizacionesv5', '44'),
+(201606061155403, '2016-06-06', '201606061158050.65705000 1465232285', 'productosventa', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'cotizacionesv5', '44'),
+(201606061155404, '2016-06-06', '201606061158050.65705000 1465232285', 'productosventa', 'REF1658', 'TOP PROMOCION', 6, 28, 0, 0, 0, 0, '15000', '1', '1', '15000', '2400', '17400', '16%', '1', '1', 'PR', 4135, 'cotizacionesv5', '44'),
+(201606061155405, '2016-06-06', '201606061450490.09560600 1465242649', 'productosventa', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'cotizacionesv5', '44'),
+(201606061155406, '2016-06-06', '201606061450490.09560600 1465242649', 'productosventa', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'cotizacionesv5', '44'),
+(201606061155407, '2016-06-06', '201606061450490.09560600 1465242649', 'productosventa', 'REF1658', 'TOP PROMOCION', 6, 28, 0, 0, 0, 0, '15000', '1', '1', '15000', '2400', '17400', '16%', '1', '1', 'PR', 4135, 'cotizacionesv5', '44'),
+(201606061155408, '2016-06-06', '201606061631230.00982800 1465248683', 'servicios', 'SOEIPE', 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 9, 0, 0, 0, 0, 0, '16000', '1', '1', '16000', '2560', '18560', '16%', '7000', '7000', 'MO', 416510, 'cotizacionesv5', '45'),
+(201606061155409, '2016-06-06', '201606061631230.00982800 1465248683', 'servicios', 'EAPLI', 'Perfil lipidico', 11, 0, 0, 0, 0, 0, '23000', '1', '1', '23000', '3680', '26680', '16%', '12000', '12000', 'MO', 416510, 'cotizacionesv5', '45');
 
 --
 -- Disparadores `facturas_items`
@@ -4699,22 +4739,31 @@ CREATE TABLE IF NOT EXISTS `formatos_calidad` (
   `Version` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Codigo` text COLLATE utf8_spanish2_ci NOT NULL,
   `Fecha` date NOT NULL,
+  `NotasPiePagina` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `formatos_calidad`
 --
 
-INSERT INTO `formatos_calidad` (`ID`, `Nombre`, `Version`, `Codigo`, `Fecha`) VALUES
-(1, 'COTIZACION', '001', 'F-GA-015', '2016-05-11'),
-(2, 'FACTURA', '001', 'F-GA-013', '2016-05-11'),
-(3, 'CONTROL DE MANTENIMIENTO', '001', 'F-GO-001', '2016-05-11'),
-(4, 'COMPROBANTE DE INGRESO', '001', 'F-GA-016', '2016-05-11'),
-(5, 'ORDEN DE COMPRA', '001', 'F-GA-006', '2016-05-11'),
-(6, 'ORDEN DE SERVICIO', '001', 'F-GA-014', '2016-05-11'),
-(7, 'REMISION', '001', 'F-GA-012', '2016-05-11'),
-(8, 'SEGUIMIENTO COTIZACIONES', '001', 'F-GC-001', '2016-05-11');
+INSERT INTO `formatos_calidad` (`ID`, `Nombre`, `Version`, `Codigo`, `Fecha`, `NotasPiePagina`) VALUES
+(1, 'COTIZACION', '001', 'F-GA-015', '2016-05-11', ''),
+(2, 'FACTURA', '001', 'F-GA-013', '2016-05-11', ''),
+(3, 'CONTROL DE MANTENIMIENTO', '001', 'F-GO-001', '2016-05-11', ''),
+(4, 'COMPROBANTE DE INGRESO', '001', 'F-GA-016', '2016-05-11', ''),
+(5, 'ORDEN DE COMPRA', '001', 'F-GA-006', '2016-05-11', ''),
+(6, 'ORDEN DE SERVICIO', '001', 'F-GA-014', '2016-05-11', ''),
+(7, 'REMISION', '001', 'F-GA-012', '2016-05-11', 'Certifico que los equipos o mercancia entregada se recibio completa y en buen estado y me hago totalmente responsable del buen uso que se le de, asi mismo a pagar los faltantes que se produzcan.'),
+(8, 'SEGUIMIENTO COTIZACIONES', '001', 'F-GC-001', '2016-05-11', ''),
+(9, 'COMPROBANTE DE AJUSTE DE REMISION', '001', 'F-GA-030', '2016-06-06', 'Los elementos o articulos faltantes se cobraran por su valor en el comercio.'),
+(10, 'NOTA DE CONTABILIDAD', '001', 'F-GC-031', '2016-06-06', ''),
+(11, 'COMPROBANTE DE EGRESO', '001', 'F-GC-032', '2016-06-06', ''),
+(12, 'COMPROBANTE DE CONTABILIDAD', '001', 'F-GC-033', '2016-06-06', ''),
+(13, 'NOTA CREDITO', '001', 'F-GC-034', '2016-06-06', ''),
+(14, 'INFORME DE MOVIMIENTO DE CUENTAS', '001', 'F-GC-035', '2016-06-06', ''),
+(15, 'BALANCE GENERAL', '001', 'F-GC-036', '2016-06-06', ''),
+(16, 'INFORME GENERAL DE VENTAS', '001', 'F-GC-037', '2016-06-06', '');
 
 -- --------------------------------------------------------
 
@@ -4882,7 +4931,7 @@ CREATE TABLE IF NOT EXISTS `kardexmercancias` (
   `ValorTotal` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ProductosVenta_idProductosVenta` int(11) NOT NULL,
   PRIMARY KEY (`idKardexMercancias`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11985 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=12057 ;
 
 --
 -- Volcado de datos para la tabla `kardexmercancias`
@@ -16885,7 +16934,79 @@ INSERT INTO `kardexmercancias` (`idKardexMercancias`, `Fecha`, `Movimiento`, `De
 (11981, '2016-04-26', 'SALIDA', 'Factura', '201604260613240.87895200 1461669204', '3', '15000', '45000', 1),
 (11982, '2016-04-26', 'SALDOS', 'Factura', '201604260613240.87895200 1461669204', '88', '15000', '1320000', 1),
 (11983, '2016-05-16', 'SALIDA', 'Factura', '201605161607040.12390100 1463432824', '1', '14000', '14000', 2),
-(11984, '2016-05-16', 'SALDOS', 'Factura', '201605161607040.12390100 1463432824', '1', '14000', '14000', 2);
+(11984, '2016-05-16', 'SALDOS', 'Factura', '201605161607040.12390100 1463432824', '1', '14000', '14000', 2),
+(11985, '2016-06-05', 'SALIDA', 'Factura', '201606052146580.14367200 1465181218', '1', '9000', '9000', 189),
+(11986, '2016-06-05', 'SALDOS', 'Factura', '201606052146580.14367200 1465181218', '7', '9000', '63000', 189),
+(11987, '2016-06-05', 'SALIDA', 'Factura', '201606052146580.14367200 1465181218', '1', '11500', '11500', 193),
+(11988, '2016-06-05', 'SALDOS', 'Factura', '201606052146580.14367200 1465181218', '8', '11500', '92000', 193),
+(11989, '2016-06-05', 'SALIDA', 'Factura', '201606052146580.14367200 1465181218', '1', '11000', '11000', 223),
+(11990, '2016-06-05', 'SALDOS', 'Factura', '201606052146580.14367200 1465181218', '0', '11000', '0', 223),
+(11991, '2016-06-05', 'SALIDA', 'Factura', '201606052146580.14367200 1465181218', '1', '15999', '15999', 4),
+(11992, '2016-06-05', 'SALDOS', 'Factura', '201606052146580.14367200 1465181218', '-2', '15999', '-31998', 4),
+(11993, '2016-06-05', 'SALIDA', 'Factura', '201606052146580.14367200 1465181218', '1', '15000', '15000', 1),
+(11994, '2016-06-05', 'SALDOS', 'Factura', '201606052146580.14367200 1465181218', '87', '15000', '1305000', 1),
+(11995, '2016-06-05', 'SALIDA', 'Factura', '201606052146580.14367200 1465181218', '1', '16000', '16000', 8),
+(11996, '2016-06-05', 'SALDOS', 'Factura', '201606052146580.14367200 1465181218', '-1', '16000', '-16000', 8),
+(11997, '2016-06-06', 'SALIDA', 'Factura', '201606061155400.71176000 1465232140', '1', '15400', '15400', 5),
+(11998, '2016-06-06', 'SALDOS', 'Factura', '201606061155400.71176000 1465232140', '0', '15400', '0', 5),
+(11999, '2016-06-06', 'SALIDA', 'Factura', '201606061158050.65705000 1465232285', '1', '15400', '15400', 5),
+(12000, '2016-06-06', 'SALDOS', 'Factura', '201606061158050.65705000 1465232285', '-1', '15400', '-15400', 5),
+(12001, '2016-06-06', 'SALIDA', 'Factura', '201606061158050.65705000 1465232285', '1', '21000', '21000', 515),
+(12002, '2016-06-06', 'SALDOS', 'Factura', '201606061158050.65705000 1465232285', '1', '21000', '21000', 515),
+(12003, '2016-06-06', 'SALIDA', 'Factura', '201606061158050.65705000 1465232285', '1', '1', '1', 1658),
+(12004, '2016-06-06', 'SALDOS', 'Factura', '201606061158050.65705000 1465232285', '-2', '1', '-2', 1658),
+(12005, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-5', '15400', '-77000', 0),
+(12006, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '4', '15400', '61600', 0),
+(12007, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-5', '15400', '-77000', 5),
+(12008, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '4', '15400', '61600', 5),
+(12009, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-5', '21000', '-105000', 515),
+(12010, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '6', '21000', '126000', 515),
+(12011, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-5', '1', '-5', 1658),
+(12012, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '3', '1', '3', 1658),
+(12013, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-5', '15400', '-77000', 5),
+(12014, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '9', '15400', '138600', 5),
+(12015, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-5', '21000', '-105000', 515),
+(12016, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '11', '21000', '231000', 515),
+(12017, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-5', '1', '-5', 1658),
+(12018, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '8', '1', '8', 1658),
+(12019, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '15400', '-15400', 5),
+(12020, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '10', '15400', '154000', 5),
+(12021, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '21000', '-21000', 515),
+(12022, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '12', '21000', '252000', 515),
+(12023, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '1', '-1', 1658),
+(12024, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '9', '1', '9', 1658),
+(12025, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '15400', '-15400', 5),
+(12026, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '11', '15400', '169400', 5),
+(12027, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '21000', '-21000', 515),
+(12028, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '13', '21000', '273000', 515),
+(12029, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '1', '-1', 1658),
+(12030, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '10', '1', '10', 1658),
+(12031, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '15400', '-15400', 5),
+(12032, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '12', '15400', '184800', 5),
+(12033, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '21000', '-21000', 515),
+(12034, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '14', '21000', '294000', 515),
+(12035, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '1', '-1', 1658),
+(12036, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '11', '1', '11', 1658),
+(12037, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '15400', '-15400', 5),
+(12038, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '13', '15400', '200200', 5),
+(12039, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '21000', '-21000', 515),
+(12040, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '15', '21000', '315000', 515),
+(12041, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '-1', '1', '-1', 1658),
+(12042, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061158050.65705000 1465232285', '12', '1', '12', 1658),
+(12043, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061155400.71176000 1465232140', '-1', '15400', '-15400', 5),
+(12044, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061155400.71176000 1465232140', '14', '15400', '215600', 5),
+(12045, '2016-06-06', 'SALIDA', 'Factura', '201606061450490.09560600 1465242649', '1', '15400', '15400', 5),
+(12046, '2016-06-06', 'SALDOS', 'Factura', '201606061450490.09560600 1465242649', '13', '15400', '200200', 5),
+(12047, '2016-06-06', 'SALIDA', 'Factura', '201606061450490.09560600 1465242649', '1', '21000', '21000', 515),
+(12048, '2016-06-06', 'SALDOS', 'Factura', '201606061450490.09560600 1465242649', '14', '21000', '294000', 515),
+(12049, '2016-06-06', 'SALIDA', 'Factura', '201606061450490.09560600 1465242649', '1', '1', '1', 1658),
+(12050, '2016-06-06', 'SALDOS', 'Factura', '201606061450490.09560600 1465242649', '11', '1', '11', 1658),
+(12051, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061450490.09560600 1465242649', '-1', '15400', '-15400', 5),
+(12052, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061450490.09560600 1465242649', '14', '15400', '215600', 5),
+(12053, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061450490.09560600 1465242649', '-1', '21000', '-21000', 515),
+(12054, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061450490.09560600 1465242649', '15', '21000', '315000', 515),
+(12055, '2016-06-06', 'SALIDA', 'Anulacion de Factura', '201606061450490.09560600 1465242649', '-1', '1', '-1', 1658),
+(12056, '2016-06-06', 'SALDOS', 'Anulacion de Factura', '201606061450490.09560600 1465242649', '12', '1', '12', 1658);
 
 -- --------------------------------------------------------
 
@@ -16971,7 +17092,7 @@ CREATE TABLE IF NOT EXISTS `librodiario` (
   `idEmpresa` int(11) NOT NULL,
   `Estado` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idLibroDiario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=557 ;
 
 --
 -- Volcado de datos para la tabla `librodiario`
@@ -17019,7 +17140,7 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (39, '2016-05-09', 'ComprobanteIngreso', '55', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'dsadsa', '2205900704258', 'Proveedores Nacionales: Meca Distribuciones SAS NIT 900704258', 'Ingresos', '0', '5000000', '-5000000', 'NO', 'NO', 2, 2, ''),
 (40, '2016-05-12', 'ComprobanteIngreso', '56', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'dsadsa', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'Ingresos', '321321', '0', '321321', 'NO', 'NO', 1, 1, ''),
 (41, '2016-05-12', 'ComprobanteIngreso', '56', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'dsadsa', '2205900704258', 'Proveedores Nacionales: Meca Distribuciones SAS NIT 900704258', 'Ingresos', '0', '321321', '-321321', 'NO', 'NO', 1, 1, ''),
-(42, '2016-05-16', 'FACTURA', '201605161607040.12390100 1463432824', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Ventas', '23084', '0', '23084', 'NO', 'NO', 1, 1, ''),
+(42, '2016-05-16', 'FACTURA', '201605161607040.12390100 1463432824', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Ventas', '23084', '0', '23084', 'NO', 'NO', 1, 1, 'OC'),
 (43, '2016-05-16', 'FACTURA', '201605161607040.12390100 1463432824', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '19900', '-19900', 'NO', 'NO', 1, 1, ''),
 (44, '2016-05-16', 'FACTURA', '201605161607040.12390100 1463432824', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3184', '-3184', 'NO', 'NO', 1, 1, ''),
 (45, '2016-05-16', 'FACTURA', '201605161607040.12390100 1463432824', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '159', '0', '159', 'NO', 'NO', 1, 1, ''),
@@ -17028,7 +17149,7 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (48, '2016-05-16', 'FACTURA', '201605161607040.12390100 1463432824', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '14000', '-14000', 'NO', 'NO', 1, 1, ''),
 (49, '2016-05-16', 'ComprobanteIngreso', '57', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anticipo por remision 46', '110510', 'CAJA MENOR', 'Anticipos', '10000', '0', '10000', 'NO', 'NO', 1, 1, ''),
 (50, '2016-05-16', 'ComprobanteIngreso', '57', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anticipo por remision 46', '238020900833180', 'Anticipos recibidos Cliente: Techno Soluciones NIT 900833180', 'Anticipos', '0', '10000', '-10000', 'NO', 'NO', 1, 1, ''),
-(51, '2016-05-16', 'FACTURA', '201605161618060.91225000 1463433486', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Ventas', '92336', '0', '92336', 'NO', 'NO', 1, 1, ''),
+(51, '2016-05-16', 'FACTURA', '201605161618060.91225000 1463433486', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Ventas', '92336', '0', '92336', 'NO', 'NO', 1, 1, 'OC'),
 (52, '2016-05-16', 'FACTURA', '201605161618060.91225000 1463433486', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '79600', '-79600', 'NO', 'NO', 1, 1, ''),
 (53, '2016-05-16', 'FACTURA', '201605161618060.91225000 1463433486', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '12736', '-12736', 'NO', 'NO', 1, 1, ''),
 (54, '2016-05-16', 'FACTURA', '201605161618060.91225000 1463433486', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '637', '0', '637', 'NO', 'NO', 1, 1, ''),
@@ -17040,7 +17161,503 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (60, '2016-05-16', 'NotaContable', '25', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdsfdsfsdf', '2408', 'Impuesto sobre las ventas por pagar', 'egresos', '16000', '0', '16000', 'NO', 'NO', 1, 1, ''),
 (61, '2016-05-16', 'NotaContable', '25', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdsfdsfsdf', '236540', 'Rete Fuente x compras', 'egresos', '0', '1900', '-1900', 'NO', 'NO', 1, 1, ''),
 (62, '2016-05-16', 'NotaContable', '25', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdsfdsfsdf', '236701', 'IVA retenido', 'egresos', '0', '13131', '-13131', 'NO', 'NO', 1, 1, ''),
-(63, '2016-05-16', 'NotaContable', '25', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdsfdsfsdf', '2368', 'Rete Fuente x ICA', 'egresos', '0', '242', '-242', 'NO', 'NO', 1, 1, '');
+(63, '2016-05-16', 'NotaContable', '25', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'fdsfdsfsdf', '2368', 'Rete Fuente x ICA', 'egresos', '0', '242', '-242', 'NO', 'NO', 1, 1, ''),
+(64, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '14964', '0', '14964', 'NO', 'NO', 1, 1, ''),
+(65, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '12900', '-12900', 'NO', 'NO', 1, 1, ''),
+(66, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2064', '-2064', 'NO', 'NO', 1, 1, ''),
+(67, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '103', '0', '103', 'NO', 'NO', 1, 1, ''),
+(68, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '103', '-103', 'NO', 'NO', 1, 1, ''),
+(69, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '9000', '0', '9000', 'NO', 'NO', 1, 1, ''),
+(70, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '9000', '-9000', 'NO', 'NO', 1, 1, ''),
+(71, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '19140', '0', '19140', 'NO', 'NO', 1, 1, ''),
+(72, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '16500', '-16500', 'NO', 'NO', 1, 1, ''),
+(73, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2640', '-2640', 'NO', 'NO', 1, 1, ''),
+(74, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '132', '0', '132', 'NO', 'NO', 1, 1, ''),
+(75, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '132', '-132', 'NO', 'NO', 1, 1, ''),
+(76, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '11500', '0', '11500', 'NO', 'NO', 1, 1, ''),
+(77, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '11500', '-11500', 'NO', 'NO', 1, 1, ''),
+(78, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '17284', '0', '17284', 'NO', 'NO', 1, 1, ''),
+(79, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '14900', '-14900', 'NO', 'NO', 1, 1, ''),
+(80, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2384', '-2384', 'NO', 'NO', 1, 1, ''),
+(81, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '119', '0', '119', 'NO', 'NO', 1, 1, ''),
+(82, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '119', '-119', 'NO', 'NO', 1, 1, ''),
+(83, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '11000', '0', '11000', 'NO', 'NO', 1, 1, ''),
+(84, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '11000', '-11000', 'NO', 'NO', 1, 1, ''),
+(85, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '25404', '0', '25404', 'NO', 'NO', 1, 1, ''),
+(86, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '21900', '-21900', 'NO', 'NO', 1, 1, ''),
+(87, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3504', '-3504', 'NO', 'NO', 1, 1, ''),
+(88, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '175', '0', '175', 'NO', 'NO', 1, 1, ''),
+(89, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '175', '-175', 'NO', 'NO', 1, 1, ''),
+(90, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15999', '0', '15999', 'NO', 'NO', 1, 1, ''),
+(91, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15999', '-15999', 'NO', 'NO', 1, 1, ''),
+(92, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '29000', '0', '29000', 'NO', 'NO', 1, 1, ''),
+(93, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '25000', '-25000', 'NO', 'NO', 1, 1, ''),
+(94, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4000', '-4000', 'NO', 'NO', 1, 1, ''),
+(95, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '200', '0', '200', 'NO', 'NO', 1, 1, ''),
+(96, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '200', '-200', 'NO', 'NO', 1, 1, ''),
+(97, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1, ''),
+(98, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1, ''),
+(99, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '25404', '0', '25404', 'NO', 'NO', 1, 1, ''),
+(100, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '21900', '-21900', 'NO', 'NO', 1, 1, ''),
+(101, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3504', '-3504', 'NO', 'NO', 1, 1, ''),
+(102, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '175', '0', '175', 'NO', 'NO', 1, 1, ''),
+(103, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '175', '-175', 'NO', 'NO', 1, 1, ''),
+(104, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '16000', '0', '16000', 'NO', 'NO', 1, 1, ''),
+(105, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '16000', '-16000', 'NO', 'NO', 1, 1, ''),
+(106, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '16240', '0', '16240', 'NO', 'NO', 1, 1, ''),
+(107, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '416520', 'Servicio de laboratorio', 'Ventas', '0', '14000', '-14000', 'NO', 'NO', 1, 1, ''),
+(108, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2240', '-2240', 'NO', 'NO', 1, 1, ''),
+(109, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '112', '0', '112', 'NO', 'NO', 1, 1, ''),
+(110, '2016-06-05', 'FACTURA', '201606052146580.14367200 1465181218', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '112', '-112', 'NO', 'NO', 1, 1, ''),
+(111, '2016-06-06', 'ComprobanteIngreso', '58', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anticipo por remision 47', '110510', 'CAJA MENOR', 'Anticipos', '20000', '0', '20000', 'NO', 'NO', 1, 1, ''),
+(112, '2016-06-06', 'ComprobanteIngreso', '58', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anticipo por remision 47', '238020900833180', 'Anticipos recibidos Cliente: Techno Soluciones NIT 900833180', 'Anticipos', '0', '20000', '-20000', 'NO', 'NO', 1, 1, ''),
+(113, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '24244', '0', '24244', 'NO', 'NO', 1, 1, ''),
+(114, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '20900', '-20900', 'NO', 'NO', 1, 1, ''),
+(115, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3344', '-3344', 'NO', 'NO', 1, 1, ''),
+(116, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(117, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(118, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(119, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(120, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '33060', '0', '33060', 'NO', 'NO', 1, 1, ''),
+(121, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '28500', '-28500', 'NO', 'NO', 1, 1, ''),
+(122, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4560', '-4560', 'NO', 'NO', 1, 1, ''),
+(123, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(124, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(125, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(126, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(127, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '17400', '0', '17400', 'NO', 'NO', 1, 1, ''),
+(128, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1, ''),
+(129, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2400', '-2400', 'NO', 'NO', 1, 1, ''),
+(130, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '120', '0', '120', 'NO', 'NO', 1, 1, ''),
+(131, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(132, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(133, '2016-06-06', 'FACTURA', '201606060837510.08510900 1465220271', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(134, '2016-06-06', 'ComprobanteIngreso', '59', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anticipo por remision 1', '110510', 'CAJA MENOR', 'Anticipos', '10000', '0', '10000', 'NO', 'NO', 1, 1, ''),
+(135, '2016-06-06', 'ComprobanteIngreso', '59', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anticipo por remision 1', '238020900833180', 'Anticipos recibidos Cliente: Techno Soluciones NIT 900833180', 'Anticipos', '0', '10000', '-10000', 'NO', 'NO', 1, 1, ''),
+(136, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '24244', '0', '24244', 'NO', 'NO', 1, 1, ''),
+(137, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '20900', '-20900', 'NO', 'NO', 1, 1, ''),
+(138, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3344', '-3344', 'NO', 'NO', 1, 1, ''),
+(139, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(140, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(141, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(142, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(143, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '33060', '0', '33060', 'NO', 'NO', 1, 1, ''),
+(144, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '28500', '-28500', 'NO', 'NO', 1, 1, ''),
+(145, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4560', '-4560', 'NO', 'NO', 1, 1, ''),
+(146, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(147, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(148, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(149, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(150, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '17400', '0', '17400', 'NO', 'NO', 1, 1, ''),
+(151, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1, ''),
+(152, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2400', '-2400', 'NO', 'NO', 1, 1, ''),
+(153, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '120', '0', '120', 'NO', 'NO', 1, 1, ''),
+(154, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(155, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(156, '2016-06-06', 'FACTURA', '201606060905020.92920100 1465221902', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(157, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '24244', '0', '24244', 'NO', 'NO', 1, 1, ''),
+(158, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '20900', '-20900', 'NO', 'NO', 1, 1, ''),
+(159, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3344', '-3344', 'NO', 'NO', 1, 1, ''),
+(160, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(161, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(162, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(163, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(164, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '33060', '0', '33060', 'NO', 'NO', 1, 1, ''),
+(165, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '28500', '-28500', 'NO', 'NO', 1, 1, ''),
+(166, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4560', '-4560', 'NO', 'NO', 1, 1, ''),
+(167, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(168, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(169, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(170, '2016-06-06', 'FACTURA', '201606060907180.70396700 1465222038', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(171, '2016-06-06', 'NotaContable', '26', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsadsa', '510512', 'Jornales', 'egresos', '22121', '0', '22121', 'NO', 'NO', 1, 1, ''),
+(172, '2016-06-06', 'NotaContable', '26', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsadsa', '2205900833180', 'Proveedores Nacionales TECHNO SOLUCIONES SAS 900833180', 'egresos', '0', '19576', '-19576', 'NO', 'NO', 1, 1, ''),
+(173, '2016-06-06', 'NotaContable', '26', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsadsa', '236540', 'Rete Fuente x compras', 'egresos', '0', '212', '-212', 'NO', 'NO', 1, 1, ''),
+(174, '2016-06-06', 'NotaContable', '26', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsadsa', '236701', 'IVA retenido', 'egresos', '0', '2121', '-2121', 'NO', 'NO', 1, 1, ''),
+(175, '2016-06-06', 'NotaContable', '26', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsadsadsa', '2368', 'Rete Fuente x ICA', 'egresos', '0', '212', '-212', 'NO', 'NO', 1, 1, ''),
+(176, '2016-06-06', 'CompEgreso', '130', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsdsa', '1435', 'Mercancias no fabricadas por la empresa', 'egresos', '100000', '0', '100000', 'NO', 'NO', 1, 1, '');
+INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `Num_Documento_Interno`, `Tercero_Tipo_Documento`, `Tercero_Identificacion`, `Tercero_DV`, `Tercero_Primer_Apellido`, `Tercero_Segundo_Apellido`, `Tercero_Primer_Nombre`, `Tercero_Otros_Nombres`, `Tercero_Razon_Social`, `Tercero_Direccion`, `Tercero_Cod_Dpto`, `Tercero_Cod_Mcipio`, `Tercero_Pais_Domicilio`, `Concepto`, `CuentaPUC`, `NombreCuenta`, `Detalle`, `Debito`, `Credito`, `Neto`, `Mayor`, `Esp`, `idCentroCosto`, `idEmpresa`, `Estado`) VALUES
+(177, '2016-06-06', 'CompEgreso', '130', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsdsa', '110510', 'CAJA MENOR', 'egresos', '0', '99940', '-99940', 'NO', 'NO', 1, 1, ''),
+(178, '2016-06-06', 'CompEgreso', '130', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsdsa', '236540', 'Rete Fuente x compras', 'egresos', '0', '10', '-10', 'NO', 'NO', 1, 1, ''),
+(179, '2016-06-06', 'CompEgreso', '130', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsdsa', '236701', 'IVA retenido', 'egresos', '0', '30', '-30', 'NO', 'NO', 1, 1, ''),
+(180, '2016-06-06', 'CompEgreso', '130', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsdsa', '2368', 'Rete Fuente x ICA', 'egresos', '0', '20', '-20', 'NO', 'NO', 1, 1, ''),
+(181, '2016-06-06', 'CompEgreso', '131', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'sdasdsa', '1435', 'Mercancias no fabricadas por la empresa', 'egresos', '100000', '0', '100000', 'NO', 'NO', 1, 1, ''),
+(182, '2016-06-06', 'CompEgreso', '131', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'sdasdsa', '110505', 'CAJA GENERAL', 'egresos', '0', '115994', '-115994', 'NO', 'NO', 1, 1, ''),
+(183, '2016-06-06', 'CompEgreso', '131', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'sdasdsa', '2408', 'Impuesto sobre las ventas por pagar', 'egresos', '16000', '0', '16000', 'NO', 'NO', 1, 1, ''),
+(184, '2016-06-06', 'CompEgreso', '131', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'sdasdsa', '236540', 'Rete Fuente x compras', 'egresos', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(185, '2016-06-06', 'CompEgreso', '131', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'sdasdsa', '236701', 'IVA retenido', 'egresos', '0', '3', '-3', 'NO', 'NO', 1, 1, ''),
+(186, '2016-06-06', 'CompEgreso', '131', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'sdasdsa', '2368', 'Rete Fuente x ICA', 'egresos', '0', '2', '-2', 'NO', 'NO', 1, 1, ''),
+(187, '2016-06-06', 'CompEgreso', '132', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dasdsa', '1435', 'Mercancias no fabricadas por la empresa', 'egresos', '205000', '0', '205000', 'NO', 'NO', 1, 1, ''),
+(188, '2016-06-06', 'CompEgreso', '132', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dasdsa', '11100501', 'CUENTA DE AHORROS DAVIVIENDA', 'egresos', '0', '221000', '-221000', 'NO', 'NO', 1, 1, ''),
+(189, '2016-06-06', 'CompEgreso', '132', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dasdsa', '2408', 'Impuesto sobre las ventas por pagar', 'egresos', '32000', '0', '32000', 'NO', 'NO', 1, 1, ''),
+(190, '2016-06-06', 'CompEgreso', '132', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dasdsa', '236540', 'Rete Fuente x compras', 'egresos', '0', '10000', '-10000', 'NO', 'NO', 1, 1, ''),
+(191, '2016-06-06', 'CompEgreso', '132', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dasdsa', '236701', 'IVA retenido', 'egresos', '0', '1000', '-1000', 'NO', 'NO', 1, 1, ''),
+(192, '2016-06-06', 'CompEgreso', '132', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dasdsa', '2368', 'Rete Fuente x ICA', 'egresos', '0', '5000', '-5000', 'NO', 'NO', 1, 1, ''),
+(193, '2016-06-06', 'CompEgreso', '133', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsdasd', '514540', 'Flota y equipo de transporte', 'egresos', '1000000', '0', '1000000', 'NO', 'NO', 1, 1, ''),
+(194, '2016-06-06', 'CompEgreso', '133', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsdasd', '110505', 'CAJA GENERAL', 'egresos', '0', '1056000', '-1056000', 'NO', 'NO', 1, 1, ''),
+(195, '2016-06-06', 'CompEgreso', '133', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsdasd', '2408', 'Impuesto sobre las ventas por pagar', 'egresos', '116000', '0', '116000', 'NO', 'NO', 1, 1, ''),
+(196, '2016-06-06', 'CompEgreso', '133', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsdasd', '236540', 'Rete Fuente x compras', 'egresos', '0', '10000', '-10000', 'NO', 'NO', 1, 1, ''),
+(197, '2016-06-06', 'CompEgreso', '133', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsdasd', '236701', 'IVA retenido', 'egresos', '0', '30000', '-30000', 'NO', 'NO', 1, 1, ''),
+(198, '2016-06-06', 'CompEgreso', '133', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsdasd', '2368', 'Rete Fuente x ICA', 'egresos', '0', '20000', '-20000', 'NO', 'NO', 1, 1, ''),
+(199, '2016-06-06', 'NotaContable', '27', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsdsad', '510512', 'Jornales', 'egresos', '321321', '0', '321321', 'NO', 'NO', 1, 1, ''),
+(200, '2016-06-06', 'NotaContable', '27', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'dsdsad', '2205', 'Proveedores Nacionales TECHNO SOLUCIONES SAS 900833180', 'egresos', '0', '321321', '-321321', 'NO', 'NO', 1, 1, ''),
+(201, '2016-06-06', 'ComprobanteIngreso', '60', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 84', '130505900833180', 'Clientes Nacionales Techno Soluciones 900833180', 'Pago', '0', '92336', '-92336', 'NO', 'NO', 1, 1, ''),
+(202, '2016-06-06', 'ComprobanteIngreso', '60', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 84', '110505', 'CAJA GENERAL', 'Pago', '92296', '0', '92296', 'NO', 'NO', 1, 1, ''),
+(203, '2016-06-06', 'ComprobanteIngreso', '60', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 84', '135515', 'Anticipo de Impuestos Retefuente', 'Pago', '12', '0', '12', 'NO', 'NO', 1, 1, ''),
+(204, '2016-06-06', 'ComprobanteIngreso', '60', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 84', '135517', 'Anticipo de Impuestos ReteIVA', 'Pago', '13', '0', '13', 'NO', 'NO', 1, 1, ''),
+(205, '2016-06-06', 'ComprobanteIngreso', '60', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 84', '135518', 'Anticipo de Impuestos ReteICA', 'Pago', '15', '0', '15', 'NO', 'NO', 1, 1, ''),
+(206, '2016-06-06', 'ComprobanteIngreso', '61', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'ewqewq', '110510', 'CAJA MENOR', 'Ingresos', '14333', '0', '14333', 'NO', 'NO', 1, 1, ''),
+(207, '2016-06-06', 'ComprobanteIngreso', '61', '31', '900704258', '1', '', '', '', '', 'Meca Distribuciones SAS', 'AV 4 N 25N-58', '76', '1', '169', 'ewqewq', '2205900704258', 'Proveedores Nacionales: Meca Distribuciones SAS NIT 900704258', 'Ingresos', '0', '14333', '-14333', 'NO', 'NO', 1, 1, ''),
+(208, '2016-06-06', 'ComprobanteIngreso', '62', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'ewewq', '110510', 'CAJA MENOR', 'Ingresos', '10000', '0', '10000', 'NO', 'NO', 2, 2, ''),
+(209, '2016-06-06', 'ComprobanteIngreso', '62', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'ewewq', '238020900833180', 'Anticipos recibidos Cliente: Techno Soluciones NIT 900833180', 'Ingresos', '0', '10000', '-10000', 'NO', 'NO', 2, 2, ''),
+(210, '2016-06-06', 'ComprobanteIngreso', '63', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsds', '110510', 'CAJA MENOR', 'Ingresos', '321321', '0', '321321', 'NO', 'NO', 2, 2, ''),
+(211, '2016-06-06', 'ComprobanteIngreso', '63', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsds', '2205900298074', 'Proveedores Nacionales: GVS COLOMBIA SAS NIT 900298074', 'Ingresos', '0', '321321', '-321321', 'NO', 'NO', 2, 2, ''),
+(212, '2016-06-06', 'COMPROBANTE CONTABLE', '21', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'sddsa', '1110', 'Bancos', 'dsadsada', '12122121', '0', '12122121', 'NO', 'NO', 1, 1, ''),
+(213, '2016-06-06', 'COMPROBANTE CONTABLE', '21', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'rerewr', '2330', 'Ordenes de compra por utilizar', 'dsadsada', '0', '12122121', '-12122121', 'NO', 'NO', 1, 1, ''),
+(214, '2016-06-06', 'COMPROBANTE CONTABLE', '22', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'dsdsa', '0', '23084', '-23084', 'NO', 'NO', 1, 1, ''),
+(215, '2016-06-06', 'COMPROBANTE CONTABLE', '22', '31', '900833180', '7', '', '', '', '', 'TECHNO SOLUCIONES SAS', 'CRA 17 7 18', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'dsdsa', '0', '92336', '-92336', 'NO', 'NO', 1, 1, ''),
+(216, '2016-06-06', 'COMPROBANTE CONTABLE', '22', '31', '900298074', '9', '', '', ' ', '', 'GVS COLOMBIA SAS', 'AV 4 N 23DN-50', '76', '1', '169', 'dsadas', '1110', 'Bancos', 'dsdsa', '115420', '0', '115420', 'NO', 'NO', 1, 1, ''),
+(217, '2016-06-06', 'ComprobanteIngreso', '64', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 83', '130505900833180', 'Clientes Nacionales Techno Soluciones 900833180', 'Pago', '0', '23084', '-23084', 'NO', 'NO', 1, 1, ''),
+(218, '2016-06-06', 'ComprobanteIngreso', '64', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 83', '110505', 'CAJA GENERAL', 'Pago', '23078', '0', '23078', 'NO', 'NO', 1, 1, ''),
+(219, '2016-06-06', 'ComprobanteIngreso', '64', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 83', '135515', 'Anticipo de Impuestos Retefuente', 'Pago', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(220, '2016-06-06', 'ComprobanteIngreso', '64', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 83', '135517', 'Anticipo de Impuestos ReteIVA', 'Pago', '3', '0', '3', 'NO', 'NO', 1, 1, ''),
+(221, '2016-06-06', 'ComprobanteIngreso', '64', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Pago de Factura A 83', '135518', 'Anticipo de Impuestos ReteICA', 'Pago', '2', '0', '2', 'NO', 'NO', 1, 1, ''),
+(222, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Ventas', '24244', '0', '24244', 'NO', 'NO', 1, 1, ''),
+(223, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '20900', '-20900', 'NO', 'NO', 1, 1, ''),
+(224, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3344', '-3344', 'NO', 'NO', 1, 1, ''),
+(225, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(226, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(227, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(228, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(229, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Ventas', '33060', '0', '33060', 'NO', 'NO', 1, 1, ''),
+(230, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '28500', '-28500', 'NO', 'NO', 1, 1, ''),
+(231, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4560', '-4560', 'NO', 'NO', 1, 1, ''),
+(232, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(233, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(234, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(235, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(236, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Ventas', '17400', '0', '17400', 'NO', 'NO', 1, 1, ''),
+(237, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1, ''),
+(238, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2400', '-2400', 'NO', 'NO', 1, 1, ''),
+(239, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '120', '0', '120', 'NO', 'NO', 1, 1, ''),
+(240, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(241, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(242, '2016-06-06', 'FACTURA', '201606061158050.65705000 1465232285', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(243, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '-24244', '0', '-24244', 'NO', 'NO', 0, 0, ''),
+(244, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '-20900', '20900', 'NO', 'NO', 0, 0, ''),
+(245, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '0', '-3344', '3344', 'NO', 'NO', 0, 0, ''),
+(246, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '-167', '0', '-167', 'NO', 'NO', 0, 0, ''),
+(247, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '0', '-167', '167', 'NO', 'NO', 0, 0, ''),
+(248, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '-15400', '0', '-15400', 'NO', 'NO', 0, 0, ''),
+(249, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '0', '-15400', '15400', 'NO', 'NO', 0, 0, ''),
+(250, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '-33060', '0', '-33060', 'NO', 'NO', 0, 0, ''),
+(251, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '-28500', '28500', 'NO', 'NO', 0, 0, ''),
+(252, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '0', '-4560', '4560', 'NO', 'NO', 0, 0, ''),
+(253, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '-228', '0', '-228', 'NO', 'NO', 0, 0, ''),
+(254, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '0', '-228', '228', 'NO', 'NO', 0, 0, ''),
+(255, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '-21000', '0', '-21000', 'NO', 'NO', 0, 0, ''),
+(256, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '0', '-21000', '21000', 'NO', 'NO', 0, 0, ''),
+(257, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '-17400', '0', '-17400', 'NO', 'NO', 0, 0, ''),
+(258, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '-15000', '15000', 'NO', 'NO', 0, 0, ''),
+(259, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '0', '-2400', '2400', 'NO', 'NO', 0, 0, ''),
+(260, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '-120', '0', '-120', 'NO', 'NO', 0, 0, ''),
+(261, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '0', '-120', '120', 'NO', 'NO', 0, 0, ''),
+(262, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '-1', '0', '-1', 'NO', 'NO', 0, 0, ''),
+(263, '2016-06-05', 'NOTA CREDITO', '1', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '0', '-1', '1', 'NO', 'NO', 0, 0, ''),
+(264, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 0, 0, ''),
+(265, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 0, 0, ''),
+(266, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 0, 0, ''),
+(267, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 0, 0, ''),
+(268, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 0, 0, ''),
+(269, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 0, 0, ''),
+(270, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 0, 0, ''),
+(271, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 0, 0, ''),
+(272, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 0, 0, ''),
+(273, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 0, 0, ''),
+(274, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 0, 0, ''),
+(275, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 0, 0, ''),
+(276, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 0, 0, ''),
+(277, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 0, 0, ''),
+(278, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 0, 0, ''),
+(279, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 0, 0, ''),
+(280, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 0, 0, ''),
+(281, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 0, 0, ''),
+(282, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 0, 0, ''),
+(283, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 0, 0, ''),
+(284, '2016-06-09', 'NOTA CREDITO', '2', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: otra prueba', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 0, 0, ''),
+(285, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 0, 0, ''),
+(286, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 0, 0, ''),
+(287, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 0, 0, ''),
+(288, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 0, 0, ''),
+(289, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 0, 0, ''),
+(290, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 0, 0, ''),
+(291, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 0, 0, ''),
+(292, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 0, 0, ''),
+(293, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 0, 0, ''),
+(294, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 0, 0, ''),
+(295, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 0, 0, ''),
+(296, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 0, 0, ''),
+(297, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 0, 0, ''),
+(298, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 0, 0, ''),
+(299, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 0, 0, ''),
+(300, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 0, 0, ''),
+(301, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 0, 0, ''),
+(302, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 0, 0, ''),
+(303, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 0, 0, ''),
+(304, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 0, 0, ''),
+(305, '2016-06-06', 'NOTA CREDITO', '3', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 0, 0, ''),
+(306, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 0, 0, ''),
+(307, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 0, 0, ''),
+(308, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 0, 0, ''),
+(309, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 0, 0, ''),
+(310, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 0, 0, ''),
+(311, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 0, 0, ''),
+(312, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 0, 0, ''),
+(313, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 0, 0, ''),
+(314, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 0, 0, ''),
+(315, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 0, 0, ''),
+(316, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 0, 0, ''),
+(317, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 0, 0, ''),
+(318, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 0, 0, ''),
+(319, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 0, 0, ''),
+(320, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 0, 0, ''),
+(321, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 0, 0, ''),
+(322, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 0, 0, ''),
+(323, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 0, 0, ''),
+(324, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 0, 0, ''),
+(325, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 0, 0, ''),
+(326, '2016-06-06', 'NOTA CREDITO', '4', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 0, 0, ''),
+(327, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 0, 0, ''),
+(328, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 0, 0, ''),
+(329, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 0, 0, ''),
+(330, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 0, 0, ''),
+(331, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 0, 0, ''),
+(332, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 0, 0, ''),
+(333, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 0, 0, ''),
+(334, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 0, 0, ''),
+(335, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 0, 0, ''),
+(336, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 0, 0, ''),
+(337, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 0, 0, ''),
+(338, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 0, 0, ''),
+(339, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 0, 0, ''),
+(340, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 0, 0, ''),
+(341, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 0, 0, ''),
+(342, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 0, 0, ''),
+(343, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 0, 0, ''),
+(344, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 0, 0, ''),
+(345, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 0, 0, ''),
+(346, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 0, 0, '');
+INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `Num_Documento_Interno`, `Tercero_Tipo_Documento`, `Tercero_Identificacion`, `Tercero_DV`, `Tercero_Primer_Apellido`, `Tercero_Segundo_Apellido`, `Tercero_Primer_Nombre`, `Tercero_Otros_Nombres`, `Tercero_Razon_Social`, `Tercero_Direccion`, `Tercero_Cod_Dpto`, `Tercero_Cod_Mcipio`, `Tercero_Pais_Domicilio`, `Concepto`, `CuentaPUC`, `NombreCuenta`, `Detalle`, `Debito`, `Credito`, `Neto`, `Mayor`, `Esp`, `idCentroCosto`, `idEmpresa`, `Estado`) VALUES
+(347, '2016-06-06', 'NOTA CREDITO', '5', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 0, 0, ''),
+(348, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 0, 0, ''),
+(349, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 0, 0, ''),
+(350, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 0, 0, ''),
+(351, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 0, 0, ''),
+(352, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 0, 0, ''),
+(353, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 0, 0, ''),
+(354, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 0, 0, ''),
+(355, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 0, 0, ''),
+(356, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 0, 0, ''),
+(357, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 0, 0, ''),
+(358, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 0, 0, ''),
+(359, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 0, 0, ''),
+(360, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 0, 0, ''),
+(361, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 0, 0, ''),
+(362, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 0, 0, ''),
+(363, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 0, 0, ''),
+(364, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 0, 0, ''),
+(365, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 0, 0, ''),
+(366, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 0, 0, ''),
+(367, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 0, 0, ''),
+(368, '2016-06-06', 'NOTA CREDITO', '6', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 0, 0, ''),
+(369, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 0, 0, ''),
+(370, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 0, 0, ''),
+(371, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 0, 0, ''),
+(372, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 0, 0, ''),
+(373, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 0, 0, ''),
+(374, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 0, 0, ''),
+(375, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 0, 0, ''),
+(376, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 0, 0, ''),
+(377, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 0, 0, ''),
+(378, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 0, 0, ''),
+(379, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 0, 0, ''),
+(380, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 0, 0, ''),
+(381, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 0, 0, ''),
+(382, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 0, 0, ''),
+(383, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 0, 0, ''),
+(384, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 0, 0, ''),
+(385, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 0, 0, ''),
+(386, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 0, 0, ''),
+(387, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 0, 0, ''),
+(388, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 0, 0, ''),
+(389, '2016-06-06', 'NOTA CREDITO', '7', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 0, 0, ''),
+(390, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 0, 0, ''),
+(391, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 0, 0, ''),
+(392, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 0, 0, ''),
+(393, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 0, 0, ''),
+(394, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 0, 0, ''),
+(395, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 0, 0, ''),
+(396, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 0, 0, ''),
+(397, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 0, 0, ''),
+(398, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 0, 0, ''),
+(399, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 0, 0, ''),
+(400, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 0, 0, ''),
+(401, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 0, 0, ''),
+(402, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 0, 0, ''),
+(403, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 0, 0, ''),
+(404, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 0, 0, ''),
+(405, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 0, 0, ''),
+(406, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 0, 0, ''),
+(407, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 0, 0, ''),
+(408, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 0, 0, ''),
+(409, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 0, 0, ''),
+(410, '2016-06-06', 'NOTA CREDITO', '8', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: dsadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 0, 0, ''),
+(411, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 1, 1, ''),
+(412, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 1, 1, ''),
+(413, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 1, 1, ''),
+(414, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(415, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(416, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(417, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(418, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 1, 1, ''),
+(419, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 1, 1, ''),
+(420, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 1, 1, ''),
+(421, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(422, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(423, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(424, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(425, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 1, 1, ''),
+(426, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 1, 1, ''),
+(427, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 1, 1, ''),
+(428, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(429, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 1, 1, ''),
+(430, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(431, '2016-06-06', 'NOTA CREDITO', '9', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 93 por: fsdfds', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(432, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 1, 1, ''),
+(433, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 1, 1, ''),
+(434, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 1, 1, ''),
+(435, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(436, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(437, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(438, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(439, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 1, 1, ''),
+(440, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 1, 1, ''),
+(441, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 1, 1, ''),
+(442, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(443, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(444, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(445, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(446, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 1, 1, ''),
+(447, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 1, 1, ''),
+(448, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 1, 1, ''),
+(449, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(450, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 1, 1, ''),
+(451, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(452, '2016-06-06', 'NOTA CREDITO', '11', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sddsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(453, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 1, 1, ''),
+(454, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 1, 1, ''),
+(455, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 1, 1, ''),
+(456, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(457, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(458, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(459, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(460, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 1, 1, ''),
+(461, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 1, 1, ''),
+(462, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 1, 1, ''),
+(463, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(464, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(465, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(466, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(467, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 1, 1, ''),
+(468, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 1, 1, ''),
+(469, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 1, 1, ''),
+(470, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(471, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 1, 1, ''),
+(472, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(473, '2016-06-06', 'NOTA CREDITO', '12', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: sdadsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(474, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 1, 1, ''),
+(475, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 1, 1, ''),
+(476, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 1, 1, ''),
+(477, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(478, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(479, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(480, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(481, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 1, 1, ''),
+(482, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 1, 1, ''),
+(483, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 1, 1, ''),
+(484, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(485, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(486, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(487, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(488, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 1, 1, ''),
+(489, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 1, 1, ''),
+(490, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 1, 1, ''),
+(491, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(492, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 1, 1, ''),
+(493, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(494, '2016-06-06', 'NOTA CREDITO', '13', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 90 por: dsdsa', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(495, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '24244', '0', '24244', 'NO', 'NO', 1, 1, ''),
+(496, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '20900', '-20900', 'NO', 'NO', 1, 1, ''),
+(497, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3344', '-3344', 'NO', 'NO', 1, 1, ''),
+(498, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(499, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(500, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(501, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(502, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '33060', '0', '33060', 'NO', 'NO', 1, 1, ''),
+(503, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '28500', '-28500', 'NO', 'NO', 1, 1, ''),
+(504, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4560', '-4560', 'NO', 'NO', 1, 1, ''),
+(505, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(506, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(507, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(508, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(509, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '17400', '0', '17400', 'NO', 'NO', 1, 1, ''),
+(510, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1, ''),
+(511, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2400', '-2400', 'NO', 'NO', 1, 1, ''),
+(512, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '120', '0', '120', 'NO', 'NO', 1, 1, '');
+INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `Num_Documento_Interno`, `Tercero_Tipo_Documento`, `Tercero_Identificacion`, `Tercero_DV`, `Tercero_Primer_Apellido`, `Tercero_Segundo_Apellido`, `Tercero_Primer_Nombre`, `Tercero_Otros_Nombres`, `Tercero_Razon_Social`, `Tercero_Direccion`, `Tercero_Cod_Dpto`, `Tercero_Cod_Mcipio`, `Tercero_Pais_Domicilio`, `Concepto`, `CuentaPUC`, `NombreCuenta`, `Detalle`, `Debito`, `Credito`, `Neto`, `Mayor`, `Esp`, `idCentroCosto`, `idEmpresa`, `Estado`) VALUES
+(513, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(514, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(515, '2016-06-06', 'FACTURA', '201606061450490.09560600 1465242649', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(516, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '24244', '-24244', 'NO', 'NO', 1, 1, ''),
+(517, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '20900', '0', '20900', 'NO', 'NO', 1, 1, ''),
+(518, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3344', '0', '3344', 'NO', 'NO', 1, 1, ''),
+(519, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '167', '-167', 'NO', 'NO', 1, 1, ''),
+(520, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '167', '0', '167', 'NO', 'NO', 1, 1, ''),
+(521, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '15400', '-15400', 'NO', 'NO', 1, 1, ''),
+(522, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '15400', '0', '15400', 'NO', 'NO', 1, 1, ''),
+(523, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '33060', '-33060', 'NO', 'NO', 1, 1, ''),
+(524, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '28500', '0', '28500', 'NO', 'NO', 1, 1, ''),
+(525, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '4560', '0', '4560', 'NO', 'NO', 1, 1, ''),
+(526, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '228', '-228', 'NO', 'NO', 1, 1, ''),
+(527, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '228', '0', '228', 'NO', 'NO', 1, 1, ''),
+(528, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '21000', '-21000', 'NO', 'NO', 1, 1, ''),
+(529, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '21000', '0', '21000', 'NO', 'NO', 1, 1, ''),
+(530, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '110505', 'CAJA GENERAL', 'Anulacion de Factura', '0', '17400', '-17400', 'NO', 'NO', 1, 1, ''),
+(531, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '4135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '15000', '0', '15000', 'NO', 'NO', 1, 1, ''),
+(532, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2400', '0', '2400', 'NO', 'NO', 1, 1, ''),
+(533, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '120', '-120', 'NO', 'NO', 1, 1, ''),
+(534, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '120', '0', '120', 'NO', 'NO', 1, 1, ''),
+(535, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '6135', 'Comercio al por mayor y al por menor', 'Anulacion de Factura', '0', '1', '-1', 'NO', 'NO', 1, 1, ''),
+(536, '2016-06-06', 'NOTA CREDITO', '15', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Anulacion de Factura A - 94 por: sdasdas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Anulacion de Factura', '1', '0', '1', 'NO', 'NO', 1, 1, ''),
+(537, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '130505890312749', 'Clientes Nacionales SEGURIDAD ATLAS LTDA NIT 890312749', 'Ventas', '18560', '0', '18560', 'NO', 'NO', 1, 1, ''),
+(538, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '416510', 'Servicio medico', 'Ventas', '0', '16000', '-16000', 'NO', 'NO', 1, 1, ''),
+(539, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2560', '-2560', 'NO', 'NO', 1, 1, ''),
+(540, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '128', '0', '128', 'NO', 'NO', 1, 1, ''),
+(541, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '128', '-128', 'NO', 'NO', 1, 1, ''),
+(542, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '130505890312749', 'Clientes Nacionales SEGURIDAD ATLAS LTDA NIT 890312749', 'Ventas', '26680', '0', '26680', 'NO', 'NO', 1, 1, ''),
+(543, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '416510', 'Servicio medico', 'Ventas', '0', '23000', '-23000', 'NO', 'NO', 1, 1, ''),
+(544, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3680', '-3680', 'NO', 'NO', 1, 1, ''),
+(545, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '184', '0', '184', 'NO', 'NO', 1, 1, ''),
+(546, '2016-06-06', 'FACTURA', '201606061631230.00982800 1465248683', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '184', '-184', 'NO', 'NO', 1, 1, ''),
+(547, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '130505890312749', 'Clientes Nacionales SEGURIDAD ATLAS LTDA NIT 890312749', 'Anulacion de Factura', '0', '18560', '-18560', 'NO', 'NO', 1, 1, ''),
+(548, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '416510', 'Servicio medico', 'Anulacion de Factura', '16000', '0', '16000', 'NO', 'NO', 1, 1, ''),
+(549, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '2560', '0', '2560', 'NO', 'NO', 1, 1, ''),
+(550, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '128', '-128', 'NO', 'NO', 1, 1, ''),
+(551, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '128', '0', '128', 'NO', 'NO', 1, 1, ''),
+(552, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '130505890312749', 'Clientes Nacionales SEGURIDAD ATLAS LTDA NIT 890312749', 'Anulacion de Factura', '0', '26680', '-26680', 'NO', 'NO', 1, 1, ''),
+(553, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '416510', 'Servicio medico', 'Anulacion de Factura', '23000', '0', '23000', 'NO', 'NO', 1, 1, ''),
+(554, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '2408', 'Impuesto sobre las ventas por pagar', 'Anulacion de Factura', '3680', '0', '3680', 'NO', 'NO', 1, 1, ''),
+(555, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '135595', 'Otros Autorretencion CREE', 'Anulacion de Factura', '0', '184', '-184', 'NO', 'NO', 1, 1, ''),
+(556, '2016-06-06', 'NOTA CREDITO', '16', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Anulacion de Factura A - 95 por: dsadsa', '23657502', 'Autorretenciones (CREE)', 'Anulacion de Factura', '184', '0', '184', 'NO', 'NO', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -17079,7 +17696,7 @@ CREATE TABLE IF NOT EXISTS `notascontables` (
   `CentroCostos` int(11) NOT NULL,
   `EmpresaPro` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=28 ;
 
 --
 -- Volcado de datos para la tabla `notascontables`
@@ -17110,7 +17727,106 @@ INSERT INTO `notascontables` (`ID`, `Fecha`, `FechaProgramada`, `Detalle`, `idPr
 (22, '2016-04-20', '2016-04-20', 'programado', 71, 200000, 0, 200000, '', '3213213', 3, 1, 1),
 (23, '2016-04-20', '2016-04-20', 'dsadsa', 71, 200000, 0, 200000, '', '233213', 3, 2, 2),
 (24, '2016-04-22', '2016-04-22', 'Pago de Nomina', 71, 1000000, 0, 1000000, '', '321321', 3, 1, 1),
-(25, '2016-05-16', '2016-05-16', 'fdsfdsfsdf', 71, 100000, 16000, 116000, '../SoportesEgresos/2016-05-03_AVICOLA_SANTA_RITA_SAS.pdf', '421342342', 3, 1, 1);
+(25, '2016-05-16', '2016-05-16', 'fdsfdsfsdf', 71, 100000, 16000, 116000, '../SoportesEgresos/2016-05-03_AVICOLA_SANTA_RITA_SAS.pdf', '421342342', 3, 1, 1),
+(26, '2016-06-06', '2016-06-06', 'dsadsadsa', 71, 22121, 0, 22121, '../SoportesEgresos/2016-04-25_DOCTORA_YULIANA.pdf', '2121', 3, 1, 1),
+(27, '2016-06-06', '2016-06-06', 'dsdsad', 71, 321321, 0, 321321, '../SoportesEgresos/Carmelo.pdf', '2313213', 3, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notascredito`
+--
+
+CREATE TABLE IF NOT EXISTS `notascredito` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Fecha` date NOT NULL,
+  `Hora` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `idFactura` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Concepto` text COLLATE utf8_spanish2_ci NOT NULL,
+  `Cliente` int(11) NOT NULL,
+  `Usuarios_idUsuarios` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=17 ;
+
+--
+-- Volcado de datos para la tabla `notascredito`
+--
+
+INSERT INTO `notascredito` (`ID`, `Fecha`, `Hora`, `idFactura`, `Concepto`, `Cliente`, `Usuarios_idUsuarios`) VALUES
+(1, '2016-06-05', '13:54', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: Prueba de Anulacion por julian', 0, 3),
+(2, '2016-06-09', '13:56', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: otra prueba', 0, 3),
+(3, '2016-06-06', '14:26', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: dsadsa', 0, 3),
+(4, '2016-06-06', '14:27', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: dsadsa', 0, 3),
+(5, '2016-06-06', '14:28', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: dsadas', 0, 3),
+(6, '2016-06-06', '14:29', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: dsadas', 0, 3),
+(7, '2016-06-06', '14:30', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: dsadsa', 0, 3),
+(8, '2016-06-06', '14:38', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: dsadsa', 0, 3),
+(9, '2016-06-06', '14:47', '201606061158050.65705000 1465232285', 'Anulacion de Factura A - 93 por: fsdfds', 2, 3),
+(10, '2016-06-06', '14:47', '201606061155400.71176000 1465232140', 'Anulacion de Factura A - 92 por: dadsa', 2, 3),
+(11, '2016-06-06', '14:48', '201606060905020.92920100 1465221902', 'Anulacion de Factura A - 90 por: sddsa', 2, 3),
+(12, '2016-06-06', '14:48', '201606060905020.92920100 1465221902', 'Anulacion de Factura A - 90 por: sdadsa', 2, 3),
+(13, '2016-06-06', '14:49', '201606060905020.92920100 1465221902', 'Anulacion de Factura A - 90 por: dsdsa', 2, 3),
+(14, '2016-06-06', '14:50', '201606060829430.91645300 1465219783', 'Anulacion de Factura A - 87 por: sdsa', 2, 3),
+(15, '2016-06-06', '14:51', '201606061450490.09560600 1465242649', 'Anulacion de Factura A - 94 por: sdasdas', 2, 3),
+(16, '2016-06-06', '16:31', '201606061631230.00982800 1465248683', 'Anulacion de Factura A - 95 por: dsadsa', 17, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ordenesdecompra`
+--
+
+CREATE TABLE IF NOT EXISTS `ordenesdecompra` (
+  `ID` int(16) NOT NULL AUTO_INCREMENT,
+  `Fecha` date NOT NULL,
+  `Tercero` int(11) NOT NULL,
+  `Descripcion` text COLLATE utf8_spanish2_ci NOT NULL,
+  `PlazoEntrega` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `NoCotizacion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Condiciones` text COLLATE utf8_spanish2_ci NOT NULL,
+  `Solicitante` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Cargo` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `UsuarioCreador` int(11) NOT NULL,
+  `Created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `ordenesdecompra`
+--
+
+INSERT INTO `ordenesdecompra` (`ID`, `Fecha`, `Tercero`, `Descripcion`, `PlazoEntrega`, `NoCotizacion`, `Condiciones`, `Solicitante`, `Cargo`, `UsuarioCreador`, `Created`) VALUES
+(1, '2016-05-06', 1, 'Compra de equipos para proyecto avicola santa rita', '5 dias', '1234', 'se realiza retencion', 'JULIAN ALVARAN', 'DIRECTOR', 3, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ordenesdecompra_items`
+--
+
+CREATE TABLE IF NOT EXISTS `ordenesdecompra_items` (
+  `ID` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `NumOrden` int(11) NOT NULL,
+  `Descripcion` text COLLATE utf8_spanish2_ci NOT NULL,
+  `Referencia` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `Cantidad` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `ValorUnitario` float NOT NULL,
+  `Subtotal` float NOT NULL,
+  `IVA` float NOT NULL,
+  `Total` float NOT NULL,
+  `TablaOrigen` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `ordenesdecompra_items`
+--
+
+INSERT INTO `ordenesdecompra_items` (`ID`, `NumOrden`, `Descripcion`, `Referencia`, `Cantidad`, `ValorUnitario`, `Subtotal`, `IVA`, `Total`, `TablaOrigen`) VALUES
+('201606052125090.85765300 1465179909', 1, 'BLUSA MAGENTA TIRAS', 'MAG2087', '5', 10000, 50000, 8000, 58000, 'productosventa'),
+('201606052130030.91147200 1465180203', 1, 'BLUSA KEBONITA CAMPESINA', 'KEBM-0153', '20', 100000, 2000000, 320000, 2320000, 'productosventa'),
+('201606052130200.78343700 1465180220', 1, 'BOXER FE&RO LICRA RAYAS T/L', 'FE&9903L', '13', 50000, 650000, 104000, 754000, 'productosventa'),
+('201606052130380.75046500 1465180238', 1, 'PANTALONETA AIR SPORT HIPERMEABLE', 'AIR234793', '23', 124566, 2865020, 458403, 3323420, 'productosventa');
 
 -- --------------------------------------------------------
 
@@ -17174,7 +17890,8 @@ INSERT INTO `ordenesdetrabajo_items` (`ID`, `idOT`, `Actividad`, `FechaInicio`, 
 ('201606051715400.20928500 1465164940', '5', 'MANTENIMIENTO A CADA UNA DE LAS 8 CAMARAS', '2016-06-05', '2016-06-05', '2', '1', 'A', 'DEJAR LIMPIAS LAS PAREDES'),
 ('201606051716060.24977500 1465164966', '5', 'LIMPIAR DVR', '2016-06-05', '2016-06-05', '0.5', '1', 'A', 'CUIDADO CON EL DISCO'),
 ('201606051716430.24189100 1465165003', '5', 'CONFIGURAR EL INTERNET', '2016-06-05', '2016-06-05', '1', '1', 'A', 'IP ESTATICA 192.168.0.100'),
-('201606051717000.72288600 1465165020', '5', 'MANTENMIENTO A LOS 4 COMPUTADORES', '2016-06-05', '2016-06-05', '2', '1', 'A', '');
+('201606051717000.72288600 1465165020', '5', 'MANTENMIENTO A LOS 4 COMPUTADORES', '2016-06-05', '2016-06-05', '2', '1', 'A', ''),
+('201606052021230.10759600 1465176083', '1', '', '0000-00-00', '0000-00-00', '', '', 'A', '');
 
 -- --------------------------------------------------------
 
@@ -17253,8 +17970,17 @@ INSERT INTO `ori_facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefij
 ('201604221456010.61287200 1461354961', 1, '02', 'A', 80, '2016-04-22', '14:56:01', '', '', 'Credito a 30 dias', '25000', '4000', '', '29000', '0', '', 1, 1, 3, 22, '15000', '', '', '', 'PRUEBA'),
 ('201604260613240.87895200 1461669204', 1, '02', 'A', 81, '2016-04-26', '06:13:24', '', '', 'Credito a 30 dias', '75000', '12000', '', '87000', '0', '', 1, 1, 3, 22, '45000', '', '', '', ''),
 ('201604270606390.21327600 1461755199', 1, '02', 'A', 82, '2016-04-27', '06:06:39', '', '', 'Contado', '25000', '4000', '', '29000', '29000', '', 1, 1, 3, 17, '15000', '', '', '', 'dsadsa'),
-('201605161607040.12390100 1463432824', 1, '02', 'A', 83, '2016-05-16', '16:07:04', '', '', 'Credito a 30 dias', '19900', '3184', '', '23084', '23084', '', 1, 1, 3, 2, '14000', '', '', '', ''),
-('201605161618060.91225000 1463433486', 1, '02', 'A', 84, '2016-05-16', '16:18:06', '', '', 'Credito a 30 dias', '79600', '12736', '', '92336', '92336', '', 1, 1, 3, 2, '14000', '', '', '', '');
+('201605161607040.12390100 1463432824', 1, '02', 'A', 83, '2016-05-16', '16:07:04', '', '', 'Credito a 30 dias', '19900', '3184', '', '23084', '0', '', 1, 1, 3, 2, '14000', '', '', '', ''),
+('201605161618060.91225000 1463433486', 1, '02', 'A', 84, '2016-05-16', '16:18:06', '', '', 'Credito a 30 dias', '79600', '12736', '', '92336', '0', '', 1, 1, 3, 2, '14000', '', '', '', ''),
+('201606052146580.14367200 1465181218', 1, '02', 'A', 85, '2016-06-05', '21:46:58', '', '', 'Contado', '127100', '20336', '', '147436', '147436', '', 1, 1, 3, 17, '84499', '', '', '', 'observaciones de factura'),
+('201606060829430.91645300 1465219783', 1, '02', 'A', 87, '2016-06-06', '08:29:43', '', '', 'ANULADA', '', '', '', '', '', '', 1, 1, 3, 2, '', '', '', '', 'dsadas'),
+('201606060837510.08510900 1465220271', 1, '02', 'A', 89, '2016-06-06', '08:37:51', '', '', 'Contado', '64400', '10304', '', '74704', '74704', '', 1, 1, 3, 2, '36401', '', '', '', 'dsdsds'),
+('201606060905020.92920100 1465221902', 1, '02', 'A', 90, '2016-06-06', '09:05:02', '', '', 'Contado', '64400', '10304', '', '74704', '74704', '', 1, 1, 3, 2, '36401', '', '', '', 'observacion de la factura'),
+('201606060907180.70396700 1465222038', 1, '02', 'A', 91, '2016-06-06', '09:07:18', '', '', 'Contado', '49400', '7904', '', '57304', '57304', '', 1, 1, 3, 2, '36400', '', '', '', 'ajuste de factura'),
+('201606061155400.71176000 1465232140', 1, '02', 'A', 92, '2016-06-06', '11:55:40', '', '', 'ANULADA', '', '', '', '', '', '', 1, 1, 3, 2, '', '', '', '', ''),
+('201606061158050.65705000 1465232285', 1, '02', 'A', 93, '2016-06-06', '11:58:05', '', '', 'ANULADA', '64400', '10304', '', '74704', '74704', '', 1, 1, 3, 2, '36401', '', '', '', ''),
+('201606061450490.09560600 1465242649', 1, '02', 'A', 94, '2016-06-06', '14:50:49', '', '', 'ANULADA', '64400', '10304', '', '74704', '74704', '', 1, 1, 3, 2, '36401', '', '', '', ''),
+('201606061631230.00982800 1465248683', 1, '02', 'A', 95, '2016-06-06', '16:31:23', '', '', 'ANULADA', '39000', '6240', '', '45240', '45240', '', 1, 1, 3, 17, '19000', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -17320,7 +18046,37 @@ INSERT INTO `ori_facturas_items` (`ID`, `FechaFactura`, `idFactura`, `TablaItems
 ('201604260613240.89295300 1461669204', '2016-04-26', '201604260613240.87895200 1461669204', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '3', '1', '75000', '12000', '87000', '16%', '15000', '45000', 'PR', 4135, 'cotizacionesv5', '39'),
 ('201604270606390.25127800 1461755199', '2016-04-27', '201604270606390.21327600 1461755199', '', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'rem_devoluciones', '25'),
 ('201605161607040.15790300 1463432824', '2016-05-16', '201605161607040.12390100 1463432824', 'productosventa', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 2, 23, 0, 0, 0, '19900', '1', '1', '19900', '3184', '23084', '16%', '14000', '14000', 'PR', 4135, 'cotizacionesv5', '42'),
-('201605161618060.93225100 1463433486', '2016-05-16', '201605161618060.91225000 1463433486', '', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 2, 23, 0, 0, 0, '19900', '1', '4', '79600', '12736', '92336', '16%', '14000', '14000', 'PR', 4135, 'rem_devoluciones', '26');
+('201605161618060.93225100 1463433486', '2016-05-16', '201605161618060.91225000 1463433486', '', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 2, 23, 0, 0, 0, '19900', '1', '4', '79600', '12736', '92336', '16%', '14000', '14000', 'PR', 4135, 'rem_devoluciones', '26'),
+('201606052146580.16467400 1465181218', '2016-06-05', '201606052146580.14367200 1465181218', 'productosventa', 'REF189', 'SANDALIA 2GOOD DAMA', 4, 2, 0, 0, 0, 0, '12900', '1', '1', '12900', '2064', '14964', '16%', '9000', '9000', 'PR', 4135, 'cotizacionesv5', '43'),
+('201606052146580.30268100 1465181218', '2016-06-05', '201606052146580.14367200 1465181218', 'productosventa', 'EVA856-10', 'CHANCLA EVACOL  LUJO HOMBRE', 4, 1, 0, 0, 0, 0, '16500', '1', '1', '16500', '2640', '19140', '16%', '11500', '11500', 'PR', 4135, 'cotizacionesv5', '43'),
+('201606052146580.32768300 1465181218', '2016-06-05', '201606052146580.14367200 1465181218', 'productosventa', 'PROT50206', 'TOALLA PROTELA VENTURA 60X120', 2, 9, 0, 0, 0, 0, '14900', '1', '1', '14900', '2384', '17284', '16%', '11000', '11000', 'PR', 4135, 'cotizacionesv5', '43'),
+('201606052146580.36468500 1465181218', '2016-06-05', '201606052146580.14367200 1465181218', 'productosventa', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 1, 2, 23, 0, 0, 0, '21900', '1', '1', '21900', '3504', '25404', '16%', '15999', '15999', 'PR', 4135, 'cotizacionesv5', '43'),
+('201606052146580.38868600 1465181218', '2016-06-05', '201606052146580.14367200 1465181218', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '43'),
+('201606052146580.43168900 1465181218', '2016-06-05', '201606052146580.14367200 1465181218', 'productosventa', 'KEBM-0153', 'BLUSA KEBONITA CAMPESINA', 1, 2, 23, 0, 0, 0, '21900', '1', '1', '21900', '3504', '25404', '16%', '16000', '16000', 'PR', 4135, 'cotizacionesv5', '43'),
+('201606052146580.43668900 1465181218', '2016-06-05', '201606052146580.14367200 1465181218', 'servicios', 'ELPE', 'Prueba de embarazo', 10, 0, 0, 0, 0, 0, '14000', '1', '1', '14000', '2240', '16240', '16%', '6000', '6000', 'MO', 416520, 'cotizacionesv5', '43'),
+('201606060829230.97961800 1465219763', '2016-06-06', '201606060829230.96401800 1465219763', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '27'),
+('201606060829240.02641800 1465219764', '2016-06-06', '201606060829230.96401800 1465219763', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '27'),
+('201606060829430.94765300 1465219783', '2016-06-06', '201606060829430.91645300 1465219783', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '28'),
+('201606060829430.96325300 1465219783', '2016-06-06', '201606060829430.91645300 1465219783', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '28'),
+('201606060835411465220141.7765', '2016-06-06', '201606060835410.76088200 1465220141', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '29'),
+('201606060835411465220141.7921', '2016-06-06', '201606060835410.76088200 1465220141', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '29'),
+('1', '2016-06-06', '201606060837510.08510900 1465220271', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '30'),
+('2', '2016-06-06', '201606060837510.08510900 1465220271', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '30'),
+('3', '2016-06-06', '201606060837510.08510900 1465220271', '', 'REF1658', 'TOP PROMOCION', 6, 28, 0, 0, 0, 0, '15000', '1', '1', '15000', '2400', '17400', '16%', '1', '1', 'PR', 4135, 'rem_devoluciones', '30'),
+('4', '2016-06-06', '201606060905020.92920100 1465221902', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '1'),
+('5', '2016-06-06', '201606060905020.92920100 1465221902', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '1'),
+('6', '2016-06-06', '201606060905020.92920100 1465221902', '', 'REF1658', 'TOP PROMOCION', 6, 28, 0, 0, 0, 0, '15000', '1', '1', '15000', '2400', '17400', '16%', '1', '1', 'PR', 4135, 'rem_devoluciones', '1'),
+('7', '2016-06-06', '201606060907180.70396700 1465222038', '', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'rem_devoluciones', '2'),
+('8', '2016-06-06', '201606060907180.70396700 1465222038', '', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'rem_devoluciones', '2'),
+('201606061155401', '2016-06-06', '201606061155400.71176000 1465232140', 'productosventa', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'cotizacionesv5', '44'),
+('201606061155402', '2016-06-06', '201606061158050.65705000 1465232285', 'productosventa', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'cotizacionesv5', '44'),
+('201606061155403', '2016-06-06', '201606061158050.65705000 1465232285', 'productosventa', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'cotizacionesv5', '44'),
+('201606061155404', '2016-06-06', '201606061158050.65705000 1465232285', 'productosventa', 'REF1658', 'TOP PROMOCION', 6, 28, 0, 0, 0, 0, '15000', '1', '1', '15000', '2400', '17400', '16%', '1', '1', 'PR', 4135, 'cotizacionesv5', '44'),
+('201606061155405', '2016-06-06', '201606061450490.09560600 1465242649', 'productosventa', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 2, 23, 0, 0, 0, '20900', '1', '1', '20900', '3344', '24244', '16%', '15400', '15400', 'PR', 4135, 'cotizacionesv5', '44'),
+('201606061155406', '2016-06-06', '201606061450490.09560600 1465242649', 'productosventa', 'REF515', 'MALETIN ESCOLAR GRANDE', 5, 25, 0, 0, 0, 0, '28500', '1', '1', '28500', '4560', '33060', '16%', '21000', '21000', 'PR', 4135, 'cotizacionesv5', '44'),
+('201606061155407', '2016-06-06', '201606061450490.09560600 1465242649', 'productosventa', 'REF1658', 'TOP PROMOCION', 6, 28, 0, 0, 0, 0, '15000', '1', '1', '15000', '2400', '17400', '16%', '1', '1', 'PR', 4135, 'cotizacionesv5', '44'),
+('201606061155408', '2016-06-06', '201606061631230.00982800 1465248683', 'servicios', 'SOEIPE', 'Salud Ocupacional (Examen de Ingreso, Periodico y Egreso)', 9, 0, 0, 0, 0, 0, '16000', '1', '1', '16000', '2560', '18560', '16%', '7000', '7000', 'MO', 416510, 'cotizacionesv5', '45'),
+('201606061155409', '2016-06-06', '201606061631230.00982800 1465248683', 'servicios', 'EAPLI', 'Perfil lipidico', 11, 0, 0, 0, 0, 0, '23000', '1', '1', '23000', '3680', '26680', '16%', '12000', '12000', 'MO', 416510, 'cotizacionesv5', '45');
 
 -- --------------------------------------------------------
 
@@ -17372,7 +18128,7 @@ CREATE TABLE IF NOT EXISTS `precotizacion` (
   `CuentaPUC` varchar(45) NOT NULL,
   `Tabla` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -17484,14 +18240,14 @@ CREATE TABLE IF NOT EXISTS `productosventa` (
 --
 
 INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, `Nombre`, `Existencias`, `PrecioVenta`, `PrecioMayorista`, `CostoUnitario`, `CostoTotal`, `IVA`, `Bodega_idBodega`, `Departamento`, `Sub1`, `Sub2`, `Sub3`, `Sub4`, `Sub5`, `Kit`, `ImagenesProductos_idImagenesProductos`, `Especial`, `CuentaPUC`) VALUES
-(1, '1', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 88, 25000, '19500', '15000', '1320000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(1, '1', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 87, 25000, '19500', '15000', '1305000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (2, '2', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 19900, '19900', '14000', '14000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (3, '3', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', -7, 23500, '23500', '17200', '-120400', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
-(4, '4', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', -1, 21900, '21900', '15999', '-15999', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
-(5, '5', 'MAG2087', 'BLUSA MAGENTA TIRAS', 1, 20900, '20900', '15400', '15400', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(4, '4', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', -2, 21900, '21900', '15999', '-31998', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(5, '5', 'MAG2087', 'BLUSA MAGENTA TIRAS', 14, 20900, '20900', '15400', '215600', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (6, '6', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 2, 18900, '18900', '13700', '27400', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (7, '7', 'NJF4003', 'BLUSA NJ FASHION GALLETA TULL TIRAS', 0, 23900, '23900', '18200', '0', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
-(8, '8', 'KEBM-0153', 'BLUSA KEBONITA CAMPESINA', 0, 21900, '21900', '16000', '0', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(8, '8', 'KEBM-0153', 'BLUSA KEBONITA CAMPESINA', -1, 21900, '21900', '16000', '-16000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (9, '9', 'POTS0861', 'BLUSA POTASIO ENCAJE CORTA', 2, 24900, '24900', '18000', '36000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (10, '10', 'AMOBD840', 'BLUSA AMOR BENDITO ENCAJE ESQUELETO', 1, 26500, '26500', '18900', '18900', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (12, '12', 'POTS0861-1', 'BLUSA POTASIO ENCAJE LARGA', 4, 32500, '32500', '23000', '92000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
@@ -17668,10 +18424,10 @@ INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, 
 (186, '186', 'PIJ2702', 'BATOLA PIJAMAS TIRAS ESTAMPADA', 13, 16500, '16500', '11890', '154570', '0.16', 1, '1', '4', '59', '', '', '', 0, 0, NULL, '4135'),
 (187, '187', 'AIR234864', 'PANTALONETA AIR SPORT FRANJA AL LADO', 1, 12500, '12500', '8900', '8900', '0.16', 1, '1', '3', '35', '', '', '', 0, 0, NULL, '4135'),
 (188, '188', 'REF188', 'LICRA ADA COLEGIAL CORTA', 0, 4500, '4500', '3000', '0', '0.16', 1, '1', '4', '53', '', '', '', 0, 0, NULL, '4135'),
-(189, '189', 'REF189', 'SANDALIA 2GOOD DAMA', 8, 12900, '12900', '9000', '72000', '0.16', 1, '4', '2', '', '', '', '', 0, 0, NULL, '4135'),
+(189, '189', 'REF189', 'SANDALIA 2GOOD DAMA', 7, 12900, '12900', '9000', '63000', '0.16', 1, '4', '2', '', '', '', '', 0, 0, NULL, '4135'),
 (190, '190', 'XIR087', 'SANDALIA XIRELLA JOHANA TACON ', 1, 14900, '14900', '10500', '10500', '0.16', 1, '4', '2', '', '', '', '', 0, 0, NULL, '4135'),
 (191, '191', 'EVA856-08', 'CHANCLA EVACOL S.A.S HOMBRE', 2, 16500, '16500', '12000', '24000', '0.16', 1, '4', '19', '107', '', '', '', 0, 0, NULL, '4135'),
-(193, '193', 'EVA856-10', 'CHANCLA EVACOL  LUJO HOMBRE', 9, 16500, '16500', '11500', '103500', '0.16', 1, '4', '1', '', '', '', '', 0, 0, NULL, '4135'),
+(193, '193', 'EVA856-10', 'CHANCLA EVACOL  LUJO HOMBRE', 8, 16500, '16500', '11500', '92000', '0.16', 1, '4', '1', '', '', '', '', 0, 0, NULL, '4135'),
 (194, '194', 'XIR083', 'SANDALIA XIRELLA JULIANA', 12, 13900, '13900', '9000', '108000', '0.16', 1, '4', '2', '', '', '', '', 0, 0, NULL, '4135'),
 (195, '195', 'XIR075', 'SANDALIA XIRELLA UNIVERSITARIA ETNICA', 4, 10900, '10900', '7540', '30160', '0.16', 1, '4', '2', '', '', '', '', 0, 0, NULL, '4135'),
 (196, '196', 'REF196', 'SANDALIA NOVAFLEX UNIVERSITARIA ETNICA', 1, 9900, '9900', '6500', '6500', '0.16', 1, '4', '2', '', '', '', '', 0, 0, NULL, '4135'),
@@ -17701,7 +18457,7 @@ INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, 
 (220, '220', 'BAM65130', 'OVEROL BAMBINOS CAMISETA CON BOTONES Y OVEROL CUTE WILD', 2, 41900, '41900', '30780', '61560', '0.16', 1, '1', '5', '75', '', '', '', 0, 0, NULL, '4135'),
 (221, '221', 'REF221', 'CHANCLA DJ GROUP S .A .S T/29', 0, 3500, '3500', '2600', '0', '0.16', 1, '4', '3', '', '', '', '', 0, 0, NULL, '4135'),
 (222, '222', 'BAM60262', 'CONJUNTO BAMBINO CAMISA CARROS Y JEAN ', 2, 41500, '41500', '33420', '66840', '0.16', 1, '1', '5', '79', '', '', '', 0, 0, NULL, '4135'),
-(223, '223', 'PROT50206', 'TOALLA PROTELA VENTURA 60X120', 1, 14900, '14900', '11000', '11000', '0.16', 1, '2', '9', '', '', '', '', 0, 0, NULL, '4135'),
+(223, '223', 'PROT50206', 'TOALLA PROTELA VENTURA 60X120', 0, 14900, '14900', '11000', '0', '0.16', 1, '2', '9', '', '', '', '', 0, 0, NULL, '4135'),
 (224, '224', 'BAM60268', 'CONJUNTO BAMBINOS CAMISA CUADROS Y PANTALON', 1, 47900, '47900', '3520', '3520', '0.16', 1, '1', '5', '79', '', '', '', 0, 0, NULL, '4135'),
 (225, '225', 'SUP003', 'CHANCLA SUPER BUENO UNISEX', 10, 9900, '9900', '7000', '70000', '0.16', 1, '4', '19', '', '', '', '', 0, 0, NULL, '4135'),
 (226, '226', 'PUP3703', 'CONJUNTO PUPPET BLUSA PONY Y JEAN', 2, 36900, '36900', '27320', '54640', '0.16', 1, '1', '33', '135', '', '', '', 0, 0, NULL, '4135'),
@@ -17990,7 +18746,7 @@ INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, 
 (512, '512', 'REF512', 'BOLSO FLECOS', -1, 19900, '19900', '14000', '-14000', '0.16', 1, '3', '12', '', '', '', '', 0, 0, NULL, '4135'),
 (513, '513', 'REF513', 'CORREAS DAMA', 2, 5500, '5500', '4000', '8000', '0.16', 1, '3', '12', '', '', '', '', 0, 0, NULL, '4135'),
 (514, '514', 'REF514', 'MALETIN ESCOLAR MEDIANO AT', 1, 26900, '26900', '19000', '19000', '0.16', 1, '5', '25', '', '', '', '', 0, 0, NULL, '4135'),
-(515, '515', 'REF515', 'MALETIN ESCOLAR GRANDE', 2, 28500, '28500', '21000', '42000', '0.16', 1, '5', '25', '', '', '', '', 0, 0, NULL, '4135'),
+(515, '515', 'REF515', 'MALETIN ESCOLAR GRANDE', 15, 28500, '28500', '21000', '315000', '0.16', 1, '5', '25', '', '', '', '', 0, 0, NULL, '4135'),
 (516, '516', 'REF516', 'CHUPO CORCHITO SILICONA JUGO', 31, 1500, '1500', '1000', '31000', '0.16', 1, '3', '15', '107', '', '', '', 0, 0, NULL, '4135'),
 (517, '517', 'REF517', 'MALENTIN ESCOLAR MUNECOS PEQUENO', 1, 30900, '30900', '22000', '22000', '0.16', 1, '5', '25', '', '', '', '', 0, 0, NULL, '4135'),
 (518, '518', 'REF518', 'MALETIN ESCOLAR MUNECOS MEDIANO', 1, 30900, '30900', '22000', '22000', '0.16', 1, '5', '25', '', '', '', '', 0, 0, NULL, '4135'),
@@ -19122,7 +19878,7 @@ INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, 
 (1655, '1655', 'REF1655', 'ACONDI SAVITAL *30 BIOTINA Y SABILA ', 9, 550, '550', '405', '3645', '0.16', 1, '3', '14', '89', '', '', '', 0, 0, NULL, '4135'),
 (1656, '1656', 'REF1656', 'SHAMPOO SAVITAL X95ML BIOTINA Y SABILA', 0, 3000, '3000', '2402', '0', '0.16', 1, '3', '14', '89', '', '', '', 0, 0, NULL, '4135'),
 (1657, '1657', 'REF1657', 'GEL EGO *120ML', 12, 2500, '2500', '1689', '20268', '0.16', 1, '3', '14', '89', '', '', '', 0, 0, NULL, '4135'),
-(1658, '1658', 'REF1658', 'TOP PROMOCION', -1, 1500, '1500', '1', '-1', '0.16', 1, '6', '28', '', '', '', '', 0, 0, NULL, '4135'),
+(1658, '1658', 'REF1658', 'TOP PROMOCION', 12, 1500, '1500', '1', '12', '0.16', 1, '6', '28', '', '', '', '', 0, 0, NULL, '4135'),
 (1659, '1659', 'REF1659', 'BOXER NINO PROMOCION SKIDS', 8, 3900, '3900', '1', '8', '0.16', 1, '6', '29', '', '', '', '', 0, 0, NULL, '4135'),
 (1660, '1660', 'REF1660', 'PANTALONETA PROMOCION NINO ', 1, 3900, '3900', '1', '1', '0.16', 1, '6', '29', '', '', '', '', 0, 0, NULL, '4135'),
 (1661, '1661', 'REF1661', 'SHAMPOO SAVITAL 95ML KERA/SAB', 0, 3000, '3000', '2429', '0', '0.16', 1, '3', '14', '89', '', '', '', 0, 0, NULL, '4135'),
@@ -23344,7 +24100,7 @@ CREATE TABLE IF NOT EXISTS `prod_comisiones` (
 CREATE TABLE IF NOT EXISTS `prod_departamentos` (
   `idDepartamentos` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Tabla` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `TablaOrigen` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `TipoItem` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
   `ManejaExistencias` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idDepartamentos`)
@@ -23354,7 +24110,7 @@ CREATE TABLE IF NOT EXISTS `prod_departamentos` (
 -- Volcado de datos para la tabla `prod_departamentos`
 --
 
-INSERT INTO `prod_departamentos` (`idDepartamentos`, `Nombre`, `Tabla`, `TipoItem`, `ManejaExistencias`) VALUES
+INSERT INTO `prod_departamentos` (`idDepartamentos`, `Nombre`, `TablaOrigen`, `TipoItem`, `ManejaExistencias`) VALUES
 (1, 'ROPA', 'productosventa', 'PR', 'SI'),
 (2, 'HOGAR', 'productosventa', 'PR', 'SI'),
 (3, 'MISCELANEA', 'productosventa', 'PR', 'SI'),
@@ -23922,59 +24678,15 @@ CREATE TABLE IF NOT EXISTS `remisiones` (
   `CentroCosto` int(11) NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `remisiones`
 --
 
 INSERT INTO `remisiones` (`ID`, `Fecha`, `Clientes_idClientes`, `Cotizaciones_idCotizaciones`, `Obra`, `Direccion`, `Ciudad`, `Telefono`, `Retira`, `FechaDespacho`, `HoraDespacho`, `ObservacionesRemision`, `Anticipo`, `Dias`, `Estado`, `CentroCosto`, `Usuarios_idUsuarios`) VALUES
-(1, '2015-09-24', 0, '1', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
-(2, '2015-09-24', 0, '4', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
-(3, '2015-09-25', 0, '8', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
-(4, '2015-09-24', 0, '2', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
-(5, '2015-09-24', 0, '5', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
-(6, '2015-09-24', 0, '5', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
-(7, '2015-09-24', 0, '1', '', '', '', '', '', '2016-02-09 15:37:15', '', '0', '', '', '', 0, 0),
-(8, '2016-02-14', 2, '2', 'dsadsa', 'dsadsa', 'dasdas', 'dsadsa', 'dasdsa', '2016-02-09 15:37:38', '', '0', '', '', '', 0, 0),
-(9, '2016-02-12', 17, '2', 'QBCO', 'CARRETERA', 'BUGA', '3232131', 'JULIAN', '2016-02-12', '09:29:23', 'PRUEBA OBSERVACIONES', '100000', '3', 'A', 0, 0),
-(10, '2016-02-12', 17, '3', 'dsa', 'dsa', 'dsa', 'dsa', 'das', '2016-02-12', '09:59:57', '', '1000', '2', 'A', 0, 0),
-(11, '2016-02-12', 17, '3', 'atlas', 'carrera 15 1-61', 'buga', '2366011', 'julian', '2016-02-12', '10:16:45', 'ninguna', '200000', '3', 'A', 0, 0),
-(12, '2016-02-12', 17, '2', 'techno', 'cra 7 No 7832', 'BUGA', '321231', 'JULIAN', '2016-02-12', '10:59:16', 'PRUEBA CON INGRESO', '20000', '3', 'A', 0, 0),
-(13, '2016-02-12', 17, '2', 'dasd', 'dsad', 'dsa', 'dsa', 'dsa', '2016-02-12', '12:31:31', 'PRUEBA CON INGRESO', '100000', '3', 'A', 0, 0),
-(14, '2016-02-12', 17, '2', 'dsa', 'dsa', 'dsa', 'dsa', 'das', '2016-02-12', '12:34:28', 'PRUEBA CON INGRESO', '122121', '3', 'A', 0, 0),
-(15, '2016-02-12', 17, '4', 'atlas', 'cra 2121', 'buga', '323123', 'julian', '2016-02-12', '13:20:29', 'ese mismo', '40000', '6', 'A', 0, 0),
-(16, '2016-02-12', 17, '5', 'HERPO', 'CALLE 7 CON 13', 'BUGA', '322321321', 'JULIAN', '2016-02-12', '13:21:51', 'NOTHING', '200000', '3', 'A', 0, 0),
-(17, '2016-02-12', 17, '5', 'guele bicha', 'alla', 'ahi', '3231', 'ese man', '2016-02-12', '13:27:31', 'essas ', '500000', '5', 'A', 0, 0),
-(18, '2016-02-12', 17, '2', 'esa', 'ahi', 'esea', 'dasda', 'ese man', '2016-02-12', '14:07:14', 'esas', '100000', '4', 'A', 1, 0),
-(19, '2016-02-12', 17, '5', 'dsad', 'dasda', 'dsad', 'dasd', 'dsa', '2016-02-12', '15:51:37', 'dasds', '100000', '2', 'A', 1, 1),
-(20, '2016-02-12', 17, '9', 'dsad', 'dsad', 'dsa', 'dsa', 'dsa', '2016-02-12', '15:54:17', 'dasdsa', '500000', '4', 'A', 1, 0),
-(21, '2016-02-12', 17, '9', 'fsdf', 'fdsf', 'fds', 'fds', 'fdsfds', '2016-02-12', '15:56:07', 'fdsfdsf', '100000', '3', 'A', 3, 0),
-(22, '2016-02-12', 17, '9', 'dsad', 'dsad', 'dsa', 'ddsad', 'dsad', '2016-02-12', '15:57:12', 'dsadsa', '100000', '4', 'A', 1, 3),
-(23, '', 0, '', '', '', '', '', '', '', '3', '', '', '', '', 0, 0),
-(24, '', 0, '', '', '', '', '', '', '', '3', '', '', '', '', 0, 0),
-(25, '2016-02-16', 17, '3', 'dsad', 'dsadsa', 'dsad', 'dasd', 'dsadsa', '2016-02-16', '08:06:05', 'dsadsa', '100000', '4', 'A', 0, 0),
-(26, '2016-02-16', 2, '6', 'dsa', 'dsa', 'dsa', 'dsa', 'dsa', '2016-02-16', '08:26:18', 'dsa', '100000', '3', 'A', 0, 0),
-(27, '2016-02-16', 17, '12', 'dasda', 'dsadsa', 'dasdsa', 'dsads', 'dasda', '2016-02-16', '13:27:16', 'dsadsa', '30000', '3', 'A', 1, 3),
-(28, '2016-02-16', 17, '12', 'ATLAS', 'CRA 15 1-61', 'BUGA', '2366011', 'JULIAN', '2016-02-16', '14:06:13', 'OBSERVACIONES', '50000', '4', 'A', 1, 3),
-(29, '2016-02-16', 17, '12', 'DSA', 'DSA', 'DSA', 'DSA', 'DAS', '2016-02-16', '14:07:54', 'OBSERVACIONES', '50000', '5', 'A', 1, 3),
-(30, '2016-02-16', 17, '12', 'DSAD', 'DSAD', 'DSA', 'DSA', 'DAS', '2016-02-16', '14:14:04', 'OBSERVACIONES', '50000', '3', 'A', 1, 3),
-(31, '2016-02-16', 17, '12', 'dsad', 'dsa', 'dsa', 'dsa', 'dsa', '2016-02-16', '15:27:37', 'das', '1000', '1', 'A', 1, 3),
-(32, '2016-02-23', 17, '12', 'cristar', 'calle 1 con 21', 'buga', '3177740609', 'julian', '2016-02-23', '09:14:41', '', '10000', '1', 'A', 1, 3),
-(33, '2016-02-23', 17, '12', 'ATLAS', 'ALLA', 'BUGA', '312321321', 'JULIAN', '2016-02-23', '16:20:56', 'ESAS MISMAS', '50000', '4', 'A', 1, 3),
-(34, '2016-02-23', 17, '14', 'dsad', 'dsa', 'dsa', 'das', 'dsads', '2016-02-23', '19:14:04', 'dads', '20000', '5', 'A', 1, 3),
-(35, '2016-03-04', 17, '18', 'techno', 'cra 17 7 18', 'BUGA', '213213213', 'JULIAN', '2016-03-04', '10:52:10', 'SALE CON CUIDADO', '2000000', '10', 'A', 1, 3),
-(36, '2016-03-04', 17, '18', 'dsad', 'dsada', 'dasda', 'dadsad', 'dasdas', '2016-03-04', '11:39:49', 'sdasdsa', '0', '5', 'A', 1, 3),
-(37, '2016-03-06', 17, '19', 'TECHNO', 'CRA 213', 'BUGA', 'ESE', 'JULIAN', '2016-03-06', '09:25:39', 'ESA MISMA', '200000', '5', 'A', 1, 3),
-(38, '2016-03-09', 18, '20', 'TECHNO', 'ESA MISMA', 'BUGA', '3177740609', 'JULIAN', '2016-03-09', '17:26:14', 'NO HAY', '500000', '5', 'A', 1, 3),
-(39, '2016-03-10', 2, '10', 'dsa', 'dsa', 'dsa', 'dsa', 'dsa', '2016-03-10', '17:47:33', '', '0', '1', 'A', 1, 3),
-(40, '2016-03-14', 17, '12', 'dsad', 'dsa', 'dsa', 'dsa', 'das', '2016-03-14', '13:10:44', '', '10000', '1', 'A', 1, 3),
-(41, '2016-03-14', 17, '28', 'TECHNO', 'CRA 17 7-18', 'BUGA', '323213', 'JULIAN', '2016-03-14', '18:44:20', 'NINGUNA', '100000', '5', 'A', 1, 3),
-(42, '2016-03-18', 17, '28', 'dsad', 'dsa', 'das', 'das', 'das', '2016-03-18', '11:18:38', 'das', '10000', '1', 'A', 1, 1),
-(43, '2016-03-27', 18, '32', 'techno', 'carrera 17 7-18', 'buga', '321321', 'julian', '2016-03-27', '14:19:55', 'ninguna', '100000', '5', 'A', 1, 3),
-(44, '2016-04-15', 17, '37', 'sdsad', 'dasd', 'dsa', 'dsa', 'das', '2016-04-15', '13:52:44', 'das', '0', '', 'A', 1, 3),
-(45, '2016-04-27', 17, '38', 'dsd', 'dsa', 'dsa', 'dsa', 'dsa', '2016-04-27', '06:00:20', 'dsa', '10', '1', 'A', 1, 3),
-(46, '2016-05-16', 2, '42', 'asdfsa', 'fdsfds', 'fdsf', 'fds', 'fds', '2016-05-16', '16:16:04', 'fdsfsd', '10000', '1', 'A', 1, 3);
+(1, '2016-06-06', 2, '44', 'techno', 'soluciones', 'buga', '321321321', 'julian', '2016-06-06', '09:02:59', 'observaciones de remision', '10000', '1', 'A', 1, 3),
+(2, '2016-06-06', 2, '44', 'dsad', 'dsad', 'dsa', 'dsa', 'ddsad', '2016-06-06', '09:06:30', 'dsadsa', '0', '1', 'A', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -23996,77 +24708,18 @@ CREATE TABLE IF NOT EXISTS `rem_devoluciones` (
   `HoraDevolucion` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `rem_devoluciones`
 --
 
 INSERT INTO `rem_devoluciones` (`ID`, `idRemision`, `idItemCotizacion`, `Cantidad`, `ValorUnitario`, `Subtotal`, `Dias`, `Total`, `NumDevolucion`, `FechaDevolucion`, `HoraDevolucion`, `Usuarios_idUsuarios`) VALUES
-(1, 36, 56, 500, '81', '40500', '5', '202500', 1, '2016-03-07', '16:38:34', 3),
-(2, 36, 57, 200, '200', '40000', '5', '200000', 1, '2016-03-07', '16:38:34', 3),
-(3, 36, 58, 25, '22000', '550000', '5', '2750000', 1, '2016-03-07', '16:38:34', 3),
-(4, 36, 59, 45, '23000', '1035000', '5', '5175000', 1, '2016-03-07', '16:38:34', 3),
-(5, 37, 60, 5, '81', '405', '10', '4050', 2, '2016-03-09', '16:57:26', 3),
-(6, 37, 63, 1, '20900', '20900', '5', '104500', 2, '2016-03-09', '16:57:26', 3),
-(7, 37, 69, 1, '14900', '14900', '5', '74500', 2, '2016-03-09', '16:57:26', 3),
-(8, 37, 60, 10, '81', '810', '10', '8100', 3, '2016-03-09', '16:59:39', 3),
-(9, 37, 61, 5, '27900', '139500', '5', '697500', 3, '2016-03-09', '16:59:39', 3),
-(10, 37, 65, 1, '18900', '18900', '5', '94500', 3, '2016-03-09', '16:59:39', 3),
-(11, 37, 60, 10, '81', '810', '10', '8100', 4, '2016-03-09', '16:59:39', 3),
-(12, 37, 61, 5, '27900', '139500', '5', '697500', 4, '2016-03-09', '16:59:39', 3),
-(13, 37, 65, 1, '18900', '18900', '5', '94500', 4, '2016-03-09', '16:59:39', 3),
-(14, 38, 78, 4, '20900', '83600', '5', '418000', 5, '2016-03-09', '17:29:10', 3),
-(15, 38, 79, 5, '21900', '109500', '5', '547500', 5, '2016-03-09', '17:29:10', 3),
-(16, 38, 80, 3, '81', '243', '5', '1215', 5, '2016-03-09', '17:29:10', 3),
-(17, 38, 81, 6, '200', '1200', '5', '6000', 5, '2016-03-09', '17:29:10', 3),
-(18, 37, 62, 1, '21900', '21900', '5', '109500', 6, '2016-03-09', '18:16:41', 3),
-(19, 37, 61, 100, '27900', '2790000', '5', '13950000', 6, '2016-03-09', '18:16:41', 3),
-(20, 37, 67, 1, '200', '200', '5', '1000', 6, '2016-03-09', '18:16:41', 3),
-(21, 37, 60, 1, '81', '81', '5', '405', 7, '2016-03-09', '18:19:57', 3),
-(22, 37, 60, 1, '81', '81', '5', '405', 8, '2016-03-09', '18:20:51', 3),
-(23, 37, 60, 2, '81', '162', '5', '810', 9, '2016-03-09', '18:24:31', 3),
-(24, 37, 61, 2, '27900', '55800', '5', '279000', 9, '2016-03-09', '18:24:31', 3),
-(25, 37, 70, 1, '8500', '8500', '5', '42500', 9, '2016-03-09', '18:24:31', 3),
-(26, 37, 60, 1, '81', '81', '5', '405', 10, '2016-03-09', '18:28:32', 3),
-(27, 37, 66, 1, '15000', '15000', '5', '75000', 10, '2016-03-09', '18:28:32', 3),
-(28, 37, 61, 1, '27900', '27900', '5', '139500', 10, '2016-03-09', '18:28:32', 3),
-(29, 37, 64, 1, '21900', '21900', '5', '109500', 11, '2016-03-09', '18:40:05', 3),
-(30, 37, 61, 2, '27900', '55800', '5', '279000', 11, '2016-03-09', '18:40:05', 3),
-(31, 37, 77, 1, '22000', '22000', '5', '110000', 11, '2016-03-09', '18:40:05', 3),
-(32, 37, 60, 3, '81', '243', '5', '1215', 12, '2016-03-09', '18:49:53', 3),
-(33, 37, 61, 4, '27900', '111600', '5', '558000', 12, '2016-03-09', '18:49:53', 3),
-(34, 37, 60, 3, '81', '243', '5', '1215', 13, '2016-03-10', '08:28:10', 3),
-(35, 37, 68, 1, '23000', '23000', '5', '115000', 13, '2016-03-10', '08:28:10', 3),
-(36, 37, 60, 3, '81', '243', '5', '1215', 14, '2016-03-10', '08:28:10', 3),
-(37, 37, 68, 1, '23000', '23000', '5', '115000', 14, '2016-03-10', '08:28:10', 3),
-(38, 37, 60, 3, '81', '243', '5', '1215', 15, '2016-03-10', '08:28:10', 3),
-(39, 37, 68, 1, '23000', '23000', '5', '115000', 15, '2016-03-10', '08:28:10', 3),
-(40, 37, 60, 1, '81', '81', '5', '405', 16, '2016-03-10', '08:36:17', 3),
-(41, 37, 60, 1, '81', '81', '5', '405', 17, '2016-03-10', '08:37:05', 3),
-(42, 37, 60, 20, '81', '1620', '5', '8100', 18, '2016-03-10', '13:58:35', 3),
-(43, 37, 61, 45, '27900', '1255500', '5', '6277500', 18, '2016-03-10', '13:58:35', 3),
-(44, 37, 71, 1, '9500', '9500', '5', '47500', 18, '2016-03-10', '13:58:35', 3),
-(45, 37, 76, 1, '25000', '25000', '5', '125000', 18, '2016-03-10', '13:58:35', 3),
-(46, 37, 60, 1, '81', '81', '5', '405', 19, '2016-03-10', '18:14:54', 3),
-(47, 38, 78, 86, '20900', '1797400', '5', '8987000', 20, '2016-03-14', '18:46:24', 3),
-(48, 38, 79, 55, '21900', '1204500', '5', '6022500', 20, '2016-03-14', '18:46:24', 3),
-(49, 38, 80, 497, '81', '40257', '2', '80514', 20, '2016-03-14', '18:46:24', 3),
-(50, 38, 81, 94, '200', '18800', '5', '94000', 20, '2016-03-14', '18:46:24', 3),
-(51, 38, 78, 86, '20900', '1797400', '5', '8987000', 21, '2016-03-14', '18:46:24', 3),
-(52, 38, 79, 55, '21900', '1204500', '5', '6022500', 21, '2016-03-14', '18:46:24', 3),
-(53, 38, 80, 497, '81', '40257', '2', '80514', 21, '2016-03-14', '18:46:24', 3),
-(54, 38, 81, 94, '200', '18800', '5', '94000', 21, '2016-03-14', '18:46:24', 3),
-(55, 38, 78, 86, '20900', '1797400', '5', '8987000', 22, '2016-03-14', '18:46:24', 3),
-(56, 38, 79, 55, '21900', '1204500', '5', '6022500', 22, '2016-03-14', '18:46:24', 3),
-(57, 38, 80, 497, '81', '40257', '2', '80514', 22, '2016-03-14', '18:46:24', 3),
-(58, 38, 81, 94, '200', '18800', '5', '94000', 22, '2016-03-14', '18:46:24', 3),
-(59, 43, 106, 200, '81', '16200', '5', '81000', 23, '2016-03-27', '14:22:24', 3),
-(60, 43, 107, 100, '296', '29600', '5', '148000', 23, '2016-03-27', '14:22:24', 3),
-(61, 44, 115, 1, '25000', '25000', '2', '50000', 24, '2016-04-15', '14:09:43', 3),
-(62, 44, 116, 1, '18900', '18900', '1', '18900', 24, '2016-04-15', '14:09:43', 3),
-(63, 45, 117, 1, '25000', '25000', '1', '25000', 25, '2016-04-27', '06:06:23', 3),
-(64, 46, 191, 1, '19900', '19900', '4', '79600', 26, '2016-05-16', '16:17:49', 3);
+(1, 1, 199, 1, '20900', '20900', '1', '20900', 1, '2016-06-06', '09:04:42', 3),
+(2, 1, 200, 1, '28500', '28500', '1', '28500', 1, '2016-06-06', '09:04:42', 3),
+(3, 1, 201, 1, '15000', '15000', '1', '15000', 1, '2016-06-06', '09:04:42', 3),
+(4, 2, 199, 1, '20900', '20900', '1', '20900', 2, '2016-06-06', '09:07:02', 3),
+(5, 2, 200, 1, '28500', '28500', '1', '28500', 2, '2016-06-06', '09:07:02', 3);
 
 -- --------------------------------------------------------
 
@@ -24085,39 +24738,15 @@ CREATE TABLE IF NOT EXISTS `rem_devoluciones_totalizadas` (
   `Clientes_idClientes` int(16) NOT NULL,
   `Facturas_idFacturas` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `rem_devoluciones_totalizadas`
 --
 
 INSERT INTO `rem_devoluciones_totalizadas` (`ID`, `FechaDevolucion`, `HoraDevolucion`, `idRemision`, `TotalDevolucion`, `ObservacionesDevolucion`, `Usuarios_idUsuarios`, `Clientes_idClientes`, `Facturas_idFacturas`) VALUES
-(1, '2016-03-07', '16:38:34', 36, '8327500', '', 3, 17, '201603071638380.59939500 1457386718'),
-(2, '2016-03-09', '16:57:26', 37, '183050', '', 3, 17, '201603091657550.75849600 1457560675'),
-(3, '2016-03-09', '16:59:39', 37, '800100', '', 3, 17, '201603091659590.45570100 1457560799'),
-(4, '2016-03-09', '16:59:39', 37, '800100', '', 3, 17, '201603091708490.11049700 1457561329'),
-(5, '2016-03-09', '17:29:10', 38, '972715', '', 3, 18, '201603091729430.68006500 1457562583'),
-(6, '2016-03-09', '18:16:41', 37, '14060500', '', 3, 17, '201603091816470.32751600 1457565407'),
-(7, '2016-03-09', '18:19:57', 37, '405', '', 3, 17, '201603091820010.42178700 1457565601'),
-(8, '2016-03-09', '18:20:51', 37, '405', '', 3, 17, '201603091820550.95948300 1457565655'),
-(9, '2016-03-09', '18:24:31', 37, '322310', '', 3, 17, '201603091824360.02906900 1457565876'),
-(10, '2016-03-09', '18:28:32', 37, '214905', '', 3, 17, '201603091828370.80108600 1457566117'),
-(11, '2016-03-09', '18:40:05', 37, '498500', '', 3, 17, '201603091840100.57890600 1457566810'),
-(12, '2016-03-09', '18:49:53', 37, '559215', '', 3, 17, '201603091849590.46434000 1457567399'),
-(13, '2016-03-10', '08:28:10', 37, '116215', '', 3, 17, '201603100828290.75158700 1457616509'),
-(14, '2016-03-10', '08:28:10', 37, '116215', '', 3, 17, '201603100829090.67687000 1457616549'),
-(15, '2016-03-10', '08:28:10', 37, '116215', '', 3, 17, '201603100829510.69673300 1457616591'),
-(16, '2016-03-10', '08:36:17', 37, '405', '', 3, 17, '201603100836280.06322700 1457616988'),
-(17, '2016-03-10', '08:37:05', 37, '405', '', 3, 17, '201603100837110.41570300 1457617031'),
-(18, '2016-03-10', '13:58:35', 37, '6458100', '', 3, 17, '201603101358580.97964000 1457636338'),
-(19, '2016-03-10', '18:14:54', 37, '405', '', 3, 17, ''),
-(20, '2016-03-14', '18:46:24', 38, '15184014', 'NADA', 3, 18, ''),
-(21, '2016-03-14', '18:46:24', 38, '15184014', 'NADA', 3, 18, ''),
-(22, '2016-03-14', '18:46:24', 38, '15184014', 'NADA', 3, 18, '201603141851470.82725600 1457999507'),
-(23, '2016-03-27', '14:22:24', 43, '229000', '', 3, 18, '201603271423000.63380800 1459106580'),
-(24, '2016-04-15', '14:09:43', 44, '68900', 'dsadsa', 3, 17, '201604151410250.10309700 1460747425'),
-(25, '2016-04-27', '06:06:23', 45, '25000', 'Cualqueir', 3, 17, '201604270606390.21327600 1461755199'),
-(26, '2016-05-16', '16:17:49', 46, '79600', '', 3, 2, '201605161618060.91225000 1463433486');
+(1, '2016-06-06', '09:04:42', 1, '64400', 'observacion de la devolucion', 3, 2, '201606060905020.92920100 1465221902'),
+(2, '2016-06-06', '09:07:02', 2, '49400', 'ajuste de remision', 3, 2, '201606060907180.70396700 1465222038');
 
 -- --------------------------------------------------------
 
@@ -24136,16 +24765,7 @@ CREATE TABLE IF NOT EXISTS `rem_pre_devoluciones` (
   `Total` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   KEY `ID` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=24 ;
-
---
--- Volcado de datos para la tabla `rem_pre_devoluciones`
---
-
-INSERT INTO `rem_pre_devoluciones` (`ID`, `idRemision`, `idItemCotizacion`, `Cantidad`, `ValorUnitario`, `Subtotal`, `Dias`, `Total`, `Usuarios_idUsuarios`) VALUES
-(21, 0, 0, 0, '', '0', '4', '0', 3),
-(22, 37, 60, 1, '81', '81', '5', '405', 3),
-(23, 37, 60, 1, '81', '81', '5', '405', 1);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -24162,65 +24782,60 @@ CREATE TABLE IF NOT EXISTS `rem_relaciones` (
   `idRemision` int(11) NOT NULL,
   `Usuarios_idUsuarios` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `rem_relaciones`
 --
 
 INSERT INTO `rem_relaciones` (`ID`, `FechaEntrega`, `CantidadEntregada`, `Multiplicador`, `idItemCotizacion`, `idRemision`, `Usuarios_idUsuarios`) VALUES
-(1, '2016-02-23', '1', 0, 43, 33, 3),
-(2, '2016-02-23', '12', 0, 44, 33, 3),
-(3, '2016-02-23', '1', 0, 45, 33, 3),
-(4, '2016-02-23', '1', 0, 48, 34, 3),
-(5, '2016-02-23', '1', 0, 49, 34, 3),
-(6, '2016-02-23', '1', 0, 50, 34, 3),
-(7, '2016-03-04', '500', 0, 56, 35, 3),
-(8, '2016-03-04', '200', 0, 57, 35, 3),
-(9, '2016-03-04', '25', 0, 58, 35, 3),
-(10, '2016-03-04', '45', 0, 59, 35, 3),
-(11, '2016-03-04', '500', 0, 56, 36, 3),
-(12, '2016-03-04', '200', 0, 57, 36, 3),
-(13, '2016-03-04', '25', 0, 58, 36, 3),
-(14, '2016-03-04', '45', 0, 59, 36, 3),
-(15, '2016-03-06', '200', 0, 60, 37, 3),
-(16, '2016-03-06', '500', 0, 61, 37, 3),
-(17, '2016-03-06', '1', 0, 62, 37, 3),
-(18, '2016-03-06', '1', 0, 63, 37, 3),
-(19, '2016-03-06', '1', 0, 64, 37, 3),
-(20, '2016-03-06', '1', 0, 65, 37, 3),
-(21, '2016-03-06', '1', 0, 66, 37, 3),
-(22, '2016-03-06', '1', 0, 67, 37, 3),
-(23, '2016-03-06', '1', 0, 68, 37, 3),
-(24, '2016-03-06', '1', 0, 69, 37, 3),
-(25, '2016-03-06', '1', 0, 70, 37, 3),
-(26, '2016-03-06', '1', 0, 71, 37, 3),
-(27, '2016-03-06', '1', 0, 72, 37, 3),
-(28, '2016-03-06', '1', 0, 73, 37, 3),
-(29, '2016-03-06', '1', 0, 74, 37, 3),
-(30, '2016-03-06', '1', 0, 75, 37, 3),
-(31, '2016-03-06', '1', 0, 76, 37, 3),
-(32, '2016-03-06', '1', 0, 77, 37, 3),
-(33, '2016-03-09', '90', 0, 78, 38, 3),
-(34, '2016-03-09', '60', 0, 79, 38, 3),
-(35, '2016-03-09', '500', 0, 80, 38, 3),
-(36, '2016-03-09', '100', 0, 81, 38, 3),
-(37, '2016-03-10', '1', 0, 40, 39, 3),
-(38, '2016-03-14', '1', 0, 43, 40, 3),
-(39, '2016-03-14', '12', 0, 44, 40, 3),
-(40, '2016-03-14', '1', 0, 45, 40, 3),
-(41, '2016-03-14', '1', 0, 99, 41, 3),
-(42, '2016-03-14', '1', 0, 100, 41, 3),
-(43, '2016-03-14', '1', 0, 101, 41, 3),
-(44, '2016-03-18', '1', 0, 99, 42, 1),
-(45, '2016-03-18', '1', 0, 100, 42, 1),
-(46, '2016-03-18', '1', 0, 101, 42, 1),
-(47, '2016-03-27', '200', 0, 106, 43, 3),
-(48, '2016-03-27', '100', 0, 107, 43, 3),
-(49, '2016-04-15', '1', 0, 115, 44, 3),
-(50, '2016-04-15', '1', 0, 116, 44, 3),
-(51, '2016-04-27', '1', 1, 117, 45, 3),
-(52, '2016-05-16', '1', 1, 191, 46, 3);
+(1, '2016-06-06', '1', 1, 199, 1, 3),
+(2, '2016-06-06', '1', 1, 200, 1, 3),
+(3, '2016-06-06', '1', 1, 201, 1, 3),
+(4, '2016-06-06', '1', 1, 199, 2, 3),
+(5, '2016-06-06', '1', 1, 200, 2, 3),
+(6, '2016-06-06', '1', 1, 201, 2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuestas_condicional`
+--
+
+CREATE TABLE IF NOT EXISTS `respuestas_condicional` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Valor` varchar(4) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `respuestas_condicional`
+--
+
+INSERT INTO `respuestas_condicional` (`ID`, `Valor`) VALUES
+(1, 'NO'),
+(2, 'SI');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuestas_tipo_item`
+--
+
+CREATE TABLE IF NOT EXISTS `respuestas_tipo_item` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Valor` varchar(4) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `respuestas_tipo_item`
+--
+
+INSERT INTO `respuestas_tipo_item` (`ID`, `Valor`) VALUES
+(1, 'PR'),
+(2, 'MO'),
+(3, 'AQ');
 
 -- --------------------------------------------------------
 
@@ -26019,6 +26634,27 @@ INSERT INTO `usuarios_keys` (`KeyUsuario`, `Usuarios_idUsuarios`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `usuarios_tipo`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_tipo` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Tipo` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_tipo`
+--
+
+INSERT INTO `usuarios_tipo` (`ID`, `Tipo`) VALUES
+(1, 'administrador'),
+(2, 'operador'),
+(3, 'comercial');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ventas`
 --
 
@@ -26230,16 +26866,15 @@ CREATE TABLE IF NOT EXISTS `vestasactivas` (
   `NumCotizacion` int(16) NOT NULL,
   `SaldoFavor` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idVestasActivas`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `vestasactivas`
 --
 
 INSERT INTO `vestasactivas` (`idVestasActivas`, `Nombre`, `Usuario_idUsuario`, `Clientes_idClientes`, `NumVenta`, `NumFactura`, `NumCotizacion`, `SaldoFavor`) VALUES
-(1, 'INICIALIZACION', 'INI', 1, 11, 11, 14, ''),
-(4, 'Venta por: JULIAN ', '3', 66, 74, 74, 78, ''),
-(5, 'Venta por: JULIAN ANDRES', '3', 1, 74, 74, 78, '');
+(1, 'INICIALIZACION', 'INI', 1, 19, 2147483647, 23, ''),
+(2, 'Venta por: JULIAN ANDRES', '3', 1, 20, 2147483647, 24, '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
