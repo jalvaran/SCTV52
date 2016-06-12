@@ -1735,14 +1735,21 @@ public function CalculePesoRemision($idCotizacion)
         $TipoAbono=$Datos["TipoAbono"];
         $idUser=$Datos["idUser"];
         $hora=date("H:i");
-        
+        if($TipoAbono=="CuentasXCobrar"){
+            $Factor=1;
+            $Page="CuentasXCobrar.php";
+        }
+        if($TipoAbono=="CuentasXPagar"){
+            $Factor="-1";
+            $Page="CuentasXPagar.php";
+        }
         $DatosLibro=$this->DevuelveValores("librodiario", "idLibroDiario", $idLibro);
         $AbonosActuales=$this->Sume("abonos_libro", "Cantidad", "WHERE idLibroDiario='$idLibro' AND TipoAbono='$TipoAbono'");
         $AbonosActuales=$AbonosActuales+$TotalAbono;
-        $SaldoTotal=$DatosLibro["Neto"]*(-1);
+        $SaldoTotal=$DatosLibro["Neto"]*$Factor;
         if($AbonosActuales>$SaldoTotal){
             echo "<script>alert('Abono incorrecto, supera el saldo total')</script>";
-            exit(" <a href='CuentasXPagar.php'> Volver</a> ");
+            exit(" <a href='$Page'> Volver</a> ");
         }
         $DatosCuentasFrecuentes=$this->DevuelveValores("cuentasfrecuentes", "CuentaPUC", $CuentaDestino);
         $Debitos1=0;
@@ -1758,6 +1765,16 @@ public function CalculePesoRemision($idCotizacion)
             $Neto2=$TotalAbono*(-1);
             
             $Creditos2=$TotalAbono;
+        }
+        
+        if($TipoAbono=="CuentasXCobrar"){
+            $Concepto="ABONO A LA CUENTA POR COBRAR ESPECIFICADA EN EL LIBRO DIARIO CON ID=$idLibro";
+            $Debitos1=0;
+            $Creditos1=$TotalAbono;
+            $Neto1=$TotalAbono*(-1);
+            $Neto2=$TotalAbono;
+            
+            $Debitos2=$TotalAbono;
         }
         /*
          * Abro un nuevo comprobante de abono
@@ -1813,7 +1830,7 @@ public function CalculePesoRemision($idCotizacion)
         $Columnas[14]="Tercero_Pais_Domicilio"; $Valores[14]=$DatosLibro['Tercero_Pais_Domicilio'];
         $Columnas[15]="CuentaPUC";		$Valores[15]=$DatosLibro["CuentaPUC"];
         $Columnas[16]="NombreCuenta";		$Valores[16]=$DatosLibro["NombreCuenta"];
-        $Columnas[17]="Detalle";		$Valores[17]="Abono";
+        $Columnas[17]="Detalle";		$Valores[17]=$TipoAbono;
         $Columnas[18]="Debito";			$Valores[18]=$Debitos1;
         $Columnas[19]="Credito";		$Valores[19]=$Creditos1;
         $Columnas[20]="Neto";			$Valores[20]=$Neto1;
@@ -1849,7 +1866,5 @@ public function CalculePesoRemision($idCotizacion)
     
 //////////////////////////////Fin	
 }
-
-
 	
 ?>

@@ -58,6 +58,7 @@ $css->CabeceraFin();
 
 $css->CreaMenuBasico("Menu"); 
     $css->CreaSubMenuBasico("Historial de Comprobantes","comprobantes_contabilidad_items.php"); 
+    $css->CreaSubMenuBasico("Historial de Abonos","abonos_libro.php"); 
 $css->CierraMenuBasico(); 
     
 ///////////////Creamos el contenedor
@@ -156,6 +157,9 @@ $css->CrearTabla();
 $css->CrearFilaNotificacion("Saldo = $Neto", 16);
 $css->CerrarTabla();
 $Vector["idComprobante"]=$idComprobante;
+$Vector["Abonos"]="CuentasXCobrar";
+$Vector["TablaAbono"]="abonos_libro";
+$Vector["Procesador"]="procesadores/ProcesaCuentasXCobrar.php";
 $obTabla->DibujeTabla($Vector);
 $css->CerrarDiv();//Cerramos contenedor para agregar items
 

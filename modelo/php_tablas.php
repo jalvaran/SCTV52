@@ -169,7 +169,7 @@ public function CreeFiltroCuentas($Vector){
        
     $Columnas=$this->Columnas($Vector);
     $Tabla=$Vector["Tabla"];
-    $Filtro=" $Tabla WHERE (`CuentaPUC` like '2205%' or `CuentaPUC` like '2380%') AND Estado ='' AND Neto < 0 ";
+    $Filtro=" $Tabla WHERE (`CuentaPUC` like '2205%' or `CuentaPUC` like '2380%' or `CuentaPUC` like '21%') AND Estado ='' AND Neto < 0 ";
     $z=0;
     
     $NumCols=count($Columnas);
@@ -485,14 +485,20 @@ public function DibujeTabla($Vector){
                 
                 $Procesador=$Vector["Procesador"];
                 $TablaAbono=$Vector["TablaAbono"];
-                $Saldo=$DatosProducto["Neto"]*(-1);
+                if($TipoAbono=="CuentasXCobrar"){
+                    $Factor=1;
+                }
+                if($TipoAbono=="CuentasXPagar"){
+                    $Factor="-1";
+                }
+                $Saldo=$DatosProducto["Neto"]*$Factor;
                 $Saldo=$Saldo-$AbonosActuales;
                 print("Saldo: $".number_format($Saldo)."<br>");
                 $idFecha="TxtFecha".$DatosProducto[0];
                 $idCantidad="TxtAbono".$DatosProducto[0];
                 $idLink="LinkAbono".$DatosProducto[0];
                 $idSelect="CmbAbono".$DatosProducto[0];
-                $Page="CuentasXPagar.php";
+                $Page=$Vector["MyPage"];
                 $this->css->CrearInputText($idFecha, "text", "Fecha: ", date("Y-m-d"), "Fecha", "black", "onchange", "CambiaLinkAbono('$idFecha',$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Page','$TablaAbono')", 100, 30, 0, 0);
                 print("<br>");
                 $this->css->CrearInputNumber($idCantidad, "number", "Abono:", 0, "Cantidad", "black", "onchange", "CambiaLinkAbono('$idFecha','$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Page','$TablaAbono')", 100, 30, 0, 0, "", $Saldo, "any");
