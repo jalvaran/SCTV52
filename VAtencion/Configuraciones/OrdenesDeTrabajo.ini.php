@@ -3,7 +3,7 @@
 $myTabla="ordenesdetrabajo";
 $idTabla="ID";
 $myPage="ordenesdetrabajo.php";
-$myTitulo="Ordenes de Trabajo";
+$myTitulo="Ordenes de Servicio";
 
 /*
  * Opciones en Acciones

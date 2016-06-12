@@ -22,7 +22,7 @@ include_once ('funciones/function.php');  //En esta funcion está la paginacion
 include_once("../modelo/php_tablas.php");  //Clases de donde se escribirán las tablas
 include_once("Configuraciones/cuentasxpagar.ini.php");  //Clases de donde se escribirán las tablas
 $obTabla = new Tabla($db);
-$obVenta = new ProcesoVenta(1);
+$obVenta = new ProcesoVenta($idUser);
 $idComprobante=0;
 $ImprimeCC=0;
 if(isset($_REQUEST["idComprobante"])){
@@ -58,6 +58,7 @@ $css->CabeceraFin();
 
 $css->CreaMenuBasico("Menu"); 
     $css->CreaSubMenuBasico("Historial de Comprobantes","comprobantes_contabilidad_items.php"); 
+    $css->CreaSubMenuBasico("Historial de Abonos","abonos_libro.php"); 
 $css->CierraMenuBasico(); 
     
 ///////////////Creamos el contenedor
@@ -159,6 +160,7 @@ $Vector["idComprobante"]=$idComprobante;
 $Vector["Abonos"]="CuentasXPagar";
 $Vector["TablaAbono"]="abonos_libro";
 $Vector["Procesador"]="procesadores/ProcesaCuentasXPagar.php";
+
 $obTabla->DibujeTabla($Vector);
 $css->CerrarDiv();//Cerramos contenedor para agregar items
 

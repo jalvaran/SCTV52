@@ -67,7 +67,7 @@ session_start();
 			//$css->SubTabs("../VAtencion/CuentasXCobrar.php","_blank","../images/cuentasxcobrar.png","Cuentas Por Cobrar");
                         $css->SubTabs("../VAtencion/CuentasXPagar.php","_blank","../images/cuentasxpagar.png","Cuentas Por Pagar");
 			$css->SubTabs("MnuInventarios.php","_blank","../images/inventarios.png","Inventarios");
-                        $css->SubTabs("../VAtencion/ordenesdetrabajo.php","_blank","../images/ordentrabajo.png","Ordenes de trabajo");
+                        $css->SubTabs("../VAtencion/ordenesdetrabajo.php","_blank","../images/ordentrabajo.png","Ordenes de servicio");
 			$css->SubTabs("MnuInformes.php","_blank","../images/informes.png","Informes");
 			$css->SubTabs("../destruir.php","_self","../images/salir.png","Salir");
 			

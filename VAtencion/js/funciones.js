@@ -226,14 +226,14 @@ function CambiaLinkKit(idProducto,idLink,idCantidad,idkit,page){
     
 }
 
-function CambiaLinkAbono(idLibro,idLink,idCantidad,idCuenta,page,procesador,TablaAbono){
+function CambiaLinkAbono(idfecha,idLibro,idLink,idCantidad,idCuenta,page,procesador,TablaAbono){
     
     
         Cantidad=document.getElementById(idCantidad).value;
-
+        Fecha2=document.getElementById(idfecha).value;
         Cuenta=document.getElementsByName(idCuenta)[0].value;
 
-        link=procesador+"?TablaAbono="+TablaAbono+"&IDLibro="+idLibro+"&TxtCantidad="+Cantidad+"&idCuenta="+Cuenta+"&Page="+page;
+        link=procesador+"?TablaAbono="+TablaAbono+"&IDLibro="+idLibro+"&TxtCantidad="+Cantidad+"&idCuenta="+Cuenta+"&Page="+page+"&TxtFecha="+Fecha2;
 
         document.getElementById(idLink).href=link;
     

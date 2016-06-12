@@ -169,7 +169,7 @@ public function CreeFiltroCuentas($Vector){
        
     $Columnas=$this->Columnas($Vector);
     $Tabla=$Vector["Tabla"];
-    $Filtro=" $Tabla WHERE `CuentaPUC` like '2%' AND Estado ='' AND Neto < 0";
+    $Filtro=" $Tabla WHERE (`CuentaPUC` like '2205%' or `CuentaPUC` like '2380%') AND Estado ='' AND Neto < 0 ";
     $z=0;
     
     $NumCols=count($Columnas);
@@ -480,22 +480,26 @@ public function DibujeTabla($Vector){
             if(isset($Vector["Abonos"])){
                 print("<td>");
                 $idLibro=$DatosProducto[0];
-                $AbonosActuales=$this->obCon->SumeColumna("abonos_libro", "Cantidad", "idLibroDiario", $idLibro);
+                $TipoAbono=$Vector["Abonos"];
+                $AbonosActuales=$this->obCon->Sume("abonos_libro", "Cantidad", "WHERE idLibroDiario='$idLibro' AND TipoAbono='$TipoAbono'");
+                
                 $Procesador=$Vector["Procesador"];
                 $TablaAbono=$Vector["TablaAbono"];
                 $Saldo=$DatosProducto["Neto"]*(-1);
                 $Saldo=$Saldo-$AbonosActuales;
                 print("Saldo: $".number_format($Saldo)."<br>");
+                $idFecha="TxtFecha".$DatosProducto[0];
                 $idCantidad="TxtAbono".$DatosProducto[0];
-                
                 $idLink="LinkAbono".$DatosProducto[0];
                 $idSelect="CmbAbono".$DatosProducto[0];
                 $Page="CuentasXPagar.php";
-                $this->css->CrearInputNumber($idCantidad, "number", "", 0, "Cantidad", "black", "onchange", "CambiaLinkAbono('$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Procesador','$TablaAbono')", 100, 30, 0, 0, 1, $Saldo, "any");
+                $this->css->CrearInputText($idFecha, "text", "Fecha: ", date("Y-m-d"), "Fecha", "black", "onchange", "CambiaLinkAbono('$idFecha',$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Page','$TablaAbono')", 100, 30, 0, 0);
+                print("<br>");
+                $this->css->CrearInputNumber($idCantidad, "number", "Abono:", 0, "Cantidad", "black", "onchange", "CambiaLinkAbono('$idFecha','$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Page','$TablaAbono')", 100, 30, 0, 0, "", $Saldo, "any");
                 
-                $this->css->CrearSelect($idSelect, "CambiaLinkAbono('$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Procesador','$TablaAbono')");
+                $this->css->CrearSelect($idSelect, "CambiaLinkAbono('$idFecha','$idLibro','$idLink','$idCantidad','$idSelect','$Page','$Page','$TablaAbono')");
                     $ConsultaCuentasFrecuentes=$this->obCon->ConsultarTabla("cuentasfrecuentes", "");
-                    $this->css->CrearOptionSelect(0, "Cuenta ingreso", 1);
+                    //$this->css->CrearOptionSelect(0, "Cuenta ingreso", 1);
                     while($DatosCuenta=  $this->obCon->FetchArray($ConsultaCuentasFrecuentes)){
                         $this->css->CrearOptionSelect($DatosCuenta["CuentaPUC"], $DatosCuenta["Nombre"], 0);
                     }

@@ -1721,6 +1721,132 @@ public function CalculePesoRemision($idCotizacion)
             }
         }
     }
+    
+    /*
+     * Funcion para registrar un abono
+     * 2016-06-10 JULIAN ALVARAN
+     */
+    
+    public function RegistreAbonoLibro($idLibro,$TablaAbonos,$CuentaDestino,$PageReturn,$TotalAbono,$Datos){
+        
+        $NomIdCentroCostos="idCentroCosto"; //Nombre de las columnas, se coloca porque en algunas versiones es diferente
+        $NomIdEmpresa="idEmpresa";
+        $Fecha=$Datos["Fecha"];
+        $TipoAbono=$Datos["TipoAbono"];
+        $idUser=$Datos["idUser"];
+        $hora=date("H:i");
+        
+        $DatosLibro=$this->DevuelveValores("librodiario", "idLibroDiario", $idLibro);
+        $AbonosActuales=$this->Sume("abonos_libro", "Cantidad", "WHERE idLibroDiario='$idLibro' AND TipoAbono='$TipoAbono'");
+        $AbonosActuales=$AbonosActuales+$TotalAbono;
+        $SaldoTotal=$DatosLibro["Neto"]*(-1);
+        if($AbonosActuales>$SaldoTotal){
+            echo "<script>alert('Abono incorrecto, supera el saldo total')</script>";
+            exit(" <a href='CuentasXPagar.php'> Volver</a> ");
+        }
+        $DatosCuentasFrecuentes=$this->DevuelveValores("cuentasfrecuentes", "CuentaPUC", $CuentaDestino);
+        $Debitos1=0;
+        $Creditos1=0;
+        $Neto1=0;
+        $Debitos2=0;
+        $Creditos2=0;
+        $Neto2=0;
+        if($TipoAbono=="CuentasXPagar"){
+            $Concepto="ABONO A LA CUENTA POR PAGAR ESPECIFICADA EN EL LIBRO DIARIO CON ID=$idLibro";
+            $Debitos1=$TotalAbono;
+            $Neto1=$TotalAbono;
+            $Neto2=$TotalAbono*(-1);
+            
+            $Creditos2=$TotalAbono;
+        }
+        /*
+         * Abro un nuevo comprobante de abono
+         */
+        
+        $tab="comprobantes_contabilidad";
+        $NumRegistros=4; 
+
+        $Columnas[0]="Fecha";                   $Valores[0]=$Fecha;
+        $Columnas[1]="Concepto";                $Valores[1]=$Concepto;
+        $Columnas[2]="Hora";                    $Valores[2]=$hora;
+        $Columnas[3]="Usuarios_idUsuarios";     $Valores[3]=$idUser;
+
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+        $idComprobante=$this->ObtenerMAX($tab, "ID", 1, "");
+                
+        /*
+         * Inserto los datos a la tabla de abonos correspondiente 
+         */
+        
+        $tab=$TablaAbonos;
+        $NumRegistros=5;
+        $Columnas[0]="Fecha";                           $Valores[0]=$Fecha;
+        $Columnas[1]="Cantidad";                        $Valores[1]=$TotalAbono;
+        $Columnas[2]="idLibroDiario";                   $Valores[2]=$idLibro;
+        $Columnas[3]="idComprobanteContable";           $Valores[3]=$idComprobante;
+        $Columnas[4]="TipoAbono";                       $Valores[4]=$TipoAbono;
+        
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+        
+        /*
+         * Se registra en el libro diario
+         * 
+         */
+                        
+        $tab="librodiario";
+        $NumRegistros=26;
+                
+        $Columnas[0]="Fecha";			$Valores[0]=$Fecha;
+        $Columnas[1]="Tipo_Documento_Intero";	$Valores[1]="COMPROBANTE CONTABLE";
+        $Columnas[2]="Num_Documento_Interno";	$Valores[2]=$idComprobante;
+        $Columnas[3]="Tercero_Tipo_Documento";	$Valores[3]=$DatosLibro['Tercero_Tipo_Documento'];
+        $Columnas[4]="Tercero_Identificacion";	$Valores[4]=$DatosLibro['Tercero_Identificacion'];
+        $Columnas[5]="Tercero_DV";		$Valores[5]=$DatosLibro['Tercero_DV'];
+        $Columnas[6]="Tercero_Primer_Apellido";	$Valores[6]=$DatosLibro['Tercero_Primer_Apellido'];
+        $Columnas[7]="Tercero_Segundo_Apellido";$Valores[7]=$DatosLibro['Tercero_Segundo_Apellido'];
+        $Columnas[8]="Tercero_Primer_Nombre";	$Valores[8]=$DatosLibro['Tercero_Primer_Nombre'];
+        $Columnas[9]="Tercero_Otros_Nombres";	$Valores[9]=$DatosLibro['Tercero_Otros_Nombres'];
+        $Columnas[10]="Tercero_Razon_Social";	$Valores[10]=$DatosLibro['Tercero_Razon_Social'];
+        $Columnas[11]="Tercero_Direccion";	$Valores[11]=$DatosLibro['Tercero_Direccion'];
+        $Columnas[12]="Tercero_Cod_Dpto";	$Valores[12]=$DatosLibro['Tercero_Cod_Dpto'];
+        $Columnas[13]="Tercero_Cod_Mcipio";	$Valores[13]=$DatosLibro['Tercero_Cod_Mcipio'];
+        $Columnas[14]="Tercero_Pais_Domicilio"; $Valores[14]=$DatosLibro['Tercero_Pais_Domicilio'];
+        $Columnas[15]="CuentaPUC";		$Valores[15]=$DatosLibro["CuentaPUC"];
+        $Columnas[16]="NombreCuenta";		$Valores[16]=$DatosLibro["NombreCuenta"];
+        $Columnas[17]="Detalle";		$Valores[17]="Abono";
+        $Columnas[18]="Debito";			$Valores[18]=$Debitos1;
+        $Columnas[19]="Credito";		$Valores[19]=$Creditos1;
+        $Columnas[20]="Neto";			$Valores[20]=$Neto1;
+        $Columnas[21]="Mayor";			$Valores[21]="NO";
+        $Columnas[22]="Esp";			$Valores[22]="NO";
+        $Columnas[23]="Concepto";		$Valores[23]=$Concepto;
+        $Columnas[24]=$NomIdCentroCostos;       $Valores[24]=$DatosLibro[$NomIdCentroCostos];
+        $Columnas[25]=$NomIdEmpresa;		$Valores[25]=$DatosLibro[$NomIdEmpresa];
+
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+
+
+        ///////////////////////Registramos contra partida del anticipo
+
+        $CuentaPUC=$CuentaDestino; 
+               
+        $Valores[15]=$CuentaPUC;
+        $Valores[16]=$DatosCuentasFrecuentes["Nombre"];
+        $Valores[18]=$Debitos2;
+        $Valores[19]=$Creditos2; 			//Credito se escribe el total de la venta menos los impuestos
+        $Valores[20]=$Neto2;  											//Credito se escribe el total de la venta menos los impuestos
+
+        $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+        
+        
+        if($AbonosActuales==$SaldoTotal){
+           $this->ActualizaRegistro("librodiario", "Estado", "CO", "idLibroDiario", $idLibro);
+        }
+        
+        return ($idComprobante);
+    }
+    
+    
 //////////////////////////////Fin	
 }
 

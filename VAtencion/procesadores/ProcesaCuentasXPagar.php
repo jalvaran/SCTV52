@@ -154,7 +154,9 @@ if(isset($_REQUEST["ChkID"])){
     $CuentaPUC=$DatosLibro["CuentaPUC"];
     $NombreCuenta=$DatosLibro["NombreCuenta"];
     $destino="";
-    $Valor=$DatosLibro["Neto"]*(-1);
+    $AbonosActuales=$obVenta->Sume("abonos_libro", "Cantidad", "WHERE idLibroDiario='$ids'");
+    
+    $Valor=$DatosLibro["Neto"]*(-1)-$AbonosActuales;
     $DC="D";
     $NumDocSoporte=$DatosLibro["Num_Documento_Interno"];
     if($DC=="C"){
@@ -187,7 +189,38 @@ if(isset($_REQUEST["ChkID"])){
     $obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
     $obVenta->ActualizaRegistro("librodiario", "Estado", "OC", "idLibroDiario", $ids);
     }
+    
+ }
+
+ /*
+ * Registre un abono
+ */
+if(!empty($_REQUEST["TablaAbono"])){
+    
+    $obVenta=new ProcesoVenta(1);
+    $TotalAbono=$_REQUEST["TxtCantidad"];
+    if($TotalAbono<1){
+        echo "<script>alert('Valor de Abono no valido')</script>";
+        exit(" <a href='CuentasXPagar.php'> Volver</a> ");
+    } 
+    if(!isset($_REQUEST["TxtFecha"]) or empty($_REQUEST["TxtFecha"])){
+        echo "<script>alert('Debe escribir una fecha')</script>";
+        exit(" <a href='CuentasXPagar.php'> Volver</a> ");
+    } 
+    $idLibro=$_REQUEST["IDLibro"];
+    $TablaAbonos=$_REQUEST["TablaAbono"];
+    $Cuenta=$_REQUEST["idCuenta"];
+    $PageReturn=$_REQUEST["Page"];
+    
+    $Datos["idUser"]=$idUser;
+    $Datos["Fecha"]=$_REQUEST["TxtFecha"];
+    $Datos["TipoAbono"]="CuentasXPagar";
+    $idComprobante=$obVenta->RegistreAbonoLibro($idLibro,$TablaAbonos,$Cuenta,$PageReturn,$TotalAbono,$Datos); 
+   
+    header("location:$myPage?ImprimeCC=$idComprobante");
+    
 }
+
 
 ///////////////fin
 ?>

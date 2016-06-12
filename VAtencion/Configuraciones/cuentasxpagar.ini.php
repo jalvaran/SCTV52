@@ -40,7 +40,7 @@ $Vector["NuevaAccion"]["ChkID"]["Target"]="_self";
  */
 
 
-$Vector["Excluir"]["idLibroDiario"]=1;
+//$Vector["Excluir"]["idLibroDiario"]=1;
 $Vector["Excluir"]["Tercero_Tipo_Documento"]=1;
 $Vector["Excluir"]["Tercero_DV"]=1;
 $Vector["Excluir"]["Tercero_Primer_Apellido"]=1;

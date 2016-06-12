@@ -48,6 +48,7 @@ $nombre="";
     
     require_once('Encabezado2.php');
     require_once('items_cotizacion.php');
+    //$pdf->writeHTML("Ver hoja Anexa", true, false, false, false, '');
     $nombre_file=$fecha."_".$nombre;
 		
 //Close and output PDF document

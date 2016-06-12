@@ -256,7 +256,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 
 }
 
-
+/*
 ///////////////////////////////////////////////////////
 //////////////tabla con los datos DE LAS DEVOLUCIONES//////////////////
 ////////////////////////////////////////////////////////
@@ -578,7 +578,7 @@ WHERE f.Fecha >= '$FechaIni' AND f.Fecha <= '$FechaFinal'
 	GROUP BY f.Usuarios_idUsuarios",$con) or die("problemas con la consulta a join facturas ".mysql_error());
 
 
-*/
+
 
 
 
@@ -783,7 +783,7 @@ $pdf->writeHTML($tbl, false, false, false, false, '');
 	
 }
 } 
- 
+ */
 //$pdf->writeHTML($tab, false, false, false, false, '');
 //Close and output PDF document
 $pdf->Output($nombre_file.'.pdf', 'I');

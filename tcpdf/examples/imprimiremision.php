@@ -53,14 +53,14 @@ $tbl = <<<EOD
 <table border="1" cellpadding="2" cellspacing="2" align="left">
     <tr nobr="true">
         <th><strong>Cliente:</strong> $DatosCliente[RazonSocial]</th>
-        <th><strong>Nombre Obra:</strong> $DatosRemision[Obra]</th>
+        <th><strong>Proyecto:</strong> $DatosRemision[Obra]</th>
     </tr>
     <tr nobr="true">
         <th><strong>Dirección:</strong> $DatosCliente[Direccion]</th>
         <th><strong>Dirección:</strong> $DatosRemision[Direccion] $DatosRemision[Ciudad]</th>
     </tr>
     <tr nobr="true">
-        <th><strong>Teléfono:</strong> $DatosCliente[Telefono]</th>
+        <th><strong>Teléfono:</strong> NA</th>  <!-- $DatosCliente[Telefono] -->
         <th><strong>Teléfono:</strong> $DatosRemision[Telefono]</th>
     </tr>
     <tr nobr="true">
@@ -85,7 +85,7 @@ $tbl = <<<EOD
  <tr nobr="true">
   <th><h3>Ref</h3></th>
   <th colspan="2"><h3>Descripción</h3></th>
-  <th><h3>Valor Unitario</h3></th>
+  <!-- <th><h3>Valor Unitario</h3></th> -->
   <th><h3>Cantidad</h3></th>
   <!-- <th><h3>Dias</h3></th>
   <th><h3>Total</h3></th> -->
@@ -126,7 +126,7 @@ $tbl = <<<EOD
  <tr nobr="true">
   <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$registros2[Referencia]</td>
   <td colspan="2" style="border-bottom: 1px solid #ddd;background-color: $Back;">$registros2[Descripcion]</td>
-  <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$$registros2[ValorUnitario]</td>
+  <!-- <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$$registros2[ValorUnitario]</td> -->
   <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$registros2[Cantidad]</td>
   <!-- <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$registros2[Multiplicador]</td>
    <td style="border-bottom: 1px solid #ddd;background-color: $Back;">$$registros2[Subtotal]</td> -->

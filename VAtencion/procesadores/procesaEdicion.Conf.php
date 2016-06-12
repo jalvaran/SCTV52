@@ -135,4 +135,21 @@ $TablaConfig="ordenesdecompra";
 $VarEdit[$TablaConfig]["Created"]["Excluir"]=1;
 $VarEdit[$TablaConfig]["UsuarioCreador"]["Excluir"]=1;
 
+/*
+ * Parametros de configuracion cartera
+ * Columnas Excluidas
+ */
+$TablaConfig="cartera";
+$VarEdit[$TablaConfig]["Facturas_idFacturas"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["FechaIngreso"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["FechaVencimiento"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["DiasCartera"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["idCliente"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["RazonSocial"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["Telefono"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["Contacto"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["TelContacto"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["TotalFactura"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["TotalAbonos"]["Excluir"]=1;
+$VarEdit[$TablaConfig]["Saldo"]["Excluir"]=1;
 ?>

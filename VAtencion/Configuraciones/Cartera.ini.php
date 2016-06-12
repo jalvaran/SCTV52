@@ -21,7 +21,7 @@ $Vector["Limit"]=$limit;            //Numero de Registros a mostrar
           
 $Vector["VerRegistro"]["Deshabilitado"]=1;       
 $Vector["NuevoRegistro"]["Deshabilitado"]=1;                                 
-$Vector["EditarRegistro"]["Deshabilitado"]=1;
+//$Vector["EditarRegistro"]["Deshabilitado"]=1;
 
 // Nueva Accion
 $Ruta="RegistrarIngreso.php?idFactura=";
