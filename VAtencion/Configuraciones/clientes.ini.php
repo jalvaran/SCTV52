@@ -27,10 +27,11 @@ $Vector["VerRegistro"]["Deshabilitado"]=1;
 
 
 $Vector["Cod_Dpto"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
-$Vector["Cod_Dpto"]["TablaVinculo"]="cod_departamentos";  //tabla de donde se vincula
+$Vector["Cod_Dpto"]["TablaVinculo"]="cod_municipios_dptos";  //tabla de donde se vincula
 $Vector["Cod_Dpto"]["IDTabla"]="Cod_dpto"; //id de la tabla que se vincula
-$Vector["Cod_Dpto"]["Display"]="Nombre";//Columna que quiero mostrar
+$Vector["Cod_Dpto"]["Display"]="Departamento";//Columna que quiero mostrar
 //
+$Vector["Excluir"]["Cod_Mcipio"]=1;
 $Vector["Cod_Mcipio"]["Vinculo"]=1;   //Indico que esta columna tendra un vinculo
 $Vector["Cod_Mcipio"]["TablaVinculo"]="cod_municipios_dptos";  //tabla de donde se vincula
 $Vector["Cod_Mcipio"]["IDTabla"]="Cod_mcipio"; //id de la tabla que se vincula
