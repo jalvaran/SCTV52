@@ -66,12 +66,6 @@
 		header("location:VentasRapidas.php?CmbPreVentaAct=$idPreventa");	
 	}
 	
-	if(!empty($_REQUEST['TxtAsociarCliente'])){
-		$idCliente=$_REQUEST['TxtAsociarCliente'];		
-		header("location:Cotizaciones.php?TxtIdCliente=$idCliente");
-	}
-		
-	
 	if(!empty($_REQUEST['del'])){
 		$id=$_REQUEST['del'];
 		$Tabla=$_REQUEST['TxtTabla'];
@@ -101,109 +95,53 @@
 	////Se recibe edicion
 	
 	if(!empty($_REQUEST['TxtEditar'])){
-		
-		$idItem=$_REQUEST['TxtPrecotizacion'];
-		$idClientes=$_REQUEST['TxtIdCliente'];
-		$Tabla=$_REQUEST['TxtTabla'];
-		$Cantidad=$_REQUEST['TxtEditar'];
-                $Multiplicador=$_REQUEST['TxtMultiplicador'];
-		$ValorAcordado=$_REQUEST['TxtValorUnitario'];
-                $flagMult=0;
-		
 		$obVenta=new ProcesoVenta($idUser);
-		$DatosPreventa=$obVenta->DevuelveValores('precotizacion',"ID",$idItem);
-		$Subtotal=$ValorAcordado*$Cantidad*$Multiplicador;
-		$DatosProductos=$obVenta->DevuelveValores($Tabla,"Referencia",$DatosPreventa["Referencia"]);
+		$idItem=$_REQUEST['TxtPrecotizacion'];
+		//$idClientes=$_REQUEST['TxtIdCliente'];
+                $idPreventa=$_REQUEST['CmbPreVentaAct'];
+		
+		$Cantidad=$_REQUEST['TxtEditar'];
+                echo " $Cantidad $idItem";
+		//$ValorAcordado=$_REQUEST['TxtValorUnitario'];
+                $DatosPreventa=$obVenta->DevuelveValores("preventa", "idPrecotizacion", $idItem);
+		$ValorAcordado=$DatosPreventa["ValorAcordado"];
+		$idProducto=$DatosPreventa["ProductosVenta_idProductosVenta"];
+		$Tabla=$DatosPreventa["TablaItem"];
+		$Subtotal=$ValorAcordado*$Cantidad;
+		$DatosProductos=$obVenta->DevuelveValores($Tabla,"idProductosVenta",$idProducto);
 		$IVA=$Subtotal*$DatosProductos["IVA"];
 		$SubtotalCosto=$DatosProductos["CostoUnitario"]*$Cantidad;
 		$Total=$Subtotal+$IVA;
-		$filtro="ID";
+		$filtro="idPrecotizacion";
 		
-		$obVenta->ActualizaRegistro("precotizacion","SubTotal", $Subtotal, $filtro, $idItem);
-		$obVenta->ActualizaRegistro("precotizacion","IVA", $IVA, $filtro, $idItem);
-		$obVenta->ActualizaRegistro("precotizacion","SubtotalCosto", $SubtotalCosto, $filtro, $idItem);
-		$obVenta->ActualizaRegistro("precotizacion","Total", $Total, $filtro, $idItem);
-		$obVenta->ActualizaRegistro("precotizacion","ValorUnitario", $ValorAcordado, $filtro, $idItem);
-		$obVenta->ActualizaRegistro("precotizacion","Cantidad", $Cantidad, $filtro, $idItem);
-                
-                $obVenta->ActualizaRegistro("precotizacion","Multiplicador", $Multiplicador, $filtro, $idItem);
+		$obVenta->ActualizaRegistro("preventa","Subtotal", $Subtotal, $filtro, $idItem);
+		$obVenta->ActualizaRegistro("preventa","Impuestos", $IVA, $filtro, $idItem);
+		$obVenta->ActualizaRegistro("preventa","TotalVenta", $Total, $filtro, $idItem);
+		$obVenta->ActualizaRegistro("preventa","Cantidad", $Cantidad, $filtro, $idItem);
 		
-		header("location:Cotizaciones.php?TxtAsociarCliente=$idClientes");
+		
+		header("location:$myPage?CmbPreVentaAct=$idPreventa");
 			
 	}
 	
 	////Se guarda la Cotizacion
 	
 	if(!empty($_REQUEST['BtnGuardar'])){
-		$fecha=date("Y-m-d");
-		$idCliente=$_REQUEST["TxtIdCliente"];
-		
-		if(!empty($_REQUEST['TxtNumOrden']))
-			$NumOrden=$_REQUEST['TxtNumOrden'];
-		else
-			$NumOrden="";
-		
-		if(!empty($_REQUEST['TxtNumSolicitud']))
-			$NumSolicitud=$_REQUEST['TxtNumSolicitud'];
-		else
-			$NumSolicitud="";
-		
-		if(!empty($_REQUEST['TxtObservaciones']))
-			$Observaciones=$_REQUEST['TxtObservaciones'];
-		else
-			$Observaciones="";
-		
-		$obVenta=new ProcesoVenta($idUser);
-		$NumCotizacion=$obVenta->ObtenerMAX("cotizacionesv5","ID", "1", "");
-		$NumCotizacion++;
-		
-		///////////////////////////Ingresar a Cotizaciones 
-			
-		$tab="cotizacionesv5";
-		$NumRegistros=7;  
-							
-		$Columnas[0]="ID";							$Valores[0]=$NumCotizacion;
-		$Columnas[1]="Fecha";						$Valores[1]=$fecha;
-		$Columnas[2]="Clientes_idClientes";			$Valores[2]=$idCliente;
-		$Columnas[3]="Usuarios_idUsuarios";			$Valores[3]=$idUser;
-		$Columnas[4]="Observaciones";				$Valores[4]=$Observaciones;
-		$Columnas[5]="NumSolicitud";				$Valores[5]=$NumSolicitud;
-		$Columnas[6]="NumOrden";					$Valores[6]=$NumOrden;
-		
-		$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
-			
-		///////////////////////////Ingresar a cot_itemscotizaciones 
-		
-		$Consulta=$obVenta->ConsultarTabla("precotizacion","WHERE idUsuario='$idUser'");
-		
-	    while($DatosPrecoti=mysql_fetch_array($Consulta)){
-		
-			
-			$tab="cot_itemscotizaciones";
-			$NumRegistros=15;  
-								
-			$Columnas[0]="NumCotizacion";				$Valores[0]=$NumCotizacion;
-			$Columnas[1]="Descripcion";					$Valores[1]=$DatosPrecoti["Descripcion"];
-			$Columnas[2]="Referencia";					$Valores[2]=$DatosPrecoti["Referencia"];
-			$Columnas[3]="TablaOrigen";						$Valores[3]=$DatosPrecoti["Tabla"];
-			$Columnas[4]="ValorUnitario";				$Valores[4]=$DatosPrecoti["ValorUnitario"];
-			$Columnas[5]="Cantidad";					$Valores[5]=$DatosPrecoti["Cantidad"];
-			$Columnas[6]="Subtotal";					$Valores[6]=$DatosPrecoti["SubTotal"];
-			$Columnas[7]="IVA";							$Valores[7]=$DatosPrecoti["IVA"];
-			$Columnas[8]="Total";						$Valores[8]=$DatosPrecoti["Total"];
-			$Columnas[9]="PrecioCosto";					$Valores[9]=$DatosPrecoti["PrecioCosto"];
-			$Columnas[10]="SubtotalCosto";				$Valores[10]=$DatosPrecoti["SubtotalCosto"];
-			$Columnas[11]="TipoItem";					$Valores[11]=$DatosPrecoti["TipoItem"];
-			$Columnas[12]="CuentaPUC";					$Valores[12]=$DatosPrecoti["CuentaPUC"];
-			$Columnas[13]="idCliente";					$Valores[13]=$idCliente;
-                        $Columnas[14]="Multiplicador";					$Valores[14]=$DatosPrecoti["Multiplicador"];
-                        
-			$obVenta->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);	
-		
-		}
-		
-		$obVenta->BorraReg("precotizacion","idUsuario",$idUser);
-		header("location:Cotizaciones.php?TxtIdCotizacion=$NumCotizacion");
+            $obVenta=new ProcesoVenta($idUser);
+            $fecha=date("Y-m-d");
+            $idCliente=$_REQUEST["TxtIdCliente"];
+            $idPreventa=$_REQUEST["CmbPreVentaAct"];
+            $Paga=$_REQUEST["TxtPaga"];
+            $Devuelta=$_REQUEST["TxtDevuelta"];
+            $CuentaDestino="110510";
+            $TipoPago="Contado";
+            $Observaciones="";
+            $DatosVentaRapida["Fut"]="";
+            $obVenta->RegistreVentaRapida($idPreventa, $idCliente, $TipoPago, $Paga, $Devuelta, $CuentaDestino, $DatosVentaRapida);
+
+            $obVenta->BorraReg("preventa","VestasActivas_idVestasActivas",$idPreventa);
+            $obVenta->ActualizaRegistro("vestasactivas","SaldoFavor", 0, "idVestasActivas", $idPreventa);
+            header("location:$myPage?CmbPreVentaAct=$idPreventa");
 		
 		
 		

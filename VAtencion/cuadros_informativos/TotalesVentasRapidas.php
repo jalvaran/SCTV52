@@ -54,8 +54,24 @@
     }
     $css->FilaTabla(18);
     $css->ColTabla("PAGA:",1);
+    
     $css->ColTablaInputText("TxtPaga","number","","","Paga","","onkeyup","CalculeDevuelta()",150,30,0,0);
-
+    
+    print("<td>");
+    $VarSelect["Ancho"]="200";
+    $VarSelect["PlaceHolder"]="Busque un Cliente";
+    $VarSelect["Title"]="Cliente: ";
+    $css->CrearSelectChosen("TxtCliente", $VarSelect);
+    
+        $sql="SELECT * FROM clientes";
+        $Consulta=$obVenta->Query($sql);
+        while($DatosCliente=$obVenta->FetchArray($Consulta)){
+               
+               $css->CrearOptionSelect("$DatosCliente[idClientes]", "$DatosCliente[Num_Identificacion] / $DatosCliente[RazonSocial] / $DatosCliente[Telefono]" , 0);
+           }
+    $css->CerrarSelect();
+    print("</td>");
+    
     $css->CierraFilaTabla();
 
     $css->FilaTabla(18);
