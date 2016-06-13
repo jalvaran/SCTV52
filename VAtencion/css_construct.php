@@ -248,12 +248,6 @@ class CssIni{
 	
 	function CrearInputText($nombre,$type,$label,$value,$placeh,$color,$TxtEvento,$TxtFuncion,$Ancho,$Alto,$ReadOnly,$Required){
 		
-            if($nombre=="TxtDevuelta"){
-                    $TFont="2em";
-                }else {
-                    $TFont="1em";
-                }
-                
 		if($ReadOnly==1)
 			$ReadOnly="readonly";
 		else
@@ -265,7 +259,7 @@ class CssIni{
 			$Required="";
 		
 			print('<strong style="color:'.$color.'">'.$label.'<input name="'.$nombre.'" value="'.$value.'" type="'.$type.'" id="'.$nombre.'" placeholder="'.$placeh.'" '.$TxtEvento.' = "'.$TxtFuncion.'" 
-			'.$ReadOnly.' '.$Required.' autocomplete="off" style="width: '.$Ancho.'px;height: '.$Alto.'px; font-size: '.$TFont.'"></strong>');
+			'.$ReadOnly.' '.$Required.' autocomplete="off" style="width: '.$Ancho.'px;height: '.$Alto.'px;"></strong>');
 		
 	}
 	
@@ -580,7 +574,6 @@ class CssIni{
             <script src="js/bootstrap-carousel.js"></script>
             <script src="js/bootstrap-typeahead.js"></script>
             <script src="js/funciones.js"></script>
-            <script src="js/shortcuts.js"></script>
             <script src="chousen/source/jquery.min.js" type="text/javascript"></script>
             <script src="chousen/source/chosen.jquery.js" type="text/javascript"></script>
             <script src="chousen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
@@ -677,15 +670,14 @@ function Footer(){
 	function CrearSelectChosen($Nombre, $VarSelect){
            $Ancho=$VarSelect["Ancho"];
            $PlaceHolder=$VarSelect["PlaceHolder"];
-           if(isset($VarSelect["Required"])){
+           if(isset($VarSelect["Enabled"])){
                $Required="required=1";
            }else{
                $Required="";
            }
-           if(isset($VarSelect["Title"])){
-                print("<strong>$VarSelect[Title]</strong><br>");
-           }
-           echo '<select id="'.$Nombre.'" data-placeholder="'.$PlaceHolder.'" class="chosen-select"  tabindex="2" name="'.$Nombre.'" $Required style="width:200px;">';
+           //print("<br><br><br>");
+           
+           echo '<select id="'.$Nombre.'" data-placeholder="'.$PlaceHolder.'" class="chosen-select"  tabindex="2" name="'.$Nombre.'" style="width:200px;" $Required>';
            
        	
 	}   
@@ -715,13 +707,6 @@ function Footer(){
     
 	} 
         
-        /////////////////////Agrega JavaScrips exclusivos de venta Rapida
-	
-	function AgregaJSVentaRapida(){
-             
-          print("<script>atajos();posiciona('TxtCodigoBarras');</script> "); 
-    
-	} 
         
         //////////////////////////////////FIN
 }

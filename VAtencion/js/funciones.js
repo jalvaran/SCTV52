@@ -90,7 +90,15 @@ shortcut("Ctrl+E",function()
 {
 document.getElementById("TxtCodigoBarras").focus();
 });
+shortcut("Ctrl+B",function()
+{
+document.getElementById("TxtBuscarItem").focus();
+});
 
+shortcut("Ctrl+D",function()
+{
+document.getElementById("TxtBuscarCliente").focus();
+});
 
 shortcut("Ctrl+S",function()
 {
@@ -103,7 +111,7 @@ function CreaRazonSocial() {
 
     campo1=document.getElementById('TxtPA').value;
     campo2=document.getElementById('TxtSA').value;
-    campo3=document.getElementById('TxtPN').value;
+	campo3=document.getElementById('TxtPN').value;
     campo4=document.getElementById('TxtON').value;
 	
 

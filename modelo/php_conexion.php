@@ -710,50 +710,39 @@ class ProcesoVenta{
 ///////////////////////////////////////////////////////////////////
 
 
-public function AgregaPreventa($fecha,$Cantidad,$idVentaActiva,$idProducto,$TablaItem)
+public function AgregaPreventa($fecha,$Cantidad,$idVentaActiva,$idProducto,$idCliente,$idUsuario)
   {
-	$DatosProductoGeneral=$this->DevuelveValores($TablaItem, "idProductosVenta", $idProducto);
-        $consulta=$this->ConsultarTabla("preventa", "WHERE TablaItem='$TablaItem' AND ProductosVenta_idProductosVenta='$idProducto' AND VestasActivas_idVestasActivas='$idVentaActiva'");
-        
-	if($this->NumRows($consulta)){
-            $DatosProduto=$this->FetchArray($consulta);
-            $Cantidad=$DatosProduto["Cantidad"]+$Cantidad;
-            $Subtotal=$DatosProduto["ValorAcordado"]*$Cantidad;
-            $Impuestos=$DatosProductoGeneral["IVA"]*$Subtotal;
-            $TotalVenta=$Subtotal+$Impuestos;
-            
-            $sql="UPDATE preventa SET Subtotal='$Subtotal', Impuestos='$Impuestos', TotalVenta='$TotalVenta', Cantidad='$Cantidad' WHERE TablaItem='$TablaItem' AND ProductosVenta_idProductosVenta='$idProducto' AND VestasActivas_idVestasActivas='$idVentaActiva'";
-            $this->Query($sql);
-        }else{
-            $reg=mysql_query("select * from fechas_descuentos where Fecha = '$fecha'") or die('no se pudo consultar los valores de fechas descuentos en AgregaPreventa: ' . mysql_error());
-            $reg=mysql_fetch_array($reg);
-            $Porcentaje=$reg["Porcentaje"];
-            $Departamento=$reg["Departamento"];
-
-            
-            $impuesto=$DatosProductoGeneral["IVA"];
-            $impuesto=$impuesto+1;
-
-            $ValorUnitario=$DatosProductoGeneral["PrecioVenta"]/$impuesto;
-
-            if($Porcentaje>0 and ($DatosProductoGeneral["Departamento"]==$Departamento) or $Departamento=="TODO"){
-
-                    $Porcentaje=$Porcentaje/100;
-                    $ValorUnitario=$ValorUnitario*$Porcentaje;
-
-            }
-
-            $Subtotal=$ValorUnitario*$Cantidad;
-            $impuesto=($impuesto-1)*$Subtotal;
-            $Total=$Subtotal+$impuesto;
-
-
-            $sql="INSERT INTO `preventa` ( `Fecha`, `Cantidad`, `VestasActivas_idVestasActivas`, `ProductosVenta_idProductosVenta`, `ValorUnitario`,`ValorAcordado`, `Subtotal`, `Impuestos`, `TotalVenta`, `TablaItem`)
-                    VALUES ('$fecha', '$Cantidad', '$idVentaActiva', '$idProducto', '$ValorUnitario','$ValorUnitario', '$Subtotal', '$impuesto', '$Total', '$TablaItem');";
-
-            $this->Query($sql) or die('no se pudo guardar el item en preventa: ' . mysql_error());	
 	
-        }
+	$reg=mysql_query("select * from fechas_descuentos where Fecha = '$fecha'") or die('no se pudo consultar los valores de fechas descuentos en AgregaPreventa: ' . mysql_error());
+	$reg=mysql_fetch_array($reg);
+	$Porcentaje=$reg["Porcentaje"];
+	$Departamento=$reg["Departamento"];
+	
+	$reg=mysql_query("select * from productosventa where idProductosVenta = '$idProducto'") or die('no se pudo consultar los valores de productosventa en AgregaPreventa: ' . mysql_error());
+	$reg=mysql_fetch_array($reg);
+	$impuesto=$reg["IVA"];
+	$impuesto=$impuesto+1;
+	
+	$ValorUnitario=ROUND($reg["PrecioVenta"]/$impuesto);
+	
+	if($Porcentaje>0 and ($reg["Departamento"]==$Departamento) or $Departamento=="TODO"){
+		
+		$Porcentaje=$Porcentaje/100;
+		$ValorUnitario=$ValorUnitario*$Porcentaje;
+		
+	}
+	
+	$Subtotal=$ValorUnitario*$Cantidad;
+	$impuesto=round(($impuesto-1)*$Subtotal);
+	$Total=$Subtotal+$impuesto;
+
+	
+	$sql="INSERT INTO `preventa` ( `Fecha`, `Cantidad`, `VestasActivas_idVestasActivas`, `ProductosVenta_idProductosVenta`,`Clientes_idClientes`, `Usuarios_idUsuarios`, `ValorUnitario`,`ValorAcordado`, `Subtotal`, `Impuestos`, `TotalVenta`)
+		VALUES ('$fecha', '$Cantidad', '$idVentaActiva', '$idProducto', '$idCliente', '$idUsuario', '$ValorUnitario','$ValorUnitario', '$Subtotal', '$impuesto', '$Total');";
+	
+	mysql_query($sql) or die('no se pudo guardar el item en preventa: ' . mysql_error());	
+	
+	
 	}	
 	
 	////////////////////////////////////////////////////////////////////
@@ -1874,18 +1863,7 @@ public function CalculePesoRemision($idCotizacion)
         return ($idComprobante);
     }
     
-    /*
-     * revisa si hay resultados tras una consulta
-     * 
-     */
     
-    public function NumRows($consulta){
-  		
-	$NR=mysql_num_rows($consulta);
-	return ($NR);	
-		
-	}
-
 //////////////////////////////Fin	
 }
 	
