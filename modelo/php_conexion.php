@@ -1885,6 +1885,146 @@ public function CalculePesoRemision($idCotizacion)
 	return ($NR);	
 		
 	}
+        
+        /*
+     * Registra una Venta Rapida
+     * 
+     */
+    
+    public function RegistreVentaRapida($idPreventa, $idCliente, $TipoPago, $Paga, $Devuelta, $CuentaDestino, $DatosVentaRapida){
+  		
+
+        $CentroCostos=1;
+        $ResolucionDian=1;
+        
+        $CuentaDestino=$_REQUEST["CmbCuentaDestino"];
+        $OrdenCompra="";
+        $OrdenSalida="";
+        $ObservacionesFactura="";
+        $FechaFactura=date("Y-m-d");
+        
+        $Consulta=$this->DevuelveValores("centrocosto", "ID", $CentroCostos);
+        $EmpresaPro=$Consulta["EmpresaPro"];
+        if($TipoPago=="Contado"){
+            $SumaDias=0;
+        }else{
+            $SumaDias=$TipoPago;
+        }
+        ////////////////////////////////Preguntamos por disponibilidad
+        ///////////
+        ///////////
+        $ID="";
+        $DatosResolucion=$this->DevuelveValores("empresapro_resoluciones_facturacion", "ID", $ResolucionDian);
+        if($DatosResolucion["Completada"]=="NO"){           ///Pregunto si la resolucion ya fue completada
+            $Disponibilidad=$DatosResolucion["Estado"];
+                                              //si entra a verificar es porque estaba ocupada y cambiará a 1
+            while($Disponibilidad=="OC"){                   //miro que esté disponible para facturar, esto para no crear facturas dobles
+                print("Esperando disponibilidad<br>");
+                usleep(300);
+                $DatosResolucion=$this->DevuelveValores("empresapro_resoluciones_facturacion", "ID", $ResolucionDian);
+                $Disponibilidad=$DatosResolucion["Estado"];
+                
+            }
+            
+            $DatosResolucion=$this->DevuelveValores("empresapro_resoluciones_facturacion", "ID", $ResolucionDian);
+            if($DatosResolucion["Completada"]<>"SI"){
+                $this->ActualizaRegistro("empresapro_resoluciones_facturacion", "Estado", "OC", "ID", $ResolucionDian); //Ocupo la resolucion
+                
+                $sql="SELECT MAX(NumeroFactura) as FacturaActual FROM facturas WHERE Prefijo='$DatosResolucion[Prefijo]' "
+                        . "AND TipoFactura='$DatosResolucion[Tipo]' AND idResolucion='$ResolucionDian'";
+                $Consulta=$this->Query($sql);
+                $Consulta=$this->FetchArray($Consulta);
+                $FacturaActual=$Consulta["FacturaActual"];
+                $idFactura=$FacturaActual+1;
+                
+                //Verificamos si ya se completó el numero de la resolucion y si es así se cambia su estado
+                if($DatosResolucion["Hasta"]==$idFactura){ 
+                    $this->ActualizaRegistro("empresapro_resoluciones_facturacion", "Completada", "SI", "ID", $ResolucionDian);
+                }
+                //Verificamos si es la primer factura que se creará con esta resolucion
+                //Si es así se inicia desde el numero autorizado
+                if($idFactura==1){
+                   $idFactura=$DatosResolucion["Desde"];
+                }
+                //Convertimos los dias en credito
+                $FormaPagoFactura=$TipoPago;
+                if($TipoPago<>"Contado"){
+                    $FormaPagoFactura="Credito a $TipoPago dias";
+                }
+                ////////////////Inserto datos de la factura
+                /////
+                ////
+                $ID=date("YmdHis").microtime(false);
+                $tab="facturas";
+                $NumRegistros=27; 
+                
+                $Columnas[0]="TipoFactura";		    $Valores[0]=$DatosResolucion["Tipo"];
+                $Columnas[1]="Prefijo";                     $Valores[1]=$DatosResolucion["Prefijo"];
+                $Columnas[2]="NumeroFactura";               $Valores[2]=$idFactura;
+                $Columnas[3]="Fecha";                       $Valores[3]=$FechaFactura;
+                $Columnas[4]="OCompra";                     $Valores[4]=$OrdenCompra;
+                $Columnas[5]="OSalida";                     $Valores[5]=$OrdenSalida;
+                $Columnas[6]="FormaPago";                   $Valores[6]=$FormaPagoFactura;
+                $Columnas[7]="Subtotal";                    $Valores[7]="";
+                $Columnas[8]="IVA";                         $Valores[8]="";
+                $Columnas[9]="Descuentos";                  $Valores[9]="";
+                $Columnas[10]="Total";                      $Valores[10]="";
+                $Columnas[11]="SaldoFact";                  $Valores[11]="";
+                $Columnas[12]="Cotizaciones_idCotizaciones";$Valores[12]="";
+                $Columnas[13]="EmpresaPro_idEmpresaPro";    $Valores[13]=$EmpresaPro;
+                $Columnas[14]="Usuarios_idUsuarios";        $Valores[14]=$this->idUser;
+                $Columnas[15]="Clientes_idClientes";        $Valores[15]=$idCliente;
+                $Columnas[16]="TotalCostos";                $Valores[16]="";
+                $Columnas[17]="CerradoDiario";              $Valores[17]="";
+                $Columnas[18]="FechaCierreDiario";          $Valores[18]="";
+                $Columnas[19]="HoraCierreDiario";           $Valores[19]="";
+                $Columnas[20]="ObservacionesFact";          $Valores[20]=$ObservacionesFactura;
+                $Columnas[21]="CentroCosto";                $Valores[21]=$CentroCostos;
+                $Columnas[22]="idResolucion";               $Valores[22]=$ResolucionDian;
+                $Columnas[23]="idFacturas";                 $Valores[23]=$ID;
+                $Columnas[24]="Hora";                       $Valores[24]=date("H:i:s");
+                $Columnas[25]="Paga";                       $Valores[25]=$Paga;
+                $Columnas[26]="Devuelve";                   $Valores[26]=$Devuelta;
+                $this->InsertarRegistro($tab,$NumRegistros,$Columnas,$Valores);
+                
+                //libero la resolucion
+                $this->ActualizaRegistro("empresapro_resoluciones_facturacion", "Estado", "", "ID", $ResolucionDian);
+                
+                //////////////////////Agrego Items a la Factura desde la devolucion
+                /////
+                /////
+                
+                /*
+                $Datos["idPreventa"]=$idPreventa;
+                $Datos["NumFactura"]=$idFactura;
+                $Datos["FechaFactura"]=$FechaFactura;
+                $Datos["ID"]=$ID;
+                $Datos["CuentaDestino"]=$CuentaDestino;
+                $Datos["EmpresaPro"]=$EmpresaPro;
+                $Datos["CentroCostos"]=$CentroCostos;
+                $obVenta->InsertarItemsCotizacionAItemsFactura($Datos);///Relaciono los items de la factura
+                
+                $obVenta->InsertarFacturaLibroDiario($Datos);///Inserto Items en el libro diario
+               
+                if($TipoPago<>"Contado"){                   //Si es a Credito
+                    $Datos["Fecha"]=$FechaFactura; 
+                    $Datos["Dias"]=$SumaDias;
+                    $FechaVencimiento=$obVenta->SumeDiasFecha($Datos);
+                    $Datos["idFactura"]=$Datos["ID"]; 
+                    $Datos["FechaFactura"]=$FechaFactura; 
+                    $Datos["FechaVencimiento"]=$FechaVencimiento;
+                    $Datos["idCliente"]=$idCliente;
+                    $obVenta->InsertarFacturaEnCartera($Datos);///Inserto La factura en la cartera
+                }
+               */  
+            }    
+          
+        }else{
+            exit("La Resolucion de facturacion fue completada");
+        }
+	return ($idFactura);	
+		
+	}
 
 //////////////////////////////Fin	
 }

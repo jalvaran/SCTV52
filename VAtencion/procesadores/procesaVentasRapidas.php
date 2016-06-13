@@ -129,7 +129,7 @@
 	if(!empty($_REQUEST['BtnGuardar'])){
             $obVenta=new ProcesoVenta($idUser);
             $fecha=date("Y-m-d");
-            $idCliente=$_REQUEST["TxtIdCliente"];
+            $idCliente=$_REQUEST["TxtCliente"];
             $idPreventa=$_REQUEST["CmbPreVentaAct"];
             $Paga=$_REQUEST["TxtPaga"];
             $Devuelta=$_REQUEST["TxtDevuelta"];
