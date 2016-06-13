@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2016 a las 14:02:01
+-- Tiempo de generación: 13-06-2016 a las 16:17:51
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -4380,7 +4380,8 @@ INSERT INTO `facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefijo`, 
 ('201606131339370.44331400 1465843177', 1, '02', 'A', 109, '2016-06-13', '13:39:37', '', '', 'Contado', '', '', '', '', '', '', 1, 1, 3, 18, '', '', '', '', '', 0, 0),
 ('201606131347350.74293700 1465843655', 1, '02', 'A', 110, '2016-06-13', '13:47:35', '', '', 'Contado', '127100', '20336', '', '147436', '147436', '', 1, 1, 3, 17, '84499', '', '', '', '', 0, 0),
 ('201606131356340.17242800 1465844194', 1, '02', 'A', 111, '2016-06-13', '13:56:34', '', '', 'Contado', '46900', '7504', '', '54404', '54404', '', 1, 1, 3, 18, '30999', '', '', '', '', 0, 0),
-('201606131400590.64788300 1465844459', 1, '02', 'A', 112, '2016-06-13', '14:00:59', '', '', 'Contado', '55000', '8800', '', '63800', '63800', '', 1, 1, 3, 2, '39900', '', '', '', '', 0, 0);
+('201606131400590.64788300 1465844459', 1, '02', 'A', 112, '2016-06-13', '14:00:59', '', '', 'Contado', '55000', '8800', '', '63800', '63800', '', 1, 1, 3, 2, '39900', '', '', '', '', 0, 0),
+('201606131617440.26331100 1465852664', 1, '02', 'A', 113, '2016-06-13', '16:17:44', '', '', 'Contado', '46900', '7504', '', '54404', '54404', '', 1, 1, 3, 18, '30999', '', '', '', '', 0, 0);
 
 --
 -- Disparadores `facturas`
@@ -4752,7 +4753,7 @@ CREATE TABLE IF NOT EXISTS `facturas_items` (
   `GeneradoDesde` varchar(100) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Tabla que agrega el item',
   `NumeroIdentificador` varchar(45) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Identificar del que agrega el item',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=201606131339383 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=201606131339385 ;
 
 --
 -- Volcado de datos para la tabla `facturas_items`
@@ -4796,7 +4797,9 @@ INSERT INTO `facturas_items` (`ID`, `FechaFactura`, `idFactura`, `TablaItems`, `
 (201606131339379, '2016-06-13', '201606131356340.17242800 1465844194', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '51'),
 (201606131339380, '2016-06-13', '201606131356340.17242800 1465844194', 'productosventa', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 1, 2, 23, 0, 0, 0, '21900', '1', '1', '21900', '3504', '25404', '16%', '15999', '15999', 'PR', 4135, 'cotizacionesv5', '51'),
 (201606131339381, '2016-06-13', '201606131400590.64788300 1465844459', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '2', '1', '47000', '7520', '54520', '16%', '17200', '34400', 'PR', 4135, 'cotizacionesv5', '47'),
-(201606131339382, '2016-06-13', '201606131400590.64788300 1465844459', 'productosventa', 'FE&9901L', 'BOXER FE&RO ALGODON SOLO FONDO T/L', 1, 1, 14, 1, 0, 0, '8000', '1', '1', '8000', '1280', '9280', '16%', '5500', '5500', 'PR', 4135, 'cotizacionesv5', '47');
+(201606131339382, '2016-06-13', '201606131400590.64788300 1465844459', 'productosventa', 'FE&9901L', 'BOXER FE&RO ALGODON SOLO FONDO T/L', 1, 1, 14, 1, 0, 0, '8000', '1', '1', '8000', '1280', '9280', '16%', '5500', '5500', 'PR', 4135, 'cotizacionesv5', '47'),
+(201606131339383, '2016-06-13', '201606131617440.26331100 1465852664', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '51'),
+(201606131339384, '2016-06-13', '201606131617440.26331100 1465852664', 'productosventa', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 1, 2, 23, 0, 0, 0, '21900', '1', '1', '21900', '3504', '25404', '16%', '15999', '15999', 'PR', 4135, 'cotizacionesv5', '51');
 
 --
 -- Disparadores `facturas_items`
@@ -5109,7 +5112,7 @@ CREATE TABLE IF NOT EXISTS `kardexmercancias` (
   `ValorTotal` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ProductosVenta_idProductosVenta` int(11) NOT NULL,
   PRIMARY KEY (`idKardexMercancias`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=12143 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=12147 ;
 
 --
 -- Volcado de datos para la tabla `kardexmercancias`
@@ -17270,7 +17273,11 @@ INSERT INTO `kardexmercancias` (`idKardexMercancias`, `Fecha`, `Movimiento`, `De
 (12139, '2016-06-13', 'SALIDA', 'Factura', '201606131400590.64788300 1465844459', '2', '17200', '34400', 3),
 (12140, '2016-06-13', 'SALDOS', 'Factura', '201606131400590.64788300 1465844459', '-15', '17200', '-258000', 3),
 (12141, '2016-06-13', 'SALIDA', 'Factura', '201606131400590.64788300 1465844459', '1', '5500', '5500', 646),
-(12142, '2016-06-13', 'SALDOS', 'Factura', '201606131400590.64788300 1465844459', '61', '5500', '335500', 646);
+(12142, '2016-06-13', 'SALDOS', 'Factura', '201606131400590.64788300 1465844459', '61', '5500', '335500', 646),
+(12143, '2016-06-13', 'SALIDA', 'Factura', '201606131617440.26331100 1465852664', '1', '15000', '15000', 1),
+(12144, '2016-06-13', 'SALDOS', 'Factura', '201606131617440.26331100 1465852664', '72', '15000', '1080000', 1),
+(12145, '2016-06-13', 'SALIDA', 'Factura', '201606131617440.26331100 1465852664', '1', '15999', '15999', 4),
+(12146, '2016-06-13', 'SALDOS', 'Factura', '201606131617440.26331100 1465852664', '-10', '15999', '-159990', 4);
 
 -- --------------------------------------------------------
 
@@ -17356,7 +17363,7 @@ CREATE TABLE IF NOT EXISTS `librodiario` (
   `idEmpresa` int(11) NOT NULL,
   `Estado` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idLibroDiario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=776 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=790 ;
 
 --
 -- Volcado de datos para la tabla `librodiario`
@@ -18139,7 +18146,21 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (772, '2016-06-13', 'FACTURA', '201606131400590.64788300 1465844459', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '64', '0', '64', 'NO', 'NO', 1, 1, ''),
 (773, '2016-06-13', 'FACTURA', '201606131400590.64788300 1465844459', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '64', '-64', 'NO', 'NO', 1, 1, ''),
 (774, '2016-06-13', 'FACTURA', '201606131400590.64788300 1465844459', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '5500', '0', '5500', 'NO', 'NO', 1, 1, ''),
-(775, '2016-06-13', 'FACTURA', '201606131400590.64788300 1465844459', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '5500', '-5500', 'NO', 'NO', 1, 1, '');
+(775, '2016-06-13', 'FACTURA', '201606131400590.64788300 1465844459', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '5500', '-5500', 'NO', 'NO', 1, 1, ''),
+(776, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '29000', '0', '29000', 'NO', 'NO', 1, 1, ''),
+(777, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '25000', '-25000', 'NO', 'NO', 1, 1, ''),
+(778, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '4000', '-4000', 'NO', 'NO', 1, 1, ''),
+(779, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '200', '0', '200', 'NO', 'NO', 1, 1, ''),
+(780, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '200', '-200', 'NO', 'NO', 1, 1, ''),
+(781, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1, ''),
+(782, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1, ''),
+(783, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '110505', 'CAJA GENERAL', 'Ventas', '25404', '0', '25404', 'NO', 'NO', 1, 1, ''),
+(784, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '21900', '-21900', 'NO', 'NO', 1, 1, ''),
+(785, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3504', '-3504', 'NO', 'NO', 1, 1, ''),
+(786, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '175', '0', '175', 'NO', 'NO', 1, 1, ''),
+(787, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '175', '-175', 'NO', 'NO', 1, 1, ''),
+(788, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15999', '0', '15999', 'NO', 'NO', 1, 1, ''),
+(789, '2016-06-13', 'FACTURA', '201606131617440.26331100 1465852664', '31', '900605785', '5', '', '', '', '', 'AREA INFORMATICA', 'CARRERA 10 No. 8-11', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15999', '-15999', 'NO', 'NO', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -18472,7 +18493,8 @@ INSERT INTO `ori_facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefij
 ('201606101725430.15685300 1465597543', 1, '02', 'A', 98, '2016-06-10', '17:25:43', '', '', 'ANULADA', '55000', '8800', '', '63800', '63800', '', 1, 1, 3, 2, '39900', '', '', '', 'dsdsd', 0, 0),
 ('201606131347350.74293700 1465843655', 1, '02', 'A', 110, '2016-06-13', '13:47:35', '', '', 'Contado', '127100', '20336', '', '147436', '147436', '', 1, 1, 3, 17, '84499', '', '', '', '', 0, 0),
 ('201606131356340.17242800 1465844194', 1, '02', 'A', 111, '2016-06-13', '13:56:34', '', '', 'Contado', '46900', '7504', '', '54404', '54404', '', 1, 1, 3, 18, '30999', '', '', '', '', 0, 0),
-('201606131400590.64788300 1465844459', 1, '02', 'A', 112, '2016-06-13', '14:00:59', '', '', 'Contado', '55000', '8800', '', '63800', '63800', '', 1, 1, 3, 2, '39900', '', '', '', '', 0, 0);
+('201606131400590.64788300 1465844459', 1, '02', 'A', 112, '2016-06-13', '14:00:59', '', '', 'Contado', '55000', '8800', '', '63800', '63800', '', 1, 1, 3, 2, '39900', '', '', '', '', 0, 0),
+('201606131617440.26331100 1465852664', 1, '02', 'A', 113, '2016-06-13', '16:17:44', '', '', 'Contado', '46900', '7504', '', '54404', '54404', '', 1, 1, 3, 18, '30999', '', '', '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -18625,7 +18647,9 @@ INSERT INTO `ori_facturas_items` (`ID`, `FechaFactura`, `idFactura`, `TablaItems
 ('201606131339379', '2016-06-13', '201606131356340.17242800 1465844194', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '51'),
 ('201606131339380', '2016-06-13', '201606131356340.17242800 1465844194', 'productosventa', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 1, 2, 23, 0, 0, 0, '21900', '1', '1', '21900', '3504', '25404', '16%', '15999', '15999', 'PR', 4135, 'cotizacionesv5', '51'),
 ('201606131339381', '2016-06-13', '201606131400590.64788300 1465844459', 'productosventa', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', 1, 2, 23, 0, 0, 0, '23500', '2', '1', '47000', '7520', '54520', '16%', '17200', '34400', 'PR', 4135, 'cotizacionesv5', '47'),
-('201606131339382', '2016-06-13', '201606131400590.64788300 1465844459', 'productosventa', 'FE&9901L', 'BOXER FE&RO ALGODON SOLO FONDO T/L', 1, 1, 14, 1, 0, 0, '8000', '1', '1', '8000', '1280', '9280', '16%', '5500', '5500', 'PR', 4135, 'cotizacionesv5', '47');
+('201606131339382', '2016-06-13', '201606131400590.64788300 1465844459', 'productosventa', 'FE&9901L', 'BOXER FE&RO ALGODON SOLO FONDO T/L', 1, 1, 14, 1, 0, 0, '8000', '1', '1', '8000', '1280', '9280', '16%', '5500', '5500', 'PR', 4135, 'cotizacionesv5', '47'),
+('201606131339383', '2016-06-13', '201606131617440.26331100 1465852664', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '25000', '1', '1', '25000', '4000', '29000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', '51'),
+('201606131339384', '2016-06-13', '201606131617440.26331100 1465852664', 'productosventa', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', 1, 2, 23, 0, 0, 0, '21900', '1', '1', '21900', '3504', '25404', '16%', '15999', '15999', 'PR', 4135, 'cotizacionesv5', '51');
 
 -- --------------------------------------------------------
 
@@ -18700,7 +18724,7 @@ CREATE TABLE IF NOT EXISTS `preventa` (
   `TotalVenta` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `TipoItem` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idPrecotizacion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=52 ;
 
 --
 -- Volcado de datos para la tabla `preventa`
@@ -18711,9 +18735,8 @@ INSERT INTO `preventa` (`idPrecotizacion`, `Fecha`, `Cantidad`, `VestasActivas_i
 (38, '2016-06-12', '25', 4, 4, 'productosventa', '18879.310344828', '471982.7586207', '18879.310344828', '', '75517.241379312', '471982.7586207', 'PR'),
 (39, '2016-06-12', '200', 4, 6, 'productosventa', '16293.103448276', '3258620.6896552', '16293.103448276', '', '521379.31034483', '3258620.6896552', 'PR'),
 (46, '2016-06-12', '1', 3, 2, 'productosventa', '17155.172413793', '17155.172413793', '17155.172413793', '', '2744.8275862069', '19900', ''),
-(47, '2016-06-12', '3', 2, 2, 'productosventa', '17155.172413793', '51465.517241379', '17155.172413793', '', '8234.4827586206', '59700', ''),
-(48, '2016-06-12', '1', 2, 4, 'productosventa', '18879.310344828', '18879.310344828', '18879.310344828', '', '3020.6896551724', '21900', ''),
-(49, '2016-06-12', '3', 2, 1, 'productosventa', '21551.724137931', '64655.172413793', '21551.724137931', '', '10344.827586207', '75000', '');
+(50, '2016-06-13', '1', 3, 40, 'productosventa', '15431.034482759', '15431.034482759', '15431.034482759', '', '2468.9655172414', '17900', ''),
+(51, '2016-06-13', '1', 2, 1, 'productosventa', '21551.724137931', '21551.724137931', '21551.724137931', '', '3448.275862069', '25000', '');
 
 -- --------------------------------------------------------
 
@@ -18791,10 +18814,10 @@ CREATE TABLE IF NOT EXISTS `productosventa` (
 --
 
 INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, `Nombre`, `Existencias`, `PrecioVenta`, `PrecioMayorista`, `CostoUnitario`, `CostoTotal`, `IVA`, `Bodega_idBodega`, `Departamento`, `Sub1`, `Sub2`, `Sub3`, `Sub4`, `Sub5`, `Kit`, `ImagenesProductos_idImagenesProductos`, `Especial`, `CuentaPUC`) VALUES
-(1, '1', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 73, 25000, '19500', '15000', '1095000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(1, '1', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 72, 25000, '19500', '15000', '1080000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (2, '2', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 19900, '19900', '14000', '14000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (3, '3', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', -15, 23500, '23500', '17200', '-258000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
-(4, '4', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', -9, 21900, '21900', '15999', '-143991', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(4, '4', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', -10, 21900, '21900', '15999', '-159990', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (5, '5', 'MAG2087', 'BLUSA MAGENTA TIRAS', 14, 20900, '20900', '15400', '215600', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (6, '6', 'NJF4001', 'BLUSA NJ FASHION GALLETA TULL\n', 2, 18900, '18900', '13700', '27400', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (7, '7', 'NJF4003', 'BLUSA NJ FASHION GALLETA TULL TIRAS', 0, 23900, '23900', '18200', '0', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
