@@ -634,10 +634,10 @@ class ProcesoVenta{
 //////////////////////Funcion imprima factura
 ///////////////////////////////////////////////////////////////////
 
-	public function ImprimeFactura($NumFactura,$COMPrinter,$PrintCuenta,$ruta){
+public function ImprimeFactura($NumFactura,$COMPrinter,$PrintCuenta,$ruta){
 
-		header("location:../printer/imprimir.php?print=$NumFactura&ruta=$ruta");
-	}	
+        header("location:../printer/imprimir.php?print=$NumFactura&ruta=$ruta");
+}	
 
 ////////////////////////////////////////////////////////////////////
 //////////////////////Funcion borra pedido
@@ -713,8 +713,10 @@ class ProcesoVenta{
 public function AgregaPreventa($fecha,$Cantidad,$idVentaActiva,$idProducto,$TablaItem)
   {
 	$DatosProductoGeneral=$this->DevuelveValores($TablaItem, "idProductosVenta", $idProducto);
+        $DatosDepartamento=$this->DevuelveValores("prod_departamentos", "idDepartamentos", $DatosProductoGeneral["Departamento"]);
+        $TipoItem=$DatosDepartamento["TipoItem"];
         $consulta=$this->ConsultarTabla("preventa", "WHERE TablaItem='$TablaItem' AND ProductosVenta_idProductosVenta='$idProducto' AND VestasActivas_idVestasActivas='$idVentaActiva'");
-        
+       
 	if($this->NumRows($consulta)){
             $DatosProduto=$this->FetchArray($consulta);
             $Cantidad=$DatosProduto["Cantidad"]+$Cantidad;
@@ -748,8 +750,8 @@ public function AgregaPreventa($fecha,$Cantidad,$idVentaActiva,$idProducto,$Tabl
             $Total=$Subtotal+$impuesto;
 
 
-            $sql="INSERT INTO `preventa` ( `Fecha`, `Cantidad`, `VestasActivas_idVestasActivas`, `ProductosVenta_idProductosVenta`, `ValorUnitario`,`ValorAcordado`, `Subtotal`, `Impuestos`, `TotalVenta`, `TablaItem`)
-                    VALUES ('$fecha', '$Cantidad', '$idVentaActiva', '$idProducto', '$ValorUnitario','$ValorUnitario', '$Subtotal', '$impuesto', '$Total', '$TablaItem');";
+            $sql="INSERT INTO `preventa` ( `Fecha`, `Cantidad`, `VestasActivas_idVestasActivas`, `ProductosVenta_idProductosVenta`, `ValorUnitario`,`ValorAcordado`, `Subtotal`, `Impuestos`, `TotalVenta`, `TablaItem`, `TipoItem`)
+                    VALUES ('$fecha', '$Cantidad', '$idVentaActiva', '$idProducto', '$ValorUnitario','$ValorUnitario', '$Subtotal', '$impuesto', '$Total', '$TablaItem', '$TipoItem');";
 
             $this->Query($sql) or die('no se pudo guardar el item en preventa: ' . mysql_error());	
 	
@@ -1892,8 +1894,14 @@ public function CalculePesoRemision($idCotizacion)
      */
     
     public function RegistreVentaRapida($idPreventa, $idCliente, $TipoPago, $Paga, $Devuelta, $CuentaDestino, $DatosVentaRapida){
-  		
-
+  	
+        $sql="SELECT * FROM preventa WHERE VestasActivas_idVestasActivas='$idPreventa'";
+        $Consulta=$this->Query($sql);
+        if($this->NumRows($Consulta)<1){
+            header("location:$myPage?CmbPreVentaAct=$idPreventa");
+            exit();    
+        }
+        
         $CentroCostos=1;
         $ResolucionDian=1;
         
@@ -2042,19 +2050,20 @@ public function CalculePesoRemision($idCotizacion)
         $TotalIVA=0;
         $GranTotal=0;
         $TotalCostos=0;
+        
         while($DatosCotizacion=  mysql_fetch_array($Consulta)){
 
             $DatosProducto=$this->DevuelveValores($DatosCotizacion["TablaItem"], "idProductosVenta", $DatosCotizacion["ProductosVenta_idProductosVenta"]);
             ////Empiezo a insertar en la tabla items facturas
             ///
             ///
-            $SubtotalItem=$DatosCotizacion["Subtotal"];
+            $SubtotalItem=round($DatosCotizacion["Subtotal"]);
             $TotalSubtotal=$TotalSubtotal+$SubtotalItem; //se realiza la sumatoria del subtotal
             
-            $IVAItem=$DatosCotizacion["Impuestos"];
+            $IVAItem=round($DatosCotizacion["Impuestos"]);
             $TotalIVA=$TotalIVA+$IVAItem; //se realiza la sumatoria del iva
             
-            $TotalItem=$DatosCotizacion['TotalVenta'];
+            $TotalItem=round($DatosCotizacion['TotalVenta']);
             $GranTotal=$GranTotal+$TotalItem;//se realiza la sumatoria del total
             
             $SubtotalCosto=$DatosCotizacion['Cantidad']*$DatosProducto["CostoUnitario"];
@@ -2114,6 +2123,174 @@ public function CalculePesoRemision($idCotizacion)
         $this->Query($sql);
         
     } 
+    
+    public function ImprimeFacturaPOS($idFactura,$COMPrinter,$Copias){
+
+        if(($handle = @fopen("$COMPrinter", "w")) === FALSE){
+            die('ERROR:\nNo se puedo Imprimir, Verifique la conexion de la IMPRESORA');
+        }
+       $DatosFactura=$this->DevuelveValores("facturas", "idFacturas", $idFactura);
+       $DatosEmpresa=$this->DevuelveValores("empresapro", "idEmpresaPro", $DatosFactura["EmpresaPro_idEmpresaPro"]);
+       $DatosResolucion=$this->DevuelveValores("empresapro_resoluciones_facturacion", "ID", $DatosFactura["idResolucion"]);
+       $DatosUsuario=$this->DevuelveValores("usuarios", "idUsuarios", $DatosFactura["Usuarios_idUsuarios"]);
+       $DatosCliente=$this->DevuelveValores("clientes", "idClientes", $DatosFactura["Clientes_idClientes"]);
+        $RazonSocial=$DatosEmpresa["RazonSocial"];
+        $NIT=$DatosEmpresa["NIT"];
+        $Direccion=$DatosEmpresa["Direccion"];
+        $Ciudad=$DatosEmpresa["Ciudad"];
+        
+        $ResolucionDian1="RES DIAN: $DatosResolucion[NumResolucion] del $DatosResolucion[Fecha]";
+        $ResolucionDian2="FACTURA AUT. $DatosResolucion[Prefijo] - $DatosResolucion[Desde] HASTA $DatosResolucion[Prefijo] - $DatosResolucion[Hasta]";
+        $ResolucionDian3="Autoriza impresion en:  $DatosResolucion[Factura]";
+        $Telefono=$DatosEmpresa["Telefono"];
+
+        $impuesto=$DatosFactura["IVA"];
+        $Descuento=$DatosFactura["Descuentos"];
+        $TotalVenta=$DatosFactura["Total"];
+        $Subtotal=$DatosFactura["Subtotal"];
+        $TotalFinal=$DatosFactura["Total"];
+
+        $Fecha=$DatosFactura["Fecha"];
+        $Hora=$DatosFactura["Hora"];
+        $NumFact=$DatosFactura["Prefijo"]." - ".$DatosFactura["NumeroFactura"];
+        for($i=1; $i<=$Copias;$i++){
+        fwrite($handle,chr(27). chr(64));//REINICIO
+        fwrite($handle, chr(27). chr(112). chr(48));//ABRIR EL CAJON
+        fwrite($handle, chr(27). chr(100). chr(0));// SALTO DE CARRO VACIO
+        fwrite($handle, chr(27). chr(33). chr(8));// NEGRITA
+        fwrite($handle, chr(27). chr(97). chr(1));// CENTRADO
+        fwrite($handle,"*************************************");
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,$RazonSocial); // ESCRIBO RAZON SOCIAL
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,$NIT);
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,$ResolucionDian1);
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,$ResolucionDian2);
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,$ResolucionDian3);
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,$Direccion);
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,$Ciudad);
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,$Telefono);
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+
+        fwrite($handle,"Cajero:.$DatosUsuario[Nombre] $DatosUsuario[Apellido]");
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,"*************************************");
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,"Cliente: $DatosCliente[RazonSocial]");
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,"NIT: $DatosCliente[Num_Identificacion]");
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle,"*************************************");
+        /////////////////////////////FECHA Y NUM FACTURA
+
+        fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+        fwrite($handle, chr(27). chr(97). chr(0));// IZQUIERDA
+        fwrite($handle,"FECHA: $Fecha");
+        fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+        fwrite($handle,"FACTURA DE VENTA No $NumFact");
+        fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+        fwrite($handle,"_____________________________________");
+        fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+
+        /////////////////////////////ITEMS VENDIDOS
+
+        fwrite($handle, chr(27). chr(97). chr(0));// IZQUIERDA
+
+        $sql = "SELECT * FROM facturas_items WHERE idFactura='$idFactura'";
+	
+        $consulta=$this->Query($sql);
+								
+	while($DatosVenta=$this->FetchArray($consulta)){
+		
+            //$Descuentos=$DatosVenta["Descuentos"];
+            //$Impuestos=$DatosVenta["Impuestos"];
+            $SubTotalITem=$DatosVenta["SubtotalItem"];
+            //$SubTotalITem=$TotalVenta-$Impuestos;
+
+
+            fwrite($handle,str_pad($DatosVenta["Cantidad"],4," ",STR_PAD_RIGHT));
+
+            fwrite($handle,str_pad(substr($DatosVenta["Nombre"],0,20),20," ",STR_PAD_BOTH)."   ");
+
+            fwrite($handle,str_pad("$".number_format($SubTotalITem),10," ",STR_PAD_LEFT));
+
+            fwrite($handle, chr(27). chr(100). chr(1));// SALTO DE LINEA
+}
+
+
+
+
+    /////////////////////////////TOTALES
+
+    fwrite($handle,"_____________________________________");
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle, chr(27). chr(97). chr(0));// IZQUIERDA
+
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle,"SUBTOTAL         ".str_pad("$".number_format($Subtotal),20," ",STR_PAD_LEFT));
+
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle,"IVA              ".str_pad("$".number_format($impuesto),20," ",STR_PAD_LEFT));
+
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle,"TOTAL A PAGAR    ".str_pad("$".number_format($TotalVenta),20," ",STR_PAD_LEFT));
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+
+    fwrite($handle,"_____________________________________");
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+
+    /////////////////////////////Forma de PAGO
+
+    fwrite($handle,"_____________________________________");
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle, chr(27). chr(97). chr(0));// IZQUIERDA
+
+    fwrite($handle,"Formas de Pago");
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle,"       $DatosFactura[FormaPago] ----> $".str_pad(number_format($DatosFactura["Paga"]),10," ",STR_PAD_LEFT));
+
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle,"       Cambio  ----> $".str_pad(number_format($DatosFactura["Devuelve"]),10," ",STR_PAD_LEFT));
+
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+
+    fwrite($handle,"_____________________________________");
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle, chr(27). chr(97). chr(1));// CENTRO
+    fwrite($handle,"***GRACIAS POR SU COMPRA***");
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    //fwrite($handle, chr(27). chr(32). chr(0));//ESTACIO ENTRE LETRAS
+    //fwrite($handle, chr(27). chr(100). chr(0));
+    //fwrite($handle, chr(29). chr(107). chr(4)); //CODIGO BARRAS
+    fwrite($handle, chr(27). chr(100). chr(1));
+    fwrite($handle, chr(27). chr(100). chr(1));
+    fwrite($handle,"***Factura impresa por SoftConTech***");
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle,"Software disenado por Techno Soluciones SAS, 3177740609, www.technosoluciones.com.co");
+    //fwrite($handle,"=================================");
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle, chr(27). chr(100). chr(1));
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle, chr(27). chr(100). chr(1));
+    fwrite($handle, chr(27). chr(100). chr(1));//salto de linea
+    fwrite($handle, chr(27). chr(100). chr(1));
+
+    fwrite($handle, chr(29). chr(86). chr(49));//CORTA PAPEL
+    }
+    fclose($handle); // cierra el fichero PRN
+    $salida = shell_exec('lpr $COMPrinter');
+    
+    }
 //////////////////////////////Fin	
 }
 	

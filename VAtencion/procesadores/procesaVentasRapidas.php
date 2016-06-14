@@ -141,6 +141,10 @@
 
             $obVenta->BorraReg("preventa","VestasActivas_idVestasActivas",$idPreventa);
             $obVenta->ActualizaRegistro("vestasactivas","SaldoFavor", 0, "idVestasActivas", $idPreventa);
+            $DatosImpresora=$obVenta->DevuelveValores("config_puertos", "ID", 1);
+            if($DatosImpresora["Habilitado"]=="SI"){
+                $obVenta->ImprimeFacturaPOS($NumFactura,$DatosImpresora["Puerto"],1);
+            }
             header("location:$myPage?CmbPreVentaAct=$idPreventa&TxtidFactura=$NumFactura");
 		
 		

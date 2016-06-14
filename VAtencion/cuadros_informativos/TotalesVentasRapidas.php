@@ -17,7 +17,7 @@
             $SaldoFavor=0;
 
     $Total=$Subtotal+$IVA;
-    $GranTotal=$Total-$SaldoFavor;
+    $GranTotal=round($Total-$SaldoFavor);
     $css->CrearForm2("FrmGuarda",$myPage,"post","_self");
     $css->CrearInputText("CmbPreVentaAct","hidden","",$idPreventa,"","","","",150,30,0,0);
     $css->CrearInputText("TxtSaldoFavor","hidden","",$SaldoFavor,"","","","",150,30,0,0);
