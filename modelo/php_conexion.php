@@ -2293,7 +2293,7 @@ public function CalculePesoRemision($idCotizacion)
     }
     
      public function ImprimirCodigoBarras($Tabla,$idProducto,$Cantidad,$Puerto,$DatosCB){
-         
+        `mode $Puerto: BAUD=9600 PARITY=N data=8 stop=1 xon=off`;  //inicializamos el puerto
         if(($handle = @fopen("$Puerto", "w")) === FALSE){
             die("<script>alert( 'ERROR:\nNo se puedo Imprimir, Verifique la conexion de la IMPRESORA')</script>");
         }
@@ -2318,16 +2318,16 @@ public function CalculePesoRemision($idCotizacion)
         $Costo1= substr($DatosProducto["CostoUnitario"], 0, 1);
         $Costo=$Costo1."/".$Costo2;
         $enter="\r\n";
-
-        $L1=10;
-        $L2=280;
-        $L3=560;
-        $AL1=1;
-        $AL2=20;
-        $AL3=40;
-        $AL4=60;
-        $AL5=120;
-        $AlturaCB=30;
+        $DatosConfigCB = $this->DevuelveValores("config_codigo_barras", "ID", 1);
+        $L1=$DatosConfigCB["DistaciaEtiqueta1"];
+        $L2=$DatosConfigCB["DistaciaEtiqueta2"];
+        $L3=$DatosConfigCB["DistaciaEtiqueta3"];
+        $AL1=$DatosConfigCB["AlturaLinea1"];
+        $AL2=$DatosConfigCB["AlturaLinea2"];
+        $AL3=$DatosConfigCB["AlturaLinea3"];
+        $AL4=$DatosConfigCB["AlturaLinea4"];
+        $AL5=$DatosConfigCB["AlturaLinea5"];
+        $AlturaCB=$DatosConfigCB["AlturaCodigoBarras"];
         if(strlen($PrecioVenta)>7){
             $TamPrecio=2;
         }else{
