@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2016 a las 14:41:31
+-- Tiempo de generación: 14-06-2016 a las 18:43:23
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -258,14 +258,15 @@ CREATE TABLE IF NOT EXISTS `cartera` (
   `Saldo` double NOT NULL DEFAULT '0',
   `Observaciones` text,
   PRIMARY KEY (`idCartera`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `cartera`
 --
 
 INSERT INTO `cartera` (`idCartera`, `Facturas_idFacturas`, `FechaIngreso`, `FechaVencimiento`, `DiasCartera`, `idCliente`, `RazonSocial`, `Telefono`, `Contacto`, `TelContacto`, `TotalFactura`, `TotalAbonos`, `Saldo`, `Observaciones`) VALUES
-(5, '201606101138550.91001300 1465576735', '2016-06-10', '2016-07-10', -28, '2', 'Techno Soluciones', '314555666', 'Julian Alvaran', '2147483647', 63104, 0, 63104, 'Se llama no contesta');
+(5, '201606101138550.91001300 1465576735', '2016-06-10', '2016-07-10', -26, '2', 'Techno Soluciones', '314555666', 'Julian Alvaran', '2147483647', 63104, 0, 63104, 'Se llama no contesta'),
+(6, '201606141759020.61171400 1465945142', '2016-06-14', '2016-08-13', -60, '2', 'Techno Soluciones', '314555666', 'Julian Alvaran', '2147483647', 25000, 0, 25000, NULL);
 
 -- --------------------------------------------------------
 
@@ -4447,7 +4448,9 @@ INSERT INTO `facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefijo`, 
 ('201606141112020.07414000 1465920722', 1, '02', 'A', 147, '2016-06-14', '11:12:02', '', '', 'Contado', '413793', '66207', '', '480000', '480000', '', 1, 1, 3, 17, '400000', '', '', '', '', 500000, 20001),
 ('201606141114240.65839000 1465920864', 1, '02', 'A', 148, '2016-06-14', '11:14:24', '', '', 'Contado', '51724', '8276', '', '60000', '60000', '', 1, 1, 3, 1, '50000', '', '', '', '', 8, -59992),
 ('201606141158520.48321200 1465923532', 1, '02', 'A', 149, '2016-06-14', '11:58:52', '', '', 'Contado', '435345', '69655', '', '505000', '505000', '', 1, 1, 3, 1, '415000', '', '', '', '', 0, 0),
-('201606141410190.16676300 1465931419', 1, '02', 'A', 150, '2016-06-14', '14:10:19', '', '', 'Contado', '17241', '2759', '', '20000', '20000', '', 1, 1, 3, 17, '5000', '', '', '', '', 20000, 0);
+('201606141410190.16676300 1465931419', 1, '02', 'A', 150, '2016-06-14', '14:10:19', '', '', 'Contado', '17241', '2759', '', '20000', '20000', '', 1, 1, 3, 17, '5000', '', '', '', '', 20000, 0),
+('201606141759020.61171400 1465945142', 1, '02', 'A', 151, '2016-06-14', '17:59:02', '', '', 'Credito a 60 dias', '21552', '3448', '', '25000', '25000', '', 1, 1, 3, 2, '15000', '', '', '', '', 0, 0),
+('201606141801220.94274000 1465945282', 1, '02', 'A', 152, '2016-06-14', '18:01:22', '', '', 'Contado', '17155', '2745', '', '19900', '19900', '', 1, 1, 3, 1, '14000', '', '', '', '', 20000, 100);
 
 --
 -- Disparadores `facturas`
@@ -4819,7 +4822,7 @@ CREATE TABLE IF NOT EXISTS `facturas_items` (
   `GeneradoDesde` varchar(100) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Tabla que agrega el item',
   `NumeroIdentificador` varchar(45) COLLATE utf8_spanish2_ci NOT NULL COMMENT 'Identificar del que agrega el item',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=201606131339430 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=201606131339432 ;
 
 --
 -- Volcado de datos para la tabla `facturas_items`
@@ -4910,7 +4913,9 @@ INSERT INTO `facturas_items` (`ID`, `FechaFactura`, `idFactura`, `TablaItems`, `
 (201606131339426, '2016-06-14', '201606141114240.65839000 1465920864', 'servicios', 'PAELTA', 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', 11, 0, 0, 0, 0, 0, '51724.137931034', '1', '1', '51724', '8276', '60000', '16%', '50000', '50000', 'MO', 416510, 'cotizacionesv5', ''),
 (201606131339427, '2016-06-14', '201606141158520.48321200 1465923532', 'servicios', 'PAELTA', 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', 11, 0, 0, 0, 0, 0, '51724.137931034', '8', '1', '413793', '66207', '480000', '16%', '50000', '400000', 'MO', 416510, 'cotizacionesv5', ''),
 (201606131339428, '2016-06-14', '201606141158520.48321200 1465923532', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '21551.724137931', '1', '1', '21552', '3448', '25000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', ''),
-(201606131339429, '2016-06-14', '201606141410190.16676300 1465931419', 'productosventa', 'BOP', 'BOTON DE PANICO FIJO', 6, 27, 0, 0, 0, 0, '17241.379310345', '1', '1', '17241', '2759', '20000', '16%', '5000', '5000', 'PR', 4135, 'cotizacionesv5', '');
+(201606131339429, '2016-06-14', '201606141410190.16676300 1465931419', 'productosventa', 'BOP', 'BOTON DE PANICO FIJO', 6, 27, 0, 0, 0, 0, '17241.379310345', '1', '1', '17241', '2759', '20000', '16%', '5000', '5000', 'PR', 4135, 'cotizacionesv5', ''),
+(201606131339430, '2016-06-14', '201606141759020.61171400 1465945142', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '21551.724137931', '1', '1', '21552', '3448', '25000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', ''),
+(201606131339431, '2016-06-14', '201606141801220.94274000 1465945282', 'productosventa', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 2, 23, 0, 0, 0, '17155.172413793', '1', '1', '17155', '2745', '19900', '16%', '14000', '14000', 'PR', 4135, 'cotizacionesv5', '');
 
 --
 -- Disparadores `facturas_items`
@@ -5223,7 +5228,7 @@ CREATE TABLE IF NOT EXISTS `kardexmercancias` (
   `ValorTotal` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ProductosVenta_idProductosVenta` int(11) NOT NULL,
   PRIMARY KEY (`idKardexMercancias`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=12167 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=12171 ;
 
 --
 -- Volcado de datos para la tabla `kardexmercancias`
@@ -17408,7 +17413,11 @@ INSERT INTO `kardexmercancias` (`idKardexMercancias`, `Fecha`, `Movimiento`, `De
 (12163, '2016-06-14', 'ENTRADA', 'INICIO', '', '0', '5000', NULL, 2918),
 (12164, '2016-06-14', 'SALDOS', 'INICIO', '', '0', '5000', NULL, 2918),
 (12165, '2016-06-14', 'SALIDA', 'Factura', '201606141410190.16676300 1465931419', '1', '5000', '5000', 2918),
-(12166, '2016-06-14', 'SALDOS', 'Factura', '201606141410190.16676300 1465931419', '-1', '5000', '-5000', 2918);
+(12166, '2016-06-14', 'SALDOS', 'Factura', '201606141410190.16676300 1465931419', '-1', '5000', '-5000', 2918),
+(12167, '2016-06-14', 'SALIDA', 'Factura', '201606141759020.61171400 1465945142', '1', '15000', '15000', 1),
+(12168, '2016-06-14', 'SALDOS', 'Factura', '201606141759020.61171400 1465945142', '60', '15000', '900000', 1),
+(12169, '2016-06-14', 'SALIDA', 'Factura', '201606141801220.94274000 1465945282', '1', '14000', '14000', 2),
+(12170, '2016-06-14', 'SALDOS', 'Factura', '201606141801220.94274000 1465945282', '-27', '14000', '-378000', 2);
 
 -- --------------------------------------------------------
 
@@ -17494,7 +17503,7 @@ CREATE TABLE IF NOT EXISTS `librodiario` (
   `idEmpresa` int(11) NOT NULL,
   `Estado` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idLibroDiario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1033 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1047 ;
 
 --
 -- Volcado de datos para la tabla `librodiario`
@@ -17599,7 +17608,21 @@ INSERT INTO `librodiario` (`idLibroDiario`, `Fecha`, `Tipo_Documento_Intero`, `N
 (1029, '2016-06-14', 'FACTURA', '201606141410190.16676300 1465931419', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '138', '0', '138', 'NO', 'NO', 1, 1, ''),
 (1030, '2016-06-14', 'FACTURA', '201606141410190.16676300 1465931419', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '138', '-138', 'NO', 'NO', 1, 1, ''),
 (1031, '2016-06-14', 'FACTURA', '201606141410190.16676300 1465931419', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '5000', '0', '5000', 'NO', 'NO', 1, 1, ''),
-(1032, '2016-06-14', 'FACTURA', '201606141410190.16676300 1465931419', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '5000', '-5000', 'NO', 'NO', 1, 1, '');
+(1032, '2016-06-14', 'FACTURA', '201606141410190.16676300 1465931419', '31', '890312749', '6', '', '', '', '', 'SEGURIDAD ATLAS LTDA', 'Carrera 2 # 31-41', '76', '001', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '5000', '-5000', 'NO', 'NO', 1, 1, ''),
+(1033, '2016-06-14', 'FACTURA', '201606141759020.61171400 1465945142', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '130505900833180', 'Clientes Nacionales Techno Soluciones NIT 900833180', 'Ventas', '25000', '0', '25000', 'NO', 'NO', 1, 1, ''),
+(1034, '2016-06-14', 'FACTURA', '201606141759020.61171400 1465945142', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '21552', '-21552', 'NO', 'NO', 1, 1, ''),
+(1035, '2016-06-14', 'FACTURA', '201606141759020.61171400 1465945142', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '3448', '-3448', 'NO', 'NO', 1, 1, ''),
+(1036, '2016-06-14', 'FACTURA', '201606141759020.61171400 1465945142', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '172', '0', '172', 'NO', 'NO', 1, 1, ''),
+(1037, '2016-06-14', 'FACTURA', '201606141759020.61171400 1465945142', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '172', '-172', 'NO', 'NO', 1, 1, ''),
+(1038, '2016-06-14', 'FACTURA', '201606141759020.61171400 1465945142', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '15000', '0', '15000', 'NO', 'NO', 1, 1, ''),
+(1039, '2016-06-14', 'FACTURA', '201606141759020.61171400 1465945142', '31', '900833180', '7', '', '', '', '', 'Techno Soluciones', 'Carrera 9 No. 9-48', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '15000', '-15000', 'NO', 'NO', 1, 1, ''),
+(1040, '2016-06-14', 'FACTURA', '201606141801220.94274000 1465945282', '0', '0', '0', '', '', '', '', 'CLIENTES VARIOS', '', '76', '111', '169', 'Ventas', '', '', 'Ventas', '19900', '0', '19900', 'NO', 'NO', 1, 1, ''),
+(1041, '2016-06-14', 'FACTURA', '201606141801220.94274000 1465945282', '0', '0', '0', '', '', '', '', 'CLIENTES VARIOS', '', '76', '111', '169', 'Ventas', '4135', 'Comercio al por mayor y al por menor', 'Ventas', '0', '17155', '-17155', 'NO', 'NO', 1, 1, ''),
+(1042, '2016-06-14', 'FACTURA', '201606141801220.94274000 1465945282', '0', '0', '0', '', '', '', '', 'CLIENTES VARIOS', '', '76', '111', '169', 'Ventas', '2408', 'Impuesto sobre las ventas por pagar', 'Ventas', '0', '2745', '-2745', 'NO', 'NO', 1, 1, ''),
+(1043, '2016-06-14', 'FACTURA', '201606141801220.94274000 1465945282', '0', '0', '0', '', '', '', '', 'CLIENTES VARIOS', '', '76', '111', '169', 'Ventas', '135595', 'Otros Autorretencion CREE', 'Ventas', '137', '0', '137', 'NO', 'NO', 1, 1, ''),
+(1044, '2016-06-14', 'FACTURA', '201606141801220.94274000 1465945282', '0', '0', '0', '', '', '', '', 'CLIENTES VARIOS', '', '76', '111', '169', 'Ventas', '23657502', 'Autorretenciones (CREE)', 'Ventas', '0', '137', '-137', 'NO', 'NO', 1, 1, ''),
+(1045, '2016-06-14', 'FACTURA', '201606141801220.94274000 1465945282', '0', '0', '0', '', '', '', '', 'CLIENTES VARIOS', '', '76', '111', '169', 'Ventas', '6135', 'Comercio al por mayor y al por menor', 'Ventas', '14000', '0', '14000', 'NO', 'NO', 1, 1, ''),
+(1046, '2016-06-14', 'FACTURA', '201606141801220.94274000 1465945282', '0', '0', '0', '', '', '', '', 'CLIENTES VARIOS', '', '76', '111', '169', 'Ventas', '1435', 'Mercanc?as no fabricadas por la empresa', 'Ventas', '0', '14000', '-14000', 'NO', 'NO', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -17962,7 +17985,9 @@ INSERT INTO `ori_facturas` (`idFacturas`, `idResolucion`, `TipoFactura`, `Prefij
 ('201606141112020.07414000 1465920722', 1, '02', 'A', 147, '2016-06-14', '11:12:02', '', '', 'Contado', '413793', '66207', '', '480000', '480000', '', 1, 1, 3, 17, '400000', '', '', '', '', 500000, 20001),
 ('201606141114240.65839000 1465920864', 1, '02', 'A', 148, '2016-06-14', '11:14:24', '', '', 'Contado', '51724', '8276', '', '60000', '60000', '', 1, 1, 3, 1, '50000', '', '', '', '', 8, -59992),
 ('201606141158520.48321200 1465923532', 1, '02', 'A', 149, '2016-06-14', '11:58:52', '', '', 'Contado', '435345', '69655', '', '505000', '505000', '', 1, 1, 3, 1, '415000', '', '', '', '', 0, 0),
-('201606141410190.16676300 1465931419', 1, '02', 'A', 150, '2016-06-14', '14:10:19', '', '', 'Contado', '17241', '2759', '', '20000', '20000', '', 1, 1, 3, 17, '5000', '', '', '', '', 20000, 0);
+('201606141410190.16676300 1465931419', 1, '02', 'A', 150, '2016-06-14', '14:10:19', '', '', 'Contado', '17241', '2759', '', '20000', '20000', '', 1, 1, 3, 17, '5000', '', '', '', '', 20000, 0),
+('201606141759020.61171400 1465945142', 1, '02', 'A', 151, '2016-06-14', '17:59:02', '', '', 'Credito a 60 dias', '21552', '3448', '', '25000', '25000', '', 1, 1, 3, 2, '15000', '', '', '', '', 0, 0),
+('201606141801220.94274000 1465945282', 1, '02', 'A', 152, '2016-06-14', '18:01:22', '', '', 'Contado', '17155', '2745', '', '19900', '19900', '', 1, 1, 3, 1, '14000', '', '', '', '', 20000, 100);
 
 -- --------------------------------------------------------
 
@@ -18162,7 +18187,9 @@ INSERT INTO `ori_facturas_items` (`ID`, `FechaFactura`, `idFactura`, `TablaItems
 ('201606131339426', '2016-06-14', '201606141114240.65839000 1465920864', 'servicios', 'PAELTA', 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', 11, 0, 0, 0, 0, 0, '51724.137931034', '1', '1', '51724', '8276', '60000', '16%', '50000', '50000', 'MO', 416510, 'cotizacionesv5', ''),
 ('201606131339427', '2016-06-14', '201606141158520.48321200 1465923532', 'servicios', 'PAELTA', 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', 11, 0, 0, 0, 0, 0, '51724.137931034', '8', '1', '413793', '66207', '480000', '16%', '50000', '400000', 'MO', 416510, 'cotizacionesv5', ''),
 ('201606131339428', '2016-06-14', '201606141158520.48321200 1465923532', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '21551.724137931', '1', '1', '21552', '3448', '25000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', ''),
-('201606131339429', '2016-06-14', '201606141410190.16676300 1465931419', 'productosventa', 'BOP', 'BOTON DE PANICO FIJO', 6, 27, 0, 0, 0, 0, '17241.379310345', '1', '1', '17241', '2759', '20000', '16%', '5000', '5000', 'PR', 4135, 'cotizacionesv5', '');
+('201606131339429', '2016-06-14', '201606141410190.16676300 1465931419', 'productosventa', 'BOP', 'BOTON DE PANICO FIJO', 6, 27, 0, 0, 0, 0, '17241.379310345', '1', '1', '17241', '2759', '20000', '16%', '5000', '5000', 'PR', 4135, 'cotizacionesv5', ''),
+('201606131339430', '2016-06-14', '201606141759020.61171400 1465945142', 'productosventa', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 1, 2, 23, 0, 0, 0, '21551.724137931', '1', '1', '21552', '3448', '25000', '16%', '15000', '15000', 'PR', 4135, 'cotizacionesv5', ''),
+('201606131339431', '2016-06-14', '201606141801220.94274000 1465945282', 'productosventa', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', 1, 2, 23, 0, 0, 0, '17155.172413793', '1', '1', '17155', '2745', '19900', '16%', '14000', '14000', 'PR', 4135, 'cotizacionesv5', '');
 
 -- --------------------------------------------------------
 
@@ -18237,7 +18264,14 @@ CREATE TABLE IF NOT EXISTS `preventa` (
   `TotalVenta` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `TipoItem` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idPrecotizacion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `preventa`
+--
+
+INSERT INTO `preventa` (`idPrecotizacion`, `Fecha`, `Cantidad`, `VestasActivas_idVestasActivas`, `ProductosVenta_idProductosVenta`, `TablaItem`, `ValorUnitario`, `Subtotal`, `ValorAcordado`, `Descuento`, `Impuestos`, `TotalVenta`, `TipoItem`) VALUES
+(6, '2016-06-14', '10', 2, 1, 'productosventa', '21551.724137931', '215517.24137931', '21551.724137931', '', '34482.75862069', '250000', 'PR');
 
 -- --------------------------------------------------------
 
@@ -18315,8 +18349,8 @@ CREATE TABLE IF NOT EXISTS `productosventa` (
 --
 
 INSERT INTO `productosventa` (`idProductosVenta`, `CodigoBarras`, `Referencia`, `Nombre`, `Existencias`, `PrecioVenta`, `PrecioMayorista`, `CostoUnitario`, `CostoTotal`, `IVA`, `Bodega_idBodega`, `Departamento`, `Sub1`, `Sub2`, `Sub3`, `Sub4`, `Sub5`, `Kit`, `ImagenesProductos_idImagenesProductos`, `Especial`, `CuentaPUC`) VALUES
-(1, '1', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 61, 25000, '19500', '15000', '915000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
-(2, '2', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', -26, 19900, '19900', '14000', '-364000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(1, '1', 'NJF4042', 'BLUSA NJFASHION GALLETA ', 60, 25000, '19500', '15000', '900000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
+(2, '2', 'KEBM-0120', 'BLUSA KEBONITA  ESTRAPLE ARGOLLA ', -27, 19900, '19900', '14000', '-378000', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (3, '3', 'MAG2076', 'BLUSA MAGENTA ESTRAPLE GALLETA', -16, 23500, '23500', '17200', '-275200', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (4, '4', 'NJF3992', 'BLUSA NJFASHION ESTRAPLE CON ENCAJE', -10, 21900, '21900', '15999', '-159990', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
 (5, '5', 'MAG2087', 'BLUSA MAGENTA TIRAS', 14, 20900, '20900', '15400', '215600', '0.16', 1, '1', '2', '23', '', '', '', 0, 0, NULL, '4135'),
@@ -24882,6 +24916,30 @@ INSERT INTO `rem_relaciones` (`ID`, `FechaEntrega`, `CantidadEntregada`, `Multip
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `repuestas_forma_pago`
+--
+
+CREATE TABLE IF NOT EXISTS `repuestas_forma_pago` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DiasCartera` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
+  `Etiqueta` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `repuestas_forma_pago`
+--
+
+INSERT INTO `repuestas_forma_pago` (`ID`, `DiasCartera`, `Etiqueta`) VALUES
+(1, 'Contado', 'Contado'),
+(2, '15', 'Credito a 15 Dias'),
+(3, '30', 'Credito a 30 Dias'),
+(4, '60', 'Credito a 60 Dias'),
+(5, '90', 'Credito a 90 Dias');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `respuestas_condicional`
 --
 
@@ -24945,7 +25003,7 @@ CREATE TABLE IF NOT EXISTS `servicios` (
   `Kit` int(11) NOT NULL,
   PRIMARY KEY (`idProductosVenta`),
   UNIQUE KEY `Referencia` (`Referencia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=35 ;
 
 --
 -- Volcado de datos para la tabla `servicios`
@@ -24980,7 +25038,8 @@ INSERT INTO `servicios` (`idProductosVenta`, `Referencia`, `Nombre`, `PrecioVent
 (30, 'PAELTA', 'Incluye examenes de laboratorio (colesterol total, trigliceridos, glicemia), examen de salud ocupacional con certificado de aptitud para trabajo en alturas, valoracion vestibular con enfasis en la parte osteomuscular, visiometria y audiometria', '60000', '80000', '50000', '0.16', '11', '', '416510', 0, 0, 0, 0, 0, 0),
 (31, 'RSER31', 'prueba', '50000', '50000', '10000', '0.16', '9', '', '4135', 0, 0, 0, 0, 0, 0),
 (32, 'PRUEBA', 'SERVICIOS DE PRUEBA', '50000', '30000', '25000', '0.08', '9', '', '4135', 1, 0, 0, 0, 0, 1),
-(33, 'ewqe', 'dsads', '', '', '', '0.16', '1', '', '4135', 1, 2, 0, 0, 0, 0);
+(33, 'ewqe', 'dsads', '', '', '', '0.16', '1', '', '4135', 1, 2, 0, 0, 0, 0),
+(34, '', 'REVISION PC', '10000', '10000', '5000', '0.16', '12', '', '4135', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -26609,6 +26668,7 @@ CREATE TABLE IF NOT EXISTS `tablas_ventas` (
   `NombreTabla` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `idTabla` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `TipoVenta` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `IVAIncluido` varchar(2) COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=4 ;
 
@@ -26616,10 +26676,10 @@ CREATE TABLE IF NOT EXISTS `tablas_ventas` (
 -- Volcado de datos para la tabla `tablas_ventas`
 --
 
-INSERT INTO `tablas_ventas` (`ID`, `NombreTabla`, `idTabla`, `TipoVenta`) VALUES
-(1, 'productosventa', 'idProductosVenta', 'PRODUCTOS'),
-(2, 'servicios', 'idProductosVenta', 'SERVICIOS'),
-(3, 'productosalquiler', 'idProductosVenta', 'ALQUILER DE SERVICIOS');
+INSERT INTO `tablas_ventas` (`ID`, `NombreTabla`, `idTabla`, `TipoVenta`, `IVAIncluido`) VALUES
+(1, 'productosventa', 'idProductosVenta', 'PRODUCTOS', 'SI'),
+(2, 'servicios', 'idProductosVenta', 'SERVICIOS', 'NO'),
+(3, 'productosalquiler', 'idProductosVenta', 'ALQUILER DE SERVICIOS', 'SI');
 
 -- --------------------------------------------------------
 
