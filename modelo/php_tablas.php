@@ -358,6 +358,10 @@ public function DibujeTabla($Vector){
         $this->css->FilaTabla(14);
         $i=0;
         $this->css->ColTabla("<strong>Acciones</strong>","");
+        if(isset($Vector["ProductosVenta"])){
+           $this->css->ColTabla("<strong>Imprimir</strong>","");
+
+        }
         if(isset($Vector["Abonos"])){
             $this->css->ColTabla("<strong>Abonar</strong>","");
         }
@@ -517,7 +521,18 @@ public function DibujeTabla($Vector){
                 print("</td>");
                 
             }
+            
+            if(isset($Vector["ProductosVenta"])){
+                print("<td>");
+                $idProducto=$DatosProducto[0];
                 
+                $this->css->CrearInputNumber("TxtCantidadCodigos$idProducto", "number", "Cantidad:", 1, "Cantidad", "black", "", "", 100, 30, 0, 0, 1, 1000, 1);
+                print("<br>");
+                $this->css->CrearBoton("BtnImprimirBarCode", $idProducto);
+                print("</td>");
+                
+            }
+            
             for($i=0;$i<$NumCols;$i++){
                 
                 

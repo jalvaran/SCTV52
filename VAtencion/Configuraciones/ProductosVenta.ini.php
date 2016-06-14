@@ -18,7 +18,9 @@ $Vector["Limit"]=$limit;            //Numero de Registros a mostrar
  * Deshabilito Acciones
  * 
  */
-          
+ 
+$Vector["ProductosVenta"]=1;
+
 $Vector["VerRegistro"]["Deshabilitado"]=1;       
 
 
@@ -27,6 +29,7 @@ $Vector["VerRegistro"]["Deshabilitado"]=1;
 $Vector["Excluir"]["ImagenesProductos_idImagenesProductos"]=1;   //Indico que esta columna no se mostrará
 $Vector["Excluir"]["Especial"]=1;
 $Vector["Excluir"]["PrecioMayorista"]=1;
+$Vector["Excluir"]["Kit"]=1;
 ///Columnas requeridas al momento de una insercion
 $Vector["Required"]["Departamento"]=1;   
 $Vector["Required"]["Nombre"]=1; 

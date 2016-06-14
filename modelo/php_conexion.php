@@ -2291,6 +2291,78 @@ public function CalculePesoRemision($idCotizacion)
     $salida = shell_exec('lpr $COMPrinter');
     
     }
+    
+     public function ImprimirCodigoBarras($Tabla,$idProducto,$Cantidad,$Puerto,$DatosCB){
+         
+        if(($handle = @fopen("$Puerto", "w")) === FALSE){
+            die("<script>alert( 'ERROR:\nNo se puedo Imprimir, Verifique la conexion de la IMPRESORA')</script>");
+        }
+        $sql="SELECT CodigoBarras FROM prod_codbarras WHERE ProductosVenta_idProductosVenta='$idProducto' LIMIT 1";
+        $Consulta =  $this->Query($sql);
+        $DatosCodigo=  $this->FetchArray($Consulta);  
+        $Codigo=$DatosCodigo["CodigoBarras"];
+        $Cantidad=$Cantidad/3;
+        $Numpages=ceil($Cantidad);
+        $idEmpresaPro=$DatosCB["EmpresaPro"];
+        $DatosEmpresa=$this->DevuelveValores("empresapro", "idEmpresaPro", $idEmpresaPro);
+        $fecha=date("y-m-d");
+
+        $RazonSocial=substr($DatosEmpresa["RazonSocial"],0,17);
+        $DatosProducto=$this->DevuelveValores($Tabla, "idProductosVenta", $idProducto);
+       
+        $Descripcion=substr($DatosProducto["Nombre"],0,16);
+        $PrecioVenta= number_format($DatosProducto["PrecioVenta"]);
+        $Referencia= $DatosProducto["Referencia"];
+        $ID= $DatosProducto["idProductosVenta"];
+        $Costo2= substr($DatosProducto["CostoUnitario"], 1, -1);
+        $Costo1= substr($DatosProducto["CostoUnitario"], 0, 1);
+        $Costo=$Costo1."/".$Costo2;
+        $enter="\r\n";
+
+        $L1=10;
+        $L2=280;
+        $L3=560;
+        $AL1=1;
+        $AL2=20;
+        $AL3=40;
+        $AL4=60;
+        $AL5=120;
+        $AlturaCB=30;
+        if(strlen($PrecioVenta)>7){
+            $TamPrecio=2;
+        }else{
+            $TamPrecio=4;
+        }
+        
+
+        fwrite($handle,"SIZE 4,1.1".$enter);
+        fwrite($handle,"GAP 4 mm,0".$enter);
+        fwrite($handle,"DIRECTION 1".$enter);
+        fwrite($handle,"CLS".$enter);
+        fwrite($handle,'TEXT '.$L1.','.$AL1.',"2",0,1,1,"'.$RazonSocial.'"'.$enter);
+        fwrite($handle,'TEXT '.$L1.','.$AL2.',"1",0,1,1,"'.$Referencia.' '.$fecha.' '.$Costo.'"'.$enter);
+        fwrite($handle,'TEXT '.$L1.','.$AL3.',"1",0,1,1,"'.$ID.' '.$Descripcion.'"'.$enter);
+        fwrite($handle,'BARCODE '.$L1.','.$AL4.',"128",'.$AlturaCB.',1,0,2,2,"'.$Codigo.'"'.$enter);
+        fwrite($handle,'TEXT '.$L1.','.$AL5.',"'.$TamPrecio.'",0,1,1,"$ '.$PrecioVenta.'"'.$enter);
+
+        fwrite($handle,'TEXT '.$L2.','.$AL1.',"2",0,1,1,"'.$RazonSocial.'"'.$enter);
+        fwrite($handle,'TEXT '.$L2.','.$AL2.',"1",0,1,1,"'.$Referencia.' '.$fecha.' '.$Costo.'"'.$enter);
+        fwrite($handle,'TEXT '.$L2.','.$AL3.',"1",0,1,1,"'.$ID.' '.$Descripcion.'"'.$enter);
+        fwrite($handle,'BARCODE '.$L2.','.$AL4.',"128",'.$AlturaCB.',1,0,2,2,"'.$Codigo.'"'.$enter);
+        fwrite($handle,'TEXT '.$L2.','.$AL5.',"'.$TamPrecio.'",0,1,1,"$ '.$PrecioVenta.'"'.$enter);
+
+        fwrite($handle,'TEXT '.$L3.','.$AL1.',"2",0,1,1,"'.$RazonSocial.'"'.$enter);
+        fwrite($handle,'TEXT '.$L3.','.$AL2.',"1",0,1,1,"'.$Referencia.' '.$fecha.' '.$Costo.'"'.$enter);
+        fwrite($handle,'TEXT '.$L3.','.$AL3.',"1",0,1,1,"'.$ID.' '.$Descripcion.'"'.$enter);
+        fwrite($handle,'BARCODE '.$L3.','.$AL4.',"128",'.$AlturaCB.',1,0,2,2,"'.$Codigo.'"'.$enter);
+        fwrite($handle,'TEXT '.$L3.','.$AL5.',"'.$TamPrecio.'",0,1,1,"$ '.$PrecioVenta.'"'.$enter);
+        fwrite($handle,"PRINT $Numpages".$enter);
+
+        $salida = shell_exec('lpr $Puerto');
+        
+
+
+     }
 //////////////////////////////Fin	
 }
 	
