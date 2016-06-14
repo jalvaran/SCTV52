@@ -2022,7 +2022,7 @@ public function CalculePesoRemision($idCotizacion)
         }else{
             exit("La Resolucion de facturacion fue completada");
         }
-	return ($idFactura);	
+	return ($ID);	
 		
 	}
 

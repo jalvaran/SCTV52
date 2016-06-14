@@ -17,7 +17,7 @@ if(!empty($_REQUEST['CmbPreVentaAct'])){
 
         $idPreventa=$_REQUEST['CmbPreVentaAct'];
 }
-        
+       
 $myPage="VentasRapidas.php";
 $css =  new CssIni("TS5 Ventas");
 $css->CabeceraIni("TS5 Ventas"); 
@@ -52,7 +52,21 @@ $NombreUser=$_SESSION['nombre'];
 $idUser=$_SESSION['idUser'];	
 $obTabla = new Tabla($db);
 $obVenta = new ProcesoVenta(1);
+if(!empty($_REQUEST["TxtidFactura"])){
+            
+    $idFactura=$_REQUEST["TxtidFactura"];
+    if($idFactura<>""){
+        $RutaPrint="../tcpdf/examples/imprimirFactura.php?ImgPrintFactura=".$idFactura;
+        $DatosFactura=$obVenta->DevuelveValores("facturas", "idFacturas", $idFactura);
+        $css->CrearTabla();
+        $css->CrearFilaNotificacion("Factura Creada Correctamente <a href='$RutaPrint' target='_blank'>Imprimir Factura No. $DatosFactura[NumeroFactura]</a>",16);
+        $css->CerrarTabla();
+    }else{
 
+       $css->AlertaJS("No se pudo crear la factura porque no hay resoluciones disponibles", 1, "", ""); 
+    }
+            
+}
 include_once("procesadores/procesaVentasRapidas.php");
 /*
  * Creo el cuadro de dialogo que perimitirá crear un cliente

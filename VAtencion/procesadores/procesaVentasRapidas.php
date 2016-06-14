@@ -137,11 +137,11 @@
             $TipoPago="Contado";
             $Observaciones="";
             $DatosVentaRapida["Fut"]="";
-            $obVenta->RegistreVentaRapida($idPreventa, $idCliente, $TipoPago, $Paga, $Devuelta, $CuentaDestino, $DatosVentaRapida);
+            $NumFactura=$obVenta->RegistreVentaRapida($idPreventa, $idCliente, $TipoPago, $Paga, $Devuelta, $CuentaDestino, $DatosVentaRapida);
 
             $obVenta->BorraReg("preventa","VestasActivas_idVestasActivas",$idPreventa);
             $obVenta->ActualizaRegistro("vestasactivas","SaldoFavor", 0, "idVestasActivas", $idPreventa);
-            header("location:$myPage?CmbPreVentaAct=$idPreventa");
+            header("location:$myPage?CmbPreVentaAct=$idPreventa&TxtidFactura=$NumFactura");
 		
 		
 		
