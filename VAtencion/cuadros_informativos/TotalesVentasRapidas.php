@@ -60,7 +60,7 @@
     print("<td>");
     $VarSelect["Ancho"]="200";
     $VarSelect["PlaceHolder"]="Busque un Cliente";
-    $VarSelect["Title"]="Cliente: ";
+    $VarSelect["Title"]="";
     $css->CrearSelectChosen("TxtCliente", $VarSelect);
     
         $sql="SELECT * FROM clientes";
@@ -68,6 +68,36 @@
         while($DatosCliente=$obVenta->FetchArray($Consulta)){
                
                $css->CrearOptionSelect("$DatosCliente[idClientes]", "$DatosCliente[Num_Identificacion] / $DatosCliente[RazonSocial] / $DatosCliente[Telefono]" , 0);
+           }
+           
+    $css->CerrarSelect();
+    //print("<br>");
+    $VarSelect["Ancho"]="200";
+    $VarSelect["PlaceHolder"]="Cuenta Destino";
+    $VarSelect["Title"]="";
+    $css->CrearSelectChosen("TxtCuentaDestino", $VarSelect);
+    
+        $sql="SELECT * FROM cuentasfrecuentes";
+        $Consulta=$obVenta->Query($sql);
+        while($DatosCuenta=$obVenta->FetchArray($Consulta)){
+            $sel=0;
+               if($DatosCuenta["CuentaPUC"]=="110510"){
+                   $sel=1;
+               }
+               $css->CrearOptionSelect("$DatosCuenta[CuentaPUC]", "$DatosCuenta[CuentaPUC] / $DatosCuenta[Nombre]" , $sel);
+           }
+    $css->CerrarSelect();
+    
+    $VarSelect["Ancho"]="200";
+    $VarSelect["PlaceHolder"]="Forma de Pago";
+    $VarSelect["Title"]="";
+    $css->CrearSelectChosen("TxtTipoPago", $VarSelect);
+    
+        $sql="SELECT * FROM repuestas_forma_pago";
+        $Consulta=$obVenta->Query($sql);
+        while($DatosTipoPago=$obVenta->FetchArray($Consulta)){
+            
+               $css->CrearOptionSelect("$DatosTipoPago[DiasCartera]", " $DatosTipoPago[Etiqueta]" , 0);
            }
     $css->CerrarSelect();
     print("</td>");

@@ -714,6 +714,7 @@ public function AgregaPreventa($fecha,$Cantidad,$idVentaActiva,$idProducto,$Tabl
   {
 	$DatosProductoGeneral=$this->DevuelveValores($TablaItem, "idProductosVenta", $idProducto);
         $DatosDepartamento=$this->DevuelveValores("prod_departamentos", "idDepartamentos", $DatosProductoGeneral["Departamento"]);
+        $DatosTablaItem=$this->DevuelveValores("tablas_ventas", "NombreTabla", $TablaItem);
         $TipoItem=$DatosDepartamento["TipoItem"];
         $consulta=$this->ConsultarTabla("preventa", "WHERE TablaItem='$TablaItem' AND ProductosVenta_idProductosVenta='$idProducto' AND VestasActivas_idVestasActivas='$idVentaActiva'");
        
@@ -735,9 +736,13 @@ public function AgregaPreventa($fecha,$Cantidad,$idVentaActiva,$idProducto,$Tabl
             
             $impuesto=$DatosProductoGeneral["IVA"];
             $impuesto=$impuesto+1;
-
-            $ValorUnitario=$DatosProductoGeneral["PrecioVenta"]/$impuesto;
-
+            if($DatosTablaItem["IVAIncluido"]=="SI"){
+                $ValorUnitario=$DatosProductoGeneral["PrecioVenta"]/$impuesto;
+                
+            }else{
+                $ValorUnitario=$DatosProductoGeneral["PrecioVenta"];
+                
+            }
             if($Porcentaje>0 and ($DatosProductoGeneral["Departamento"]==$Departamento) or $Departamento=="TODO"){
 
                     $Porcentaje=$Porcentaje/100;

@@ -133,8 +133,8 @@
             $idPreventa=$_REQUEST["CmbPreVentaAct"];
             $Paga=$_REQUEST["TxtPaga"];
             $Devuelta=$_REQUEST["TxtDevuelta"];
-            $CuentaDestino="110510";
-            $TipoPago="Contado";
+            $CuentaDestino=$_REQUEST["TxtCuentaDestino"];
+            $TipoPago=$_REQUEST["TxtTipoPago"];
             $Observaciones="";
             $DatosVentaRapida["Fut"]="";
             $NumFactura=$obVenta->RegistreVentaRapida($idPreventa, $idCliente, $TipoPago, $Paga, $Devuelta, $CuentaDestino, $DatosVentaRapida);
